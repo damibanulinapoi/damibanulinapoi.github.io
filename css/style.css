@@ -92,8 +92,8 @@ h1, h2, h3, h4, h5, h6 {
     flex-shrink: 0;
 }
 
-.next-btn {
-    width: calc(100% - 48px); /* 24px left + 24px right */
+.btn {
+    width: calc(100% - 48px);
     margin: 0 24px;
 
     height: 40px;
@@ -107,6 +107,9 @@ h1, h2, h3, h4, h5, h6 {
 
     position: relative;
     cursor: pointer;
+
+    text-decoration: none; /* removes underline (for <a>) */
+    color: white; /* ensures text doesn't turn blue */
 }
 
 .btn-text {
