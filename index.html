@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator de Buget - Dă-mi Banul Înapoi</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+<header>
+    <div class="logo">
+        <img src="images/logo.png" alt="logo" class="logo-image">
+
+        <span class="logo-text">Dă-mi Banul Înapoi</span>
+    </div>
+
+    <button class="menu-btn">☰</button>
+</header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Calculator de buget</h1>
+        <p>Folosește calculatorul nostru de buget pentru obține o imagine de ansamblu asupra veniturilor și cheltuielilor tale lunare și pentru a te înțelege mai bine. Introdu suma aproximativă în toate câmpurile care ți se aplică ție sau gospodăriei tale.</p>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Monthly Income Section -->
+        <section>
+            <h2 class="section-title">Venit lunar</h2>
+            <p class="section-subtitle">Care este venitul tău net lunar? Pe lângă salarii, sunt incluse și alte venituri, cum ar fi chirie, dividendele etc.</p>
+
+            <div class="input-card">
+                <div class="input-card-icon">🏠</div>
+                <div class="input-card-content">
+                    <h3>Venitul gospodăriei</h3>
+                    <p>Salarii, bonusuri, dividende și altele</p>
+                    <input type="number" placeholder="Introduceți suma" min="0">
+                </div>
+            </div>
+        </section>
+
+        <!-- Next Button -->
+         
+        <button class="next-btn">
+            <span class="btn-text">Următorul pas</span>
+            <img src="images/arrow.png" alt="arrow" class="btn-icon">
+</button>
+    </main>
+
+    <script>
+        // Calculator logic will go here
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Budget Calculator initialized');
+        });
+    </script>
+</body>
+</html>
