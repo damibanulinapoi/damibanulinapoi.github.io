@@ -92,23 +92,24 @@ h1, h2, h3, h4, h5, h6 {
     flex-shrink: 0;
 }
 
-.btn { width: calc(100% - 48px);
-      margin: 0 24px;
-      
-      height: 40px;
-      background-color: #F17B62;
-      border: none;
-      border-radius: 8px;
-      
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      
-      position: relative;
-      cursor: pointer;
+.btn {
+    width: calc(100% - 48px);
+    margin: 0 24px;
 
-      text-decoration: none; /* removes underline (for <a>) */
-      color: white; /* ensures text doesn't turn blue */
+    height: 40px;
+    background-color: #F17B62;
+    border: none;
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    cursor: pointer;
+
+    text-decoration: none; /* removes underline (for <a>) */
+    color: white; /* ensures text doesn't turn blue */
 }
 
 .btn-text {
@@ -126,4 +127,53 @@ h1, h2, h3, h4, h5, h6 {
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
+}
+
+/* SECTION */
+.budget-section {
+  width: 100%;
+  padding: 0 0px; /* no screen margin */
+  box-sizing: border-box;
+}
+
+/* ORANGE CARD */
+.budget-card {
+  width: 100%;
+  background: #F17B62;
+  border-radius: 8px;
+
+  /* auto-layout style */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* 24px all around */
+  padding: 24px;
+
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* TITLE */
+.budget-title {
+  margin: 0;
+
+  font-family: "Roca One", serif;
+  font-size: 40px;
+  line-height: 40px;
+  font-weight: normal;
+  color: #FFFFFF;
+}
+
+/* PARAGRAPH */
+.budget-text {
+  margin: 24px 0 0 0;
+
+  font-family: "Archivo", sans-serif;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 400;
+  color: #FFFFFF;
+
+  text-align: center;
 }
