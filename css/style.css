@@ -47,6 +47,39 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 16px;
 }
 
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 20px 24px;
+}
+
+/* LEFT SIDE */
+.left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo {
+    width: 16px;
+    height: 16px;
+}
+
+.site-name {
+    font-family: 'Roca One', sans-serif;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 40px;
+}
+
+/* RIGHT MENU */
+.menu {
+    width: 32px;
+    height: 32px;
+}
+
 .next-btn {
     width: calc(100% - 48px); /* 24px left + 24px right */
     margin: 0 24px;
