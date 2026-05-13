@@ -47,37 +47,49 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 16px;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 .topbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
     padding: 20px 24px;
+
+    flex-wrap: nowrap; /* IMPORTANT: prevents stacking */
 }
 
-/* LEFT SIDE */
 .left {
     display: flex;
     align-items: center;
     gap: 8px;
+
+    flex-shrink: 0; /* prevents breaking */
 }
 
 .logo {
     width: 16px;
     height: 16px;
+    display: block; /* IMPORTANT fix */
 }
 
 .site-name {
-    font-family: 'Roca One', sans-serif;
+    font-family: 'Roca', sans-serif;
     font-weight: 900;
     font-size: 16px;
-    line-height: 40px;
+    line-height: 16px;
+
+    white-space: nowrap; /* prevents text wrapping */
 }
 
-/* RIGHT MENU */
 .menu {
     width: 32px;
     height: 32px;
+
+    display: block; /* IMPORTANT fix */
+    flex-shrink: 0;
 }
 
 .next-btn {
