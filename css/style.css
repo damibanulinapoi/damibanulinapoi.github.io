@@ -58,7 +58,12 @@ h1, h2, h3, h4, h5, h6 {
 
     padding: 20px 24px;
 
-    flex-wrap: nowrap; /* IMPORTANT: prevents stacking */
+    flex-wrap: nowrap;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: white;
 }
 
 .left {
