@@ -106,6 +106,9 @@ h1, h2, h3, h4, h5, h6 {
       
       position: relative;
       cursor: pointer;
+
+      text-decoration: none; /* removes underline (for <a>) */
+      color: white; /* ensures text doesn't turn blue */
 }
 
 .btn-text {
