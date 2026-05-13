@@ -129,25 +129,16 @@ h1, h2, h3, h4, h5, h6 {
     transform: translateY(-50%);
 }
 
-/* SECTION */
-.budget-section {
-  width: 100%;
-  padding: 0 0px; /* no screen margin */
-  box-sizing: border-box;
-}
-
 /* ORANGE CARD */
-.budget-card {
+.hero-card {
   width: 100%;
   background: #F17B62;
   border-radius: 8px;
 
-  /* auto-layout style */
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  /* 24px all around */
   padding: 24px;
 
   box-sizing: border-box;
@@ -155,25 +146,121 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* TITLE */
-.budget-title {
+.hero-title {
   margin: 0;
 
   font-family: "Roca One", serif;
   font-size: 40px;
   line-height: 40px;
-  font-weight: normal;
+  font-weight: bold;
   color: #FFFFFF;
 }
 
 /* PARAGRAPH */
-.budget-text {
+.hero-text {
   margin: 24px 0 0 0;
 
   font-family: "Archivo", sans-serif;
   font-size: 12px;
   line-height: 14px;
-  font-weight: 400;
+  font-weight: normal;
   color: #FFFFFF;
 
   text-align: center;
+}
+
+.category-section {
+  padding: 24px 24px 0;
+  box-sizing: border-box;
+}
+
+.category-title {
+  margin: 0;
+
+  font-family: "Roca One", serif;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: normal;
+
+  color: #303434;
+}
+
+.category-text {
+  margin: 0;
+
+  font-family: "Archivo", sans-serif;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 400;
+
+  color: #A0A7A7;
+}
+
+.income-card {
+  width: calc(100% - 48px);
+  margin: 16px 24px 16px;
+
+  border: 1px solid #F17B62;
+  border-radius: 12px;
+
+  box-sizing: border-box;
+
+  /* 16px clear space inside */
+  padding: 16px;
+
+  display: flex;
+  align-items: center;
+}
+
+/* LEFT ICON */
+.income-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+
+  flex-shrink: 0;
+}
+
+/* TEXT AREA */
+.income-info {
+  margin-left: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* TITLE */
+.income-info-title {
+  margin: 0;
+
+  font-family: "Archivo", sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
+
+  color: #303434;
+}
+
+/* SUBTITLE */
+.income-info-text {
+  margin: 0;
+
+  font-family: "Archivo", sans-serif;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 400;
+
+  color: #A0A7A7;
+}
+
+/* RIGHT GREY BOX */
+.income-placeholder {
+  width: 84px;
+  height: 36px;
+
+  background: #E6EAEA;
+  border-radius: 6px;
+
+  flex-shrink: 0;
+
+  margin-left: 12px;
 }

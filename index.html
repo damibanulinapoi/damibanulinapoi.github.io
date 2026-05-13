@@ -20,11 +20,10 @@
 </header>
 
     <!-- Hero Section -->
-    <section class="budget-section">
-        <div class="budget-card">
-            <h1 class="budget-title">Calculator<br>de buget</h1>
+    <section class="hero-card">
+            <h1 class="hero-title">Calculator<br>de buget</h1>
 
-            <p class="budget-text">
+            <p class="hero-text">
             Introduceți venitul lunar net și faceți clic pe Calculați
             bugetul meu. Calculatorul va afișa sumele recomandate
             pentru fiecare categorie, pe baza mediilor naționale.
@@ -32,30 +31,43 @@
             obiectivul este un buget cu bază zero, în care fiecare
             dolar are un job.
             </p>
-        </div>
     </section>
 
-    <!-- Main Content -->
-    <main>
-        <!-- Monthly Income Section -->
-        <section>
-            <h2 class="section-title">Venit lunar</h2>
-            <p class="section-subtitle">Care este venitul tău net lunar? Pe lângă salarii, sunt incluse și alte venituri, cum ar fi chirie, dividendele etc.</p>
+    <section class="category-section">
+        <h2 class="category-title">Venit lunar</h2>
 
-            <div class="input-card">
-                <div class="input-card-icon">🏠</div>
-                <div class="input-card-content">
-                    <h3>Venitul gospodăriei</h3>
-                    <p>Salarii, bonusuri, dividende și altele</p>
-                    <input type="number" placeholder="Introduceți suma" min="0">
-                </div>
-            </div>
-        </section>
+        <p class="category-text">
+        Care este venitul tău net lunar? Pe lângă salarii,
+        sunt incluse și alte venituri, cum ar fi chirie,
+        dividendele etc.
+        </p>
+    </section>
+
+    <!-- Venit Categorie -->
+    <section class="income-card">
+        <img
+        src="images/venit.png"
+        alt=""
+        class="income-icon"
+        >
+
+        <div class="income-info">
+        <h3 class="income-info-title">
+            Venitul gospodăriei
+        </h3>
+
+        <p class="income-info-text">
+        Salarii, bonusuri, dividende și altele
+        </p>
+        </div>
+
+        <div class="income-placeholder"></div>
+    </section>
 
         <!-- Next Button -->
 
         <button class="btn">
-        <span class="btn-text">Următorul pas</span>
+        <span class="btn-text">Chltuieli</span>
         <img src="images/arrow.png" class="btn-icon">
         </button>
 
