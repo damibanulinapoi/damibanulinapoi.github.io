@@ -32,47 +32,124 @@
             </p>
     </section>
 
+    <!-- VENIT SECTION -->
+<section id="income-section">
+
     <section class="category-section">
         <h2 class="category-title">Venit lunar</h2>
 
         <p class="category-text">
-        Care este venitul tău net lunar? Pe lângă salarii,
-        sunt incluse și alte venituri, cum ar fi chirie,
-        dividendele etc.
+            Care este venitul tău net lunar? Pe lângă salarii,
+            sunt incluse și alte venituri, cum ar fi chirie,
+            dividendele etc.
         </p>
     </section>
 
     <!-- Venit Categorie -->
     <section class="income-card">
-  <img
-    src="images/venit.png"
-    alt=""
-    class="income-icon"
-  >
+      <img
+            src="images/venit.png"
+            alt=""
+            class="income-icon"
+        >
+        <div class="income-info">
+            <h3 class="income-info-title">
+              Venitul net (după taxe)
+            </h3>
 
-  <div class="income-info">
-    <h3 class="income-info-title">
-      Venitul gospodăriei
-    </h3>
+            <p class="income-info-text">
+                Salarii, bonusuri, dividende și altele
+            </p>
+        </div>
 
-    <p class="income-info-text">
-      Salarii, bonusuri, dividende și altele
-    </p>
-  </div>
+        <div class="income-input-wrapper">
+        <input
+        type="number"
+        class="income-input"
+        placeholder="0"
+        >
 
-  <input
-    type="number"
-    class="income-input"
-    placeholder="0"
-  >
+        <span class="currency">MDL</span>
+        </div>
+    </section>
+
+    <!-- BUTTON -->
+    <button class="btn" id="show-expenses-btn">
+        <span class="btn-text">Cheltuieli</span>
+        <img src="images/arrow.png" class="btn-icon">
+    </button>
+
 </section>
 
-        <!-- Next Button -->
+<!-- EXPENSES SECTION -->
+<section id="expenses-section" style="display: none;">
 
-        <button class="btn">
-        <span class="btn-text">Chltuieli</span>
-        <img src="images/arrow.png" class="btn-icon">
-        </button>
+    <section class="category-section">
+        <h2 class="category-title">Cheltuieli lunare</h2>
+
+        <p class="category-text">
+            Estimează cheltuielile tale lunare pentru fiecare categorie de mai jos.
+        </p>
+    </section>
+
+    <!-- CATEGORY Locuinta -->
+    <section class="income-card">
+      <img
+            src="images/venit.png"
+            alt=""
+            class="income-icon"
+        >
+        <div class="income-info">
+            <h3 class="income-info-title">
+              Utilități
+            </h3>
+
+            <p class="income-info-text">
+                Electricitate, internet, întreținere bloc și altele
+            </p>
+        </div>
+
+        <div class="income-input-wrapper">
+        <input
+        type="number"
+        class="income-input"
+        placeholder="0"
+        >
+
+        <span class="currency">MDL</span>
+        </div>
+    </section>
+
+    <!-- CATEGORY 2 -->
+    <section class="income-card">
+      <img
+            src="images/venit.png"
+            alt=""
+            class="income-icon"
+        >
+        <div class="income-info">
+            <h3 class="income-info-title">
+              Venitul net (după taxe)
+            </h3>
+
+            <p class="income-info-text">
+                Salarii, bonusuri, dividende și altele
+            </p>
+        </div>
+
+        <div class="income-input-wrapper">
+        <input
+        type="number"
+        class="income-input"
+        placeholder="0"
+        >
+
+        <span class="currency">MDL</span>
+        </div>
+    </section>
+
+</section>
+<script src="js/script.js"></script>
 
 <!-- Footer / Bottom Section -->
 <footer class="bottom-card">
