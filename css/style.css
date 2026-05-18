@@ -9,8 +9,15 @@ body {
 
 @font-face {
     font-family: 'Roca One';
+    src: url('../fonts/RocaOne-Th.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roca One';
     src: url('../fonts/RocaOne-Bold.ttf') format('truetype');
-    font-weight: bold;
+    font-weight: 700;
     font-style: normal;
 }
 
@@ -92,7 +99,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-text {
-    font-family: 'Roca One', sans-serif;
+    font-family: "Roca One", serif;
+    font-weight: 700;
     font-size: 16px;
     line-height: 16px;
     color: white;
@@ -108,44 +116,47 @@ h1, h2, h3, h4, h5, h6 {
     transform: translateY(-50%);
 }
 
-/* HERO ORANGE CARD */
-.hero-card {
-  width: 100%;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  padding: 24px;
-  box-sizing: border-box;
-  text-align: left;
+.hero {
+    margin: 16px 24px 0 24px;
 }
 
-/* TITLE */
+/* BACK LINK */
+.hero-back {
+    display: inline-block;
+
+    font-family: "Archivo", sans-serif;
+    font-size: 12px;
+    line-height: 16px;
+
+    color: #ef442f;
+    text-decoration: none;
+
+    margin-bottom: 16px;
+}
+
 .hero-title {
-  margin: 0;
+    margin: 0;
 
-  font-family: "Roca One", serif;
-  font-size: 40px;
-  line-height: 40px;
+    font-family: "Roca One", serif;
+    font-weight: 400;
 
-  color: #1F2937;
+    font-size: 28px;
+    line-height: 32px;
 
-  letter-spacing: -0.5px;
+    color: #303434;
+
+    letter-spacing: -0.05em;
 }
 
 /* TEXT */
 .hero-text {
-  margin: 20px 0 0 0;
+    margin: 16px 0 0 0;
 
-  font-family: "Archivo", sans-serif;
-  font-size: 13px;
-  line-height: 18px;
+    font-family: "Archivo", sans-serif;
+    font-size: 13px;
+    line-height: 18px;
 
-  color: #1F2937;
-
-  text-align: Left;
-
-  max-width: 280px;
+    color: #1F2937;
 }
 
 .income-section {
