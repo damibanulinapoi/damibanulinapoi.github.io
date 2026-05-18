@@ -1,7 +1,11 @@
 body {
   background:
     radial-gradient(circle at top left, #ffffff 0%, #f7f7f7 100%);
-}
+
+  font-family: 'Archivo', sans-serif;
+  margin: 0;
+  padding: 0;
+  }
 
 @font-face {
     font-family: 'Roca One';
@@ -24,12 +28,6 @@ body {
     font-style: normal;
 }
 
-body {
-    font-family: 'Archivo', sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Roca One', sans-serif;
 }
@@ -42,14 +40,14 @@ h1, h2, h3, h4, h5, h6 {
     margin: 16px;
 
     background: #ffffff;
-    border: 1px solid #d9d9d9;
+    border: .5px solid #d9d9d9;
     border-radius: 8px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    padding: 12px 16px;
+    padding: 8px 16px;
 }
 
 .left {
@@ -298,66 +296,70 @@ h1, h2, h3, h4, h5, h6 {
   appearance: textfield;
 }
 
-.bottom-card {
-  background: #005451;
-  border-radius: 8px 8px 0 0;
+.footer {
+    background: #ffffff;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
 
-  width: 100%;
-  margin: 120px 0 0 0;
-  padding-top: 24px;
-  padding-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-  box-sizing: border-box;
+    margin: 120px 16px 16px 16px;
+
+    padding: 24px 16px;
+
+    box-sizing: border-box;
 }
 
 /* Logo */
 .footer-logo {
-  width: 263px;
-  height: 28.5px;
-  object-fit: contain;
+    width: 263px;
+    height: 28.5px;
+
+    object-fit: contain;
+    display: block;
 }
 
 /* Links */
 .footer-links {
-  display: flex;
-  gap: 24px;
+    display: flex;
+    gap: 24px;
 
-  margin-top: 16px;
+    margin-top: 16px;
 }
 
 .footer-links a {
-  font-family: 'Archivo', sans-serif;
-  font-size: 12px;
-  line-height: 14px;
-  color: #ffffff;
-  text-decoration: none;
+    font-family: 'Archivo', sans-serif;
+    font-size: 12px;
+    line-height: 14px;
+
+    color: #1f2937;
+    text-decoration: none;
 }
 
 /* Social Icons */
 .social-icons {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-
-  margin-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
 }
 
 .social-icons img {
-  width: 24px;
-  height: 24px;
-  display: block;
+    width: 24px;
+    height: 24px;
+
+    display: block;
 }
 
 /* Copyright */
 .footer-copy {
-  margin-top: 16px;
+    margin-top: 16px;
 
-  font-family: 'Archivo', sans-serif;
-  font-size: 12px;
-  line-height: 14px;
-  color: #ffffff;
+    font-family: 'Archivo', sans-serif;
+    font-size: 12px;
+    line-height: 14px;
+
+    color: #6b7280;
 }
