@@ -110,14 +110,15 @@ h1, h2, h3, h4, h5, h6 {
 
 /* HERO ORANGE CARD */
 .hero-card {
-  width: 100%; background: #F17B62;
+  width: 100%;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
   padding: 24px;
   box-sizing: border-box;
-  text-align: center; }
+  text-align: left;
+}
 
 /* TITLE */
 .hero-title {
@@ -127,7 +128,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 40px;
   line-height: 40px;
 
-  color: #FFFFFF;
+  color: #1F2937;
 
   letter-spacing: -0.5px;
 }
@@ -140,160 +141,134 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 13px;
   line-height: 18px;
 
-  color: rgba(255,255,255,0.92);
+  color: #1F2937;
 
-  text-align: center;
+  text-align: Left;
 
   max-width: 280px;
 }
 
-.category-section {
-  padding: 24px 24px 12px;
-  box-sizing: border-box;
+.income-section {
+    margin: 24px;
+    padding: 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+
+    box-sizing: border-box;
 }
 
-.category-title {
-  margin: 0;
+/* SECTION TITLE */
+.income-section-title {
+    margin: 0 0 24px 0;
 
-  font-family: "Roca One", serif;
-  font-size: 18px;
-  line-height: 20px;
-  font-weight: normal;
+    font-family: "Archivo", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 24px;
 
-  color: #303434;
+    color: #303434;
 }
 
-.category-text {
-  margin: 0;
+/* ROW */
+.income-row {
+    display: flex;
+    align-items: center;
 
-  font-family: "Archivo", sans-serif;
-  font-size: 12px;
-  line-height: 14px;
-  font-weight: 400;
-
-  color: #A0A7A7;
-}
-
-.income-card {
-  width: calc(100% - 48px);
-  margin: 4px 24px 0;
-
-  border: 1px solid #F17B62;
-  border-radius: 12px;
-
-  box-sizing: border-box;
-  padding: 16px;
-
-  display: flex;
-  align-items: center;
+    gap: 12px;
 }
 
 /* ICON */
 .income-icon {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
+    width: 32px;
+    height: 32px;
 
-  flex-shrink: 0;
+    object-fit: contain;
+    flex-shrink: 0;
 }
 
-/* TEXT CONTENT */
-.income-info {
-  margin-left: 8px;
-
-  flex: 1;
-  min-width: 0;
+/* TEXT */
+.income-content {
+    flex: 1;
+    min-width: 0;
 }
 
-.income-info-title {
-  margin: 0;
+.income-title {
+    margin: 0;
 
-  font-family: "Archivo", sans-serif;
-  font-size: 16px;
-  line-height: 20px;
-  font-weight: 400;
+    font-family: "Archivo", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
 
-  color: #303434;
+    color: #303434;
 }
 
-.income-info-text {
-  margin: 0;
+.income-description {
+    margin: 4px 0 0 0;
 
-  font-family: "Archivo", sans-serif;
-  font-size: 12px;
-  line-height: 14px;
-  font-weight: 400;
+    font-family: "Archivo", sans-serif;
+    font-size: 12px;
+    line-height: 16px;
 
-  color: #A0A7A7;
-}
-
-/* INPUT WRAPPER */
-.income-input-wrapper {
-  position: relative;
-
-  width: 100px;
-  height: 32px;
-
-  margin-left: 12px;
-
-  flex-shrink: 0;
+    color: #A0A7A7;
 }
 
 /* INPUT */
 .income-input {
-  width: 100%;
-  height: 100%;
+    width: 120px;
+    height: 40px;
 
-  padding-right: 44px;
-  padding-left: 8px;
+    padding: 0 12px;
 
-  border: none;
-  border-radius: 4px;
-  background: #E6EAEA;
+    border: 1px solid #d9d9d9;
+    border-radius: 6px;
 
-  box-sizing: border-box;
+    background: #ffffff;
 
-  font-family: "Roca One", sans-serif;
-  font-size: 16px;
+    box-sizing: border-box;
 
-  color: #303434;
-  text-align: right;
+    font-family: "Archivo", sans-serif;
+    font-size: 16px;
 
-  outline: none;
-}
+    color: #303434;
 
-/* PLACEHOLDER */
-.income-input::placeholder {
-  color: #303434;
-  opacity: 1;
-}
+    outline: none;
 
-/* MDL TEXT */
-.currency {
-  position: absolute;
-
-  right: 10px;
-  top: 50%;
-
-  transform: translateY(-50%);
-
-  font-family: "Roca One", sans-serif;
-  font-size: 13px;
-
-  color: #303434;
-
-  pointer-events: none;
+    flex-shrink: 0;
 }
 
 /* REMOVE NUMBER ARROWS */
 .income-input::-webkit-outer-spin-button,
 .income-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 .income-input[type="number"] {
-  appearance: textfield;
+    appearance: textfield;
+}
+
+/* BUTTON */
+.income-button {
+    width: 100%;
+    height: 52px;
+
+    margin-top: 24px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #ef442f;
+
+    font-family: "Roca One", sans-serif;
+    font-size: 16px;
+
+    color: #ffffff;
+
+    cursor: pointer;
 }
 
 .footer {
