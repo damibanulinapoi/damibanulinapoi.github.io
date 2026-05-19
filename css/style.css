@@ -144,6 +144,7 @@ body::before {
     font-family: "Archivo", sans-serif;
     font-size: 16px;
     line-height: 24px;
+    margin-bottom: 8px;
 
     color: var(--color-orange);
     text-decoration: none;
