@@ -209,13 +209,19 @@ body::before {
 }
 
 .income-section-title {
-    margin: 0 0 0px 0;
+    margin: 0;
 
-    font-family: "Roca One", serif;
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 24px;
+    font-family: "Archivo", sans-serif;
+    font-weight: normal;
 
+    font-size: 16px;
+    line-height: 16px;
+
+    text-transform: uppercase;
+
+    color: var(--color-text-primary);
+    
+    letter-spacing: -0.05em;
     color: var(--color-text-primary);
 }
 
