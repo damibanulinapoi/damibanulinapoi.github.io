@@ -44,6 +44,12 @@
     --color-card-border: #d9d9d9;
 }
 
+/* SHADOWS */
+:root {
+  --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.04),
+                 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
 /* BACKGROUND */
 body {
   background-color: #f8f4ee;
@@ -154,12 +160,10 @@ body::after {
 
     border-radius: 8px;
 
-    box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.04),
-      0 8px 24px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--card-shadow);
 
     outline: 1px solid rgba(0,0,0,0.045);
-    outline-offset: -8px;
+    outline-offset: -9px;
 
     display: flex;
     align-items: center;
@@ -253,16 +257,14 @@ body::after {
 
 /* CARD SECTION */
 .income-section {
-    margin: 40px 24px 120px 24px;
+    margin: 8px 24px;
     padding: 16px;
 
     background: var(--color-card);
 
     border-radius: 8px;
 
-    box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.04),
-      0 8px 24px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--card-shadow);
 
     box-sizing: border-box;
 }
@@ -403,12 +405,10 @@ body::after {
 
     border-radius: 8px;
 
-    box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.04),
-      0 8px 24px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--card-shadow);
 
     outline: 1px solid rgba(0,0,0,0.045);
-    outline-offset: -8px;
+    outline-offset: -9px;
 
     display: flex;
     flex-direction: column;
