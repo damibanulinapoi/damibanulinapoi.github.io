@@ -103,7 +103,7 @@ body::before {
 
     margin: 16px;
 
-    background: #ffffff;
+    background: var(--color-card);
     border: .5px solid var(--color-card-border);
     border-radius: 8px;
 
@@ -169,6 +169,22 @@ body::before {
     letter-spacing: -0.05em;
 }
 
+.hero-subtitle {
+    margin: 16 0;
+
+    font-family: "Archivo", sans-serif;
+    font-weight: normal;
+
+    font-size: 16px;
+    line-height: 16px;
+
+    text-transform: uppercase;
+
+    color: var(--color-text-primary);
+    
+    letter-spacing: -0.05em;
+}
+
 .hero-text {
     margin: 16px 0 0 0;
 
@@ -184,7 +200,7 @@ body::before {
     margin: 24px;
     padding: 16px;
 
-    background: #ffffff;
+    background: var(--color-card);
 
     border: .5px solid var(--color-card-border);
     border-radius: 8px;
@@ -219,7 +235,7 @@ body::before {
 }
 
 .income-content {
-    margin: 24px;
+    margin: 16px;
     flex: 1;
     min-width: 0;
 }
@@ -252,7 +268,7 @@ body::before {
     border: .5px solid var(--color-card-border);
     border-radius: 4px;
 
-    background: #ffffff;
+    background: var(--color-card);
 
     box-sizing: border-box;
 
@@ -318,7 +334,7 @@ body::before {
 
 /* FOOTER */
 .footer {
-    background: #ffffff;
+    background: var(--color-card);
 
     border: .5px solid var(--color-card-border);
     border-radius: 8px;
