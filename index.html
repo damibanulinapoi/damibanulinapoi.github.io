@@ -36,7 +36,7 @@
 <!-- VENIT SECTION -->
 <section class="income-section">
 
-    <h2 class="income-section-title">Venit lunar</h2>
+    <h2 class="income-section-title">Venit Lunar</h2>
 
     <div class="income-divider"></div>
 
@@ -68,11 +68,80 @@
     </div>
 
     <!-- Button -->
-    <button class="btn">
+    <button id="calculează-btn" class="btn">
         <span class="btn-text">Calculează Bugetul Meu</span>
     </button>
 
 </section>
+
+<!-- SECȚIUNEA CHELTUIELI -->
+<section id="expenses-section" style="display: none;">
+
+    <section class="income-section">
+
+    <h2 class="income-section-title">Cheltuieli Lunare</h2>
+
+    <div class="income-divider"></div>
+
+    <!-- CATEGORY Locuinta -->
+    <div class="income-row">
+
+        <img
+            src="images/venit.svg"
+            alt=""
+            class="income-icon"
+        >
+
+        <div class="income-content">
+            <h3 class="income-title">
+                Venitul net (dupa taxe)
+            </h3>
+
+            <p class="income-description">
+                Salarii, bonusuri, dividende și altele
+            </p>
+        </div>
+
+        <input
+            type="number"
+            class="income-input"
+            placeholder=""
+        >
+
+    </div>
+
+        <!-- CATEGORY Locuinta -->
+    <div class="income-row">
+
+        <img
+            src="images/venit.svg"
+            alt=""
+            class="income-icon"
+        >
+
+        <div class="income-content">
+            <h3 class="income-title">
+                Venitul net (dupa taxe)
+            </h3>
+
+            <p class="income-description">
+                Salarii, bonusuri, dividende și altele
+            </p>
+        </div>
+
+        <input
+            type="number"
+            class="income-input"
+            placeholder=""
+        >
+
+    </div>
+
+
+</section>
+
+</section>
+<script src="js/script.js"></script>
 
 <!-- Hero Section -->
 <section class="hero">
@@ -90,72 +159,6 @@
     </p>
 
 </section>
-
-<!-- EXPENSES SECTION -->
-<section id="expenses-section" style="display: none;">
-
-    <section class="category-section">
-        <h2 class="category-title">Cheltuieli lunare</h2>
-
-        <p class="category-text">
-            Estimează cheltuielile tale lunare pentru fiecare categorie de mai jos.
-        </p>
-    </section>
-
-    <!-- CATEGORY Locuinta -->
-    <section class="income-card">
-      <span class="income-icon">🏠</span>
-        <div class="income-info">
-            <h3 class="income-info-title">
-              Locuință
-            </h3>
-
-            <p class="income-info-text">
-                Chirie, ipotecă și altele
-            </p>
-        </div>
-
-        <div class="income-input-wrapper">
-        <input
-        type="number"
-        class="income-input"
-        placeholder="0"
-        >
-
-        <span class="currency">MDL</span>
-        </div>
-    </section>
-
-    <!-- CATEGORY 2 -->
-    <section class="income-card">
-      <img
-            src="images/venit.png"
-            alt=""
-            class="income-icon"
-        >
-        <div class="income-info">
-            <h3 class="income-info-title">
-              Venitul net (după taxe)
-            </h3>
-
-            <p class="income-info-text">
-                Salarii, bonusuri, dividende și altele
-            </p>
-        </div>
-
-        <div class="income-input-wrapper">
-        <input
-        type="number"
-        class="income-input"
-        placeholder="0"
-        >
-
-        <span class="currency">MDL</span>
-        </div>
-    </section>
-
-</section>
-<script src="js/script.js"></script>
 
 <!-- Footer / Bottom Section -->
 <footer class="footer">

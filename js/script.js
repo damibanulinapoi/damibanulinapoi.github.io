@@ -1,4 +1,4 @@
-const button = document.getElementById("show-expenses-btn");
+const button = document.getElementById("calculează-btn");
 const expensesSection = document.getElementById("expenses-section");
 
 button.addEventListener("click", () => {
