@@ -14,16 +14,16 @@
 }
 
 @font-face {
-    font-family: 'Roca One';
-    src: url('../fonts/RocaOne-Hv.ttf') format('truetype');
-    font-weight: 900;
+    font-family: 'Archivo';
+    src: url('../fonts/Archivo-Regular.ttf') format('truetype');
+    font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Archivo';
-    src: url('../fonts/Archivo-Regular.ttf') format('truetype');
-    font-weight: normal;
+    src: url('../fonts/Archivo-Medium.ttf') format('truetype');
+    font-weight: 500;
     font-style: normal;
 }
 
@@ -104,7 +104,7 @@ body::before {
     margin: 16px;
 
     background: var(--color-card);
-    
+
     border: .5px solid var(--color-card-border);
     border-radius: 8px;
 
@@ -198,7 +198,7 @@ body::before {
 /* CARD SECTION */
 .income-section {
     margin: 24px;
-    padding: 16px 12px;
+    padding: 16px;
 
     background: var(--color-card);
 
@@ -212,12 +212,17 @@ body::before {
     margin: 0;
 
     font-family: "Archivo", sans-serif;
-    font-weight: normal;
+    font-weight: 500;
 
     font-size: 18px;
     line-height: 28px;
 
     color: var(--color-text-primary);
+}
+
+.income-divider {
+    height: .5px;
+    background: var(--color-card-border);
 }
 
 .income-row {
@@ -228,8 +233,8 @@ body::before {
 }
 
 .income-icon {
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
 
     object-fit: contain;
     flex-shrink: 0;
@@ -245,7 +250,7 @@ body::before {
     margin: 0;
     font-family: "Archivo", sans-serif;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: normal;
     line-height: 20px;
 
     color: var(--color-text-primary);
