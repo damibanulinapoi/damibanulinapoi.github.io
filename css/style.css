@@ -47,25 +47,25 @@
 
 /* BACKGROUND */
 body {
-  background-color: #FAF8F5;
+  background-color: #f8f4ee;
 
   background-image:
     radial-gradient(
-      circle at 0% 0%,
+      circle at top left,
       rgba(232, 66, 49, 0.10) 0%,
-      transparent 28%
+      transparent 30%
     ),
 
     radial-gradient(
-      circle at 100% 85%,
+      circle at bottom right,
       rgba(0, 84, 81, 0.10) 0%,
-      transparent 32%
+      transparent 30%
     ),
 
     linear-gradient(
       180deg,
-      #fffdfc 0%,
-      #FAF8F5 100%
+      #fcfbf8 0%,
+      #f5f1ea 100%
     );
 
   background-attachment: fixed;
@@ -78,7 +78,7 @@ body {
   position: relative;
 }
 
-/* SUBTLE NOISE */
+/* noise texture */
 body::before {
   content: "";
 
@@ -86,13 +86,61 @@ body::before {
   inset: 0;
 
   pointer-events: none;
-  z-index: 999;
+  z-index: 1;
 
   opacity: 0.035;
-  mix-blend-mode: multiply;
 
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='%23000000'%3E%3Ccircle cx='12' cy='14' r='1'/%3E%3Ccircle cx='44' cy='62' r='1'/%3E%3Ccircle cx='88' cy='18' r='1'/%3E%3Ccircle cx='130' cy='90' r='1'/%3E%3Ccircle cx='72' cy='120' r='1'/%3E%3Ccircle cx='150' cy='38' r='1'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* vertical lines */
+body::after {
+  content: "";
+
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+  z-index: 2;
+
+  background:
+
+    /* LEFT OUTER */
+    linear-gradient(
+      to right,
+      transparent 15px,
+      rgba(0,0,0,0.045) 15px,
+      rgba(0,0,0,0.045) 16px,
+      transparent 16px
+    ),
+
+    /* LEFT INNER */
+    linear-gradient(
+      to right,
+      transparent 23px,
+      rgba(0,0,0,0.025) 23px,
+      rgba(0,0,0,0.025) 24px,
+      transparent 24px
+    ),
+
+    /* RIGHT OUTER */
+    linear-gradient(
+      to left,
+      transparent 15px,
+      rgba(0,0,0,0.045) 15px,
+      rgba(0,0,0,0.045) 16px,
+      transparent 16px
+    ),
+
+    /* RIGHT INNER */
+    linear-gradient(
+      to left,
+      transparent 23px,
+      rgba(0,0,0,0.025) 23px,
+      rgba(0,0,0,0.025) 24px,
+      transparent 24px
+    );
 }
 
 /* TOP BAR */
@@ -198,13 +246,16 @@ body::before {
 
 /* CARD SECTION */
 .income-section {
-    margin: 24px;
+    margin: 32px 24px 128px 24px;
     padding: 16px;
 
     background: var(--color-card);
 
-    border: .5px solid var(--color-card-border);
     border-radius: 8px;
+
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.04),
+      0 8px 24px rgba(0, 0, 0, 0.06);
 
     box-sizing: border-box;
 }
