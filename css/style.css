@@ -246,7 +246,7 @@ body::after {
 
 /* CARD SECTION */
 .income-section {
-    margin: 32px 24px 128px 24px;
+    margin: 40px 24px 120px 24px;
     padding: 16px;
 
     background: var(--color-card);
