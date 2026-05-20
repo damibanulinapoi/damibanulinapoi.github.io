@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dă-mi Banul Înapoi</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/svg+xml" href="images/logo-small.svg">
+</head>
+<body>
+    <!-- Header -->
+<header class="topbar">
+
+    <div class="left">
+        <img src="images/logo-text.svg" class="logo">
+    </div>
+
+    <div class="lang-dropdown">
+
+        <button class="lang-btn">
+            RO ▼
+        </button>
+
+        <div class="lang-menu">
+            <div>EN</div>
+            <div>RU</div>
+        </div>
+
+    </div>
+
+    <img src="images/menu.png" class="menu">
+
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+
+    <a href="index.html" class="hero-back">← Calculatoare</a>
+
+    <h1 class="hero-title">
+        Calculator de buget
+    </h1>
+
+    <p class="hero-text">
+        Folosește calculatorul nostru de buget pentru obține o imagine de ansamblu asupra veniturilor și cheltuielilor tale lunare și pentru a le înțelege mai bine. Introdu suma aproximativă în toate câmpurile care ți se aplică ție sau gospodăriei tale.
+    </p>
+
+</section>
+
+<!-- SECȚIUNEA VENIT -->
+<section class="income-section">
+
+    <h2 class="income-section-title">Venit Lunar</h2>
+
+    <div class="income-divider"></div>
+
+    <!-- Income Row -->
+    <div class="income-row">
+
+        <img
+            src="images/venit.svg"
+            alt=""
+            class="income-icon"
+        >
+
+        <div class="income-content">
+            <h3 class="income-title">
+                Venitul net (dupa taxe)
+            </h3>
+
+            <p class="income-description">
+                Salarii, bonusuri, dividende și altele
+            </p>
+        </div>
+
+        <input
+            type="number"
+            class="income-input"
+            placeholder=""
+        >
+
+    </div>
+
+    <!-- Button -->
+    <button id="calculează-btn" class="btn">
+        <span class="btn-text">Calculează Bugetul Meu</span>
+    </button>
+
+</section>
+
+<!-- SECȚIUNEA CHELTUIELI -->
+<section id="expenses-section" style="display: none;">
+
+    <section class="income-section">
+
+    <h2 class="income-section-title">Cheltuieli Lunare</h2>
+
+    <div class="income-divider"></div>
+
+    <!-- CATEGORY Locuinta -->
+    <div class="income-row">
+
+        <img
+            src="images/venit.svg"
+            alt=""
+            class="income-icon"
+        >
+
+        <div class="income-content">
+            <h3 class="income-title">
+                Venitul net (dupa taxe)
+            </h3>
+
+            <p class="income-description">
+                Salarii, bonusuri, dividende și altele
+            </p>
+        </div>
+
+        <input
+            type="number"
+            class="income-input"
+            placeholder=""
+        >
+
+    </div>
+
+        <!-- CATEGORY Locuinta -->
+    <div class="income-row">
+
+        <img
+            src="images/venit.svg"
+            alt=""
+            class="income-icon"
+        >
+
+        <div class="income-content">
+            <h3 class="income-title">
+                Venitul net (dupa taxe)
+            </h3>
+
+            <p class="income-description">
+                Salarii, bonusuri, dividende și altele
+            </p>
+        </div>
+
+        <input
+            type="number"
+            class="income-input"
+            placeholder=""
+        >
+
+    </div>
+
+
+</section>
+
+</section>
+<script src="js/script.js"></script>
+
+<!-- Hero Section -->
+<section class="hero">
+
+    <h1 class="hero-title">
+        About the calculator
+    </h1>
+
+    <h2 class="hero-subtitle">
+        How are the results calculated?
+    </h2>
+
+    <p class="hero-text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+
+</section>
+
+<!-- Footer / Bottom Section -->
+<footer class="footer">
+  <img
+    src="images/logo-text.svg"
+    alt="Dă-mi Banul Înapoi"
+    class="footer-logo"
+  />
+
+  <div class="footer-links">
+    <a href="#">Contactează-ne</a>
+    <a href="#">Despre noi</a>
+  </div>
+
+<div class="social-icons">
+    <a href="https://www.instagram.com/damibanulinapoi/">
+        <img src="images/instagram.svg" alt="Instagram">
+    </a>
+
+    <a href="https://www.facebook.com/damibanulinapoi/">
+        <img src="images/facebook.svg" alt="Facebook">
+    </a>
+
+    <a href="https://www.youtube.com/@damibanulinapoi/">
+        <img src="images/youtube.svg" alt="YouTube">
+    </a>
+</div>
+
+  <p class="footer-copy">© 2026 Dă-mi Banul Înapoi</p>
+</footer>
+
+    <script>
+        // Calculator logic will go here
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Budget Calculator initialized');
+        });
+    </script>
+</body>
+</html>
