@@ -209,19 +209,22 @@ body::after {
 }
 
 .lang-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
     border: none;
     background: transparent;
 
-    font-size: 14px;
-    font-weight: 500;
-    padding: 0;
     cursor: pointer;
-
-    transition: 0.2s;
 }
 
-.lang-btn:hover {
-    background: rgba(0,0,0,0.06);
+.lang-btn img {
+    display: block;
+    max-width: 24px;
+    max-height: 24px;
 }
 
 

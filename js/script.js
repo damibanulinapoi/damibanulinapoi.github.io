@@ -9,10 +9,17 @@ if (button && expensesSection) {
 }
 
 const langBtn = document.getElementById("langBtn");
+const langFlag = document.getElementById("langFlag");
+
+let lang = "RO";
 
 if (langBtn) {
     langBtn.addEventListener("click", () => {
-        langBtn.textContent =
-            langBtn.textContent.trim() === "RO" ? "RU" : "RO";
+        lang = lang === "RO" ? "RU" : "RO";
+
+        langFlag.src =
+            lang === "RO"
+                ? "images/flag-romania.svg"
+                : "images/flag-russia.svg";
     });
 }
