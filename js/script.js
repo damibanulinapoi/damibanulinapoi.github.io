@@ -1,11 +1,18 @@
 const button = document.getElementById("calculează-btn");
 const expensesSection = document.getElementById("expenses-section");
 
-button.addEventListener("click", () => {
+if (button && expensesSection) {
+    button.addEventListener("click", () => {
+        expensesSection.style.display = "block";
+        button.style.display = "none";
+    });
+}
 
-    // show expenses
-    expensesSection.style.display = "block";
+const langBtn = document.getElementById("langBtn");
 
-    // hide button
-    button.style.display = "none";
-});
+if (langBtn) {
+    langBtn.addEventListener("click", () => {
+        langBtn.textContent =
+            langBtn.textContent.trim() === "RO" ? "RU" : "RO";
+    });
+}
