@@ -195,6 +195,67 @@ body::after {
     flex-shrink: 0;
 }
 
+.lang-dropdown {
+    position: relative;
+
+    margin-left: auto;
+    margin-right: 16px;
+}
+
+.lang-btn {
+    border: none;
+    background: transparent;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    border-radius: 6px;
+
+    transition: 0.2s;
+}
+
+.lang-btn:hover {
+    background: rgba(0,0,0,0.06);
+}
+
+.lang-menu {
+    position: absolute;
+
+    top: 42px;
+    right: 0;
+
+    display: none;
+    flex-direction: column;
+
+    min-width: 70px;
+
+    background: white;
+
+    border-radius: 8px;
+
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+
+    overflow: hidden;
+}
+
+.lang-menu div {
+
+    cursor: pointer;
+
+    font-size: 14px;
+}
+
+.lang-menu div:hover {
+    background: rgba(0,0,0,0.05);
+}
+
+/* Show dropdown on hover */
+.lang-dropdown:hover .lang-menu {
+    display: flex;
+}
+
 
 /* TOP BACK LINK */
 .hero-back {
