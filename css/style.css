@@ -165,11 +165,10 @@ body::after {
     z-index: 1000;
 
     margin: 16px;
-
-    background: var(--color-card);
-
+    padding: 8px 16px;
+    flex-wrap: nowrap;
     border-radius: 8px;
-
+    background: var(--color-card);
     box-shadow: var(--card-shadow);
 
     outline: 1px solid rgba(0,0,0,0.045);
@@ -178,8 +177,6 @@ body::after {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    padding: 8px 16px;
 
     box-sizing: border-box;
 }
