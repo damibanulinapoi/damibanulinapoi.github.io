@@ -9,17 +9,43 @@ if (button && expensesSection) {
 }
 
 const langBtn = document.getElementById("langBtn");
+const langMenu = document.getElementById("langMenu");
 const langFlag = document.getElementById("langFlag");
 
-let lang = "RO";
+const options = document.querySelectorAll(".lang-option");
 
-if (langBtn) {
-    langBtn.addEventListener("click", () => {
-        lang = lang === "RO" ? "RU" : "RO";
+/* OPEN / CLOSE */
 
-        langFlag.src =
-            lang === "RO"
-                ? "images/flag-romania.svg"
-                : "images/flag-russia.svg";
+langBtn.addEventListener("click", () => {
+    langMenu.classList.toggle("active");
+});
+
+/* CHANGE LANGUAGE */
+
+options.forEach(option => {
+
+    option.addEventListener("click", () => {
+
+        const lang = option.dataset.lang;
+
+        if (lang === "RO") {
+            langFlag.src = "images/flag-romania.svg";
+        } else {
+            langFlag.src = "images/flag-russia.svg";
+        }
+
+        langMenu.classList.remove("active");
+
     });
-}
+
+});
+
+/* CLOSE OUTSIDE */
+
+document.addEventListener("click", (e) => {
+
+    if (!e.target.closest(".lang-dropdown")) {
+        langMenu.classList.remove("active");
+    }
+
+});

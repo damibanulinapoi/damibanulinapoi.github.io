@@ -162,7 +162,7 @@ body::after {
 .topbar {
     position: sticky;
     top: 16px;
-    z-index: 1000;
+    z-index: 100;
 
     margin: 16px;
     padding: 8px 16px;
@@ -227,6 +227,72 @@ body::after {
     max-height: 24px;
 }
 
+/* LANGUAGE DROPDOWN */
+
+.lang-dropdown {
+    position: relative;
+}
+
+/* DROPDOWN MENU */
+
+.lang-menu {
+    position: absolute;
+
+    top: 42px;
+    right: -64px;
+
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+
+    min-width: 180px;
+
+    padding: 8px;
+
+    background: var(--color-card);
+
+    border-radius: 8px;
+
+    box-shadow: var(--card-shadow);
+
+    z-index: 100;
+}
+
+.lang-menu.active {
+    display: flex;
+}
+
+/* OPTIONS */
+
+.lang-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    width: 100%;
+
+    padding: 8px 8px;
+
+    border: 1px solid rgba(0,0,0,0.045);
+    border-radius: 4px;
+
+    background: white;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.lang-option:hover {
+    background: #f5f5f5;
+}
+
+.lang-option img {
+    width: 24px;
+    height: 24px;
+
+    display: block;
+}
 
 /* TOP BACK LINK */
 .hero-back {
