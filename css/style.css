@@ -154,14 +154,16 @@ body::after {
     );
 }
 
-.hero-bg {
-    width: 100%;
-    aspect-ratio: 16 / 9;
+.hero_img {
+    position: absolute;
+    z-index: 0;
+    margin-top: -88px;
+}
 
-    background-image: url("../images/landing-page-1.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: top center;
+.hero_img img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 /* Header */
@@ -296,7 +298,6 @@ body::after {
 .lang-option img {
     width: 24px;
     height: 24px;
-
     display: block;
 }
 
