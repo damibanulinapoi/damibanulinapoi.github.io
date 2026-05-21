@@ -156,7 +156,7 @@ body::after {
 
 .hero_img {
     position: absolute;
-    z-index: 0;
+    z-index: -1;
     margin-top: -88px;
 }
 
