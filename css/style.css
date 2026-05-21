@@ -27,6 +27,12 @@
     font-style: normal;
 }
 
+h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 /* COLORS */
 :root {
     /* Primary */
@@ -158,8 +164,8 @@ body::after {
     background-position: top center;
 }
 
-/* TOP BAR */
-.topbar {
+/* Header */
+.header {
     position: sticky;
     top: 16px;
     z-index: 100;
@@ -301,7 +307,6 @@ body::after {
     font-family: "Archivo", sans-serif;
     font-size: 16px;
     line-height: 24px;
-    margin-bottom: 8px;
 
     color: var(--color-orange);
     text-decoration: none;
@@ -310,12 +315,11 @@ body::after {
 
 /* HERO SECTION */
 .hero {
-    margin: 0px 24px 0 24px;
+    margin: 16px 24px;
 }
 
 .hero-title {
-    margin: 0;
-
+    padding-top: 16px;
     font-family: "Roca One", serif;
     font-weight: 400;
 
@@ -328,7 +332,7 @@ body::after {
 }
 
 .hero-subtitle {
-    margin-top: 16px;
+    padding-top: 16px;
 
     font-family: "Archivo", sans-serif;
     font-weight: normal;
@@ -344,7 +348,7 @@ body::after {
 }
 
 .hero-text {
-    margin-top: 16px;
+    padding-top: 16px;
 
     font-family: "Archivo", sans-serif;
     font-size: 16px;
