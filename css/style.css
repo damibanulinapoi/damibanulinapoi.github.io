@@ -252,15 +252,11 @@ body::after {
     display: none;
     flex-direction: column;
     gap: 8px;
-
     min-width: 180px;
-
     padding: 8px;
-
-    background: var(--color-card);
-
     border-radius: 8px;
 
+    background: var(--color-card);
     box-shadow: var(--card-shadow);
 
     z-index: 100;
@@ -282,7 +278,6 @@ body::after {
     padding: 8px 8px;
 
     border: 1px solid rgba(0,0,0,0.045);
-    border-radius: 4px;
 
     background: white;
 
