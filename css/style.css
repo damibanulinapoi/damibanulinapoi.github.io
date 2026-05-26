@@ -282,7 +282,7 @@ margin: 16px 24px;
 /* CARD SECTION */
 .income-section {
     margin: 4px 24px;
-    padding: 8px 16px;
+    padding: 8px 8px;
     background: var(--color-card);
     border: .5px solid var(--color-card-border);
     border-radius: 8px;
@@ -313,23 +313,23 @@ margin: 16px 24px;
     margin: 8px 0;
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
 }
 
 .income-row:not(:last-child) {
-    margin-left: -16px;
-    margin-right: -16px;
+    margin-left: -8px;
+    margin-right: -8px;
 
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 8px;
+    padding-right: 8px;
 
     border-bottom: .5px solid var(--color-card-border);
     padding-bottom: 8px;
 }
 
 .income-icon {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     object-fit: contain;
     flex-shrink: 0;
 }
