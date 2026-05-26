@@ -460,6 +460,19 @@ margin: 16px 24px;
     transform: translateY(-50%);
 }
 
+.chart-box {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    height: 320px;
+    margin: 24px auto;
+}
+
+#chart {
+    width: 100% !important;
+    height: 100% !important;
+}
+
 /* FOOTER */
 .footer {
     position: relative;

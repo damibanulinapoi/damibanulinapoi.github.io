@@ -1,87 +1,138 @@
 const langBtn = document.getElementById("langBtn");
 const langMenu = document.getElementById("langMenu");
 const langFlag = document.getElementById("langFlag");
-
 const options = document.querySelectorAll(".lang-option");
 
-/* OPEN / CLOSE */
+const incomeInputs = document.querySelectorAll(".income-input");
 
+const MAX_DIGITS = 6;
+
+/* LANGUAGE TOGGLE */
 langBtn.addEventListener("click", () => {
     langMenu.classList.toggle("active");
 });
 
-/* CHANGE LANGUAGE */
-
+/* LANGUAGE SWITCH */
 options.forEach(option => {
-
     option.addEventListener("click", () => {
-
         const lang = option.dataset.lang;
 
-        if (lang === "RO") {
-            langFlag.src = "images/flag-romania.svg";
-        } else {
-            langFlag.src = "images/flag-russia.svg";
-        }
+        langFlag.src =
+            lang === "RO"
+                ? "images/flag-romania.svg"
+                : "images/flag-russia.svg";
 
         langMenu.classList.remove("active");
-
     });
-
 });
 
 /* CLOSE OUTSIDE */
-
 document.addEventListener("click", (e) => {
-
     if (!e.target.closest(".lang-dropdown")) {
         langMenu.classList.remove("active");
     }
-
 });
 
-const incomeInputs = document.querySelectorAll(".income-input");
+/* NUMBER FORMAT HELPERS */
+function formatIncome(value) {
+    value = value.replace(/\D/g, "").slice(0, MAX_DIGITS);
 
-incomeInputs.forEach((input) => {
-    input.addEventListener("input", (e) => {
+    if (!value) return "0";
 
-        // remove everything except digits
-        let value = e.target.value.replace(/\D/g, "");
+    return Number(value).toLocaleString("en-US");
+}
 
-        // limit to 6 digits
-        value = value.slice(0, 6);
-
-        // format with commas
-        if (value) {
-            value = Number(value).toLocaleString("en-US");
-        }
-
-        e.target.value = value;
-    });
-});
-
-document.querySelectorAll(".income-input").forEach((input) => {
-
-    let isFirstInput = true;
-
+/* INCOME INPUTS */
+incomeInputs.forEach(input => {
     input.addEventListener("focus", () => {
-        if (input.value === "0") {
-            input.value = "";
-        }
+        if (input.value === "0") input.value = "";
     });
 
     input.addEventListener("input", (e) => {
-
-        let value = e.target.value.replace(/\D/g, "");
-        value = value.slice(0, 6);
-
-        if (value === "") {
-            e.target.value = "0";
-            return;
-        }
-
-        value = Number(value).toLocaleString("en-US");
-
-        e.target.value = value;
+        e.target.value = formatIncome(e.target.value);
     });
 });
+
+/* =========================
+   DONUT CHART
+========================= */
+
+const ctx = document.getElementById("chart");
+
+const categoryInputs = document.querySelectorAll(".income-input");
+
+const categoryLabels = [
+    "Venit",
+    "Locuință",
+    "Utilități",
+    "Datorii",
+    "Mâncare",
+    "Transport",
+    "Sănătate",
+    "Îngrijire",
+    "Casă",
+    "Abonamente",
+    "Shopping",
+    "Ieșiri",
+    "Donații",
+    "Alte"
+];
+
+// IMPORTANT: same order as HTML inputs
+function getValues() {
+    return Array.from(categoryInputs).map(input => {
+        return Number(input.value.replace(/\D/g, "")) || 0;
+    });
+}
+
+const chart = new Chart(ctx, {
+    type: "doughnut",
+    data: {
+        labels: categoryLabels,
+        datasets: [{
+            data: getValues(),
+            backgroundColor: [
+                "#E84231",
+                "#FAD1D7",
+                "#005451",
+                "#FFD200",
+                "#003F87",
+                "#8A2BE2",
+                "#FF7A00",
+                "#00A8A8",
+                "#B22222",
+                "#2E8B57",
+                "#C71585",
+                "#FF4500",
+                "#7B68EE",
+                "#A9A9A9"
+            ],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        cutout: "70%",
+        plugins: {
+            legend: {
+                display: false
+            }
+        }
+    }
+});
+
+/* UPDATE CHART LIVE */
+function updateChart() {
+    chart.data.datasets[0].data = getValues();
+    chart.update();
+
+    const totalIncome = Number(incomeInputs[0].value.replace(/\D/g, "")) || 0;
+    document.getElementById("incomeText").textContent =
+        totalIncome.toLocaleString("en-US");
+}
+
+incomeInputs.forEach(input => {
+    input.addEventListener("input", updateChart);
+});
+
+updateChart();
