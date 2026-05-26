@@ -57,7 +57,7 @@
     </h1>
 
     <p class="hero-text">
-        Folosește calculatorul nostru de buget pentru obține o imagine de ansamblu asupra veniturilor și cheltuielilor tale lunare și pentru a le înțelege mai bine. Introdu suma aproximativă în toate câmpurile care ți se aplică ție sau gospodăriei tale.
+        Acest calculator de buget este destinat planificării finanțelor personale. Introdu suma aproximativă în toate câmpurile care ți se aplică ție.
     </p>
 
 </section>
@@ -88,11 +88,16 @@
             </p>
         </div>
 
-        <input
-            type="number"
-            class="income-input"
-            placeholder=""
-        >
+        <div class="input-wrapper"> 
+            <input
+                type="text"
+                class="income-input"
+                inputmode="numeric"
+                maxlength="7"
+                value="0"
+            />
+            <span class="currency">lei</span>
+        </div>
 
     </div>
 
@@ -112,60 +117,67 @@
 
     <div class="income-divider"></div>
 
-    <!-- CATEGORY Locuinta -->
+    <!-- Categoria Locuință -->
     <div class="income-row">
 
         <img
-            src="images/venit.svg"
+            src="images/locuinta.png"
             alt=""
             class="income-icon"
         >
 
         <div class="income-content">
             <h3 class="income-title">
-                Venitul net (dupa taxe)
+                Locuință
             </h3>
 
             <p class="income-description">
-                Salarii, bonusuri, dividende și altele
+                Chirie, ipotecă și altele
             </p>
         </div>
 
-        <input
-            type="number"
-            class="income-input"
-            placeholder=""
-        >
+        <div class="input-wrapper"> 
+            <input
+                type="text"
+                class="income-input"
+                inputmode="numeric"
+                maxlength="7"
+                value="0"
+            />
+            <span class="currency">lei</span>
+        </div>
 
     </div>
 
-        <!-- CATEGORY Locuinta -->
+        <!-- Categoria Utilități -->
     <div class="income-row">
 
         <img
-            src="images/venit.svg"
+            src="images/utilitati.png"
             alt=""
             class="income-icon"
         >
 
         <div class="income-content">
             <h3 class="income-title">
-                Venitul net (dupa taxe)
+                Utilități
             </h3>
 
             <p class="income-description">
-                Salarii, bonusuri, dividende și altele
+                Electricitate, internet, întreținere bloc și altele
             </p>
         </div>
 
-        <input
-            type="number"
-            class="income-input"
-            placeholder=""
-        >
-
-    </div>
-
+        <div class="input-wrapper"> 
+            <input
+                type="text"
+                class="income-input"
+                inputmode="numeric"
+                maxlength="7"
+                value="0"
+            />
+            <span class="currency">lei</span>
+        </div>
 
 </section>
 

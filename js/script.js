@@ -49,3 +49,49 @@ document.addEventListener("click", (e) => {
     }
 
 });
+
+const incomeInputs = document.querySelectorAll(".income-input");
+
+incomeInputs.forEach((input) => {
+    input.addEventListener("input", (e) => {
+
+        // remove everything except digits
+        let value = e.target.value.replace(/\D/g, "");
+
+        // limit to 6 digits
+        value = value.slice(0, 6);
+
+        // format with commas
+        if (value) {
+            value = Number(value).toLocaleString("en-US");
+        }
+
+        e.target.value = value;
+    });
+});
+
+document.querySelectorAll(".income-input").forEach((input) => {
+
+    let isFirstInput = true;
+
+    input.addEventListener("focus", () => {
+        if (input.value === "0") {
+            input.value = "";
+        }
+    });
+
+    input.addEventListener("input", (e) => {
+
+        let value = e.target.value.replace(/\D/g, "");
+        value = value.slice(0, 6);
+
+        if (value === "") {
+            e.target.value = "0";
+            return;
+        }
+
+        value = Number(value).toLocaleString("en-US");
+
+        e.target.value = value;
+    });
+});

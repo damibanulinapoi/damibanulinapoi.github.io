@@ -57,7 +57,27 @@ h1, h2, h3, h4, h5, h6, p {
 
 /* BACKGROUND */
 body {
-  background-color: #FFFFFF;
+  background-color: #FAF8F5;
+
+  background-image:
+    radial-gradient(
+      circle at 0% 0%,
+      rgba(232, 66, 49, 0.10) 0%,
+      transparent 28%
+    ),
+
+    radial-gradient(
+      circle at 100% 85%,
+      rgba(0, 84, 81, 0.10) 0%,
+      transparent 32%
+    ),
+
+    linear-gradient(
+      180deg,
+      #fffdfc 0%,
+      #FAF8F5 100%
+    );
+
   background-attachment: fixed;
 
   font-family: 'Archivo', sans-serif;
@@ -310,11 +330,18 @@ margin: 16px 24px;
 }
 
 .income-divider {
-    height: .5px;
-    background: var(--color-card-border);
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        #003F87 0%,
+        #FFD200 50%,
+        #C8102E 100%
+    );
+    border-radius: 999px;
 }
 
 .income-row {
+    margin: 8px 0;
     display: flex;
     align-items: center;
     gap: 4px;
@@ -328,7 +355,6 @@ margin: 16px 24px;
 }
 
 .income-content {
-    margin: 16px 0;
     flex: 1;
     min-width: 0;
 }
@@ -350,6 +376,13 @@ margin: 16px 24px;
     color: var(--color-text-secondary);
 }
 
+.input-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* INPUT */
 .income-input {
     width: 80px;
     height: 36px;
@@ -358,10 +391,29 @@ margin: 16px 24px;
     background: var(--color-card);
     box-sizing: border-box;
     font-family: "Archivo", sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     color: var(--color-text-primary);
     outline: none;
     flex-shrink: 0;
+
+    text-align: right;
+
+    padding: 0 20px 0 4px;
+}
+
+/* remove placeholder styling (no longer needed) */
+.income-input::placeholder {
+    display: none;
+}
+
+/* CURRENCY LABEL */
+.currency {
+    position: absolute;
+    right: 4px;
+    font-size: 14px;
+    color: var(--color-text-primary);
+    pointer-events: none; /* not clickable */
+    user-select: none;
 }
 
 /* REMOVE NUMBER ARROWS */
