@@ -1,13 +1,3 @@
-const button = document.getElementById("calculează-btn");
-const expensesSection = document.getElementById("expenses-section");
-
-if (button && expensesSection) {
-    button.addEventListener("click", () => {
-        expensesSection.style.display = "block";
-        button.style.display = "none";
-    });
-}
-
 const langBtn = document.getElementById("langBtn");
 const langMenu = document.getElementById("langMenu");
 const langFlag = document.getElementById("langFlag");
