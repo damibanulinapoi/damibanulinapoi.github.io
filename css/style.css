@@ -279,10 +279,17 @@ margin: 16px 24px;
     color: var(--color-text-primary);
 }
 
+.section-divider {
+  height: 16px;
+  width: 100%;
+  background: #fff;
+  margin: 16px 0;
+}
+
 /* CARD SECTION */
 .income-section {
     margin: 4px 24px;
-    padding: 8px 8px;
+    padding: 0px 8px;
     background: var(--color-card);
     border: .5px solid var(--color-card-border);
     border-radius: 8px;
@@ -290,7 +297,7 @@ margin: 16px 24px;
 }
 
 .income-section-title {
-    margin: 0;
+    margin: 0 24px;
     font-family: "Archivo", sans-serif;
     font-weight: 500;
     font-size: 18px;
