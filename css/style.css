@@ -58,7 +58,7 @@ h1, h2, h3, h4, h5, h6, p {
 
 /* BACKGROUND */
 body {
-  background-color: #F2F5F6;
+  background-color: var(--color-background);
 
   background-attachment: fixed;
 
@@ -292,22 +292,21 @@ margin: 16px 24px;
     margin: 4px 24px;
     padding: 16px 16px;
     background: var(--color-card);
-    box-shadow: var(--card-shadow);
     border-radius: 8px;
     box-sizing: border-box;
 }
 
 .income-section-title {
-    font-family: "Archivo", sans-serif;
-    font-weight: 500;
+    font-family: "Roca One", serif;
+    font-weight: normal;
     font-size: 18px;
     line-height: 28px;
     color: var(--color-text-primary);
+    letter-spacing: -0.05em;
 }
 
 .income-divider {
-    height: 1px;
-    margin: 0 -16px;
+    height: .5px;
     background: linear-gradient(
         to right,
         #003F87 0%,
@@ -374,9 +373,9 @@ margin: 16px 24px;
 .income-input {
     width: 80px;
     height: 36px;
-    border: .5px solid var(--color-card-border);
+    border: 0px solid var(--color-card-border);
     border-radius: 4px;
-    background: var(--color-card);
+    background: var(--color-background);
     box-sizing: border-box;
     font-family: "Archivo", sans-serif;
     font-size: 14px;
