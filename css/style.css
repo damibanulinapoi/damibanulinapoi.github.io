@@ -307,6 +307,7 @@ margin: 16px 24px;
 
 .income-divider {
     height: 1px;
+    margin: 0 -16px;
     background: linear-gradient(
         to right,
         #003F87 0%,
