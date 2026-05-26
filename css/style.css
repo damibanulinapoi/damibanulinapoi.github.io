@@ -248,7 +248,7 @@ body::after {
 
 /* HERO SECTION */
 .hero {
-margin: 16px 24px;
+margin: 40px 24px;
 }
 
 .hero-title {
@@ -281,15 +281,15 @@ margin: 16px 24px;
 }
 
 .section-divider {
-  height: 16px;
+  height: 24px;
   width: 100%;
   background: #fff;
-  margin: 16px 0;
+  margin: 24px 0;
 }
 
 /* CARD SECTION */
 .income-section {
-    margin: 4px 24px;
+    margin: 8px 24px;
     padding: 16px 16px;
     background: var(--color-card);
     border-radius: 8px;
@@ -297,16 +297,17 @@ margin: 16px 24px;
 }
 
 .income-section-title {
-    font-family: "Roca One", serif;
+    font-family: "Archivo", sans-serif;
     font-weight: normal;
     font-size: 18px;
     line-height: 28px;
     color: var(--color-text-primary);
     letter-spacing: -0.05em;
+    padding-bottom: 8px;
 }
 
 .income-divider {
-    height: .5px;
+    height: 1px;
     background: linear-gradient(
         to right,
         #003F87 0%,
