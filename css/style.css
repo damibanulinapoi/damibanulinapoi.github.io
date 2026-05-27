@@ -45,7 +45,8 @@ h1, h2, h3, h4, h5, h6, p {
     --color-text-disabled: #CFD3D3;
     /* Card */
     --color-card: #FFFFFF;
-    --color-card-border: #d9d9d9;
+    --color-card-border: #CCCCCC;
+    --color-background: #F2F5F6;
 }
 
 /* SHADOWS */
@@ -57,44 +58,16 @@ h1, h2, h3, h4, h5, h6, p {
 
 /* BACKGROUND */
 body {
-  background-color: #f8f4ee;
-  background-image:
-    radial-gradient(
-      circle at top left,
-      rgba(232, 66, 49, 0.10) 0%,
-      transparent 30%
-    ),
-
-    radial-gradient(
-      circle at bottom right,
-      rgba(0, 84, 81, 0.10) 0%,
-      transparent 30%
-    ),
-
-    linear-gradient(
-      180deg,
-      #fcfbf8 0%,
-      #f5f1ea 100%
-    );
+  background-color: var(--color-background);
 
   background-attachment: fixed;
+
   font-family: 'Archivo', sans-serif;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  position: relative;
-}
 
-/* noise texture */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -1;
-  opacity: 0.035;
-  background-image:
-  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='%23000000'%3E%3Ccircle cx='2' cy='3' r='0.6'/%3E%3Ccircle cx='6' cy='10' r='0.6'/%3E%3Ccircle cx='9' cy='18' r='0.6'/%3E%3Ccircle cx='14' cy='6' r='0.6'/%3E%3Ccircle cx='18' cy='22' r='0.6'/%3E%3Ccircle cx='22' cy='12' r='0.6'/%3E%3Ccircle cx='26' cy='30' r='0.6'/%3E%3Ccircle cx='30' cy='8' r='0.6'/%3E%3Ccircle cx='34' cy='18' r='0.6'/%3E%3Ccircle cx='38' cy='28' r='0.6'/%3E%3Ccircle cx='42' cy='14' r='0.6'/%3E%3Ccircle cx='46' cy='36' r='0.6'/%3E%3Ccircle cx='50' cy='20' r='0.6'/%3E%3Ccircle cx='54' cy='40' r='0.6'/%3E%3Ccircle cx='58' cy='25' r='0.6'/%3E%3C/g%3E%3C/svg%3E");
+  position: relative;
 }
 
 /* vertical lines */
@@ -275,9 +248,10 @@ body::after {
 
 /* HERO SECTION */
 .hero {
-margin: 16px 24px;
+    margin: 0px 24px 56px 24px;
 }
 
+/* TITLE */
 .hero-title {
     padding-top: 16px;
     font-family: "Roca One", serif;
@@ -288,64 +262,105 @@ margin: 16px 24px;
     letter-spacing: -0.05em;
 }
 
-.hero-subtitle {
+.hero-row {
     padding-top: 16px;
-    font-family: "Archivo", sans-serif;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 16px;
-    text-transform: uppercase;
-    color: var(--color-text-primary); 
-    letter-spacing: -0.05em;
+    display: flex;
+    gap: 24px;
+    align-items: center; /* vertical alignment fix */
 }
 
+/* TEXT */
 .hero-text {
-    padding-top: 16px;
+    margin: 0;
+    flex: 1;
+
     font-family: "Archivo", sans-serif;
     font-size: 16px;
     line-height: 20px;
     color: var(--color-text-primary);
 }
 
+/* IMAGE BOX */
+.hero-image {
+    flex-shrink: 0;
+
+    width: 120px;
+    aspect-ratio: 1 / 1;
+
+    padding: 16px;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* IMAGE */
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.section-divider {
+  height: 24px;
+  width: 100%;
+  background: #fff;
+  margin: 56px 0;
+}
+
 /* CARD SECTION */
 .income-section {
-    margin: 4px 24px;
-    padding: 16px;
+    margin:8px 24px 24px 24px;
+    padding: 8px;
     background: var(--color-card);
     border-radius: 8px;
-    box-shadow: var(--card-shadow);
     box-sizing: border-box;
+}
+.income-section-a {
+    margin:8px 24px;
 }
 
 .income-section-title {
-    margin: 0;
-    font-family: "Archivo", sans-serif;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 28px;
+    font-family: "Roca One", serif;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
     color: var(--color-text-primary);
+    letter-spacing: -0.05em;
+}
+
+.income-section-subtitle {
+    margin-top: 0px;
+    font-family: "Archivo", sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--color-text-secondary);
 }
 
 .income-divider {
-    height: .5px;
-    background: var(--color-card-border);
+    margin: 8px -8px;
+    height: 1px;
+    background: #F2F5F6;
+    border-radius: 999px;
 }
 
 .income-row {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
 }
 
 .income-icon {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     object-fit: contain;
     flex-shrink: 0;
 }
 
 .income-content {
-    margin: 16px 0;
     flex: 1;
     min-width: 0;
 }
@@ -367,18 +382,44 @@ margin: 16px 24px;
     color: var(--color-text-secondary);
 }
 
+.input-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* INPUT */
 .income-input {
     width: 80px;
     height: 36px;
-    border: .5px solid var(--color-card-border);
+    border: 0px solid var(--color-card-border);
     border-radius: 4px;
-    background: var(--color-card);
+    background: var(--color-background);
     box-sizing: border-box;
     font-family: "Archivo", sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     color: var(--color-text-primary);
     outline: none;
     flex-shrink: 0;
+
+    text-align: right;
+
+    padding: 0 20px 0 4px;
+}
+
+/* remove placeholder styling (no longer needed) */
+.income-input::placeholder {
+    display: none;
+}
+
+/* CURRENCY LABEL */
+.currency {
+    position: absolute;
+    right: 4px;
+    font-size: 14px;
+    color: var(--color-text-primary);
+    pointer-events: none; /* not clickable */
+    user-select: none;
 }
 
 /* REMOVE NUMBER ARROWS */
@@ -395,6 +436,7 @@ margin: 16px 24px;
 /* BUTTON */
 .btn {
     width: calc(100%);
+    margin-top: 8px;
     height: 40px;
     background-color: var(--color-orange);
     border: none;
@@ -404,8 +446,7 @@ margin: 16px 24px;
     justify-content: center;
     position: relative;
     cursor: pointer;
-    text-decoration: none; /* removes underline (for <a>) */
-    color: white; /* ensures text doesn't turn blue */
+    color: white;
 }
 
 .btn-text {
@@ -423,6 +464,19 @@ margin: 16px 24px;
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
+}
+
+.chart-box {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    height: 320px;
+    margin: 24px auto;
+}
+
+#chart {
+    width: 100% !important;
+    height: 100% !important;
 }
 
 /* FOOTER */
