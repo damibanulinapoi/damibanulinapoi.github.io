@@ -248,7 +248,7 @@ body::after {
 
 /* HERO SECTION */
 .hero {
-margin: 40px 24px;
+margin: 56px 24px;
 }
 
 .hero-title {
@@ -284,7 +284,7 @@ margin: 40px 24px;
   height: 24px;
   width: 100%;
   background: #fff;
-  margin: 24px 0;
+  margin: 56px 0;
 }
 
 /* CARD SECTION */
@@ -305,6 +305,7 @@ margin: 40px 24px;
     line-height: 32px;
     color: var(--color-text-primary);
     letter-spacing: -0.05em;
+    text-decoration: underline;
 }
 
 .income-section-subtitle {
