@@ -289,50 +289,45 @@ margin: 40px 24px;
 
 /* CARD SECTION */
 .income-section {
-    margin: 8px 24px;
-    padding: 16px 16px;
+    margin:8px 24px;
     background: var(--color-card);
     border-radius: 8px;
     box-sizing: border-box;
+}
+.income-section-a {
+    margin:8px 24px;
 }
 
 .income-section-title {
     font-family: "Archivo", sans-serif;
     font-weight: normal;
-    font-size: 18px;
-    line-height: 28px;
+    font-size: 14px;
+    line-height: 20px;
     color: var(--color-text-primary);
-    letter-spacing: -0.05em;
-    padding-bottom: 8px;
+    padding-bottom: 0px;
+}
+
+.income-section-subtitle {
+    font-family: "Archivo", sans-serif;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 16px;
+    color: var(--color-text-secondary);
+    padding-bottom: 0px;
 }
 
 .income-divider {
     height: 1px;
-    background: linear-gradient(
-        to right,
-        #003F87 0%,
-        #FFD200 50%,
-        #C8102E 100%
-    );
+    background: #F2F5F6;
     border-radius: 999px;
 }
 
 .income-row {
-    margin: 8px 0;
+    margin: 0px 0;
     display: flex;
     align-items: center;
     gap: 8px;
-}
-
-.income-row:not(:last-child) {
-    margin-left: -16px;
-    margin-right: -16px;
-
-    padding-left: 16px;
-    padding-right: 16px;
-
-    border-bottom: 1px solid var(--color-background);
-    padding-bottom: 8px;
+    padding: 8px;
 }
 
 .income-icon {
