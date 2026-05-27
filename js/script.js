@@ -136,3 +136,18 @@ incomeInputs.forEach(input => {
 });
 
 updateChart();
+
+const text = document.querySelector('.hero-text');
+const image = document.querySelector('.hero-image img');
+
+function syncImageHeight() {
+    const height = text.offsetHeight;
+
+    // safety cap (prevents breaking layout)
+    const max = 220;
+
+    image.style.height = Math.min(height, max) + "px";
+}
+
+syncImageHeight();
+window.addEventListener('resize', syncImageHeight);
