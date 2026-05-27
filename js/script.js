@@ -33,6 +33,16 @@ document.addEventListener("click", (e) => {
     }
 });
 
+const button = document.getElementById("calculează-btn");
+const expensesSection = document.getElementById("expenses-section");
+
+if (button && expensesSection) {
+    button.addEventListener("click", () => {
+        expensesSection.style.display = "block";
+        button.style.display = "none";
+    });
+}
+
 /* NUMBER FORMAT HELPERS */
 function formatIncome(value) {
     value = value.replace(/\D/g, "").slice(0, MAX_DIGITS);
