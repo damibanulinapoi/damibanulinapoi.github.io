@@ -151,3 +151,28 @@ function syncImageHeight() {
 
 syncImageHeight();
 window.addEventListener('resize', syncImageHeight);
+
+incomeInputs.forEach(input => {
+    input.addEventListener("focus", () => {
+        if (input.value === "0") {
+            input.value = "";
+        }
+    });
+
+    input.addEventListener("blur", () => {
+        if (input.value.trim() === "") {
+            input.value = "0";
+        }
+    });
+
+    input.addEventListener("input", updateChart);
+});
+
+const buttons = document.querySelectorAll(".toggle-btn");
+
+buttons.forEach(button => {
+    button.addEventListener("click", () => {
+        buttons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
+    });
+});

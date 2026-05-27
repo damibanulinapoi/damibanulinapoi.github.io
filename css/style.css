@@ -310,11 +310,56 @@ body::after {
   margin: 56px 0;
 }
 
+.toggle-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.toggle-container {
+    display: flex;
+    width: fit-content;
+    background: white;
+    border-radius: 4px;
+    box-shadow: var(--card-shadow);
+}
+
+.toggle-btn {
+    width: 110px;
+    height: 36px;
+    border: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: white;
+    color: var(--color-text-primary);
+    border-radius: 4px;
+
+    font-family: 'Roca One', serif;
+    font-weight: 600;
+    font-size: 16px;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+
+    position: relative;
+}
+
+.toggle-btn.active {
+    background: var(--color-orange);
+    color: white;
+    border-radius: 4px;
+}
+
+
 /* CARD SECTION */
 .income-section {
     margin:8px 24px 24px 24px;
     padding: 8px;
     background: var(--color-card);
+    box-shadow: var(--card-shadow);
     border-radius: 8px;
     box-sizing: border-box;
 }
@@ -392,12 +437,13 @@ body::after {
 .income-input {
     width: 80px;
     height: 36px;
-    border: 0px solid var(--color-card-border);
+    border: 1px solid var(--color-card-border);
     border-radius: 4px;
     background: var(--color-background);
     box-sizing: border-box;
     font-family: "Archivo", sans-serif;
     font-size: 14px;
+    line-height: 16px;
     color: var(--color-text-primary);
     outline: none;
     flex-shrink: 0;
@@ -431,6 +477,11 @@ body::after {
 
 .income-input[type="number"] {
     appearance: textfield;
+}
+
+.income-input:focus {
+    border-color: var(--color-orange);
+    transition: border-color 0.2s ease;
 }
 
 /* BUTTON */
