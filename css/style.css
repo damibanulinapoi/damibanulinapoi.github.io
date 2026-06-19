@@ -246,20 +246,32 @@ body::after {
 
 .breadcrumb {
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
     gap: 4px;
 
     font-family: "Archivo", sans-serif;
-    font-weight: 600; /* Semibold */
+    font-weight: 500;
     font-size: 12px;
     line-height: 14px;
-    color: var(--color-orange);
 }
 
-.breadcrumb a,
-.breadcrumb span {
-    color: inherit;
+.breadcrumb a {
+    color: var(--color-orange);
     text-decoration: none;
+}
+
+.breadcrumb a:hover,
+.breadcrumb a:focus,
+.breadcrumb a:active,
+.breadcrumb a:visited {
+    color: var(--color-orange);
+    text-decoration: none;
+}
+
+.breadcrumb .separator,
+.breadcrumb span {
+    color: var(--color-text-secondary);
 }
 
 .hero-title {
