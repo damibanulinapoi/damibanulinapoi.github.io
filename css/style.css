@@ -42,6 +42,7 @@ h1, h2, h3, h4, h5, h6, p {
     /* Text */
     --color-text-primary: #1F2937;
     --color-text-secondary: #A0A7A7;
+    --color-text-tertiary: #959D9D;
     --color-text-disabled: #CFD3D3;
     /* Card */
     --color-card: #FFFFFF;
@@ -49,7 +50,6 @@ h1, h2, h3, h4, h5, h6, p {
     --color-background: #F1F1F3;
 }
 
-/* SHADOWS */
 :root {
     --card-shadow:
         0 1px 2px rgba(0, 0, 0, 0.04),
@@ -161,7 +161,7 @@ body {
     padding: 8px;
     border-radius: 8px;
     background: var(--color-card);
-    box-shadow: var(--card-shadow);
+    border: 1px solid var(--color-card-border);
     z-index: 100;
 }
 
@@ -284,56 +284,12 @@ body {
   box-shadow: inset 0 4px 4px -1px rgba(0, 0, 0, 0.05);
 }
 
-.toggle-wrapper {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-.toggle-container {
-    display: flex;
-    width: fit-content;
-    background: white;
-    border-radius: 4px;
-    box-shadow: var(--card-shadow);
-}
-
-.toggle-btn {
-    width: 110px;
-    height: 36px;
-    border: none;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: white;
-    color: var(--color-text-primary);
-    border-radius: 4px;
-
-    font-family: 'Roca One', serif;
-    font-weight: 600;
-    font-size: 16px;
-
-    cursor: pointer;
-    transition: 0.2s ease;
-
-    position: relative;
-}
-
-.toggle-btn.active {
-    background: var(--color-orange);
-    color: white;
-    border-radius: 4px;
-}
-
-
 /* CARD SECTION */
 .income-section {
     margin:8px 24px 24px 24px;
     padding: 8px;
     background: var(--color-card);
-    box-shadow: var(--card-shadow);
+    border: 1px solid var(--color-card-border);
     border-radius: 8px;
     box-sizing: border-box;
 }
@@ -344,8 +300,8 @@ body {
 .income-section-title {
     font-family: "Archivo", sans-serif;
     font-weight: normal;
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 14px;
+    line-height: 16px;
     color: var(--color-text-primary);
 }
 
@@ -353,16 +309,15 @@ body {
     margin-top: 0px;
     font-family: "Archivo", sans-serif;
     font-weight: normal;
-    font-size: 14px;
-    line-height: 20px;
-    color: var(--color-text-secondary);
+    font-size: 12px;
+    line-height: 14px;
+    color: var(--color-text-tertiary);
 }
 
 .income-divider {
     margin: 8px -8px;
     height: 1px;
-    background: #F2F5F6;
-    border-radius: 999px;
+    background: var(--color-card-border);
 }
 
 .income-row {
@@ -388,7 +343,7 @@ body {
     font-family: "Archivo", sans-serif;
     font-size: 14px;
     font-weight: normal;
-    line-height: 20px;
+    line-height: 16px;
     color: var(--color-text-primary);
 }
 
@@ -477,7 +432,7 @@ body {
     font-family: "Roca One", serif;
     font-weight: 700;
     font-size: 16px;
-    line-height: 16px;
+    line-height: 14px;
     color: white;
 }
 
