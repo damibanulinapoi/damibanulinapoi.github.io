@@ -45,7 +45,15 @@ function formatIncome(value) {
 /* INCOME INPUTS */
 incomeInputs.forEach(input => {
     input.addEventListener("focus", () => {
-        if (input.value === "0") input.value = "";
+        if (input.value === "0") {
+            input.value = "";
+        }
+    });
+
+    input.addEventListener("blur", () => {
+        if (input.value.trim() === "") {
+            input.value = "0";
+        }
     });
 
     input.addEventListener("input", (e) => {
