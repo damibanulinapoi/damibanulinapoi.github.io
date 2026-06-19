@@ -70,48 +70,6 @@ body {
   position: relative;
 }
 
-/* vertical lines */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -1;
-  background:
-    /* LEFT OUTER */
-    linear-gradient(
-      to right,
-      transparent 16px,
-      rgba(0,0,0,0.045) 16px,
-      rgba(0,0,0,0.045) 17px,
-      transparent 17px
-    ),
-    /* LEFT INNER */
-    linear-gradient(
-      to right,
-      transparent 24px,
-      rgba(0,0,0,0.025) 24px,
-      rgba(0,0,0,0.025) 25px,
-      transparent 25px
-    ),
-    /* RIGHT OUTER */
-    linear-gradient(
-      to left,
-      transparent 16px,
-      rgba(0,0,0,0.045) 16px,
-      rgba(0,0,0,0.045) 17px,
-      transparent 17px
-    ),
-    /* RIGHT INNER */
-    linear-gradient(
-      to left,
-      transparent 24px,
-      rgba(0,0,0,0.025) 24px,
-      rgba(0,0,0,0.025) 25px,
-      transparent 25px
-    );
-}
-
 .hero_img {
     position: absolute;
     z-index: -1;
@@ -550,7 +508,7 @@ body::after {
     position: relative;
     background: var(--color-card);
     border-radius: 8px;
-    box-shadow: var(--card-shadow);
+    border: 1px solid var(--color-card-border);
     outline: 1px solid rgba(0,0,0,0.045);
     outline-offset: -9px;
     display: flex;
