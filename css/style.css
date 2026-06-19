@@ -46,7 +46,7 @@ h1, h2, h3, h4, h5, h6, p {
     /* Card */
     --color-card: #FFFFFF;
     --color-card-border: #CCCCCC;
-    --color-background: #F2F5F6;
+    --color-background: #F1F1F3;
 }
 
 /* SHADOWS */
@@ -132,9 +132,9 @@ body::after {
     margin: 16px;
     padding: 8px 16px;
     flex-wrap: nowrap;
+    border: .5px solid var(--color-card-border);
     border-radius: 8px;
     background: var(--color-card);
-    box-shadow: var(--card-shadow);
     outline: 1px solid rgba(0,0,0,0.045);
     outline-offset: -9px;
     display: flex;
@@ -235,48 +235,50 @@ body::after {
     display: block;
 }
 
-/* TOP BACK LINK */
-.hero-back {
-    display: inline-block;
+.budget-hero {
+    width: calc(100% - 48px);
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+
     font-family: "Archivo", sans-serif;
-    font-size: 16px;
-    line-height: 24px;
+    font-weight: 600; /* Semibold */
+    font-size: 12px;
+    line-height: 14px;
     color: var(--color-orange);
+}
+
+.breadcrumb a,
+.breadcrumb span {
+    color: inherit;
     text-decoration: none;
-
 }
 
-/* HERO SECTION */
-.hero {
-    margin: 0px 24px 56px 24px;
-}
-
-/* TITLE */
 .hero-title {
-    padding-top: 16px;
+    margin: 0;
+
     font-family: "Roca One", serif;
     font-weight: 400;
-    font-size: 32px;
-    line-height: 40px;
-    color: var(--color-text-primary);
+    font-size: 24px;
+    line-height: 24px;
     letter-spacing: -0.05em;
+    color: var(--color-text-primary);
 }
 
-.hero-row {
-    padding-top: 16px;
-    display: flex;
-    gap: 24px;
-    align-items: center; /* vertical alignment fix */
-}
-
-/* TEXT */
-.hero-text {
+.hero-description {
     margin: 0;
-    flex: 1;
 
     font-family: "Archivo", sans-serif;
-    font-size: 16px;
-    line-height: 20px;
+    font-size: 12px;
+    line-height: 14px;
     color: var(--color-text-primary);
 }
 
@@ -303,11 +305,13 @@ body::after {
     display: block;
 }
 
-.section-divider {
-  height: 24px;
-  width: 100%;
-  background: #fff;
-  margin: 56px 0;
+.section-break {
+  height: 16px;
+  width: calc(100% - 32px);
+  margin: 56px auto;
+  background: #F8F8F9;
+  border-radius: 999px;
+  box-shadow: inset 0 4px 4px -1px rgba(0, 0, 0, 0.05);
 }
 
 .toggle-wrapper {
