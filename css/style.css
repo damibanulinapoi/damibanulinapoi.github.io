@@ -326,7 +326,7 @@ body {
 .income-divider {
     margin: 8px auto;
     height: 1px;
-    background: var(--color-card-border);
+    background: rgba(0,0,0,0.045);
 }
 
 .income-row {
@@ -364,7 +364,7 @@ body {
 .income-input {
     width: 80px;
     height: 36px;
-    border: 1px solid var(--color-background);
+    border: 1px solid #fff;
     border-radius: 4px;
     background: var(--color-background);
     box-sizing: border-box;
