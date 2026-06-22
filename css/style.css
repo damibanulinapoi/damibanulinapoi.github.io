@@ -1,3 +1,7 @@
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
 /* Fonts */
 @font-face {
     font-family: 'Roca One';
