@@ -20,17 +20,59 @@
     font-style: normal;
 }
 
-@font-face {
-    font-family: 'Archivo';
-    src: url('../fonts/Archivo-Medium.ttf') format('truetype');
-    font-weight: 500;
-    font-style: normal;
-}
-
 h1, h2, h3, h4, h5, h6, p {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+h2 {
+    font-size: 25.23px;
+    line-height: 32px;
+    font-family: "Roca One", serif;
+    font-weight: 400;
+    letter-spacing: -0.05em;
+    color: var(--color-text-primary);
+}
+
+h6 {
+    font-size: 15.75px;
+    line-height: 20px;
+    font-family: "Archivo", sans-serif;
+    font-weight: normal;
+    color: var(--color-text-primary);
+}
+
+.body1 {
+    font-size: 14px;
+    line-height: 16px;
+    font-family: "Archivo", sans-serif;
+    font-weight: normal;
+    color: var(--color-text-primary);
+}
+
+.body1-secondary {
+    font-size: 14px;
+    line-height: 16px;
+    font-family: "Archivo", sans-serif;
+    font-weight: normal;
+    color: var(--color-text-secondary);
+}
+
+.body2 {
+    font-size: 12.44px;
+    line-height: 16px;
+    font-family: "Archivo", sans-serif;
+    font-weight: normal;
+    color: var(--color-text-primary);
+}
+
+.body2-secondary {
+    font-size: 12.44px;
+    line-height: 16px;
+    font-family: "Archivo", sans-serif;
+    font-weight: normal;
+    color: var(--color-text-secondary);
 }
 
 /* COLORS */
@@ -42,7 +84,6 @@ h1, h2, h3, h4, h5, h6, p {
     /* Text */
     --color-text-primary: #1F2937;
     --color-text-secondary: #A0A7A7;
-    --color-text-tertiary: #959D9D;
     --color-text-disabled: #CFD3D3;
     /* Card */
     --color-card: #FFFFFF;
@@ -193,10 +234,11 @@ body {
     display: block;
 }
 
-.budget-hero {
-    width: calc(100% - 48px);
-    margin: 0 auto;
+.page-container {
+    margin-inline: 24px;
+}
 
+.budget-hero {
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -215,6 +257,10 @@ body {
 }
 
 .breadcrumb a {
+    font-size: 14px;
+    line-height: 16px;
+    font-family: "Archivo", sans-serif;
+    font-weight: normal;
     color: var(--color-orange);
     text-decoration: none;
 }
@@ -229,27 +275,11 @@ body {
 
 .breadcrumb .separator,
 .breadcrumb span {
-    color: var(--color-text-secondary);
-}
-
-.hero-title {
-    margin: 0;
-
-    font-family: "Roca One", serif;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 24px;
-    letter-spacing: -0.05em;
-    color: var(--color-text-primary);
-}
-
-.hero-description {
-    margin: 0;
-
+    font-size: 14px;
+    line-height: 16px;
     font-family: "Archivo", sans-serif;
-    font-size: 12px;
-    line-height: 14px;
-    color: var(--color-text-primary);
+    font-weight: normal;
+    color: var(--color-text-secondary);
 }
 
 /* IMAGE BOX */
@@ -277,7 +307,6 @@ body {
 
 .section-break {
   height: 16px;
-  width: calc(100% - 32px);
   margin: 56px auto;
   background: #F8F8F9;
   border-radius: 999px;
@@ -286,37 +315,17 @@ body {
 
 /* CARD SECTION */
 .income-section {
-    margin:8px 24px 24px 24px;
+    margin:8px 0 24px 0;
     padding: 8px;
     background: var(--color-card);
     border: 1px solid var(--color-card-border);
     border-radius: 8px;
     box-sizing: border-box;
 }
-.income-section-a {
-    margin:8px 24px;
-}
-
-.income-section-title {
-    font-family: "Archivo", sans-serif;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 16px;
-    color: var(--color-text-primary);
-}
-
-.income-section-subtitle {
-    margin-top: 0px;
-    font-family: "Archivo", sans-serif;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 14px;
-    color: var(--color-text-tertiary);
-}
 
 .income-divider {
-    margin: 8px -8px;
-    height: 1px;
+    margin: 8px auto;
+    height: .5px;
     background: var(--color-card-border);
 }
 
@@ -338,17 +347,7 @@ body {
     min-width: 0;
 }
 
-.income-title {
-    margin: 0;
-    font-family: "Archivo", sans-serif;
-    font-size: 14px;
-    font-weight: normal;
-    line-height: 16px;
-    color: var(--color-text-primary);
-}
-
 .income-description {
-    margin: 0;
     font-family: "Archivo", sans-serif;
     font-size: 13px;
     line-height: 16px;
@@ -365,7 +364,7 @@ body {
 .income-input {
     width: 80px;
     height: 36px;
-    border: 1px solid var(--color-card-border);
+    border: none;
     border-radius: 4px;
     background: var(--color-background);
     box-sizing: border-box;
@@ -400,7 +399,6 @@ body {
 .income-input::-webkit-outer-spin-button,
 .income-input::-webkit-inner-spin-button {
     -webkit-appearance: none;
-    margin: 0;
 }
 
 .income-input[type="number"] {

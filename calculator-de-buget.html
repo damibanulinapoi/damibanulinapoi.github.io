@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    
 <!-- Header -->
 <header class="header">
 
@@ -47,417 +48,275 @@
 
 </header>
 
-<!-- Hero Section -->
-<section class="budget-hero">
-    <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="/">acasă</a>
-        <span class="separator">/</span>
+<div class="page-container">
 
-        <a href="/calculatoare">calculatoare</a>
-        <span class="separator">/</span>
+    <!-- Hero Section -->
+    <section class="budget-hero">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="/">acasă</a>
+            <span class="separator">/</span>
 
-        <span>calculator de buget</span>
-    </nav>
+            <a href="/calculatoare">calculatoare</a>
+            <span class="separator">/</span>
 
-    <h1 class="hero-title">Calculator de Buget</h1>
+            <span>calculator de buget</span>
+        </nav>
 
-    <p class="hero-description">
-        Obține o imagine de ansamblu asupra veniturilor și cheltuielilor tale
-        lunare și pentru a le înțelege mai bine. Introdu suma aproximativă în
-        toate câmpurile care ți se aplică ție sau gospodăriei tale.
-    </p>
-</section>
+        <h2>Calculator de Buget</h2>
 
-<div class="section-break"></div>
+        <p class="body2">
+            Obține o imagine de ansamblu asupra veniturilor și cheltuielilor tale
+            lunare și pentru a le înțelege mai bine. Introdu suma aproximativă în
+            toate câmpurile care ți se aplică ție sau gospodăriei tale.
+        </p>
+    </section>
 
-<!-- SECȚIUNEA VENIT -->
-<section class="income-section-a">
-    <p class="income-section-title">Venit lunar</p>
-    <p class="income-section-subtitle">Care este venitul tău net lunar? Pe lângă salariu, sunt incluse și alte venituri, cum ar fi chiria, dividendele etc.</p>
-</section>
+    <div class="section-break"></div>
 
-<section class="income-section">
+    <!-- SECȚIUNEA VENIT -->
+        <h6>Venit lunar</h6>
+        <p class="body1-secondary">
+            Care este venitul tău net lunar? Pe lângă salariu, sunt incluse și alte venituri,
+            cum ar fi chiria, dividendele etc.
+        </p>
 
-    <!-- Income Row -->
-    <div class="income-row">
-
-        <img
-            src="images/venit.svg"
-            alt=""
-            class="income-icon"
-        >
-
-        <div class="income-content">
-            <h3 class="income-title">
-                Venitul net
-            </h3>
-
-            <p class="income-description">
-                Suma tuturor veniturilor
-            </p>
-        </div>
-
-        <div class="input-wrapper"> 
-            <input
-                type="text"
-                id="amount"
-                class="income-input"
-                inputmode="numeric"
-                maxlength="7"
-                value="0"
-            />
-            <span class="currency">lei</span>
-        </div>
-    </div>
-</section>
-
-<!-- SECȚIUNEA CHELTUIELI -->
-<section id="expenses-section">
-<section class="income-section-a">
-    <p class="income-section-title">Cheltuieli lunare</p>
-    <p class="income-section-subtitle">Pe ce cheltuiești bani în fiecare lună? Estimează-ți costurile lunare în următoarele categorii.</p>
-</section>
-
-<section id="expenses-section">
     <section class="income-section">
-    <!-- Categoria Locuință -->
-    <div class="income-row">
+        <div class="income-row">
+            <img
+                src="images/venit.svg"
+                alt=""
+                class="income-icon"
+            >
 
-        <img
-            src="images/locuință.svg"
-            alt=""
-            class="income-icon"
-        >
+            <div class="income-content">
+                <p class="body1">Venitul net</p>
+                <p class="body2-secondary">
+                    Suma tuturor veniturilor
+                </p>
+            </div>
 
-        <div class="income-content">
-            <h3 class="income-title">
-                Locuință
-            </h3>
+            <div class="input-wrapper">
+                <input
+                    type="text"
+                    id="amount"
+                    class="income-input"
+                    inputmode="numeric"
+                    maxlength="7"
+                    value="0"
+                >
+                <span class="currency">lei</span>
+            </div>
+        </div>
+    </section>
 
-            <p class="income-description">
-                Chirie, ipotecă și altele
-            </p>
+    <!-- SECȚIUNEA CHELTUIELI -->
+        <h6>Cheltuieli lunare</h6>
+        <p class="body1-secondary">
+            Pe ce cheltuiești bani în fiecare lună? Estimează-ți costurile lunare în următoarele categorii.
+        </p>
+
+    <section class="income-section">
+
+        <!-- Categoria Locuință -->
+        <div class="income-row">
+            <img src="images/locuință.svg" alt="" class="income-icon">
+
+            <div class="income-content">
+                <p class="body1">Locuință</p>
+                <p class="body2-secondary">Chirie, ipotecă și altele</p>
+            </div>
+
+            <div class="input-wrapper">
+                <input type="text" class="income-input" inputmode="numeric" maxlength="7" value="0">
+                <span class="currency">lei</span>
+            </div>
         </div>
 
-        <div class="input-wrapper"> 
-            <input
-                type="text"
-                class="income-input"
-                inputmode="numeric"
-                maxlength="7"
-                value="0"
-            />
-            <span class="currency">lei</span>
-        </div>
-    </div>
-    <div class="income-divider"></div>
+        <div class="income-divider"></div>
 
         <!-- Categoria Utilități -->
-    <div class="income-row">
+        <div class="income-row">
+            <img src="images/utilități.svg" alt="" class="income-icon">
 
-        <img
-            src="images/utilități.svg"
-            alt=""
-            class="income-icon"
-        >
+            <div class="income-content">
+                <p class="body1">Utilități</p>
+                <p class="body2-secondary">
+                    Electricitate, internet, întreținere bloc și altele
+                </p>
+            </div>
 
-        <div class="income-content">
-            <h3 class="income-title">
-                Utilități
-            </h3>
-
-            <p class="income-description">
-                Electricitate, internet, întreținere bloc și altele
-            </p>
+            <div class="input-wrapper">
+                <input type="text" class="income-input" inputmode="numeric" maxlength="7" value="0">
+                <span class="currency">lei</span>
+            </div>
         </div>
 
-        <div class="input-wrapper"> 
-            <input
-                type="text"
-                class="income-input"
-                inputmode="numeric"
-                maxlength="7"
-                value="0"
-            />
-            <span class="currency">lei</span>
-        </div>
-    </div>
-    <div class="income-divider"></div>
-    <!-- Categoria Datorii -->
-    <div class="income-row">
-
-        <img
-            src="images/datorii.svg"
-            alt=""
-            class="income-icon"
-        >
-
-        <div class="income-content">
-            <h3 class="income-title">
-                Datorii
-            </h3>
-
-            <p class="income-description">
-                Credite, împrumuturi și altele
-            </p>
-        </div>
-
-        <div class="input-wrapper"> 
-            <input
-                type="text"
-                class="income-input"
-                inputmode="numeric"
-                maxlength="7"
-                value="0"
-            />
-            <span class="currency">lei</span>
-        </div>
-    </div>
-    <div class="income-divider"></div>
-    <!-- Categoria Mâncare -->
-    <div class="income-row">
-
-        <img
-            src="images/mâncare.svg"
-            alt=""
-            class="income-icon"
-        >
-
-        <div class="income-content">
-            <h3 class="income-title">
-                Mâncare
-            </h3>
-
-            <p class="income-description">
-                Mese zilnice, supermarket, gustări și altele
-            </p>
-        </div>
-
-        <div class="input-wrapper"> 
-            <input
-                type="text"
-                class="income-input"
-                inputmode="numeric"
-                maxlength="7"
-                value="0"
-            />
-            <span class="currency">lei</span>
-        </div>
-    </div>
         <div class="income-divider"></div>
-            <!-- Categoria Transport -->
-    <div class="income-row">
 
-        <img
-            src="images/transport.svg"
-            alt=""
-            class="income-icon"
-        >
+        <!-- Categoria Datorii -->
+        <div class="income-row">
+            <img src="images/datorii.svg" alt="" class="income-icon">
 
-        <div class="income-content">
-            <h3 class="income-title">
-                Transport
-            </h3>
+            <div class="income-content">
+                <p class="body1">Datorii</p>
+                <p class="body2-secondary">Credite, împrumuturi și altele</p>
+            </div>
 
-            <p class="income-description">
-                Combustibil, transport public, leasing și altele
-            </p>
+            <div class="input-wrapper">
+                <input type="text" class="income-input" inputmode="numeric" maxlength="7" value="0">
+                <span class="currency">lei</span>
+            </div>
         </div>
 
-        <div class="input-wrapper"> 
-            <input
-                type="text"
-                class="income-input"
-                inputmode="numeric"
-                maxlength="7"
-                value="0"
-            />
-            <span class="currency">lei</span>
-        </div>
-    </div>
-    <div class="income-divider"></div>
-            <!-- Categoria Îngrijire personală -->
-    <div class="income-row">
+        <div class="income-divider"></div>
 
-        <img
-            src="images/îngrijire-personală.svg"
-            alt=""
-            class="income-icon"
-        >
+        <!-- Categoria Mâncare -->
+        <div class="income-row">
+            <img src="images/mâncare.svg" alt="" class="income-icon">
 
-        <div class="income-content">
-            <h3 class="income-title">
-                Îngrijire personală
-            </h3>
+            <div class="income-content">
+                <p class="body1">Mâncare</p>
+                <p class="body2-secondary">
+                    Mese zilnice, supermarket, gustări și altele
+                </p>
+            </div>
 
-            <p class="income-description">
-                Frizer, igienă, cosmetică și altele
-            </p>
+            <div class="input-wrapper">
+                <input type="text" class="income-input" inputmode="numeric" maxlength="7" value="0">
+                <span class="currency">lei</span>
+            </div>
         </div>
 
-        <div class="input-wrapper"> 
-            <input
-                type="text"
-                class="income-input"
-                inputmode="numeric"
-                maxlength="7"
-                value="0"
-            />
-            <span class="currency">lei</span>
-        </div>
-    </div>
-    <div class="income-divider"></div>
-                <!-- Categoria Abonamente -->
-    <div class="income-row">
+        <div class="income-divider"></div>
 
-        <img
-            src="images/abonamente.svg"
-            alt=""
-            class="income-icon"
-        >
+        <!-- Categoria Transport -->
+        <div class="income-row">
+            <img src="images/transport.svg" alt="" class="income-icon">
 
-        <div class="income-content">
-            <h3 class="income-title">
-                Abonamente
-            </h3>
+            <div class="income-content">
+                <p class="body1">Transport</p>
+                <p class="body2-secondary">
+                    Combustibil, transport public, leasing și altele
+                </p>
+            </div>
 
-            <p class="income-description">
-                Telefon, sală, aplicații și altele
-            </p>
+            <div class="input-wrapper">
+                <input type="text" class="income-input" inputmode="numeric" maxlength="7" value="0">
+                <span class="currency">lei</span>
+            </div>
         </div>
 
-        <div class="input-wrapper"> 
-            <input
-                type="text"
-                class="income-input"
-                inputmode="numeric"
-                maxlength="7"
-                value="0"
-            />
-            <span class="currency">lei</span>
-        </div>
-    </div>
-    <div class="income-divider"></div>
-    <!-- Categoria Shopping -->
-    <div class="income-row">
+        <div class="income-divider"></div>
 
-        <img
-            src="images/shopping.svg"
-            alt=""
-            class="income-icon"
-        >
+        <!-- Categoria Îngrijire personală -->
+        <div class="income-row">
+            <img src="images/îngrijire-personală.svg" alt="" class="income-icon">
 
-        <div class="income-content">
-            <h3 class="income-title">
-                Shopping
-            </h3>
+            <div class="income-content">
+                <p class="body1">Îngrijire personală</p>
+                <p class="body2-secondary">
+                    Frizer, igienă, cosmetică și altele
+                </p>
+            </div>
 
-            <p class="income-description">
-                Haine, cadouri, accesorii și altele
-            </p>
+            <div class="input-wrapper">
+                <input type="text" class="income-input" inputmode="numeric" maxlength="7" value="0">
+                <span class="currency">lei</span>
+            </div>
         </div>
 
-        <div class="input-wrapper"> 
-            <input
-                type="text"
-                class="income-input"
-                inputmode="numeric"
-                maxlength="7"
-                value="0"
-            />
-            <span class="currency">lei</span>
-        </div>
-    </div>
-    <div class="income-divider"></div>
-    <!-- Categoria Ieșiri & Distracție -->
-    <div class="income-row">
+        <div class="income-divider"></div>
 
-        <img
-            src="images/ieșiri&distracție.svg"
-            alt=""
-            class="income-icon"
-        >
+        <!-- Categoria Abonamente -->
+        <div class="income-row">
+            <img src="images/abonamente.svg" alt="" class="income-icon">
 
-        <div class="income-content">
-            <h3 class="income-title">
-                Ieșiri & distracție
-            </h3>
+            <div class="income-content">
+                <p class="body1">Abonamente</p>
+                <p class="body2-secondary">
+                    Telefon, sală, aplicații și altele
+                </p>
+            </div>
 
-            <p class="income-description">
-                Restaurante, cafenele, evenimente și altele
-            </p>
+            <div class="input-wrapper">
+                <input type="text" class="income-input" inputmode="numeric" maxlength="7" value="0">
+                <span class="currency">lei</span>
+            </div>
         </div>
 
-        <div class="input-wrapper"> 
-            <input
-                type="text"
-                class="income-input"
-                inputmode="numeric"
-                maxlength="7"
-                value="0"
-            />
-            <span class="currency">lei</span>
-        </div>
-    </div>
-    <div class="income-divider"></div>
-    <!-- Categoria Donații -->
-    <div class="income-row">
+        <div class="income-divider"></div>
 
-        <img
-            src="images/donații.svg"
-            alt=""
-            class="income-icon"
-        >
+        <!-- Categoria Shopping -->
+        <div class="income-row">
+            <img src="images/shopping.svg" alt="" class="income-icon">
 
-        <div class="income-content">
-            <h3 class="income-title">
-                Donații
-            </h3>
+            <div class="income-content">
+                <p class="body1">Shopping</p>
+                <p class="body2-secondary">
+                    Haine, cadouri, accesorii și altele
+                </p>
+            </div>
 
-            <p class="income-description">
-                Cauze caritabile
-            </p>
+            <div class="input-wrapper">
+                <input type="text" class="income-input" inputmode="numeric" maxlength="7" value="0">
+                <span class="currency">lei</span>
+            </div>
         </div>
 
-        <div class="input-wrapper"> 
-            <input
-                type="text"
-                class="income-input"
-                inputmode="numeric"
-                maxlength="7"
-                value="0"
-            />
-            <span class="currency">lei</span>
+        <div class="income-divider"></div>
+
+        <!-- Categoria Ieșiri & distracție -->
+        <div class="income-row">
+            <img src="images/ieșiri&distracție.svg" alt="" class="income-icon">
+
+            <div class="income-content">
+                <p class="body1">Ieșiri & distracție</p>
+                <p class="body2-secondary">
+                    Restaurante, cafenele, evenimente și altele
+                </p>
+            </div>
+
+            <div class="input-wrapper">
+                <input type="text" class="income-input" inputmode="numeric" maxlength="7" value="0">
+                <span class="currency">lei</span>
+            </div>
         </div>
-    </div>
-</section>
 
-<!-- SECȚIUNEA 50-30-20 -->
-<section class="income-section-a">
-    <p class="income-section-title">Împărțirea ta 50-30-20</p>
-    <p class="income-section-subtitle">Ce e asta?</p>
-</section>
+        <div class="income-divider"></div>
 
-</section>
-</section>
+        <!-- Categoria Donații -->
+        <div class="income-row">
+            <img src="images/donații.svg" alt="" class="income-icon">
+
+            <div class="income-content">
+                <p class="body1">Donații</p>
+                <p class="body2-secondary">Cauze caritabile</p>
+            </div>
+
+            <div class="input-wrapper">
+                <input type="text" class="income-input" inputmode="numeric" maxlength="7" value="0">
+                <span class="currency">lei</span>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- SECȚIUNEA 50-30-20 -->
+        <h6>Împărțirea ta 50-30-20</h6>
+        <p class="body1-secondary">Ce e asta?</p>
+
+    <div class="section-break"></div>
+
+    <!-- About -->
+    <section class="hero">
+        <h2>About the calculator</h2>
+        <p class="body1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
+    </section>
+
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="js/script.js"></script>
-
-<div class="section-break"></div>
-
-<!-- Hero Section -->
-<section class="hero">
-
-    <h1 class="hero-title">
-        About the calculator
-    </h1>
-
-    <p class="hero-text">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
-
-</section>
 
 <!-- Footer -->
 <footer class="footer">
