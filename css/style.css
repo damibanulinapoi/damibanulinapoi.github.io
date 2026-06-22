@@ -364,7 +364,7 @@ body {
 .income-input {
     width: 80px;
     height: 36px;
-    border: none;
+    border: 1px solid var(--color-background);
     border-radius: 4px;
     background: var(--color-background);
     box-sizing: border-box;
