@@ -67,3 +67,23 @@ function getValues() {
         return Number(input.value.replace(/\D/g, "")) || 0;
     });
 }
+
+const items = document.querySelectorAll('.item');
+
+items.forEach(item => {
+    const question = item.querySelector('.question');
+
+    question.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+
+        // Close all
+        items.forEach(i => {
+            i.classList.remove('open');
+        });
+
+        // Open clicked item if it wasn't open
+        if (!isOpen) {
+            item.classList.add('open');
+        }
+    });
+});

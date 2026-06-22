@@ -410,50 +410,69 @@ body {
     transition: border-color 0.2s ease;
 }
 
-/* BUTTON */
-.btn {
-    width: calc(100%);
-    margin-top: 8px;
-    height: 40px;
-    background-color: var(--color-orange);
-    border: none;
-    border-radius: 8px;
+* {
+    box-sizing: border-box;
+}
+
+.faq {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    cursor: pointer;
-    color: white;
+    flex-direction: column;
+    gap: 16px;
 }
 
-.btn-text {
-    font-family: "Roca One", serif;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 14px;
-    color: white;
-}
-
-.btn-icon {
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.chart-box {
-    position: relative;
+.accordion {
     width: 100%;
-    max-width: 320px;
-    height: 320px;
-    margin: 24px auto;
 }
 
-#chart {
-    width: 100% !important;
-    height: 100% !important;
+.item {
+    border: 1px solid var(--color-card-border);
+    border-radius: 8px;
+    background: #fff;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.question p {
+    margin: 0;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    transition: transform 0.25s ease;
+}
+
+.item.open .icon {
+    transform: rotate(180deg);
+}
+
+.answer {
+    display: none;
+    padding: 8px;
+    padding-top: 0;
+}
+
+.item.open .answer {
+    display: block;
+}
+
+.answer-box {
+    background: var(--color-background);
+    border-radius: 4px;
+    padding: 8px;
+}
+
+.answer-box p {
+    margin: 0;
 }
 
 /* FOOTER */
