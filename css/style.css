@@ -332,6 +332,9 @@ body {
 /* CARD SECTION */
 .income-section {
     padding: 8px;
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
     background: var(--color-card);
     border: 1px solid var(--color-card-border);
     border-radius: 8px;
@@ -339,7 +342,6 @@ body {
 }
 
 .income-divider {
-    margin: 8px auto;
     height: 1px;
     background: rgba(0,0,0,0.045);
 }
@@ -621,13 +623,6 @@ body {
   background: rgba(232, 67, 33, 0.08);
 }
 
-/* text styles */
-.body1-secondary {
-  color: #888;
-  font-size: 14px;
-  font-weight: 400;
-}
-
 .body1-red {
   color: #E84321;
   font-size: 14px;
@@ -640,7 +635,7 @@ body {
     height: 40px;
     background-color: var(--color-orange);
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
