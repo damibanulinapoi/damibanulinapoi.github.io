@@ -625,11 +625,11 @@ body {
 
 /* selected state */
 .segment-item.active {
-  background: rgba(232, 67, 33, 0.08);
+  background: #FEF0EE;
 }
 
 .body1-red {
-  color: #E84321;
+  color: var(--color-orange);
   font-size: 14px;
   font-weight: 500;
 }
