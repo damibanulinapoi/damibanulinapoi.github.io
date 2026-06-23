@@ -64,7 +64,7 @@
 
         <h2>Calculator de Buget</h2>
 
-        <p class="body2">
+        <p class="body1">
             Obține o imagine de ansamblu asupra veniturilor și cheltuielilor tale
             lunare și pentru a le înțelege mai bine. Introdu suma aproximativă în
             toate câmpurile care ți se aplică ție sau gospodăriei tale.
@@ -130,7 +130,7 @@
             </div>
 
             <div class="input-wrapper">
-                <input type="text" class="income-input" inputmode="numeric" maxlength="7" value="0">
+                <input type="text" class="expense-input" inputmode="numeric" maxlength="7" value="0">
                 <span class="currency">lei</span>
             </div>
         </div>
@@ -149,7 +149,7 @@
             </div>
 
             <div class="input-wrapper">
-                <input type="text" class="income-input" inputmode="numeric" maxlength="7" value="0">
+                <input type="text" class="expense-input" inputmode="numeric" maxlength="7" value="0">
                 <span class="currency">lei</span>
             </div>
         </div>
@@ -166,7 +166,7 @@
             </div>
 
             <div class="input-wrapper">
-                <input type="text" class="income-input" inputmode="numeric" maxlength="7" value="0">
+                <input type="text" class="expense-input" inputmode="numeric" maxlength="7" value="0">
                 <span class="currency">lei</span>
             </div>
         </div>
@@ -185,7 +185,7 @@
             </div>
 
             <div class="input-wrapper">
-                <input type="text" class="income-input" inputmode="numeric" maxlength="7" value="0">
+                <input type="text" class="expense-input" inputmode="numeric" maxlength="7" value="0">
                 <span class="currency">lei</span>
             </div>
         </div>
@@ -204,7 +204,7 @@
             </div>
 
             <div class="input-wrapper">
-                <input type="text" class="income-input" inputmode="numeric" maxlength="7" value="0">
+                <input type="text" class="expense-input" inputmode="numeric" maxlength="7" value="0">
                 <span class="currency">lei</span>
             </div>
         </div>
@@ -223,7 +223,7 @@
             </div>
 
             <div class="input-wrapper">
-                <input type="text" class="income-input" inputmode="numeric" maxlength="7" value="0">
+                <input type="text" class="expense-input" inputmode="numeric" maxlength="7" value="0">
                 <span class="currency">lei</span>
             </div>
         </div>
@@ -242,7 +242,7 @@
             </div>
 
             <div class="input-wrapper">
-                <input type="text" class="income-input" inputmode="numeric" maxlength="7" value="0">
+                <input type="text" class="expense-input" inputmode="numeric" maxlength="7" value="0">
                 <span class="currency">lei</span>
             </div>
         </div>
@@ -261,7 +261,7 @@
             </div>
 
             <div class="input-wrapper">
-                <input type="text" class="income-input" inputmode="numeric" maxlength="7" value="0">
+                <input type="text" class="expense-input" inputmode="numeric" maxlength="7" value="0">
                 <span class="currency">lei</span>
             </div>
         </div>
@@ -280,7 +280,7 @@
             </div>
 
             <div class="input-wrapper">
-                <input type="text" class="income-input" inputmode="numeric" maxlength="7" value="0">
+                <input type="text" class="expense-input" inputmode="numeric" maxlength="7" value="0">
                 <span class="currency">lei</span>
             </div>
         </div>
@@ -297,9 +297,20 @@
             </div>
 
             <div class="input-wrapper">
-                <input type="text" class="income-input" inputmode="numeric" maxlength="7" value="0">
+                <input type="text" class="expense-input" inputmode="numeric" maxlength="7" value="0">
                 <span class="currency">lei</span>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="chart-wrapper">
+    <div class="chart-box">
+        <canvas id="chart"></canvas>
+
+        <div class="center">
+            <h2 id="incomeText">0</h2>
+            <p class="body1-secondary">Venit</p>
         </div>
     </div>
 </div>
@@ -375,7 +386,6 @@
 </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="js/script.js"></script>
 
 <!-- Footer -->
