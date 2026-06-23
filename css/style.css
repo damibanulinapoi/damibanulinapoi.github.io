@@ -671,14 +671,11 @@ body {
 
 .resultat {
     display: none;
-
     background: var(--color-background);
     border-radius: 8px;
     padding: 8px;
     gap: 8px;
-
     flex-direction: column;
-    margin-top: 16px;
 }
 
 .resultat.show {
