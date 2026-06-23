@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dă-mi Banul Înapoi</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/svg+xml" href="images/logo-small.svg">
+</head>
+
+<body>
+    
+<!-- Header -->
+<header class="header">
+
+    <div class="left">
+        <a href="index.html">
+            <img src="images/logo-text.svg" class="logo">
+        </a>
+    </div>
+
+    <div class="right">
+
+<div class="lang-dropdown">
+
+    <button class="lang-btn" id="langBtn">
+        <img src="images/flag-romania.svg" id="langFlag">
+    </button>
+
+    <div class="lang-menu" id="langMenu">
+
+        <button class="lang-option" data-lang="RO">
+            <img src="images/flag-romania.svg">
+            <span>Română</span>
+        </button>
+
+        <button class="lang-option" data-lang="RU">
+            <img src="images/flag-russia.svg">
+            <span>Русский</span>
+        </button>
+
+    </div>
+
+    </div>
+        <img src="images/menu.svg" class="menu">
+
+    </div>
+
+</header>
+
+<div class="page-body">
+    <!-- SECTION CALCULATOR HERO -->
+    <section class="calculator-hero">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="/">acasă</a>
+            <span class="separator">/</span>
+
+            <a href="/calculatoare">calculatoare</a>
+            <span class="separator">/</span>
+
+            <span>calculator de salariu</span>
+        </nav>
+
+        <h2>Calculator de Salariu</h2>
+
+        <p class="body1">Acest calculator salarii brut net si total vă ajută să identificaţi salariul net, salariul brut şi salariul total introducînd doar una din cele 3 valori: salariul net, salariul brut, salariul total</p>
+    </section>
+
+    <div class="section-break"></div>
+
+    <!-- SECTION CALCULATOR -->
+    <section class="calculator">
+        <div class="segment-wrapper">
+        <div class="segment" id="segment">
+        <div class="segment-item active" data-value="net">
+        <span class="body1-red">Salariu net</span>
+    </div>
+
+    <div class="segment-item" data-value="brut">
+      <span class="body1-secondary">Salariu brut</span>
+    </div>
+
+    <div class="segment-item" data-value="total">
+      <span class="body1-secondary">Salariu total</span>
+    </div>
+
+  </div>
+</div>
+
+        <!-- VENIT -->
+<div class="calculator-categorie">
+
+    <div class="income-section">
+        <div class="income-row">
+            <img
+                src="images/venit.svg"
+                alt=""
+                class="income-icon"
+            >
+
+            <div class="income-content">
+                <p class="body1">Salariu</p>
+                <p class="body2-secondary">
+                    Suma tuturor veniturilor
+                </p>
+            </div>
+
+            <div class="input-wrapper">
+                <input
+                    type="text"
+                    id="amount"
+                    class="income-input"
+                    inputmode="numeric"
+                    maxlength="7"
+                    value="0"
+                >
+                <span class="currency">lei</span>
+            </div>
+        </div>
+
+    <!-- Button -->
+    <button id="calculează-btn" class="btn">
+        <span class="btn-text">Calculează Bugetul Meu</span>
+    </button>
+</div>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>

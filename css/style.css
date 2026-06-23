@@ -589,3 +589,80 @@ body {
     transform: translate(-50%, -50%);
     text-align: center;
 }
+
+.segment-wrapper {
+  width: 100%;
+}
+
+.segment {
+  display: flex;
+  width: 100%;
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 999px;
+  background: #fff;
+  box-sizing: border-box;
+  gap: 4px;
+}
+
+.segment-item {
+  flex: 1;
+  padding: 4px;
+  border-radius: 999px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s ease;
+  user-select: none;
+  background: transparent;
+}
+
+/* selected state */
+.segment-item.active {
+  background: rgba(232, 67, 33, 0.08);
+}
+
+/* text styles */
+.body1-secondary {
+  color: #888;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.body1-red {
+  color: #E84321;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* BUTTON */
+.btn {
+    width: calc(100%);
+    height: 40px;
+    background-color: var(--color-orange);
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none; /* removes underline (for <a>) */
+    color: white; /* ensures text doesn't turn blue */
+}
+
+.btn-text {
+    font-family: "Roca One", serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 16px;
+    color: white;
+}
+
+.btn-icon {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}

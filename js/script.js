@@ -7,6 +7,33 @@ const allMoneyInputs = document.querySelectorAll(".income-input, .expense-input"
 
 const MAX_DIGITS = 6;
 
+/* SEGMENT CONTROL */
+const segmentItems = document.querySelectorAll(".segment-item");
+
+segmentItems.forEach(item => {
+    item.addEventListener("click", () => {
+
+        segmentItems.forEach(i => {
+            i.classList.remove("active");
+            i.querySelector("span").className = "body1-secondary";
+        });
+
+        item.classList.add("active");
+        item.querySelector("span").className = "body1-red";
+    });
+});
+
+/* CALCULATE BUTTON → SHOW EXPENSES SECTION */
+const button = document.getElementById("calculează-btn");
+const expensesSection = document.getElementById("expenses-section");
+
+if (button && expensesSection) {
+    button.addEventListener("click", () => {
+        expensesSection.style.display = "block";
+        button.style.display = "none";
+    });
+}
+
 /* LANGUAGE TOGGLE */
 langBtn.addEventListener("click", () => {
     langMenu.classList.toggle("active");
