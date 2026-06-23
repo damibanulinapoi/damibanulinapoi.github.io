@@ -1,94 +1,11 @@
-document.addEventListener("DOMContentLoaded", () => {
-
-const MAX_DIGITS = 8;
-
-/* =========================
-   HELPERS
-========================= */
-
-const parseNumber = (val) =>
-    Number(String(val).replace(/[^\d]/g, "")) || 0;
-
-const formatNumber = (val) =>
-    Math.round(val).toLocaleString("en-US");
-
-/* =========================
-   LANGUAGE
-========================= */
-
 const langBtn = document.getElementById("langBtn");
 const langMenu = document.getElementById("langMenu");
 const langFlag = document.getElementById("langFlag");
 const options = document.querySelectorAll(".lang-option");
 
-if (langBtn) {
-    langBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        langMenu.classList.toggle("active");
-    });
-}
-
-options.forEach(option => {
-    option.addEventListener("click", () => {
-        const lang = option.dataset.lang;
-
-        if (langFlag) {
-            langFlag.src =
-                lang === "RO"
-                    ? "images/flag-romania.svg"
-                    : "images/flag-russia.svg";
-        }
-
-        langMenu?.classList.remove("active");
-    });
-});
-
-document.addEventListener("click", (e) => {
-    if (!e.target.closest(".lang-dropdown")) {
-        langMenu?.classList.remove("active");
-    }
-});
-
-/* =========================
-   INPUT FORMATTING
-========================= */
-
 const allMoneyInputs = document.querySelectorAll(".income-input, .expense-input");
 
-allMoneyInputs.forEach(input => {
-
-    input.addEventListener("input", (e) => {
-        let raw = e.target.value.replace(/[^\d]/g, "").slice(0, MAX_DIGITS);
-        e.target.value = raw ? Number(raw).toLocaleString("en-US") : "0";
-    });
-
-    input.addEventListener("focus", () => {
-        if (input.value === "0") input.value = "";
-    });
-
-    input.addEventListener("blur", () => {
-        if (input.value.trim() === "") input.value = "0";
-    });
-});
-
-/* =========================
-   FAQ ACCORDION
-========================= */
-
-const faqItems = document.querySelectorAll(".item");
-
-faqItems.forEach(item => {
-    const q = item.querySelector(".question");
-    if (!q) return;
-
-    q.addEventListener("click", () => {
-        const open = item.classList.contains("open");
-
-        faqItems.forEach(i => i.classList.remove("open"));
-
-        if (!open) item.classList.add("open");
-    });
-});
+const MAX_DIGITS = 8;
 
 /* =========================
    SEGMENT CONTROL
@@ -235,7 +152,81 @@ document
     });
 
 /* =========================
-   CHART (SAFE + OPTIONAL)
+   LANGUAGE TOGGLE
+========================= */
+
+langBtn.addEventListener("click", () => {
+    langMenu.classList.toggle("active");
+});
+
+options.forEach(option => {
+    option.addEventListener("click", () => {
+        const lang = option.dataset.lang;
+
+        langFlag.src =
+            lang === "RO"
+                ? "images/flag-romania.svg"
+                : "images/flag-russia.svg";
+
+        langMenu.classList.remove("active");
+    });
+});
+
+document.addEventListener("click", (e) => {
+    if (!e.target.closest(".lang-dropdown")) {
+        langMenu.classList.remove("active");
+    }
+});
+
+/* =========================
+   INPUT FORMATTING
+========================= */
+
+function formatIncome(value) {
+    value = value.replace(/\D/g, "").slice(0, MAX_DIGITS);
+    if (!value) return "0";
+    return Number(value).toLocaleString("en-US");
+}
+
+allMoneyInputs.forEach(input => {
+
+    input.addEventListener("focus", () => {
+        if (input.value === "0") input.value = "";
+    });
+
+    input.addEventListener("blur", () => {
+        if (input.value.trim() === "") input.value = "0";
+    });
+
+    input.addEventListener("input", (e) => {
+        e.target.value = formatIncome(e.target.value);
+    });
+});
+
+/* =========================
+   FAQ ACCORDION (RESTORED)
+========================= */
+
+const items = document.querySelectorAll('.item');
+
+items.forEach(item => {
+    const question = item.querySelector('.question');
+
+    if (!question) return;
+
+    question.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+
+        items.forEach(i => i.classList.remove('open'));
+
+        if (!isOpen) {
+            item.classList.add('open');
+        }
+    });
+});
+
+/* =========================
+   CHART (SAFE RESTORE)
 ========================= */
 
 const canvas = document.getElementById("chart");
@@ -245,6 +236,7 @@ if (canvas) {
     const ctx = canvas.getContext("2d");
 
     const incomeInput = document.getElementById("amount");
+    const incomeText = document.getElementById("incomeText");
     const expenseInputs = document.querySelectorAll(".expense-input");
 
     const colors = [
@@ -255,57 +247,105 @@ if (canvas) {
         "#c93a3a","#e55252","#ff7a7a"
     ];
 
+    function resizeCanvas() {
+        const size = canvas.clientWidth;
+        const dpr = window.devicePixelRatio || 1;
+
+        canvas.width = size * dpr;
+        canvas.height = size * dpr;
+
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
     function drawChart() {
 
-        const income = parseNumber(incomeInput?.value);
-
-        const expenses = [...expenseInputs].map(i =>
-            parseNumber(i.value)
-        );
+        resizeCanvas();
 
         const size = canvas.clientWidth;
         const center = size / 2;
 
-        canvas.width = size;
-        canvas.height = size;
+        const income = Number(incomeInput.value.replace(/\D/g, "")) || 0;
 
-        ctx.clearRect(0, 0, size, size);
+        const expenses = [...expenseInputs].map(i =>
+            Number(i.value.replace(/\D/g, "")) || 0
+        );
 
-        const base = size * 0.35;
-        const thick = size * 0.12;
+        const baseRadius = size * 0.35;
+        const thickness = size * 0.12;
+        const overflowRadius = baseRadius + thickness;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         ctx.beginPath();
-        ctx.arc(center, center, base, 0, Math.PI * 2);
-        ctx.strokeStyle = "#eee";
-        ctx.lineWidth = thick;
+        ctx.arc(center, center, baseRadius, 0, Math.PI * 2);
+        ctx.strokeStyle = "#fff";
+        ctx.lineWidth = thickness;
         ctx.stroke();
 
-        if (!income) return;
+        if (income <= 0) {
+            if (incomeText) incomeText.textContent = "0";
+            return;
+        }
 
         let start = -Math.PI / 2;
+        const gap = 0.025;
+        let used = 0;
 
-        expenses.forEach((v, i) => {
+        expenses.forEach((value, i) => {
 
-            if (!v) return;
+            if (value <= 0) return;
 
-            const angle = (v / income) * Math.PI * 2;
+            let inside = Math.max(0, Math.min(value, income - used));
+            let overflow = Math.max(0, value - inside);
 
-            ctx.beginPath();
-            ctx.arc(center, center, base, start, start + angle);
+            if (inside > 0) {
 
-            ctx.strokeStyle = colors[i % colors.length];
-            ctx.lineWidth = thick;
-            ctx.stroke();
+                let angle = (inside / income) * Math.PI * 2;
 
-            start += angle;
+                if (angle > gap) {
+                    ctx.beginPath();
+                    ctx.arc(center, center, baseRadius,
+                        start + gap / 2,
+                        start + gap / 2 + (angle - gap)
+                    );
+
+                    ctx.strokeStyle = colors[i % colors.length];
+                    ctx.lineWidth = thickness;
+                    ctx.stroke();
+                }
+
+                start += angle;
+                used += inside;
+            }
+
+            if (overflow > 0) {
+
+                let angle = (overflow / income) * Math.PI * 2;
+
+                if (angle > gap) {
+                    ctx.beginPath();
+                    ctx.arc(center, center, overflowRadius,
+                        start + gap / 2,
+                        start + gap / 2 + (angle - gap)
+                    );
+
+                    ctx.strokeStyle = colors[i % colors.length];
+                    ctx.lineWidth = thickness * 0.3;
+                    ctx.stroke();
+                }
+
+                start += angle;
+            }
         });
+
+        if (incomeText) {
+            incomeText.textContent = income.toLocaleString("en-US");
+        }
     }
 
-    incomeInput?.addEventListener("input", drawChart);
+    incomeInput.addEventListener("input", drawChart);
     expenseInputs.forEach(i => i.addEventListener("input", drawChart));
     window.addEventListener("resize", drawChart);
 
     drawChart();
 }
-
-});
