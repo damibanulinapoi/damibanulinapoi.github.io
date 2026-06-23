@@ -88,32 +88,240 @@
 </div>
 
         <!-- VENIT -->
-<div class="calculator-categorie">
+        <div class="calculator-categorie">
 
-    <div class="income-section">
-        <div class="income-row">
-            <div class="income-content">
-                <p class="body1">Salariu</p>
+            <div class="income-section">
+                <div class="income-row">
+                    <div class="income-content">
+                        <p class="body1">Salariu</p>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <input
+                            type="text"
+                            id="amount"
+                            class="income-input"
+                            inputmode="numeric"
+                            maxlength="7"
+                            value="0"
+                        >
+                        <span class="currency">lei</span>
+                    </div>
+                </div>
+
+                <button id="calculează-btn" class="btn">
+                    <span class="btn-text">Calculează Salariul Meu</span>
+                </button>
+
+<div class="resultat">
+
+    <div class="result-row">
+        <p class="body1">Salariu net</p>
+        <p class="body1" id="netResult">0 lei</p>
+    </div>
+
+    <div class="result-row">
+        <p class="body1">Salariu brut</p>
+        <p class="body1" id="brutResult">0 lei</p>
+    </div>
+
+    <div class="result-row">
+        <p class="body1">Salariu total</p>
+        <p class="body1" id="totalResult">0 lei</p>
+    </div>
+
+    <div class="income-divider"></div>
+
+    <div class="result-row">
+        <p class="body1">Scutirea lunară</p>
+        <p class="body1" id="scutireResult">0 lei</p>
+    </div>
+
+    <div class="result-row">
+        <p class="body1">Venit impozabil</p>
+        <p class="body1" id="impozabilResult">0 lei</p>
+    </div>
+
+    <div class="income-divider"></div>
+
+    <div class="result-row">
+        <p class="body1">Fondul social 24%</p>
+        <p class="body1" id="socialResult">0 lei</p>
+    </div>
+
+    <div class="result-row">
+        <p class="body1">Asig. medicală 9%</p>
+        <p class="body1" id="medicalResult">0 lei</p>
+    </div>
+
+    <div class="result-row">
+        <p class="body1">Impozit pe venit 12%</p>
+        <p class="body1" id="taxResult">0 lei</p>
+    </div>
+
+    <div class="result-row">
+        <p class="body1-bold">Total impozite/contribuții</p>
+        <p class="body1-bold" id="totalTaxResult">0 lei</p>
+    </div>
+
+</div>
             </div>
 
-            <div class="input-wrapper">
-                <input
-                    type="text"
-                    id="amount"
-                    class="income-input"
-                    inputmode="numeric"
-                    maxlength="7"
-                    value="0"
-                >
-                <span class="currency">lei</span>
+        </div>
+    </section>
+
+    <div class="section-break"></div>
+
+<section class="faq">
+    <h2>Întrebări Frecvente</h2>
+
+    <div class="accordion">
+
+        <!-- Item 1 -->
+        <div class="item open">
+            <div class="question">
+                <p class="body1">1. Care este diferența dintre salariul net, brut și total?</p>
+                <img class="icon" src="images/arrow-down.svg" alt="toggle">
+            </div>
+
+            <div class="answer">
+                <div class="answer-box">
+                        <p class="body2">Salariul net – suma primită de angajat.</p>
+                        <p class="body2">Salariul brut – salariul înainte de reținerea taxelor și contribuțiilor.</p>
+                        <p class="body2">Salariul total – costul total suportat de angajator pentru angajat, inclusiv contribuțiile achitate de angajator.</p>
+                    </ul>
+                </div>
             </div>
         </div>
 
-    <!-- Button -->
-    <button id="calculează-btn" class="btn">
-        <span class="btn-text">Calculează Bugetul Meu</span>
-    </button>
+        <!-- Item 2 -->
+        <div class="item">
+            <div class="question">
+                <p class="body1">2. Ce reprezintă fondul social de 24%?</p>
+                <img class="icon" src="images/arrow-down.svg" alt="toggle">
+            </div>
+
+            <div class="answer">
+                <div class="answer-box">
+                    <p class="body2">
+                        Fondul social este contribuția obligatorie pentru asigurările sociale de stat. Aceasta finanțează sistemul public de pensii și alte prestații sociale prevăzute de legislație.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="item">
+            <div class="question">
+                <p class="body1">3. Ce reprezintă asigurarea medicală de 9%?</p>
+                <img class="icon" src="images/arrow-down.svg" alt="toggle">
+            </div>
+
+            <div class="answer">
+                <div class="answer-box">
+                    <p class="body2">
+                        Contribuția la asigurarea medicală obligatorie oferă acces la serviciile medicale acoperite de sistemul public de sănătate.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="item">
+            <div class="question">
+                <p class="body1">4. Ce este venitul impozabil?</p>
+                <img class="icon" src="images/arrow-down.svg" alt="toggle">
+            </div>
+
+            <div class="answer">
+                <div class="answer-box">
+                    <p class="body2">
+                        Venitul impozabil este partea din salariu asupra căreia se aplică impozitul pe venit după deducerea contribuțiilor și a eventualelor scutiri fiscale.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="item">
+            <div class="question">
+                <p class="body1">5. Ce este scutirea personală lunară?</p>
+                <img class="icon" src="images/arrow-down.svg" alt="toggle">
+            </div>
+
+            <div class="answer">
+                <div class="answer-box">
+                    <p class="body2">
+                        Scutirea personală reprezintă o sumă stabilită prin lege care reduce baza impozabilă și, implicit, impozitul pe venit datorat. Valoarea acesteia poate varia în funcție de legislația fiscală în vigoare.                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Item 6 -->
+        <div class="item">
+            <div class="question">
+                <p class="body1">6. Cât de exacte sunt rezultatele calculatorului?</p>
+                <img class="icon" src="images/arrow-down.svg" alt="toggle">
+            </div>
+
+            <div class="answer">
+                <div class="answer-box">
+                    <p class="body2">
+                        Calculatorul oferă estimări bazate pe cotele de contribuții și impozite configurate în prezent. Pentru situații speciale sau modificări legislative recente, rezultatele pot diferi de calculul efectuat de angajator.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Item 7 -->
+        <div class="item">
+            <div class="question">
+                <p class="body1">7. Pot calcula salariul pornind de la salariul net, brut sau total?</p>
+                <img class="icon" src="images/arrow-down.svg" alt="toggle">
+            </div>
+
+            <div class="answer">
+                <div class="answer-box">
+                    <p class="body2">
+                        Da. Calculatorul vă permite să introduceți una dintre cele trei valori (net, brut sau total), iar celelalte vor fi estimate automat pe baza formulelor fiscale aplicabile.                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
 </div>
+
+<!-- Footer -->
+<footer class="footer">
+    <img
+        src="images/logo-text.svg"
+        alt="Dă-mi Banul Înapoi"
+        class="footer-logo"
+    />
+
+    <div class="footer-links">
+        <a href="#">Contactează-ne</a>
+        <a href="#">Despre noi</a>
+    </div>
+
+    <div class="social-icons">
+
+        <a href="https://www.facebook.com/damibanulinapoi/">
+            <img src="images/facebook.svg" alt="Facebook">
+        </a>
+
+        <a href="https://www.instagram.com/damibanulinapoi/">
+            <img src="images/instagram.svg" alt="Instagram">
+        </a>
+
+        <a href="https://www.youtube.com/@damibanulinapoi/">
+            <img src="images/youtube.svg" alt="YouTube">
+        </a>
+    </div>
+
+    <p class="footer-copy">© 2026 Dă-mi Banul Înapoi</p>
+</footer>
 
 <script src="js/script.js"></script>
 
