@@ -96,6 +96,7 @@ faqItems.forEach(item => {
 
 let calcMode = "net";
 
+const salaryLabel = document.getElementById("salary-label");
 const segmentItems = document.querySelectorAll(".segment-item");
 
 segmentItems.forEach(item => {
@@ -110,7 +111,31 @@ segmentItems.forEach(item => {
         item.querySelector("span").className = "body1-red";
 
         calcMode = item.dataset.value;
+
+        if (calcMode === "net") {
+            salaryLabel.textContent = "Salariu net";
+        } else if (calcMode === "brut") {
+            salaryLabel.textContent = "Salariu brut";
+        } else if (calcMode === "total") {
+            salaryLabel.textContent = "Salariu total";
+        }
     });
+});
+
+const advancedBtn = document.getElementById("advanced-btn");
+const advancedOptions = document.getElementById("advanced-options");
+const advancedIcon = document.getElementById("advanced-icon");
+
+advancedBtn.addEventListener("click", () => {
+
+    advancedOptions.classList.toggle("show");
+
+    if (advancedOptions.classList.contains("show")) {
+        advancedIcon.textContent = "−";
+    } else {
+        advancedIcon.textContent = "+";
+    }
+
 });
 
 /* =========================

@@ -93,7 +93,7 @@
             <div class="income-section">
                 <div class="income-row">
                     <div class="income-content">
-                        <p class="body1">Salariu</p>
+                        <p class="body1" id="salary-label">Salariu net</p>
                     </div>
 
                     <div class="input-wrapper">
@@ -108,6 +108,40 @@
                         <span class="currency">lei</span>
                     </div>
                 </div>
+
+            <div class="advanced-wrapper">
+                
+                <button type="button" id="advanced-btn" class="advanced-btn">
+                    <span class="body1">Opțiuni avansate</span>
+                    <span id="advanced-icon">+</span>
+                </button>
+
+                <div id="advanced-options" class="advanced-options">
+
+                    <div class="advanced-row">
+                        <label class="body1">Scutire personală</label>
+                        <select>
+                            <option class="body1">Fără</option>
+                            <option class="body1">Normala</option>
+                            <option class="body1">Majorată</option>
+                        </select>
+                    </div>
+
+                    <div class="advanced-row">
+                        <label class="body1">Scutire p/u soț/soție</label>
+                        <select>
+                            <option class="body1">Nu</option>
+                            <option class="body1">Da</option>
+                        </select>
+                    </div>
+
+                    <div class="advanced-row">
+                        <label class="body1">Persoane întreținute</label>
+                        <input class="body1" type="number" value="0" min="0">
+                    </div>
+
+                </div>
+            </div>
 
                 <button id="calculează-btn" class="btn">
                     <span class="btn-text">Calculează Salariul Meu</span>
