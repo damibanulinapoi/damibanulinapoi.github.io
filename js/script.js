@@ -112,7 +112,7 @@ segmentItems.forEach(item => {
                 ? "Salariu net"
                 : calcMode === "brut"
                     ? "Salariu brut"
-                    : "Cost total angajator";
+                    : "Salariul total";
     });
 });
 
