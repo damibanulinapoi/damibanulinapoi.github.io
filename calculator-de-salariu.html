@@ -41,7 +41,7 @@
 
     </div>
 
-    </div>
+</div>
         <img src="images/menu.svg" class="menu">
 
     </div>
@@ -72,16 +72,16 @@
     <section class="calculator">
         <div class="segment-wrapper">
         <div class="segment" id="segment">
-        <div class="segment-item active" data-value="net">
-        <span class="body1-red">Salariu net</span>
+        <div class="segment-item active" data-value="brut">
+        <span class="body1-red">Salariu brut</span>
     </div>
 
-    <div class="segment-item" data-value="brut">
-      <span class="body1-secondary">Salariu brut</span>
+    <div class="segment-item" data-value="net">
+      <span class="body1-secondary">Salariu net</span>
     </div>
 
     <div class="segment-item" data-value="total">
-      <span class="body1-secondary">Salariu total</span>
+      <span class="body1-secondary">Cost total angajator</span>
     </div>
 
   </div>
@@ -93,7 +93,7 @@
             <div class="income-section">
                 <div class="income-row">
                     <div class="income-content">
-                        <p class="body1" id="salary-label">Salariu net</p>
+                        <p class="body1" id="salary-label">Salariu brut</p>
                     </div>
 
                     <div class="input-wrapper">
@@ -113,32 +113,94 @@
                 
                 <button type="button" id="advanced-btn" class="advanced-btn">
                     <span class="body1">Opțiuni avansate</span>
-                    <span id="advanced-icon">+</span>
+                    <span id="advanced-icon" style="margin-left:auto;">+</span>
                 </button>
 
                 <div id="advanced-options" class="advanced-options">
 
-                    <div class="advanced-row">
-                        <label class="body1">Scutire personală</label>
-                        <select>
-                            <option class="body1">Fără</option>
-                            <option class="body1">Normala</option>
-                            <option class="body1">Majorată</option>
-                        </select>
-                    </div>
+                <div class="advanced-row">
+                    <label class="body1">CNAS angajator</label>
+                    <select id="FondSocial">
+                        <option value="24" selected>24%</option>
+                        <option value="29">29%</option>
+                        <option value="32">32%</option>
+                        <option value="39">39%</option>
+                    </select>
+                </div>
 
-                    <div class="advanced-row">
-                        <label class="body1">Scutire p/u soț/soție</label>
-                        <select>
-                            <option class="body1">Nu</option>
-                            <option class="body1">Da</option>
-                        </select>
-                    </div>
+                <div class="advanced-row">
+                    <label class="body1">CNAM angajat</label>
+                    <input
+                        id="AsigMedAtManual"
+                        type="number"
+                        value="9"
+                        min="0"
+                        max="20"
+                    >
+                </div>
 
-                    <div class="advanced-row">
-                        <label class="body1">Persoane întreținute</label>
-                        <input class="body1" type="number" value="0" min="0">
-                    </div>
+                <div class="advanced-row">
+                    <label class="body1">Angajat IT Park</label>
+                    <select id="AngajatiIT">
+                        <option value="0" selected>Nu</option>
+                        <option value="1">Da</option>
+                    </select>
+                </div>
+
+                <div class="advanced-row">
+                    <label class="body1">Cotizație sindicat</label>
+                    <select id="CotizatieSindicat">
+                        <option value="0" selected>Fără</option>
+                        <option value="1">1% angajat</option>
+                        <option value="2">1% angajator</option>
+                    </select>
+                </div>
+
+                <div class="advanced-row">
+                    <label class="body1">Scutire personală</label>
+                    <select id="ScutPers">
+                        <option value="0">Fără</option>
+                        <option value="2475" selected>Normală</option>
+                        <option value="2885">Majorată</option>
+                    </select>
+                </div>
+
+                <div class="advanced-row">
+                    <label class="body1">Scutire p/u soț/soție</label>
+                    <select id="ScutSot">
+                        <option value="0" selected>Nu</option>
+                        <option value="1815">Da</option>
+                    </select>
+                </div>
+
+                <div class="advanced-row">
+                    <label class="body1">Persoane întreținute</label>
+                    <input
+                        id="NrPersIntr"
+                        type="number"
+                        value="0"
+                        min="0"
+                    />
+                </div>
+
+                <div class="advanced-row">
+                    <label class="body1">Persoane cu dizabilitate</label>
+                    <input
+                        id="NrPersIntrI"
+                        type="number"
+                        value="0"
+                        min="0"
+                    >
+                </div>
+
+                <div class="advanced-row">
+                    <label class="body1">Scutire manuală</label>
+                    <input
+                        id="ScutireManuala"
+                        type="number"
+                        value="0"
+                    >
+                </div>
 
                 </div>
             </div>
@@ -160,14 +222,14 @@
     </div>
 
     <div class="result-row">
-        <p class="body1">Salariu total</p>
+        <p class="body1">Cost total pentru angajator</p>
         <p class="body1" id="totalResult">0 lei</p>
     </div>
 
     <div class="income-divider"></div>
 
     <div class="result-row">
-        <p class="body1">Scutirea lunară</p>
+        <p class="body1">Scutire totală lunară</p>
         <p class="body1" id="scutireResult">0 lei</p>
     </div>
 
@@ -177,24 +239,29 @@
     </div>
 
     <div class="income-divider"></div>
+    
+    <div class="result-row">
+        <p class="body1">CNAS angajat (6%)</p>
+        <p class="body1" id="cnasEmployeeResult">0 lei</p>
+    </div>
 
     <div class="result-row">
-        <p class="body1">Fondul social 24%</p>
+        <p class="body1" id="socialLabel">Fond social angajator (CNAS)</p>
         <p class="body1" id="socialResult">0 lei</p>
     </div>
 
     <div class="result-row">
-        <p class="body1">Asig. medicală 9%</p>
+        <p class="body1" id="medicalLabel">CNAM (asigurare medicală angajat)</p>
         <p class="body1" id="medicalResult">0 lei</p>
     </div>
 
     <div class="result-row">
-        <p class="body1">Impozit pe venit 12%</p>
+        <p class="body1">Impozit pe venit (12%)</p>
         <p class="body1" id="taxResult">0 lei</p>
     </div>
 
     <div class="result-row">
-        <p class="body1-bold">Total impozite/contribuții</p>
+        <p class="body1-bold">Total impozite / contribuții</p>
         <p class="body1-bold" id="totalTaxResult">0 lei</p>
     </div>
 
@@ -214,16 +281,14 @@
         <!-- Item 1 -->
         <div class="item open">
             <div class="question">
-                <p class="body1">1. Care este diferența dintre salariul net, brut și total?</p>
+                <p class="body1">1. Care este diferența dintre salariu net, brut și costul total?</p>
                 <img class="icon" src="images/arrow-down.svg" alt="toggle">
             </div>
-
             <div class="answer">
                 <div class="answer-box">
-                        <p class="body2">Salariul net – suma primită de angajat.</p>
-                        <p class="body2">Salariul brut – salariul înainte de reținerea taxelor și contribuțiilor.</p>
-                        <p class="body2">Salariul total – costul total suportat de angajator pentru angajat, inclusiv contribuțiile achitate de angajator.</p>
-                    </ul>
+                    <p class="body2">Salariul net – suma efectiv primită de angajat după reținerea tuturor taxelor și contribuțiilor.</p>
+                    <p class="body2">Salariul brut – salariul stipulat în contractul de muncă, înainte de orice rețineri.</p>
+                    <p class="body2">Costul total pentru angajator – salariul brut plus contribuțiile achitate de angajator (fondul social CNAS).</p>
                 </div>
             </div>
         </div>
@@ -231,15 +296,16 @@
         <!-- Item 2 -->
         <div class="item">
             <div class="question">
-                <p class="body1">2. Ce reprezintă fondul social de 24%?</p>
+                <p class="body1">2. Ce reprezintă fondul social (CNAS) al angajatorului?</p>
                 <img class="icon" src="images/arrow-down.svg" alt="toggle">
             </div>
-
             <div class="answer">
                 <div class="answer-box">
-                    <p class="body2">
-                        Fondul social este contribuția obligatorie pentru asigurările sociale de stat. Aceasta finanțează sistemul public de pensii și alte prestații sociale prevăzute de legislație.
-                    </p>
+                    <p class="body2">Fondul social este contribuția obligatorie achitată de angajator pentru asigurările sociale de stat. Finanțează sistemul public de pensii și alte prestații sociale. Cotele aplicabile în 2026:</p>
+                    <p class="body2"><strong>24%</strong> – sectorul privat, instituții de învățământ superior și medico-sanitare</p>
+                    <p class="body2"><strong>29%</strong> – autorități/instituții bugetare și publice la autogestiune</p>
+                    <p class="body2"><strong>32%</strong> – sectorul privat / învățământ superior / medico-sanitare (condiții speciale de muncă)</p>
+                    <p class="body2"><strong>39%</strong> – autorități/instituții bugetare și publice la autogestiune (condiții speciale de muncă)</p>
                 </div>
             </div>
         </div>
@@ -247,15 +313,12 @@
         <!-- Item 3 -->
         <div class="item">
             <div class="question">
-                <p class="body1">3. Ce reprezintă asigurarea medicală de 9%?</p>
+                <p class="body1">3. Ce reprezintă asigurarea medicală obligatorie (CNAM) de 9%?</p>
                 <img class="icon" src="images/arrow-down.svg" alt="toggle">
             </div>
-
             <div class="answer">
                 <div class="answer-box">
-                    <p class="body2">
-                        Contribuția la asigurarea medicală obligatorie oferă acces la serviciile medicale acoperite de sistemul public de sănătate.
-                    </p>
+                    <p class="body2">Contribuția la asigurarea medicală obligatorie (CNAM) este reținută din salariul angajatului și oferă acces la serviciile medicale din sistemul public de sănătate. Cota standard pentru 2026 rămâne 9%.</p>
                 </div>
             </div>
         </div>
@@ -266,12 +329,9 @@
                 <p class="body1">4. Ce este venitul impozabil?</p>
                 <img class="icon" src="images/arrow-down.svg" alt="toggle">
             </div>
-
             <div class="answer">
                 <div class="answer-box">
-                    <p class="body2">
-                        Venitul impozabil este partea din salariu asupra căreia se aplică impozitul pe venit după deducerea contribuțiilor și a eventualelor scutiri fiscale.
-                    </p>
+                    <p class="body2">Venitul impozabil = Salariu brut − CNAM angajat − Scutiri lunare. Impozitul pe venit de 12% se aplică asupra acestei sume. Cota impozitului pe venit pentru persoane fizice rămâne 12% în 2026.</p>
                 </div>
             </div>
         </div>
@@ -279,14 +339,18 @@
         <!-- Item 5 -->
         <div class="item">
             <div class="question">
-                <p class="body1">5. Ce este scutirea personală lunară?</p>
+                <p class="body1">5. Ce scutiri fiscale sunt disponibile în 2026?</p>
                 <img class="icon" src="images/arrow-down.svg" alt="toggle">
             </div>
-
             <div class="answer">
                 <div class="answer-box">
-                    <p class="body2">
-                        Scutirea personală reprezintă o sumă stabilită prin lege care reduce baza impozabilă și, implicit, impozitul pe venit datorat. Valoarea acesteia poate varia în funcție de legislația fiscală în vigoare.                    </p>
+                    <p class="body2">Dreptul la scutire personală îl au doar persoanele fizice rezidente cu venit anual impozabil sub 360.000 lei (cu excepția veniturilor de la art. 901 Cod Fiscal).</p>
+                    <p class="body2"><strong>Scutirea personală</strong> – 29.700 lei/an → <strong>2.475 lei/lună</strong></p>
+                    <p class="body2"><strong>Scutirea personală majorată</strong> – 34.620 lei/an → <strong>2.885 lei/lună</strong></p>
+                    <p class="body2"><strong>Scutirea pentru soț/soție majorată</strong> – 21.780 lei/an → <strong>1.815 lei/lună</strong></p>
+                    <p class="body2"><strong>Persoană întreținută</strong> – 9.900 lei/an → <strong>825 lei/lună</strong></p>
+                    <p class="body2"><strong>Persoană întreținută cu dizabilitate</strong> – 21.780 lei/an → <strong>1.815 lei/lună</strong></p>
+                    <p class="body2" style="margin-top:8px;">Salariul mediu lunar pe economie în 2026 – <strong>17.400 lei</strong></p>
                 </div>
             </div>
         </div>
@@ -294,30 +358,12 @@
         <!-- Item 6 -->
         <div class="item">
             <div class="question">
-                <p class="body1">6. Cât de exacte sunt rezultatele calculatorului?</p>
+                <p class="body1">6. Ce înseamnă CNAS angajat (6%) în rezultate?</p>
                 <img class="icon" src="images/arrow-down.svg" alt="toggle">
             </div>
-
             <div class="answer">
                 <div class="answer-box">
-                    <p class="body2">
-                        Calculatorul oferă estimări bazate pe cotele de contribuții și impozite configurate în prezent. Pentru situații speciale sau modificări legislative recente, rezultatele pot diferi de calculul efectuat de angajator.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Item 7 -->
-        <div class="item">
-            <div class="question">
-                <p class="body1">7. Pot calcula salariul pornind de la salariul net, brut sau total?</p>
-                <img class="icon" src="images/arrow-down.svg" alt="toggle">
-            </div>
-
-            <div class="answer">
-                <div class="answer-box">
-                    <p class="body2">
-                        Da. Calculatorul vă permite să introduceți una dintre cele trei valori (net, brut sau total), iar celelalte vor fi estimate automat pe baza formulelor fiscale aplicabile.                    </p>
+                    <p class="body2">Contribuția CNAS a angajatului (6% din salariu brut) este prezentată informativ. Spre deosebire de CNAM (9%), aceasta nu se reține din salariul net al angajatului și nu este inclusă în totalul impozitelor/contribuțiilor afișat.</p>
                 </div>
             </div>
         </div>

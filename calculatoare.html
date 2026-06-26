@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Financial Calculators</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #f4f6f9, #e9eef5);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .container {
+        max-width: 900px;
+        width: 100%;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 34px;
+        margin-bottom: 10px;
+        color: #222;
+    }
+
+    p {
+        color: #666;
+        margin-bottom: 40px;
+        font-size: 16px;
+    }
+
+    .cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    @media (max-width: 700px) {
+        .cards {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .card {
+        background: white;
+        padding: 25px;
+        border-radius: 18px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        cursor: pointer;
+        transition: 0.25s ease;
+        text-decoration: none;
+        color: inherit;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+    }
+
+    .icon {
+        font-size: 40px;
+        margin-bottom: 10px;
+    }
+
+    .title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    .desc {
+        font-size: 14px;
+        color: #666;
+        line-height: 1.5;
+    }
+
+    .tag {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: #e63b2e;
+        color: white;
+        font-size: 12px;
+        padding: 4px 8px;
+        border-radius: 8px;
+    }
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Financial Calculators</h1>
+    <p>Quickly calculate budgets and salaries with simple, fast tools designed for Moldova.</p>
+
+    <div class="cards">
+
+        <a href="calculator-de-buget.html" class="card">
+            <div class="tag">Budget</div>
+            <div class="icon">💰</div>
+            <div class="title">Budget Calculator</div>
+            <div class="desc">
+                Plan your monthly budget, track income and expenses, and manage your money smarter.
+            </div>
+        </a>
+
+        <a href="calculator-de-salariu.html" class="card">
+            <div class="tag">Salary</div>
+            <div class="icon">📊</div>
+            <div class="title">Salary Calculator</div>
+            <div class="desc">
+                Convert net, gross, and total salary with Moldova tax rules in seconds.
+            </div>
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

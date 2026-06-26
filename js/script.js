@@ -9,9 +9,6 @@ const MAX_DIGITS = 8;
 const parseNumber = (val) =>
     Number(String(val).replace(/[^\d]/g, "")) || 0;
 
-const formatNumber = (val) =>
-    Math.round(val).toLocaleString("en-US");
-
 /* =========================
    LANGUAGE
 ========================= */
@@ -72,7 +69,7 @@ allMoneyInputs.forEach(input => {
 });
 
 /* =========================
-   FAQ ACCORDION
+   FAQ
 ========================= */
 
 const faqItems = document.querySelectorAll(".item");
@@ -83,9 +80,7 @@ faqItems.forEach(item => {
 
     q.addEventListener("click", () => {
         const open = item.classList.contains("open");
-
         faqItems.forEach(i => i.classList.remove("open"));
-
         if (!open) item.classList.add("open");
     });
 });
@@ -94,7 +89,7 @@ faqItems.forEach(item => {
    SEGMENT CONTROL
 ========================= */
 
-let calcMode = "net";
+let calcMode = "brut";
 
 const salaryLabel = document.getElementById("salary-label");
 const segmentItems = document.querySelectorAll(".segment-item");
@@ -112,13 +107,12 @@ segmentItems.forEach(item => {
 
         calcMode = item.dataset.value;
 
-        if (calcMode === "net") {
-            salaryLabel.textContent = "Salariu net";
-        } else if (calcMode === "brut") {
-            salaryLabel.textContent = "Salariu brut";
-        } else if (calcMode === "total") {
-            salaryLabel.textContent = "Salariu total";
-        }
+        salaryLabel.textContent =
+            calcMode === "net"
+                ? "Salariu net"
+                : calcMode === "brut"
+                    ? "Salariu brut"
+                    : "Cost total angajator";
     });
 });
 
@@ -126,141 +120,187 @@ const advancedBtn = document.getElementById("advanced-btn");
 const advancedOptions = document.getElementById("advanced-options");
 const advancedIcon = document.getElementById("advanced-icon");
 
-advancedBtn.addEventListener("click", () => {
+if (advancedBtn && advancedOptions && advancedIcon) {
+    advancedBtn.addEventListener("click", () => {
+        advancedOptions.classList.toggle("show");
 
-    advancedOptions.classList.toggle("show");
-
-    if (advancedOptions.classList.contains("show")) {
-        advancedIcon.textContent = "−";
-    } else {
-        advancedIcon.textContent = "+";
-    }
-
-});
+        advancedIcon.textContent =
+            advancedOptions.classList.contains("show") ? "−" : "+";
+    });
+}
 
 /* =========================
-   HELPERS
+   ADVANCED OPTIONS
 ========================= */
 
-const R = (x) => Math.round(x);
+/* =========================
+   EXEMPTIONS
+========================= */
 
-function getInputValue() {
-    return Number(
-        document
-            .getElementById("amount")
-            .value
-            .replace(/\D/g, "")
-    ) || 0;
+function getTotalExemption() {
+
+    const personal = parseNumber(document.getElementById("ScutPers")?.value);
+    const spouse = parseNumber(document.getElementById("ScutSot")?.value);
+    const dependents = parseNumber(document.getElementById("NrPersIntr")?.value) * 825;
+    const disabled = parseNumber(document.getElementById("NrPersIntrI")?.value) * 1815;
+    const manual = parseNumber(document.getElementById("ScutireManuala")?.value);
+
+    return personal + spouse + dependents + disabled + manual;
 }
 
 /* =========================
    CORE CALCULATION
 ========================= */
 
+function getOptions() {
+    const isITPark   = document.getElementById("AngajatiIT")?.value === "1";
+    const unionMode  = document.getElementById("CotizatieSindicat")?.value ?? "0";
+    const cnasEmpRate = parseFloat(document.getElementById("FondSocial")?.value ?? "24") / 100;
+    const cnamRate   = parseFloat(document.getElementById("AsigMedAtManual")?.value ?? "9") / 100;
+    return { isITPark, unionMode, cnasEmpRate, cnamRate };
+}
+
 function calcFromBrut(brut) {
+    brut = Math.round(brut);
 
-    brut = R(brut);
+    const opts       = getOptions();
+    const exemption  = getTotalExemption();
 
-    const social = R(brut * 0.24);
-    const medical = R(brut * 0.09);
+    // IT Park: 7% flat tax paid by employer, no CNAS/CNAM/income tax from employee
+    if (opts.isITPark) {
+        const itTax  = Math.round(brut * 0.07);
+        const social = Math.round(brut * opts.cnasEmpRate);
+        const total  = brut + social + itTax;
+        return {
+            brut,
+            net: brut,       // employee receives full brut
+            total,
+            cnasEmployee: 0,
+            medical: 0,
+            tax: itTax,      // shown as "impozit" even though employer pays
+            taxable: brut,
+            social,
+            exemption: 0,
+            totalTaxes: social + itTax
+        };
+    }
 
-    const venitImpozabil = R(brut - medical);
-    const impozit = R(venitImpozabil * 0.12);
+    // Standard calculation
+    // In Moldova: CNAS employee 6% is shown informatively but NOT withheld from net
+    // CNAM 9% IS withheld from net
+    // Taxable = brut - CNAM - personal exemption
+    const cnasEmployee = Math.round(brut * 0.06);       // informational only
+    const medical      = Math.round(brut * opts.cnamRate); // withheld from net
 
-    const net = R(brut - medical - impozit);
-    const total = R(brut + social);
+    // Union fee from employee (withheld from net)
+    const unionEmployee = opts.unionMode === "1" ? Math.round(brut * 0.01) : 0;
+
+    const taxable = Math.max(0, brut - medical - exemption);
+    const tax     = Math.round(taxable * 0.12);
+
+    // Net = brut - CNAM - income tax - union(employee) — CNAS employee NOT subtracted
+    const net = brut - medical - tax - unionEmployee;
+
+    // Employer contributions
+    const social        = Math.round(brut * opts.cnasEmpRate);
+    const unionEmployer = opts.unionMode === "2" ? Math.round(brut * 0.01) : 0;
+    const total         = brut + social + unionEmployer;
+
+    // Total taxes excludes CNAS employee (it's informational)
+    const totalTaxes = medical + tax + social + unionEmployee + unionEmployer;
 
     return {
         brut,
-        net,
-        total,
-        social,
+        net:   Math.round(net),
+        total: Math.round(total),
+        cnasEmployee,
         medical,
-        impozit,
-        venitImpozabil
+        tax,
+        taxable,
+        social,
+        exemption,
+        totalTaxes
     };
 }
 
 /* =========================
-   SALARY CALCULATOR
+   CALCULATOR BUTTON
 ========================= */
 
-document
-    .getElementById("calculează-btn")
-    .addEventListener("click", function () {
+document.getElementById("calculează-btn")?.addEventListener("click", () => {
 
-        const input = getInputValue();
-        const scutire = 0;
+    const input = parseNumber(document.getElementById("amount")?.value);
+    if (!input) return;
 
-        let result;
+    let result;
 
-        if (calcMode === "brut") {
-            result = calcFromBrut(input);
+    if (calcMode === "brut") {
+        result = calcFromBrut(input);
+    }
+
+    if (calcMode === "net") {
+        let brut = input * 1.25; // initial estimate
+        for (let i = 0; i < 50; i++) {
+            const r    = calcFromBrut(brut);
+            const diff = input - r.net;
+            brut      += diff;
+            if (Math.abs(diff) < 0.5) break;
         }
+        result = calcFromBrut(Math.round(brut));
+    }
 
-        if (calcMode === "net") {
-
-            let targetNet = input;
-            let brut = targetNet;
-
-            for (let i = 0; i < 25; i++) {
-                const r = calcFromBrut(brut);
-                const diff = targetNet - r.net;
-                brut += diff;
-                if (Math.abs(diff) < 1) break;
-            }
-
-            result = calcFromBrut(brut);
+    if (calcMode === "total") {
+        const opts  = getOptions();
+        let brut    = input / (1 + opts.cnasEmpRate); // initial estimate
+        for (let i = 0; i < 50; i++) {
+            const r    = calcFromBrut(brut);
+            const diff = input - r.total;
+            brut      += diff;
+            if (Math.abs(diff) < 0.5) break;
         }
+        result = calcFromBrut(Math.round(brut));
+    }
 
-        if (calcMode === "total") {
+    if (!result) return;
 
-            let targetTotal = input;
-            let brut = targetTotal / 1.24;
+    const fmt = (val) =>
+        (val ?? 0).toLocaleString("en-EN", { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + " lei";
 
-            for (let i = 0; i < 20; i++) {
-                const r = calcFromBrut(brut);
-                const diff = targetTotal - r.total;
-                brut += diff;
-                if (Math.abs(diff) < 1) break;
-            }
+    const set = (id, val) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = fmt(val);
+    };
 
-            result = calcFromBrut(brut);
-        }
+    // Update CNAS employer label to reflect current rate
+    const socialLabel = document.getElementById("socialLabel");
+    if (socialLabel) {
+        const rate = document.getElementById("FondSocial")?.value ?? "24";
+        socialLabel.textContent = `Fond social angajator (CNAS) ${rate}%`;
+    }
 
-        document.getElementById("netResult").textContent =
-            result.net.toLocaleString("en-US") + " lei";
+    // Update medical label to reflect current rate
+    const medicalLabel = document.getElementById("medicalLabel");
+    if (medicalLabel) {
+        const rate = document.getElementById("AsigMedAtManual")?.value ?? "9";
+        medicalLabel.textContent = `CNAM (asigurare medicală angajat) ${rate}%`;
+    }
 
-        document.getElementById("brutResult").textContent =
-            result.brut.toLocaleString("en-US") + " lei";
+    set("netResult",          result.net);
+    set("brutResult",         result.brut);
+    set("totalResult",        result.total);
+    set("scutireResult",      result.exemption);
+    set("impozabilResult",    result.taxable);
+    set("socialResult",       result.social);
+    set("medicalResult",      result.medical);
+    set("cnasEmployeeResult", result.cnasEmployee);
+    set("taxResult",          result.tax);
+    set("totalTaxResult",     result.totalTaxes);
 
-        document.getElementById("totalResult").textContent =
-            result.total.toLocaleString("en-US") + " lei";
-
-        document.getElementById("scutireResult").textContent =
-            scutire.toLocaleString("en-US") + " lei";
-
-        document.getElementById("impozabilResult").textContent =
-            result.venitImpozabil.toLocaleString("en-US") + " lei";
-
-        document.getElementById("socialResult").textContent =
-            result.social.toLocaleString("en-US") + " lei";
-
-        document.getElementById("medicalResult").textContent =
-            result.medical.toLocaleString("en-US") + " lei";
-
-        document.getElementById("taxResult").textContent =
-            result.impozit.toLocaleString("en-US") + " lei";
-
-        document.getElementById("totalTaxResult").textContent =
-            (result.social + result.medical + result.impozit)
-                .toLocaleString("en-US") + " lei";
-
-        document.querySelector(".resultat").classList.add("show");
-    });
+    document.querySelector(".resultat")?.classList.add("show");
+});
 
 /* =========================
-   CHART (SAFE + OPTIONAL)
+   CHART (UNCHANGED SAFE)
 ========================= */
 
 const canvas = document.getElementById("chart");
