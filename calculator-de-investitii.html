@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator de Investiții – Dă-mi Banul Înapoi</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/svg+xml" href="images/logo-small.svg">
+    <style>
+        /* ---- Investment-specific styles ---- */
+
+        /* Tabs (5 calculation modes) */
+        .tab-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .tab-row {
+            display: flex;
+            gap: 4px;
+            padding: 4px;
+            border: 1px solid #ccc;
+            border-radius: 999px;
+            background: #fff;
+            box-sizing: border-box;
+            width: max-content;
+            min-width: 100%;
+        }
+
+        .tab-item {
+            flex: 1;
+            white-space: nowrap;
+            padding: 6px 12px;
+            border-radius: 999px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s ease;
+            user-select: none;
+            background: transparent;
+            font-size: 13px;
+            font-family: "Archivo", sans-serif;
+            color: var(--color-text-secondary);
+        }
+
+        .tab-item.active {
+            background: #FEF0EE;
+            color: var(--color-orange);
+            font-weight: 500;
+        }
+
+        /* Form rows */
+        .invest-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .invest-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .invest-row.hidden {
+            display: none;
+        }
+
+        .invest-row label {
+            font-size: 14px;
+            line-height: 16px;
+            font-family: "Archivo", sans-serif;
+            color: var(--color-text-primary);
+            flex: 1;
+        }
+
+        .invest-input-wrap {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .invest-input {
+            width: 110px;
+            height: 36px;
+            border: 1px solid var(--color-card-border);
+            border-radius: 4px;
+            background: var(--color-background);
+            box-sizing: border-box;
+            font-family: "Archivo", sans-serif;
+            font-size: 14px;
+            color: var(--color-text-primary);
+            outline: none;
+            text-align: right;
+            padding: 0 30px 0 4px;
+        }
+
+        .invest-input:focus {
+            border-color: var(--color-orange);
+            transition: border-color 0.2s ease;
+        }
+
+        .invest-input::-webkit-outer-spin-button,
+        .invest-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+        .invest-input[type="number"] { appearance: textfield; }
+
+        .invest-suffix {
+            position: absolute;
+            right: 6px;
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .invest-select {
+            height: 36px;
+            border: 1px solid var(--color-card-border);
+            border-radius: 4px;
+            padding: 0 8px;
+            font-size: 13px;
+            font-family: "Archivo", sans-serif;
+            background: var(--color-background);
+            color: var(--color-text-primary);
+            outline: none;
+            width: 150px;
+            flex-shrink: 0;
+        }
+
+        /* Radio-style choice (contribute at beginning/end) */
+        .radio-row {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .radio-options {
+            display: flex;
+            gap: 16px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .radio-option input {
+            accent-color: var(--color-orange);
+            width: 14px;
+            height: 14px;
+        }
+
+        .radio-option span {
+            font-size: 13px;
+            font-family: "Archivo", sans-serif;
+            color: var(--color-text-primary);
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-family: "Archivo", sans-serif;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        /* ---- RESULTS (bottom) ---- */
+        .invest-result-block {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .result-highlight {
+            background: var(--color-orange);
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .result-highlight .result-label {
+            font-size: 12px;
+            font-family: "Archivo", sans-serif;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .result-highlight .result-value {
+            font-family: "Roca One", serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .result-rows {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            background: var(--color-card);
+            border: 1px solid var(--color-card-border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .result-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            border-bottom: 1px solid rgba(0,0,0,0.045);
+        }
+
+        .result-line:last-child { border-bottom: none; }
+
+        .result-line .result-value {
+            font-family: "Archivo", sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--color-text-primary);
+        }
+
+        /* Pie chart + legend */
+        .pie-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .pie-wrap {
+            position: relative;
+            width: 220px;
+            height: 220px;
+        }
+
+        .pie-wrap canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        .pie-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .legend-dot.start     { background: #005451; }
+        .legend-dot.contrib   { background: #FAD1D7; }
+        .legend-dot.interest  { background: #E84231; }
+
+        .legend-item span {
+            font-size: 12px;
+            font-family: "Archivo", sans-serif;
+            color: var(--color-text-secondary);
+        }
+
+        /* Vertical bar (stick) chart */
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            padding: 0 4px;
+            height: 220px;
+            overflow-x: auto;
+        }
+
+        .stick-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 6px;
+            flex: 1;
+            min-width: 28px;
+            height: 100%;
+        }
+
+        .stick-value {
+            font-size: 10px;
+            font-family: "Archivo", sans-serif;
+            color: var(--color-text-primary);
+            white-space: nowrap;
+        }
+
+        .stick-track {
+            width: 16px;
+            display: flex;
+            flex-direction: column-reverse;
+            border-radius: 999px 999px 0 0;
+            overflow: hidden;
+            background: #e8e8ea;
+        }
+
+        .stick-start    { width: 100%; background: #005451; }
+        .stick-contrib  { width: 100%; background: #FAD1D7; }
+        .stick-interest { width: 100%; background: #E84231; }
+
+        .stick-label {
+            font-size: 10px;
+            font-family: "Archivo", sans-serif;
+            color: var(--color-text-secondary);
+            white-space: nowrap;
+        }
+
+        /* Schedule table */
+        .schedule-toggle {
+            display: flex;
+            gap: 4px;
+            padding: 4px;
+            border: 1px solid #ccc;
+            border-radius: 999px;
+            background: #fff;
+            box-sizing: border-box;
+            width: max-content;
+        }
+
+        .schedule-toggle .freq-item {
+            padding: 6px 16px;
+            border-radius: 999px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s ease;
+            user-select: none;
+            font-size: 13px;
+            font-family: "Archivo", sans-serif;
+            color: var(--color-text-secondary);
+        }
+
+        .schedule-toggle .freq-item.active {
+            background: #FEF0EE;
+            color: var(--color-orange);
+            font-weight: 500;
+        }
+
+        .schedule-table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--color-card-border);
+            border-radius: 8px;
+        }
+
+        table.schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: "Archivo", sans-serif;
+            font-size: 12.5px;
+            min-width: 480px;
+        }
+
+        table.schedule-table th {
+            background: var(--color-background);
+            color: var(--color-text-secondary);
+            font-weight: 500;
+            text-align: right;
+            padding: 8px 10px;
+            border-bottom: 1px solid var(--color-card-border);
+            position: sticky;
+            top: 0;
+        }
+
+        table.schedule-table th:first-child,
+        table.schedule-table td:first-child {
+            text-align: left;
+        }
+
+        table.schedule-table td {
+            text-align: right;
+            padding: 6px 10px;
+            border-bottom: 1px solid rgba(0,0,0,0.045);
+            color: var(--color-text-primary);
+            white-space: nowrap;
+        }
+
+        table.schedule-table tr.year-end td {
+            background: var(--color-background);
+            font-weight: bold;
+        }
+
+        .schedule-scroll {
+            max-height: 420px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Header -->
+<header class="header">
+    <div class="left">
+        <a href="index.html">
+            <img src="images/logo-text.svg" class="logo">
+        </a>
+    </div>
+    <div class="right">
+        <div class="lang-dropdown">
+            <button class="lang-btn" id="langBtn">
+                <img src="images/flag-romania.svg" id="langFlag">
+            </button>
+            <div class="lang-menu" id="langMenu">
+                <button class="lang-option" data-lang="RO">
+                    <img src="images/flag-romania.svg">
+                    <span>Română</span>
+                </button>
+                <button class="lang-option" data-lang="RU">
+                    <img src="images/flag-russia.svg">
+                    <span>Русский</span>
+                </button>
+            </div>
+        </div>
+        <img src="images/menu.svg" class="menu">
+    </div>
+</header>
+
+<div class="page-body">
+
+    <!-- HERO -->
+    <section class="calculator-hero">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="/">acasă</a>
+            <span class="separator">/</span>
+            <a href="/calculatoare">calculatoare</a>
+            <span class="separator">/</span>
+            <span>calculator de investiții</span>
+        </nav>
+        <h2>Calculator de Investiții</h2>
+        <p class="body1">Acest calculator poate fi folosit pentru a determina orice parametru lipsă dintr-un plan de investiții. Alege ce vrei să calculezi din tab-urile de mai jos.</p>
+    </section>
+
+    <div class="section-break"></div>
+
+    <!-- CALCULATOR -->
+    <section class="calculator">
+
+        <!-- TABS: which variable to solve for -->
+        <div class="tab-wrapper">
+            <div class="tab-row" id="tabRow">
+                <div class="tab-item active" data-tab="end">Valoare finală</div>
+                <div class="tab-item" data-tab="contribution">Contribuție suplimentară</div>
+                <div class="tab-item" data-tab="rate">Rata dobânzii</div>
+                <div class="tab-item" data-tab="start">Sumă inițială</div>
+                <div class="tab-item" data-tab="length">Durata investiției</div>
+            </div>
+        </div>
+
+        <div class="calculator-categorie">
+            <div class="income-section">
+                <div class="invest-grid">
+
+                    <!-- TARGET (only in "contribution" mode) -->
+                    <div class="invest-row hidden" id="rowTarget">
+                        <label>Obiectivul tău (valoare finală)</label>
+                        <div class="invest-input-wrap">
+                            <input type="text" id="targetAmount" class="invest-input" inputmode="numeric" value="50,000">
+                            <span class="invest-suffix">lei</span>
+                        </div>
+                    </div>
+
+                    <!-- END AMOUNT KNOWN (shown in "start", "rate", "length" modes) -->
+                    <div class="invest-row hidden" id="rowEndKnown">
+                        <label>Valoare finală cunoscută</label>
+                        <div class="invest-input-wrap">
+                            <input type="text" id="endKnown" class="invest-input" inputmode="numeric" value="50,000">
+                            <span class="invest-suffix">lei</span>
+                        </div>
+                    </div>
+
+                    <!-- STARTING AMOUNT -->
+                    <div class="invest-row" id="rowStart">
+                        <label>Suma inițială</label>
+                        <div class="invest-input-wrap">
+                            <input type="text" id="startAmount" class="invest-input" inputmode="numeric" value="20,000">
+                            <span class="invest-suffix">lei</span>
+                        </div>
+                    </div>
+
+                    <!-- INVESTMENT LENGTH -->
+                    <div class="invest-row" id="rowYears">
+                        <label>Durata investiției</label>
+                        <div class="invest-input-wrap">
+                            <input type="text" id="years" class="invest-input" inputmode="numeric" value="10">
+                            <span class="invest-suffix">ani</span>
+                        </div>
+                    </div>
+
+                    <div class="income-divider"></div>
+
+                    <!-- RETURN RATE -->
+                    <div class="invest-row" id="rowRate">
+                        <label>Rata dobânzii anuale</label>
+                        <div class="invest-input-wrap">
+                            <input type="text" id="rate" class="invest-input" inputmode="decimal" value="6">
+                            <span class="invest-suffix">%</span>
+                        </div>
+                    </div>
+
+                    <!-- COMPOUND FREQUENCY -->
+                    <div class="invest-row">
+                        <label>Frecvența capitalizării</label>
+                        <select id="compoundFreq" class="invest-select">
+                            <option value="1">Anual</option>
+                            <option value="2">Semestrial</option>
+                            <option value="4">Trimestrial</option>
+                            <option value="12" selected>Lunar</option>
+                            <option value="24">Semi-lunar</option>
+                            <option value="26">Bisăptămânal</option>
+                            <option value="52">Săptămânal</option>
+                            <option value="365">Zilnic</option>
+                            <option value="continuous">Continuă</option>
+                        </select>
+                    </div>
+
+                    <div class="income-divider"></div>
+
+                    <!-- ADDITIONAL CONTRIBUTION -->
+                    <div class="invest-row" id="rowContribution">
+                        <label>Contribuție suplimentară</label>
+                        <div class="invest-input-wrap">
+                            <input type="text" id="contribution" class="invest-input" inputmode="numeric" value="1,000">
+                            <span class="invest-suffix">lei</span>
+                        </div>
+                    </div>
+
+                    <div class="invest-row">
+                        <label>Frecvența contribuției</label>
+                        <select id="contribFreq" class="invest-select">
+                            <option value="12" selected>Lunar</option>
+                            <option value="1">Anual</option>
+                        </select>
+                    </div>
+
+                    <!-- CONTRIBUTE AT BEGINNING/END -->
+                    <div class="radio-row">
+                        <span class="section-label">Contribuie la</span>
+                        <div class="radio-options">
+                            <label class="radio-option">
+                                <input type="radio" name="contribTiming" value="begin" checked>
+                                <span>Începutul perioadei</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="contribTiming" value="end">
+                                <span>Sfârșitul perioadei</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <button id="calc-btn" class="btn">
+                    <span class="btn-text">Calculează</span>
+                </button>
+
+            </div>
+        </div>
+
+    </section>
+
+    <div class="section-break"></div>
+
+    <!-- RESULTS + GRAPHICS (bottom) -->
+    <section class="calculator">
+        <div class="invest-result-block" id="results">
+
+            <!-- Main highlight + breakdown rows -->
+            <div class="calculator-categorie">
+                <div class="result-highlight">
+                    <span class="result-label" id="mainLabel">Valoarea finală</span>
+                    <span class="result-value" id="mainValue">0 lei</span>
+                </div>
+
+                <div class="result-rows">
+                    <div class="result-line">
+                        <span class="body1">Suma inițială</span>
+                        <span class="result-value" id="resStart">0 lei</span>
+                    </div>
+                    <div class="result-line">
+                        <span class="body1">Contribuții totale</span>
+                        <span class="result-value" id="resContribs">0 lei</span>
+                    </div>
+                    <div class="result-line">
+                        <span class="body1">Dobândă totală</span>
+                        <span class="result-value" id="resInterest">0 lei</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pie chart -->
+            <div class="calculator-categorie">
+                <p class="section-label">Compoziția valorii finale</p>
+                <div class="pie-section">
+                    <div class="pie-wrap">
+                        <canvas id="pieChart"></canvas>
+                        <div class="pie-center">
+                            <p class="body2-secondary">Total</p>
+                            <p class="body1-bold" id="pieCenterValue">0 lei</p>
+                        </div>
+                    </div>
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-dot start"></div>
+                            <span id="legendStart">Suma inițială — 0%</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-dot contrib"></div>
+                            <span id="legendContrib">Contribuții — 0%</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-dot interest"></div>
+                            <span id="legendInterest">Dobândă — 0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bar chart by year -->
+            <div class="calculator-categorie">
+                <p class="section-label">Evoluție pe ani</p>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-dot start"></div>
+                        <span>Suma inițială</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot contrib"></div>
+                        <span>Contribuții</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot interest"></div>
+                        <span>Dobândă</span>
+                    </div>
+                </div>
+                <div class="bar-chart" id="barChart" style="margin-top:8px;"></div>
+            </div>
+
+            <!-- Schedule table -->
+            <div class="calculator-categorie">
+                <p class="section-label">Grafic de acumulare</p>
+                <div class="schedule-toggle" id="scheduleToggle">
+                    <div class="freq-item active" data-view="yearly">Anual</div>
+                    <div class="freq-item" data-view="monthly">Lunar</div>
+                </div>
+                <div class="schedule-table-wrap" style="margin-top:8px;">
+                    <div class="schedule-scroll">
+                        <table class="schedule-table">
+                            <thead>
+                                <tr id="scheduleHead">
+                                    <th>An</th>
+                                    <th>Depunere</th>
+                                    <th>Dobândă</th>
+                                    <th>Sold final</th>
+                                </tr>
+                            </thead>
+                            <tbody id="scheduleBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="section-break"></div>
+
+    <!-- FAQ -->
+    <section class="faq">
+        <h2>Întrebări Frecvente</h2>
+        <div class="accordion">
+
+            <div class="item open">
+                <div class="question">
+                    <p class="body1">1. Ce variabile sunt implicate într-o investiție?</p>
+                    <img class="icon" src="images/arrow-down.svg" alt="toggle">
+                </div>
+                <div class="answer">
+                    <div class="answer-box">
+                        <p class="body2"><strong>Rata dobânzii</strong> – procentul anual de creștere a investiției.</p>
+                        <p class="body2"><strong>Suma inițială</strong> – capitalul existent la începutul investiției.</p>
+                        <p class="body2"><strong>Valoarea finală</strong> – suma dorită la sfârșitul perioadei.</p>
+                        <p class="body2"><strong>Durata investiției</strong> – numărul de ani cât durează investiția.</p>
+                        <p class="body2"><strong>Contribuția suplimentară</strong> – sume adăugate periodic pe parcursul investiției.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="question">
+                    <p class="body1">2. Ce este capitalizarea dobânzii?</p>
+                    <img class="icon" src="images/arrow-down.svg" alt="toggle">
+                </div>
+                <div class="answer">
+                    <div class="answer-box">
+                        <p class="body2">Capitalizarea (compounding) înseamnă că dobânda câștigată este adăugată la capital, iar în perioadele următoare dobânda se calculează pe un capital mai mare. Cu cât capitalizarea este mai frecventă, cu atât suma finală este mai mare.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="question">
+                    <p class="body1">3. Care e diferența dintre a contribui la început sau la sfârșitul perioadei?</p>
+                    <img class="icon" src="images/arrow-down.svg" alt="toggle">
+                </div>
+                <div class="answer">
+                    <div class="answer-box">
+                        <p class="body2">Dacă depui suma la începutul fiecărei perioade, ea beneficiază de dobândă pentru întreaga perioadă respectivă, ceea ce duce la o valoare finală ușor mai mare decât dacă depui la sfârșitul perioadei.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="question">
+                    <p class="body1">4. Ce tab ar trebui să folosesc?</p>
+                    <img class="icon" src="images/arrow-down.svg" alt="toggle">
+                </div>
+                <div class="answer">
+                    <div class="answer-box">
+                        <p class="body2">Alege tab-ul corespunzător variabilei pe care vrei să o afli. De exemplu, dacă știi cât vrei să economisești și vrei să afli ce rată a dobânzii ai nevoie, folosește tab-ul „Rata dobânzii".</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="question">
+                    <p class="body1">5. Calculatorul ține cont de inflație sau taxe?</p>
+                    <img class="icon" src="images/arrow-down.svg" alt="toggle">
+                </div>
+                <div class="answer">
+                    <div class="answer-box">
+                        <p class="body2">Nu, calculatorul prezintă valori nominale, fără ajustare pentru inflație sau impozit pe câștigul de capital. Pentru o estimare realistă a puterii de cumpărare, poți scădea rata inflației din rata dobânzii înainte de a introduce datele.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <img src="images/logo-text.svg" alt="Dă-mi Banul Înapoi" class="footer-logo">
+    <div class="footer-links">
+        <a href="#">Contactează-ne</a>
+        <a href="#">Despre noi</a>
+    </div>
+    <div class="social-icons">
+        <a href="https://www.facebook.com/damibanulinapoi/">
+            <img src="images/facebook.svg" alt="Facebook">
+        </a>
+        <a href="https://www.instagram.com/damibanulinapoi/">
+            <img src="images/instagram.svg" alt="Instagram">
+        </a>
+        <a href="https://www.youtube.com/@damibanulinapoi/">
+            <img src="images/youtube.svg" alt="YouTube">
+        </a>
+    </div>
+    <p class="footer-copy">© 2026 Dă-mi Banul Înapoi</p>
+</footer>
+
+<script src="js/script.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    /* =========================
+       HELPERS
+    ========================= */
+    const parseNum = (id) => {
+        const v = document.getElementById(id)?.value ?? "0";
+        return Number(String(v).replace(/[^\d.]/g, "")) || 0;
+    };
+
+    const fmt = (n) =>
+        Math.round(n).toLocaleString("en-US") + " lei";
+
+    const fmtPlain = (n) =>
+        Math.round(n).toLocaleString("en-US");
+
+    /* =========================
+       INPUT FORMATTING
+    ========================= */
+    ["startAmount","endKnown","targetAmount","contribution"].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener("input", () => {
+            let raw = el.value.replace(/[^\d]/g, "").slice(0, 12);
+            el.value = raw ? Number(raw).toLocaleString("en-US") : "0";
+            calculate();
+        });
+        el.addEventListener("focus", () => { if (el.value === "0") el.value = ""; });
+        el.addEventListener("blur",  () => { if (!el.value.trim()) el.value = "0"; calculate(); });
+    });
+
+    // Rate and years are plain text inputs (not in the money-formatting list above)
+    ["rate", "years"].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener("input", () => calculate());
+    });
+
+    // Selects (compounding frequency, contribution frequency)
+    ["compoundFreq", "contribFreq"].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener("change", () => calculate());
+    });
+
+    // Contribute at beginning/end radios
+    document.querySelectorAll('input[name="contribTiming"]').forEach(radio => {
+        radio.addEventListener("change", () => calculate());
+    });
+
+    /* =========================
+       TABS
+    ========================= */
+    let mode = "end"; // contribution | end | rate | start | length
+    let currentSchedule = null;
+    let scheduleView = "yearly";
+
+    const rowTarget        = document.getElementById("rowTarget");
+    const rowEndKnown       = document.getElementById("rowEndKnown");
+    const rowStart          = document.getElementById("rowStart");
+    const rowYears          = document.getElementById("rowYears");
+    const rowRate           = document.getElementById("rowRate");
+    const rowContribution   = document.getElementById("rowContribution");
+    const mainLabelEl       = document.getElementById("mainLabel");
+
+    function applyTabVisibility() {
+        [rowTarget, rowEndKnown, rowStart, rowYears, rowRate, rowContribution].forEach(r => r.classList.add("hidden"));
+
+        if (mode === "end") {
+            rowStart.classList.remove("hidden");
+            rowYears.classList.remove("hidden");
+            rowRate.classList.remove("hidden");
+            rowContribution.classList.remove("hidden");
+        } else if (mode === "contribution") {
+            rowTarget.classList.remove("hidden");
+            rowStart.classList.remove("hidden");
+            rowYears.classList.remove("hidden");
+            rowRate.classList.remove("hidden");
+        } else if (mode === "rate") {
+            rowStart.classList.remove("hidden");
+            rowEndKnown.classList.remove("hidden");
+            rowYears.classList.remove("hidden");
+            rowContribution.classList.remove("hidden");
+        } else if (mode === "start") {
+            rowEndKnown.classList.remove("hidden");
+            rowYears.classList.remove("hidden");
+            rowRate.classList.remove("hidden");
+            rowContribution.classList.remove("hidden");
+        } else if (mode === "length") {
+            rowStart.classList.remove("hidden");
+            rowEndKnown.classList.remove("hidden");
+            rowRate.classList.remove("hidden");
+            rowContribution.classList.remove("hidden");
+        }
+
+        if (typeof calculate === "function") calculate();
+    }
+
+    document.querySelectorAll("#tabRow .tab-item").forEach(item => {
+        item.addEventListener("click", () => {
+            document.querySelectorAll("#tabRow .tab-item").forEach(i => i.classList.remove("active"));
+            item.classList.add("active");
+            mode = item.dataset.tab;
+            applyTabVisibility();
+        });
+    });
+
+    applyTabVisibility();
+
+    /* =========================
+       CORE MATH
+    ========================= */
+
+    function fvLumpSum(PV, r, n, years) {
+        if (n === "continuous") return PV * Math.exp(r * years);
+        const rPer = r / n;
+        return PV * Math.pow(1 + rPer, n * years);
+    }
+
+    function fvContributions(PMT, contribFreqN, r, n, years, atBeginning) {
+        if (!PMT || !contribFreqN) return 0;
+        const totalContribs = Math.max(0, Math.round(contribFreqN * years));
+        const yearsPerContrib = 1 / contribFreqN;
+        let total = 0;
+        for (let k = 0; k < totalContribs; k++) {
+            const depositTime = atBeginning ? k * yearsPerContrib : (k + 1) * yearsPerContrib;
+            const yearsToGrow = years - depositTime;
+            if (yearsToGrow < 0) continue;
+            total += fvLumpSum(PMT, r, n, yearsToGrow);
+        }
+        return total;
+    }
+
+    function totalFV(PV, PMT, contribFreqN, r, n, years, atBeginning) {
+        return fvLumpSum(PV, r, n, years) + fvContributions(PMT, contribFreqN, r, n, years, atBeginning);
+    }
+
+    function solveRate(PV, PMT, contribFreqN, n, years, atBeginning, targetFV) {
+        let lo = -0.5, hi = 2.0;
+        for (let i = 0; i < 100; i++) {
+            const mid = (lo + hi) / 2;
+            const fv = totalFV(PV, PMT, contribFreqN, mid, n, years, atBeginning);
+            if (fv < targetFV) lo = mid; else hi = mid;
+        }
+        return (lo + hi) / 2;
+    }
+
+    function solveYears(PV, PMT, contribFreqN, r, n, atBeginning, targetFV) {
+        let lo = 0, hi = 100;
+        for (let i = 0; i < 100; i++) {
+            const mid = (lo + hi) / 2;
+            const fv = totalFV(PV, PMT, contribFreqN, r, n, mid, atBeginning);
+            if (fv < targetFV) lo = mid; else hi = mid;
+        }
+        return (lo + hi) / 2;
+    }
+
+    function solveStart(targetFV, PMT, contribFreqN, r, n, years, atBeginning) {
+        const fvContrib = fvContributions(PMT, contribFreqN, r, n, years, atBeginning);
+        const remaining = targetFV - fvContrib;
+        const growth = n === "continuous" ? Math.exp(r * years) : Math.pow(1 + r / n, n * years);
+        return remaining / growth;
+    }
+
+    function solveContribution(targetFV, PV, contribFreqN, r, n, years, atBeginning) {
+        const fvPV = fvLumpSum(PV, r, n, years);
+        const remaining = targetFV - fvPV;
+        if (remaining <= 0) return 0;
+        const perUnit = fvContributions(1, contribFreqN, r, n, years, atBeginning);
+        if (perUnit <= 0) return 0;
+        return remaining / perUnit;
+    }
+
+    /* =========================
+       SCHEDULE BUILDING
+    ========================= */
+
+    function buildSchedule(PV, PMT, contribFreqN, r, n, years, atBeginning) {
+        const months = Math.max(1, Math.round(years * 12));
+        const monthlyRate = (n === "continuous")
+            ? Math.exp(r / 12) - 1
+            : Math.pow(1 + r / n, n / 12) - 1;
+
+        const contribEveryMonths = contribFreqN === 12 ? 1 : 12;
+
+        let balance = PV;
+        const monthly = [];
+        let yearDeposit = 0, yearInterest = 0;
+
+        for (let m = 1; m <= months; m++) {
+            let deposit = 0;
+            const isContribMonth = atBeginning
+                ? ((m - 1) % contribEveryMonths === 0)
+                : (m % contribEveryMonths === 0);
+
+            if (isContribMonth) deposit = PMT;
+
+            if (atBeginning && deposit) balance += deposit;
+
+            const interest = balance * monthlyRate;
+            balance += interest;
+
+            if (!atBeginning && deposit) balance += deposit;
+
+            yearDeposit += deposit;
+            yearInterest += interest;
+
+            const isYearEnd = (m % 12 === 0) || (m === months);
+
+            monthly.push({
+                month: m,
+                deposit,
+                interest,
+                balance,
+                isYearEnd
+            });
+
+            if (isYearEnd) {
+                monthly[monthly.length - 1].yearDeposit = yearDeposit;
+                monthly[monthly.length - 1].yearInterest = yearInterest;
+                yearDeposit = 0;
+                yearInterest = 0;
+            }
+        }
+
+        const yearly = [];
+        let yIdx = 0;
+        for (let i = 0; i < monthly.length; i++) {
+            if (monthly[i].isYearEnd) {
+                yIdx++;
+                yearly.push({
+                    year: yIdx,
+                    deposit: monthly[i].yearDeposit,
+                    interest: monthly[i].yearInterest,
+                    balance: monthly[i].balance
+                });
+            }
+        }
+
+        return { monthly, yearly };
+    }
+
+    /* =========================
+       PIE CHART
+    ========================= */
+
+    function drawPie(startPct, contribPct, interestPct) {
+        const canvas = document.getElementById("pieChart");
+        const size = 220;
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, size, size);
+
+        const center = size / 2;
+        const radius = size * 0.4;
+        const thickness = size * 0.16;
+
+        const segments = [
+            { pct: startPct, color: "#005451" },
+            { pct: contribPct, color: "#FAD1D7" },
+            { pct: interestPct, color: "#E84231" }
+        ];
+
+        let start = -Math.PI / 2;
+        segments.forEach(seg => {
+            if (seg.pct <= 0) return;
+            const angle = (seg.pct / 100) * Math.PI * 2;
+            ctx.beginPath();
+            ctx.arc(center, center, radius, start, start + angle);
+            ctx.strokeStyle = seg.color;
+            ctx.lineWidth = thickness;
+            ctx.stroke();
+            start += angle;
+        });
+    }
+
+    /* =========================
+       BAR CHART
+    ========================= */
+
+    function renderBars(yearlyData, PV) {
+        const container = document.getElementById("barChart");
+        container.innerHTML = "";
+
+        let cumDeposit = 0;
+        let cumInterest = 0;
+        const maxFV = yearlyData[yearlyData.length - 1]?.balance || 1;
+
+        const step = yearlyData.length <= 10 ? 1 : yearlyData.length <= 20 ? 2 : 5;
+        const trackMaxHeight = 170; // px
+
+        yearlyData.forEach((d, i) => {
+            cumDeposit += d.deposit;
+            cumInterest += d.interest;
+
+            const showRow = (i + 1) % step === 0 || i === yearlyData.length - 1;
+            if (!showRow) return;
+
+            const totalPx = Math.max(2, (d.balance / maxFV) * trackMaxHeight);
+            const startPx = Math.min((PV / maxFV) * trackMaxHeight, totalPx);
+            const contribPx = Math.min((cumDeposit / maxFV) * trackMaxHeight, totalPx - startPx);
+            const interestPx = Math.max(0, totalPx - startPx - contribPx);
+
+            const col = document.createElement("div");
+            col.className = "stick-col";
+            col.innerHTML = `
+                <span class="stick-value">${fmtPlain(d.balance)}</span>
+                <div class="stick-track" style="height:${totalPx}px;">
+                    <div class="stick-interest" style="height:${interestPx}px;"></div>
+                    <div class="stick-contrib" style="height:${contribPx}px;"></div>
+                    <div class="stick-start" style="height:${startPx}px;"></div>
+                </div>
+                <span class="stick-label">An ${d.year}</span>
+            `;
+            container.appendChild(col);
+        });
+    }
+
+    /* =========================
+       SCHEDULE TABLE
+    ========================= */
+
+    function renderSchedule() {
+        const head = document.getElementById("scheduleHead");
+        const body = document.getElementById("scheduleBody");
+        if (!currentSchedule) return;
+
+        if (scheduleView === "yearly") {
+            head.innerHTML = `<th>An</th><th>Depunere</th><th>Dobândă</th><th>Sold final</th>`;
+            body.innerHTML = currentSchedule.yearly.map(d => `
+                <tr class="year-end">
+                    <td>${d.year}</td>
+                    <td>${fmt(d.deposit)}</td>
+                    <td>${fmt(d.interest)}</td>
+                    <td>${fmt(d.balance)}</td>
+                </tr>
+            `).join("");
+        } else {
+            head.innerHTML = `<th>Lună</th><th>Depunere</th><th>Dobândă</th><th>Sold final</th>`;
+            body.innerHTML = currentSchedule.monthly.map(d => `
+                <tr class="${d.isYearEnd ? 'year-end' : ''}">
+                    <td>${d.month}</td>
+                    <td>${fmt(d.deposit)}</td>
+                    <td>${fmt(d.interest)}</td>
+                    <td>${fmt(d.balance)}</td>
+                </tr>
+            `).join("");
+        }
+    }
+
+    document.querySelectorAll("#scheduleToggle .freq-item").forEach(item => {
+        item.addEventListener("click", () => {
+            document.querySelectorAll("#scheduleToggle .freq-item").forEach(i => i.classList.remove("active"));
+            item.classList.add("active");
+            scheduleView = item.dataset.view;
+            renderSchedule();
+        });
+    });
+
+    /* =========================
+       MAIN CALCULATE HANDLER
+    ========================= */
+
+    function totalContribAmountFn(PMT, contribFreqN, years) {
+        return PMT * contribFreqN * years;
+    }
+
+    document.getElementById("calc-btn").addEventListener("click", calculate);
+
+    function calculate() {
+
+        const compoundSel = document.getElementById("compoundFreq").value;
+        const n = compoundSel === "continuous" ? "continuous" : Number(compoundSel);
+        const contribFreqN = Number(document.getElementById("contribFreq").value);
+        const atBeginning = document.querySelector('input[name="contribTiming"]:checked').value === "begin";
+
+        let PV, PMT, r, years, FV;
+        PMT = parseNum("contribution");
+        r = parseNum("rate") / 100;
+        years = Math.max(0.1, parseNum("years"));
+
+        if (mode === "end") {
+            PV = parseNum("startAmount");
+            FV = totalFV(PV, PMT, contribFreqN, r, n, years, atBeginning);
+            mainLabelEl.textContent = "Valoarea finală";
+
+        } else if (mode === "contribution") {
+            FV = parseNum("targetAmount");
+            PV = parseNum("startAmount");
+            PMT = solveContribution(FV, PV, contribFreqN, r, n, years, atBeginning);
+            mainLabelEl.textContent = "Contribuție necesară per perioadă";
+
+        } else if (mode === "rate") {
+            PV = parseNum("startAmount");
+            FV = parseNum("endKnown");
+            PMT = parseNum("contribution");
+            r = solveRate(PV, PMT, contribFreqN, n, years, atBeginning, FV);
+            mainLabelEl.textContent = "Rata dobânzii necesară";
+
+        } else if (mode === "start") {
+            FV = parseNum("endKnown");
+            PV = solveStart(FV, PMT, contribFreqN, r, n, years, atBeginning);
+            mainLabelEl.textContent = "Suma inițială necesară";
+
+        } else if (mode === "length") {
+            PV = parseNum("startAmount");
+            FV = parseNum("endKnown");
+            years = solveYears(PV, PMT, contribFreqN, r, n, atBeginning, FV);
+            mainLabelEl.textContent = "Durata necesară";
+        }
+
+        // Guard against invalid numbers
+        if (!isFinite(PV)) PV = 0;
+        if (!isFinite(PMT)) PMT = 0;
+        if (!isFinite(r)) r = 0;
+        if (!isFinite(years) || years <= 0) years = 0.1;
+        if (!isFinite(FV)) FV = totalFV(PV, PMT, contribFreqN, r, n, years, atBeginning);
+
+        // Set main value based on mode
+        if (mode === "end") {
+            document.getElementById("mainValue").textContent = fmt(FV);
+        } else if (mode === "start") {
+            document.getElementById("mainValue").textContent = fmt(PV);
+        } else if (mode === "contribution") {
+            document.getElementById("mainValue").textContent = fmt(PMT);
+        } else if (mode === "rate") {
+            document.getElementById("mainValue").textContent = (r * 100).toFixed(2) + "%";
+        } else if (mode === "length") {
+            document.getElementById("mainValue").textContent = years.toFixed(1) + " ani";
+        }
+
+        const totalContribAmount = totalContribAmountFn(PMT, contribFreqN, years);
+        const totalInterest = FV - PV - totalContribAmount;
+
+        document.getElementById("resStart").textContent = fmt(PV);
+        document.getElementById("resContribs").textContent = fmt(totalContribAmount);
+        document.getElementById("resInterest").textContent = fmt(Math.max(0, totalInterest));
+
+        // Pie chart
+        const totalForPie = Math.max(FV, 1);
+        const startPct = Math.max(0, Math.min(100, (PV / totalForPie) * 100));
+        const contribPct = Math.max(0, Math.min(100 - startPct, (totalContribAmount / totalForPie) * 100));
+        const interestPct = Math.max(0, 100 - startPct - contribPct);
+
+        drawPie(startPct, contribPct, interestPct);
+        document.getElementById("pieCenterValue").textContent = fmt(FV);
+        document.getElementById("legendStart").textContent = `Suma inițială — ${startPct.toFixed(0)}%`;
+        document.getElementById("legendContrib").textContent = `Contribuții — ${contribPct.toFixed(0)}%`;
+        document.getElementById("legendInterest").textContent = `Dobândă — ${interestPct.toFixed(0)}%`;
+
+        // Schedule + bar chart (capped at 50 years for performance)
+        const scheduleYears = Math.min(years, 50);
+        currentSchedule = buildSchedule(PV, PMT, contribFreqN, r, n, scheduleYears, atBeginning);
+        renderSchedule();
+        renderBars(currentSchedule.yearly, PV);
+    }
+
+    // Calculate immediately on load so all diagrams are visible right away
+    calculate();
+
+});
+</script>
+
+</body>
+</html>
