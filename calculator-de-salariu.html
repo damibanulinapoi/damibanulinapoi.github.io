@@ -70,30 +70,27 @@
 
     <!-- SECTION CALCULATOR -->
     <section class="calculator">
-        <div class="segment-wrapper">
-        <div class="segment" id="segment">
-        <div class="segment-item active" data-value="brut">
-        <span class="body1-red">Salariu brut</span>
-    </div>
 
-    <div class="segment-item" data-value="net">
-      <span class="body1-secondary">Salariu net</span>
-    </div>
-
-    <div class="segment-item" data-value="total">
-      <span class="body1-secondary">Salariul total</span>
-    </div>
-
-  </div>
-</div>
-
-        <!-- VENIT -->
         <div class="calculator-categorie">
 
             <div class="income-section">
-                <div class="income-row">
-                    <div class="income-content">
-                        <p class="body1" id="salary-label">Salariu brut</p>
+
+                <!-- SALARIU: label + segment (net / brut / total) + input, all in one line -->
+                <div class="salary-row">
+                    <p class="body1">Salariu</p>
+
+                    <div class="segment-wrapper">
+                        <div class="segment" id="segment">
+                            <div class="segment-item" data-value="net">
+                                <span class="body1-secondary">net</span>
+                            </div>
+                            <div class="segment-item active" data-value="brut">
+                                <span class="body1-red">brut</span>
+                            </div>
+                            <div class="segment-item" data-value="total">
+                                <span class="body1-secondary">total</span>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="input-wrapper">
@@ -104,106 +101,117 @@
                             inputmode="numeric"
                             maxlength="7"
                             value="0"
+                            aria-labelledby="salary-label"
                         >
                         <span class="currency">lei</span>
                     </div>
+
+                    <!-- Kept for script.js (it updates this text when the mode changes); used as the input's accessible name -->
+                    <span class="sr-only" id="salary-label">Salariu brut</span>
                 </div>
 
-            <div class="advanced-wrapper">
-                
-                <button type="button" id="advanced-btn" class="advanced-btn">
-                    <span class="body1">Opțiuni avansate</span>
-                    <span id="advanced-icon" style="margin-left:auto;">+</span>
-                </button>
+                <!-- OPȚIUNI AVANSATE -->
+                <div class="advanced-wrapper" id="advanced-wrapper">
 
-                <div id="advanced-options" class="advanced-options">
+                    <div class="advanced-box">
+                        <button type="button" id="advanced-btn" class="advanced-btn">
+                            <span class="body1">Opțiuni avansate</span>
+                            <span id="advanced-icon" class="advanced-icon">+</span>
+                        </button>
 
-                <div class="advanced-row">
-                    <label class="body1">CNAS angajator</label>
-                    <select id="FondSocial">
-                        <option value="24" selected>24%</option>
-                        <option value="29">29%</option>
-                        <option value="32">32%</option>
-                        <option value="39">39%</option>
-                    </select>
+                        <div id="advanced-options" class="advanced-options">
+
+                            <div class="advanced-row">
+                                <label class="body1" for="FondSocial">CNAS angajator</label>
+                                <select id="FondSocial">
+                                    <option value="24" selected>24%</option>
+                                    <option value="29">29%</option>
+                                    <option value="32">32%</option>
+                                    <option value="39">39%</option>
+                                </select>
+                            </div>
+
+                            <div class="advanced-row">
+                                <label class="body1" for="AsigMedAtManual">CNAM angajat</label>
+                                <input
+                                    id="AsigMedAtManual"
+                                    type="number"
+                                    value="9"
+                                    min="0"
+                                    max="20"
+                                >
+                            </div>
+
+                            <div class="advanced-row">
+                                <label class="body1" for="AngajatiIT">Angajat IT Park</label>
+                                <select id="AngajatiIT">
+                                    <option value="0" selected>Nu</option>
+                                    <option value="1">Da</option>
+                                </select>
+                            </div>
+
+                            <div class="advanced-row">
+                                <label class="body1" for="CotizatieSindicat">Cotizație sindicat</label>
+                                <select id="CotizatieSindicat">
+                                    <option value="0" selected>Fără</option>
+                                    <option value="1">1% angajat</option>
+                                    <option value="2">1% angajator</option>
+                                </select>
+                            </div>
+
+                            <div class="advanced-row">
+                                <label class="body1" for="ScutPers">Scutire personală</label>
+                                <select id="ScutPers">
+                                    <option value="0">Fără</option>
+                                    <option value="2475" selected>Normală</option>
+                                    <option value="2885">Majorată</option>
+                                </select>
+                            </div>
+
+                            <div class="advanced-row">
+                                <label class="body1" for="ScutSot">Scutire p/u soț/soție</label>
+                                <select id="ScutSot">
+                                    <option value="0" selected>Nu</option>
+                                    <option value="1815">Da</option>
+                                </select>
+                            </div>
+
+                            <div class="advanced-row">
+                                <label class="body1" for="NrPersIntr">Persoane întreținute</label>
+                                <input
+                                    id="NrPersIntr"
+                                    type="number"
+                                    value="0"
+                                    min="0"
+                                />
+                            </div>
+
+                            <div class="advanced-row">
+                                <label class="body1" for="NrPersIntrI">Persoane cu dizabilitate</label>
+                                <input
+                                    id="NrPersIntrI"
+                                    type="number"
+                                    value="0"
+                                    min="0"
+                                >
+                            </div>
+
+                            <div class="advanced-row">
+                                <label class="body1" for="ScutireManuala">Scutire manuală</label>
+                                <input
+                                    id="ScutireManuala"
+                                    type="number"
+                                    value="0"
+                                >
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Overview of current option values (hidden while expanded) -->
+                    <p class="body2-secondary advanced-overview" id="advanced-overview"></p>
+
                 </div>
-
-                <div class="advanced-row">
-                    <label class="body1">CNAM angajat</label>
-                    <input
-                        id="AsigMedAtManual"
-                        type="number"
-                        value="9"
-                        min="0"
-                        max="20"
-                    >
-                </div>
-
-                <div class="advanced-row">
-                    <label class="body1">Angajat IT Park</label>
-                    <select id="AngajatiIT">
-                        <option value="0" selected>Nu</option>
-                        <option value="1">Da</option>
-                    </select>
-                </div>
-
-                <div class="advanced-row">
-                    <label class="body1">Cotizație sindicat</label>
-                    <select id="CotizatieSindicat">
-                        <option value="0" selected>Fără</option>
-                        <option value="1">1% angajat</option>
-                        <option value="2">1% angajator</option>
-                    </select>
-                </div>
-
-                <div class="advanced-row">
-                    <label class="body1">Scutire personală</label>
-                    <select id="ScutPers">
-                        <option value="0">Fără</option>
-                        <option value="2475" selected>Normală</option>
-                        <option value="2885">Majorată</option>
-                    </select>
-                </div>
-
-                <div class="advanced-row">
-                    <label class="body1">Scutire p/u soț/soție</label>
-                    <select id="ScutSot">
-                        <option value="0" selected>Nu</option>
-                        <option value="1815">Da</option>
-                    </select>
-                </div>
-
-                <div class="advanced-row">
-                    <label class="body1">Persoane întreținute</label>
-                    <input
-                        id="NrPersIntr"
-                        type="number"
-                        value="0"
-                        min="0"
-                    />
-                </div>
-
-                <div class="advanced-row">
-                    <label class="body1">Persoane cu dizabilitate</label>
-                    <input
-                        id="NrPersIntrI"
-                        type="number"
-                        value="0"
-                        min="0"
-                    >
-                </div>
-
-                <div class="advanced-row">
-                    <label class="body1">Scutire manuală</label>
-                    <input
-                        id="ScutireManuala"
-                        type="number"
-                        value="0"
-                    >
-                </div>
-
-                </div>
-            </div>
 
                 <button id="calculează-btn" class="btn">
                     <span class="btn-text">Calculează Salariul Meu</span>
@@ -249,6 +257,8 @@
         <p class="body1" id="socialLabel">Fond social angajator (CNAS)</p>
         <p class="body1" id="socialResult">0 lei</p>
     </div>
+
+    <div class="income-divider income-divider--dotted"></div>
 
     <div class="result-row">
         <p class="body1" id="medicalLabel">CNAM (asigurare medicală angajat)</p>
