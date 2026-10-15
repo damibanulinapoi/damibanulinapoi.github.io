@@ -683,7 +683,7 @@ body {
 }
 
 .salary-row .segment-item {
-  padding: 2px 6px;
+  padding: 6px 6px;
 }
 
 /* selected state */
@@ -772,7 +772,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    padding: 5px;
+    padding: 9px;
     border: 1px solid var(--color-card-border);
     border-radius: 8px;
     background: var(--color-card);
