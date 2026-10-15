@@ -678,7 +678,7 @@ body {
 }
 
 .salary-row .segment {
-  padding: 2px;
+  padding: 4px;
   gap: 2px;
 }
 
@@ -694,7 +694,7 @@ body {
 .body1-red {
   color: var(--color-orange);
   font-size: 14px;
-  font-weight: 500;
+  font-weight: bold;
 }
 
 /* BUTTON */
