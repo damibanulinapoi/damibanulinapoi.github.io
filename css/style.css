@@ -741,7 +741,7 @@ body {
 .resultat {
     display: none;
     background: var(--color-background);
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 8px;
     gap: 8px;
     flex-direction: column;
@@ -804,7 +804,7 @@ body {
     flex-direction: column;
     gap: 8px;
     padding: 8px;
-    border-radius: 8px;
+    border-radius: 4px;
     background: var(--color-background);
 }
 
