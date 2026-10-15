@@ -640,14 +640,10 @@ body {
     flex-shrink: 0;
 }
 
+/* Border color comes from .income-input (invisible) and :focus (orange), same as the budget calculator */
 .salary-row .income-input {
     width: 88px;
     padding-right: 26px;
-    border-color: var(--color-card-border);
-}
-
-.salary-row .income-input:focus {
-    border-color: var(--color-orange);
 }
 
 .segment-wrapper {
@@ -723,6 +719,12 @@ body {
     font-size: 16px;
     line-height: 16px;
     color: white;
+}
+
+/* Disabled (e.g. no amount entered yet) */
+.btn:disabled {
+    background-color: var(--color-text-disabled);
+    cursor: not-allowed;
 }
 
 .btn-icon {

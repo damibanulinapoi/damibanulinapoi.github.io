@@ -268,7 +268,37 @@ function calcFromBrut(brut) {
    CALCULATOR BUTTON
 ========================= */
 
-document.getElementById("calculează-btn")?.addEventListener("click", () => {
+const calcBtn = document.getElementById("calculează-btn");
+const amountInput = document.getElementById("amount");
+
+// Button stays disabled until an amount greater than 0 is entered
+function updateCalcBtnState() {
+    if (!calcBtn || !amountInput) return;
+    calcBtn.disabled = parseNumber(amountInput.value) === 0;
+}
+
+amountInput?.addEventListener("input", updateCalcBtnState);
+updateCalcBtnState();
+
+// Enter (desktop or phone keyboard) runs the calculation from the amount field or the advanced number fields
+const enterFields = [
+    amountInput,
+    ...document.querySelectorAll("#advanced-options input")
+].filter(Boolean);
+
+enterFields.forEach(field => {
+    field.addEventListener("keydown", (e) => {
+        if (e.key !== "Enter") return;
+        e.preventDefault();
+
+        if (calcBtn && !calcBtn.disabled) {
+            calcBtn.click();
+            field.blur(); // closes the phone keyboard so the results are visible
+        }
+    });
+});
+
+calcBtn?.addEventListener("click", () => {
 
     const input = parseNumber(document.getElementById("amount")?.value);
     if (!input) return;
