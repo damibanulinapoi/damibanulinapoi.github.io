@@ -660,7 +660,7 @@ body {
   width: 100%;
   padding: 4px;
   border: 1px solid #ccc;
-  border-radius: 999px;
+  border-radius: 8px;
   background: #fff;
   box-sizing: border-box;
   gap: 4px;
@@ -669,7 +669,7 @@ body {
 .segment-item {
   flex: 1;
   padding: 4px;
-  border-radius: 999px;
+  border-radius: 6px;
   text-align: center;
   cursor: pointer;
   transition: 0.2s ease;
@@ -741,7 +741,7 @@ body {
 .resultat {
     display: none;
     background: var(--color-background);
-    border-radius: 4px;
+    border-radius: 16px;
     padding: 8px;
     gap: 8px;
     flex-direction: column;
@@ -772,7 +772,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    padding: 8px;
+    padding: 5px;
     border: 1px solid var(--color-card-border);
     border-radius: 8px;
     background: var(--color-card);
