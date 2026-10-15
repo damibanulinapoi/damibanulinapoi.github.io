@@ -107,31 +107,72 @@ segmentItems.forEach(item => {
 
         calcMode = item.dataset.value;
 
-        salaryLabel.textContent =
-            calcMode === "net"
-                ? "Salariu net"
-                : calcMode === "brut"
-                    ? "Salariu brut"
-                    : "Salariul total";
+        // Hidden accessible label for the input (the visible label is just "Salariu")
+        if (salaryLabel) {
+            salaryLabel.textContent =
+                calcMode === "net"
+                    ? "Salariu net"
+                    : calcMode === "brut"
+                        ? "Salariu brut"
+                        : "Salariul total";
+        }
     });
 });
-
-const advancedBtn = document.getElementById("advanced-btn");
-const advancedOptions = document.getElementById("advanced-options");
-const advancedIcon = document.getElementById("advanced-icon");
-
-if (advancedBtn && advancedOptions && advancedIcon) {
-    advancedBtn.addEventListener("click", () => {
-        advancedOptions.classList.toggle("show");
-
-        advancedIcon.textContent =
-            advancedOptions.classList.contains("show") ? "−" : "+";
-    });
-}
 
 /* =========================
    ADVANCED OPTIONS
 ========================= */
+
+const advancedWrapper = document.getElementById("advanced-wrapper");
+const advancedBtn = document.getElementById("advanced-btn");
+const advancedOptions = document.getElementById("advanced-options");
+const advancedIcon = document.getElementById("advanced-icon");
+const advancedOverview = document.getElementById("advanced-overview");
+
+/* Overview line: current value of every option, shown only while collapsed */
+
+const selectText = (id) => {
+    const el = document.getElementById(id);
+    return el && el.options ? el.options[el.selectedIndex].text : "";
+};
+
+const inputVal = (id) => {
+    const el = document.getElementById(id);
+    return el ? (el.value === "" ? "0" : el.value) : "0";
+};
+
+function updateAdvancedOverview() {
+    if (!advancedOverview) return;
+
+    advancedOverview.textContent = [
+        `CNAS angajator: ${selectText("FondSocial")}`,
+        `CNAM: ${inputVal("AsigMedAtManual")}%`,
+        `IT Park: ${selectText("AngajatiIT")}`,
+        `Sindicat: ${selectText("CotizatieSindicat")}`,
+        `Scutire: ${selectText("ScutPers")}`,
+        `Soț/soție: ${selectText("ScutSot")}`,
+        `Persoane întreținute: ${inputVal("NrPersIntr")}`,
+        `Persoane cu dizabilitate: ${inputVal("NrPersIntrI")}`,
+        `Scutire manuală: ${inputVal("ScutireManuala")}`
+    ].join(" / ");
+}
+
+if (advancedBtn && advancedOptions && advancedIcon) {
+
+    advancedBtn.addEventListener("click", () => {
+        const isOpen = advancedOptions.classList.toggle("show");
+
+        advancedWrapper?.classList.toggle("is-open", isOpen);
+        advancedIcon.textContent = isOpen ? "−" : "+";
+    });
+
+    advancedOptions.querySelectorAll("select, input").forEach(el => {
+        el.addEventListener("input", updateAdvancedOverview);
+        el.addEventListener("change", updateAdvancedOverview);
+    });
+
+    updateAdvancedOverview();
+}
 
 /* =========================
    EXEMPTIONS
