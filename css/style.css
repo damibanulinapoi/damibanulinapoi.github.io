@@ -132,6 +132,19 @@ body {
     display: block;
 }
 
+/* Visually hidden (still read by screen readers) */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 /* Header */
 .header {
     position: sticky;
@@ -349,6 +362,18 @@ body {
 .income-divider {
     height: 1px;
     background: rgba(0,0,0,0.045);
+}
+
+/* Same divider, but dashed: dash length = gap length */
+.income-divider--dotted {
+    height: 1px;
+    background: repeating-linear-gradient(
+        to right,
+        rgba(0,0,0,0.045) 0,
+        rgba(0,0,0,0.045) 8px,
+        transparent 8px,
+        transparent 16px
+    );
 }
 
 .income-row {
@@ -597,8 +622,41 @@ body {
     text-align: center;
 }
 
+/* =========================
+   SALARY ROW: label + segment + input on one line
+========================= */
+
+.salary-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.salary-row > .body1 {
+    flex-shrink: 0;
+}
+
+.salary-row .input-wrapper {
+    flex-shrink: 0;
+}
+
+.salary-row .income-input {
+    width: 88px;
+    padding-right: 26px;
+    border-color: var(--color-card-border);
+}
+
+.salary-row .income-input:focus {
+    border-color: var(--color-orange);
+}
+
 .segment-wrapper {
   width: 100%;
+}
+
+.salary-row .segment-wrapper {
+  flex: 1;
+  min-width: 0;
 }
 
 .segment {
@@ -621,6 +679,15 @@ body {
   transition: 0.2s ease;
   user-select: none;
   background: transparent;
+}
+
+.salary-row .segment {
+  padding: 2px;
+  gap: 2px;
+}
+
+.salary-row .segment-item {
+  padding: 2px 6px;
 }
 
 /* selected state */
@@ -693,30 +760,54 @@ body {
 ========================= */
 
 .advanced-wrapper {
-gap: 8px;
-display: flex;
-flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Bordered box: header always visible, grey options box inside when open */
+.advanced-box {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px;
+    border: 1px solid var(--color-card-border);
+    border-radius: 8px;
+    background: var(--color-card);
 }
 
 .advanced-btn {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 4px 8px;
-    border: 1px solid var(--color-card-border);
-    border-radius: 8px;
-    background: var(--color-card);
+    justify-content: space-between;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: transparent;
     cursor: pointer;
+    text-align: left;
 }
 
+.advanced-icon {
+    font-family: "Archivo", sans-serif;
+    font-size: 24px;
+    line-height: 16px;
+    color: var(--color-text-primary);
+    margin-left: auto;
+}
+
+/* Expanded options: grey box, same look as the results */
 .advanced-options {
     display: none;
-    gap: 8px;
     flex-direction: column;
+    gap: 8px;
+    padding: 8px;
+    border-radius: 8px;
+    background: var(--color-background);
 }
 
 .advanced-options.show {
-    display: block;
+    display: flex;
 }
 
 .advanced-row {
@@ -730,8 +821,22 @@ flex-direction: column;
     width: 120px;
     height: 32px;
 
-    border: 1px solid #ddd;
+    border: 1px solid var(--color-card-border);
     border-radius: 4px;
+    background: var(--color-card);
+
+    font-family: "Archivo", sans-serif;
+    font-size: 14px;
+    color: var(--color-text-primary);
 
     padding: 0 8px;
+}
+
+/* Overview of current values (hidden while expanded) */
+.advanced-overview {
+    line-height: 18px;
+}
+
+.advanced-wrapper.is-open .advanced-overview {
+    display: none;
 }
