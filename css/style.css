@@ -630,24 +630,54 @@ body {
    SALARY ROW: label + segment + input on one line
 ========================= */
 
-.salary-row {
+/* Hint bar above the calculator ("Modifica valorile de mai jos") */
+.calc-hint {
     display: flex;
     align-items: center;
     gap: 8px;
+    margin: 56px 0 16px;
+    height: 36px;
+    padding: 0 8px;
+    background: var(--color-card);
+    border: 1px solid var(--color-card-border);
+    border-radius: 8px;
 }
 
-.salary-row > .body1 {
+.calc-hint-icon {
+    width: 24px;
+    height: 24px;
     flex-shrink: 0;
+    display: block;
+}
+
+.calc-hint-text {
+    font-family: "Roca One", serif;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    color: var(--color-text-primary);
+}
+
+.salary-row {
+    display: flex;
+    flex-direction: column;   /* toggle on top, input underneath */
+    align-items: stretch;
+    gap: 8px;
 }
 
 .salary-row .input-wrapper {
-    flex-shrink: 0;
+    display: flex;
+    width: 100%;
 }
 
-/* Border color comes from .income-input (invisible) and :focus (orange), same as the budget calculator */
+/* Full-width input; no visible border until pressed (orange comes from .income-input:focus) */
 .salary-row .income-input {
-    width: 88px;
-    padding-right: 26px;
+    width: 100%;
+    padding: 0 36px 0 8px;
+}
+
+.salary-row .currency {
+    right: 8px;
 }
 
 .segment-wrapper {
@@ -655,8 +685,8 @@ body {
 }
 
 .salary-row .segment-wrapper {
-  flex: 1;
-  min-width: 0;
+  flex: none;
+  width: 100%;
 }
 
 .segment {
@@ -681,13 +711,22 @@ body {
   background: transparent;
 }
 
+/* Toggle: no outer border, pill-shaped options (Salariu net | Salariu brut | Salariu total) */
 .salary-row .segment {
-  padding: 4px;
-  gap: 2px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  gap: 4px;
 }
 
 .salary-row .segment-item {
-  padding: 4px 6px;
+  border-radius: 999px;
+  padding: 8px 4px;
+}
+
+.salary-row .segment-item span {
+  font-size: 14px;
+  white-space: nowrap;
 }
 
 /* selected state */
@@ -698,7 +737,7 @@ body {
 .body1-red {
   color: var(--color-orange);
   font-size: 14px;
-  font-weight: bold;
+  font-weight: normal;
 }
 
 /* BUTTON */

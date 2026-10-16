@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dă-mi Banul Înapoi</title>
+    <title>Калькулятор зарплаты – Dă-mi Banul Înapoi</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="icon" type="image/svg+xml" href="../images/logo-small.svg">
 </head>
@@ -12,33 +12,433 @@
 
 <!-- Header -->
 <header class="header">
+
     <div class="left">
         <a href="index.html">
             <img src="../images/logo-text.svg" class="logo">
         </a>
     </div>
+
     <div class="right">
+
         <div class="lang-dropdown">
+
             <button class="lang-btn" id="langBtn">
                 <img src="../images/flag-russia.svg" id="langFlag">
             </button>
+
             <div class="lang-menu" id="langMenu">
+
                 <button class="lang-option" data-lang="RO">
                     <img src="../images/flag-romania.svg">
                     <span>Română</span>
                 </button>
+
                 <button class="lang-option" data-lang="RU">
                     <img src="../images/flag-russia.svg">
                     <span>Русский</span>
                 </button>
+
             </div>
+
         </div>
         <img src="../images/menu.svg" class="menu">
+
     </div>
+
 </header>
 
-<!-- TODO: Russian translation -->
-<div class="page-body"></div>
+<div class="page-body">
+    <!-- SECTION CALCULATOR HERO -->
+    <section class="calculator-hero">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">главная</a>
+            <span class="separator">/</span>
+
+            <a href="calculatoare.html">калькуляторы</a>
+            <span class="separator">/</span>
+
+            <span>калькулятор зарплаты</span>
+        </nav>
+
+        <h2>Калькулятор зарплаты</h2>
+
+        <p class="body1">Этот калькулятор помогает определить зарплату нетто, зарплату брутто и общую зарплату (полную стоимость для работодателя). Достаточно ввести одно из трёх значений: нетто, брутто или общую зарплату.</p>
+    </section>
+
+    <!-- Подсказка над калькулятором (вместо белого разделителя) -->
+    <div class="calc-hint">
+        <img src="../images/arrow-down.svg" alt="" class="calc-hint-icon">
+        <span class="calc-hint-text">Измените значения ниже</span>
+    </div>
+
+    <!-- SECTION CALCULATOR -->
+    <section class="calculator">
+
+        <div class="calculator-categorie">
+
+            <div class="income-section">
+
+                <!-- ЗАРПЛАТА: переключатель в своей строке, поле ввода в строке под ним -->
+                <div class="salary-row">
+
+                    <div class="segment-wrapper">
+                        <div class="segment" id="segment">
+                            <div class="segment-item" data-value="net">
+                                <span class="body1-secondary">Нетто</span>
+                            </div>
+                            <div class="segment-item active" data-value="brut">
+                                <span class="body1-red">Брутто</span>
+                            </div>
+                            <div class="segment-item" data-value="total">
+                                <span class="body1-secondary">Общая</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <input
+                            type="text"
+                            id="amount"
+                            class="income-input"
+                            inputmode="numeric"
+                            maxlength="7"
+                            value="0"
+                            enterkeyhint="go"
+                            aria-labelledby="salary-label"
+                        >
+                        <span class="currency">л</span>
+                    </div>
+
+                    <!-- Нужен для script.js (он меняет этот текст при смене режима); служит доступным названием поля -->
+                    <span class="sr-only" id="salary-label">Зарплата брутто</span>
+                </div>
+
+                <div class="income-divider"></div>
+
+                <!-- ДОПОЛНИТЕЛЬНЫЕ ПАРАМЕТРЫ -->
+                <div class="advanced-wrapper" id="advanced-wrapper">
+
+                    <div class="advanced-box">
+                        <button type="button" id="advanced-btn" class="advanced-btn">
+                            <span class="body1">Дополнительные параметры</span>
+                            <span id="advanced-icon" class="advanced-icon">+</span>
+                        </button>
+
+                        <div id="advanced-options" class="advanced-options">
+
+                            <div class="advanced-row">
+                                <label class="body1" for="FondSocial">CNAS работодателя</label>
+                                <select id="FondSocial">
+                                    <option value="24" selected>24%</option>
+                                    <option value="29">29%</option>
+                                    <option value="32">32%</option>
+                                    <option value="39">39%</option>
+                                </select>
+                            </div>
+
+                            <div class="advanced-row">
+                                <label class="body1" for="AsigMedAtManual">CNAM работника</label>
+                                <div class="input-wrapper">
+                                    <input
+                                        id="AsigMedAtManual" class="unit-pct"
+                                        type="text"
+                                        inputmode="decimal"
+                                        data-format="percent"
+                                        data-max="20"
+                                        maxlength="5"
+                                        value="9"
+                                    >
+                                    <span class="currency">%</span>
+                                </div>
+                            </div>
+
+                            <div class="advanced-row">
+                                <label class="body1" for="AngajatiIT">Сотрудник IT-парка</label>
+                                <select id="AngajatiIT">
+                                    <option value="0" selected>Нет</option>
+                                    <option value="1">Да</option>
+                                </select>
+                            </div>
+
+                            <div class="advanced-row">
+                                <label class="body1" for="CotizatieSindicat">Профсоюзный взнос</label>
+                                <select id="CotizatieSindicat">
+                                    <option value="0" selected>Нет</option>
+                                    <option value="1">1% работник</option>
+                                    <option value="2">1% работодатель</option>
+                                </select>
+                            </div>
+
+                            <div class="advanced-row">
+                                <label class="body1" for="ScutPers">Личное освобождение</label>
+                                <select id="ScutPers">
+                                    <option value="0">Нет</option>
+                                    <option value="2475" selected>Обычное</option>
+                                    <option value="2885">Увеличенное</option>
+                                </select>
+                            </div>
+
+                            <div class="advanced-row">
+                                <label class="body1" for="ScutSot">Освобождение на супруга(у)</label>
+                                <select id="ScutSot">
+                                    <option value="0" selected>Нет</option>
+                                    <option value="1815">Да</option>
+                                </select>
+                            </div>
+
+                            <div class="advanced-row">
+                                <label class="body1" for="NrPersIntr">Иждивенцы</label>
+                                <div class="input-wrapper">
+                                    <input
+                                        id="NrPersIntr" class="unit-p"
+                                        type="text"
+                                        inputmode="numeric"
+                                        data-format="count"
+                                        maxlength="2"
+                                        value="0"
+                                    >
+                                    <span class="currency">ч</span>
+                                </div>
+                            </div>
+
+                            <div class="advanced-row">
+                                <label class="body1" for="NrPersIntrI">Иждивенцы с инвалидностью</label>
+                                <div class="input-wrapper">
+                                    <input
+                                        id="NrPersIntrI" class="unit-p"
+                                        type="text"
+                                        inputmode="numeric"
+                                        data-format="count"
+                                        maxlength="2"
+                                        value="0"
+                                    >
+                                    <span class="currency">ч</span>
+                                </div>
+                            </div>
+
+                            <div class="advanced-row">
+                                <label class="body1" for="ScutireManuala">Освобождение вручную</label>
+                                <div class="input-wrapper">
+                                    <input
+                                        id="ScutireManuala" class="unit-lei"
+                                        type="text"
+                                        inputmode="numeric"
+                                        data-format="money"
+                                        maxlength="9"
+                                        value="0"
+                                    >
+                                    <span class="currency">л</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Краткий обзор выбранных параметров (скрыт, пока список открыт) -->
+                    <p class="body2-secondary advanced-overview" id="advanced-overview"></p>
+
+                </div>
+
+                <button id="calculează-btn" class="btn" disabled>
+                    <span class="btn-text">Рассчитать</span>
+                </button>
+
+<div class="resultat">
+
+    <div class="result-row">
+        <p class="body1">Зарплата нетто</p>
+        <p class="body1" id="netResult">0 л</p>
+    </div>
+
+    <div class="result-row">
+        <p class="body1">Зарплата брутто</p>
+        <p class="body1" id="brutResult">0 л</p>
+    </div>
+
+    <div class="result-row">
+        <p class="body1">Общая зарплата</p>
+        <p class="body1" id="totalResult">0 л</p>
+    </div>
+
+    <div class="income-divider"></div>
+
+    <div class="result-row">
+        <p class="body1">Общее месячное освобождение</p>
+        <p class="body1" id="scutireResult">0 л</p>
+    </div>
+
+    <div class="result-row">
+        <p class="body1">Налогооблагаемый доход</p>
+        <p class="body1" id="impozabilResult">0 л</p>
+    </div>
+
+    <div class="income-divider"></div>
+
+    <div class="result-row">
+        <p class="body1">CNAS работника (6%)</p>
+        <p class="body1" id="cnasEmployeeResult">0 л</p>
+    </div>
+
+    <div class="result-row">
+        <p class="body1" id="socialLabel">Социальный фонд работодателя (CNAS)</p>
+        <p class="body1" id="socialResult">0 л</p>
+    </div>
+
+    <div class="income-divider income-divider--dotted"></div>
+
+    <div class="result-row">
+        <p class="body1" id="medicalLabel">CNAM (медицинское страхование работника)</p>
+        <p class="body1" id="medicalResult">0 л</p>
+    </div>
+
+    <div class="result-row">
+        <p class="body1">Подоходный налог (12%)</p>
+        <p class="body1" id="taxResult">0 л</p>
+    </div>
+
+    <div class="result-row">
+        <p class="body1-bold">Всего налогов / взносов</p>
+        <p class="body1-bold" id="totalTaxResult">0 л</p>
+    </div>
+
+</div>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="section-break"></div>
+
+<section class="faq">
+    <h2>Частые вопросы</h2>
+
+    <div class="accordion">
+
+        <!-- Item 1 -->
+        <div class="item open">
+            <div class="question">
+                <p class="body1">1. В чём разница между зарплатой нетто, брутто и общей стоимостью?</p>
+                <img class="icon" src="../images/arrow-down.svg" alt="toggle">
+            </div>
+            <div class="answer">
+                <div class="answer-box">
+                    <p class="body2">Зарплата нетто – сумма, которую работник фактически получает на руки после удержания всех налогов и взносов.</p>
+                    <p class="body2">Зарплата брутто – зарплата, указанная в трудовом договоре, до любых удержаний.</p>
+                    <p class="body2">Общая зарплата – полная стоимость для работодателя: зарплата брутто плюс взносы, которые оплачивает работодатель (социальный фонд CNAS).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="item">
+            <div class="question">
+                <p class="body1">2. Что такое социальный фонд (CNAS) работодателя?</p>
+                <img class="icon" src="../images/arrow-down.svg" alt="toggle">
+            </div>
+            <div class="answer">
+                <div class="answer-box">
+                    <p class="body2">Социальный фонд – это обязательный взнос, который работодатель платит на государственное социальное страхование. Он финансирует государственную пенсионную систему и другие социальные выплаты. Применимые ставки в 2026 году:</p>
+                    <p class="body2"><strong>24%</strong> – частный сектор, высшие учебные заведения и медико-санитарные учреждения</p>
+                    <p class="body2"><strong>29%</strong> – бюджетные и публичные органы/учреждения на самоуправлении</p>
+                    <p class="body2"><strong>32%</strong> – частный сектор / высшие учебные заведения / медико-санитарные учреждения (особые условия труда)</p>
+                    <p class="body2"><strong>39%</strong> – бюджетные и публичные органы/учреждения на самоуправлении (особые условия труда)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="item">
+            <div class="question">
+                <p class="body1">3. Что такое обязательное медицинское страхование (CNAM) в размере 9%?</p>
+                <img class="icon" src="../images/arrow-down.svg" alt="toggle">
+            </div>
+            <div class="answer">
+                <div class="answer-box">
+                    <p class="body2">Взнос на обязательное медицинское страхование (CNAM) удерживается из зарплаты работника и даёт доступ к медицинским услугам в государственной системе здравоохранения. Стандартная ставка на 2026 год остаётся 9%.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="item">
+            <div class="question">
+                <p class="body1">4. Что такое налогооблагаемый доход?</p>
+                <img class="icon" src="../images/arrow-down.svg" alt="toggle">
+            </div>
+            <div class="answer">
+                <div class="answer-box">
+                    <p class="body2">Налогооблагаемый доход = зарплата брутто − CNAM работника − месячные освобождения. Подоходный налог в 12% применяется к этой сумме. Ставка подоходного налога для физических лиц в 2026 году остаётся 12%.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="item">
+            <div class="question">
+                <p class="body1">5. Какие налоговые освобождения доступны в 2026 году?</p>
+                <img class="icon" src="../images/arrow-down.svg" alt="toggle">
+            </div>
+            <div class="answer">
+                <div class="answer-box">
+                    <p class="body2">Право на личное освобождение имеют только резиденты – физические лица с годовым налогооблагаемым доходом менее 360 000 лей (за исключением доходов по ст. 901 Налогового кодекса).</p>
+                    <p class="body2"><strong>Личное освобождение</strong> – 29 700 лей/год → <strong>2 475 лей/мес.</strong></p>
+                    <p class="body2"><strong>Увеличенное личное освобождение</strong> – 34 620 лей/год → <strong>2 885 лей/мес.</strong></p>
+                    <p class="body2"><strong>Увеличенное освобождение на супруга(у)</strong> – 21 780 лей/год → <strong>1 815 лей/мес.</strong></p>
+                    <p class="body2"><strong>Иждивенец</strong> – 9 900 лей/год → <strong>825 лей/мес.</strong></p>
+                    <p class="body2"><strong>Иждивенец с инвалидностью</strong> – 21 780 лей/год → <strong>1 815 лей/мес.</strong></p>
+                    <p class="body2" style="margin-top:8px;">Средняя месячная зарплата по экономике в 2026 году – <strong>17 400 лей</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Item 6 -->
+        <div class="item">
+            <div class="question">
+                <p class="body1">6. Что означает CNAS работника (6%) в результатах?</p>
+                <img class="icon" src="../images/arrow-down.svg" alt="toggle">
+            </div>
+            <div class="answer">
+                <div class="answer-box">
+                    <p class="body2">Взнос CNAS работника (6% от зарплаты брутто) показан для информации. В отличие от CNAM (9%), он не удерживается из зарплаты нетто работника и не входит в показанную сумму налогов/взносов.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <img
+        src="../images/logo-text.svg"
+        alt="Dă-mi Banul Înapoi"
+        class="footer-logo"
+    />
+
+    <div class="footer-links">
+        <a href="#">Свяжитесь с нами</a>
+        <a href="#">О нас</a>
+    </div>
+
+    <div class="social-icons">
+
+        <a href="https://www.facebook.com/damibanulinapoi/">
+            <img src="../images/facebook.svg" alt="Facebook">
+        </a>
+
+        <a href="https://www.instagram.com/damibanulinapoi/">
+            <img src="../images/instagram.svg" alt="Instagram">
+        </a>
+
+        <a href="https://www.youtube.com/@damibanulinapoi/">
+            <img src="../images/youtube.svg" alt="YouTube">
+        </a>
+    </div>
+
+    <p class="footer-copy">© 2026 Dă-mi Banul Înapoi</p>
+</footer>
 
 <script src="../js/script.js"></script>
 

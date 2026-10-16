@@ -20,16 +20,16 @@ const parseNumber = (val) =>
 const LANG = document.documentElement.lang === "ru" ? "ru" : "ro";
 
 const TXT = LANG === "ru" ? {
-    lei: "л.",
-    pers: "ч.",
+    lei: "л",
+    pers: "ч",
     salaryLabel: { net: "Зарплата нетто", brut: "Зарплата брутто", total: "Общая зарплата" },
     ov: {
         cnasEmp: "CNAS работодателя", cnam: "CNAM", it: "IT-парк", union: "Профсоюз",
         exempt: "Освобождение", spouse: "Супруг(а)", dep: "Иждивенцы",
         dis: "Иждивенцы с инвалидностью", manual: "Освобождение вручную"
     },
-    social: "Соц. фонд работодателя (CNAS)",
-    medical: "CNAM (мед. страхование работника)"
+    social: "Социальный фонд работодателя (CNAS)",
+    medical: "CNAM (медицинское страхование работника)"
 } : {
     lei: "lei",
     pers: "p.",
@@ -65,14 +65,24 @@ options.forEach(option => {
 
         langMenu?.classList.remove("active");
 
-        // Romanian pages live in the root folder, Russian pages in /ru/ with the same file names.
+        // Romanian pages live in the root folder, Russian pages in /ru/.
+        // Pages whose Russian file name is different are listed here (RO file -> RU file).
+        // Pages not listed keep the same file name in both languages.
+        const PAGE_NAMES = {
+            "calculator-de-salariu.html": "калькулятор-зарплаты.html"
+        };
+        const PAGE_NAMES_REVERSE = Object.fromEntries(
+            Object.entries(PAGE_NAMES).map(([ro, ru]) => [ru, ro])
+        );
+
         const inRussian = document.documentElement.lang === "ru";
-        const file = location.pathname.split("/").pop() || "index.html";
+        // decodeURIComponent: Cyrillic file names appear percent-encoded in the URL
+        const file = decodeURIComponent(location.pathname.split("/").pop() || "index.html");
 
         if (lang === "RU" && !inRussian) {
-            location.href = "ru/" + file + location.search;
+            location.href = "ru/" + encodeURIComponent(PAGE_NAMES[file] || file) + location.search;
         } else if (lang === "RO" && inRussian) {
-            location.href = "../" + file + location.search;
+            location.href = "../" + (PAGE_NAMES_REVERSE[file] || file) + location.search;
         }
     });
 });
