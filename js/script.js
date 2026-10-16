@@ -94,6 +94,126 @@ document.addEventListener("click", (e) => {
 });
 
 /* =========================
+   MENU (hamburger)
+   Built here, so every page gets it without extra HTML.
+   To add or rename an entry, edit the MENU list below.
+========================= */
+
+const siteHeader = document.querySelector(".header");
+const menuIcon = document.querySelector(".header .menu");
+
+if (siteHeader && menuIcon) {
+
+    const ROOT = LANG === "ru" ? "../" : "";   // Russian pages sit inside /ru/
+
+    // An entry with "children" opens a sub-list; one with only "href" is a plain link.
+    const MENU = LANG === "ru" ? [
+        { label: "Калькуляторы", children: [
+            { label: "Калькулятор зарплаты",  href: "калькулятор-зарплаты.html" },
+            { label: "Калькулятор бюджета",   href: "calculator-de-buget.html" },
+            { label: "Калькулятор инвестиций", href: "calculator-de-investitii.html" }
+        ]},
+        { label: "Сравнение цен", href: "#" },
+        { label: "Советы",        href: "#" },
+        { label: "О нас",         href: "#" }
+    ] : [
+        { label: "Calculatoare", children: [
+            { label: "Calculator de salariu",   href: "calculator-de-salariu.html" },
+            { label: "Calculator de buget",     href: "calculator-de-buget.html" },
+            { label: "Calculator de investiții", href: "calculator-de-investitii.html" }
+        ]},
+        { label: "Comparații de prețuri", href: "#" },
+        { label: "Sfaturi",               href: "#" },
+        { label: "Despre noi",            href: "#" }
+    ];
+
+    const overlay = document.createElement("nav");
+    overlay.className = "menu-overlay";
+    overlay.setAttribute("aria-label", LANG === "ru" ? "Меню" : "Meniu");
+
+    const list = document.createElement("ul");
+
+    MENU.forEach(item => {
+        const li = document.createElement("li");
+        li.className = "menu-item";
+
+        const label = document.createElement("span");
+        label.className = "body1";
+        label.textContent = item.label;
+
+        if (item.children) {
+            const row = document.createElement("button");
+            row.type = "button";
+            row.className = "menu-row";
+            row.append(label);
+
+            const chevron = document.createElement("img");
+            chevron.className = "menu-chevron";
+            chevron.src = ROOT + "images/arrow-down.svg";
+            chevron.alt = "";
+            row.append(chevron);
+
+            const sub = document.createElement("ul");
+            sub.className = "menu-sub";
+            item.children.forEach(child => {
+                const subLi = document.createElement("li");
+                const a = document.createElement("a");
+                a.className = "body1";
+                a.href = child.href;
+                a.textContent = child.label;
+                subLi.append(a);
+                sub.append(subLi);
+            });
+
+            row.addEventListener("click", () => li.classList.toggle("open"));
+            li.append(row, sub);
+        } else {
+            const a = document.createElement("a");
+            a.className = "menu-row";
+            a.href = item.href;
+            a.append(label);
+            li.append(a);
+        }
+
+        list.append(li);
+    });
+
+    overlay.append(list);
+    document.body.append(overlay);
+
+    const menuSrc = menuIcon.getAttribute("src");
+    const closeSrc = menuSrc.replace("menu.svg", "close.svg");
+
+    menuIcon.setAttribute("role", "button");
+    menuIcon.setAttribute("tabindex", "0");
+    menuIcon.setAttribute("aria-label", LANG === "ru" ? "Меню" : "Meniu");
+
+    function setMenu(open) {
+        siteHeader.classList.toggle("menu-open", open);
+        overlay.classList.toggle("show", open);
+        document.body.classList.toggle("menu-locked", open);
+        menuIcon.setAttribute("src", open ? closeSrc : menuSrc);
+        menuIcon.setAttribute("aria-expanded", String(open));
+        langMenu?.classList.remove("active");
+    }
+
+    menuIcon.addEventListener("click", () => {
+        setMenu(!overlay.classList.contains("show"));
+    });
+
+    menuIcon.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            menuIcon.click();
+        }
+    });
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") setMenu(false);
+    });
+}
+
+/* =========================
    FAQ
 ========================= */
 
