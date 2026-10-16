@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dă-mi Banul Înapoi</title>
+    <title>Calculator de Salariu – Dă-mi Banul Înapoi</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/svg+xml" href="images/logo-small.svg">
 </head>
 
 <body>
-    
+
 <!-- Header -->
 <header class="header">
 
@@ -21,27 +21,27 @@
 
     <div class="right">
 
-<div class="lang-dropdown">
+        <div class="lang-dropdown">
 
-    <button class="lang-btn" id="langBtn">
-        <img src="images/flag-romania.svg" id="langFlag">
-    </button>
+            <button class="lang-btn" id="langBtn">
+                <img src="images/flag-romania.svg" id="langFlag">
+            </button>
 
-    <div class="lang-menu" id="langMenu">
+            <div class="lang-menu" id="langMenu">
 
-        <button class="lang-option" data-lang="RO">
-            <img src="images/flag-romania.svg">
-            <span>Română</span>
-        </button>
+                <button class="lang-option" data-lang="RO">
+                    <img src="images/flag-romania.svg">
+                    <span>Română</span>
+                </button>
 
-        <button class="lang-option" data-lang="RU">
-            <img src="images/flag-russia.svg">
-            <span>Русский</span>
-        </button>
+                <button class="lang-option" data-lang="RU">
+                    <img src="images/flag-russia.svg">
+                    <span>Русский</span>
+                </button>
 
-    </div>
+            </div>
 
-</div>
+        </div>
         <img src="images/menu.svg" class="menu">
 
     </div>
@@ -110,9 +110,9 @@
                     <!-- Kept for script.js (it updates this text when the mode changes); used as the input's accessible name -->
                     <span class="sr-only" id="salary-label">Salariu brut</span>
                 </div>
-                
+
                 <div class="income-divider"></div>
-                
+
                 <!-- OPȚIUNI AVANSATE -->
                 <div class="advanced-wrapper" id="advanced-wrapper">
 
@@ -136,13 +136,18 @@
 
                             <div class="advanced-row">
                                 <label class="body1" for="AsigMedAtManual">CNAM angajat</label>
-                                <input
-                                    id="AsigMedAtManual"
-                                    type="number"
-                                    value="9"
-                                    min="0"
-                                    max="20"
-                                >
+                                <div class="input-wrapper">
+                                    <input
+                                        id="AsigMedAtManual" class="unit-pct"
+                                        type="text"
+                                        inputmode="decimal"
+                                        data-format="percent"
+                                        data-max="20"
+                                        maxlength="5"
+                                        value="9"
+                                    >
+                                    <span class="currency">%</span>
+                                </div>
                             </div>
 
                             <div class="advanced-row">
@@ -181,31 +186,47 @@
 
                             <div class="advanced-row">
                                 <label class="body1" for="NrPersIntr">Persoane întreținute</label>
-                                <input
-                                    id="NrPersIntr"
-                                    type="number"
-                                    value="0"
-                                    min="0"
-                                />
+                                <div class="input-wrapper">
+                                    <input
+                                        id="NrPersIntr" class="unit-p"
+                                        type="text"
+                                        inputmode="numeric"
+                                        data-format="count"
+                                        maxlength="2"
+                                        value="0"
+                                    >
+                                    <span class="currency">p.</span>
+                                </div>
                             </div>
 
                             <div class="advanced-row">
                                 <label class="body1" for="NrPersIntrI">Persoane cu dizabilitate</label>
-                                <input
-                                    id="NrPersIntrI"
-                                    type="number"
-                                    value="0"
-                                    min="0"
-                                >
+                                <div class="input-wrapper">
+                                    <input
+                                        id="NrPersIntrI" class="unit-p"
+                                        type="text"
+                                        inputmode="numeric"
+                                        data-format="count"
+                                        maxlength="2"
+                                        value="0"
+                                    >
+                                    <span class="currency">p.</span>
+                                </div>
                             </div>
 
                             <div class="advanced-row">
                                 <label class="body1" for="ScutireManuala">Scutire manuală</label>
-                                <input
-                                    id="ScutireManuala"
-                                    type="number"
-                                    value="0"
-                                >
+                                <div class="input-wrapper">
+                                    <input
+                                        id="ScutireManuala" class="unit-lei"
+                                        type="text"
+                                        inputmode="numeric"
+                                        data-format="money"
+                                        maxlength="9"
+                                        value="0"
+                                    >
+                                    <span class="currency">lei</span>
+                                </div>
                             </div>
 
                         </div>
@@ -250,7 +271,7 @@
     </div>
 
     <div class="income-divider"></div>
-    
+
     <div class="result-row">
         <p class="body1">CNAS angajat (6%)</p>
         <p class="body1" id="cnasEmployeeResult">0 lei</p>

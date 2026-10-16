@@ -1,3 +1,9 @@
+/* =====================================================
+   SHARED SCRIPT — used by every page (script.js)
+   Sections: helpers, language, FAQ, money inputs,
+   salary calculator, budget chart, investment calculator
+===================================================== */
+
 document.addEventListener("DOMContentLoaded", () => {
 
 const MAX_DIGITS = 8;
@@ -8,6 +14,34 @@ const MAX_DIGITS = 8;
 
 const parseNumber = (val) =>
     Number(String(val).replace(/[^\d]/g, "")) || 0;
+
+/* Texts that script.js writes into the page (the rest lives in the HTML).
+   The page language comes from <html lang="ro"> or <html lang="ru">. */
+const LANG = document.documentElement.lang === "ru" ? "ru" : "ro";
+
+const TXT = LANG === "ru" ? {
+    lei: "л.",
+    pers: "ч.",
+    salaryLabel: { net: "Зарплата нетто", brut: "Зарплата брутто", total: "Общая зарплата" },
+    ov: {
+        cnasEmp: "CNAS работодателя", cnam: "CNAM", it: "IT-парк", union: "Профсоюз",
+        exempt: "Освобождение", spouse: "Супруг(а)", dep: "Иждивенцы",
+        dis: "Иждивенцы с инвалидностью", manual: "Освобождение вручную"
+    },
+    social: "Социальный фонд работодателя (CNAS)",
+    medical: "CNAM (медицинское страхование работника)"
+} : {
+    lei: "lei",
+    pers: "p.",
+    salaryLabel: { net: "Salariu net", brut: "Salariu brut", total: "Salariul total" },
+    ov: {
+        cnasEmp: "CNAS angajator", cnam: "CNAM", it: "IT Park", union: "Sindicat",
+        exempt: "Scutire", spouse: "Soț/soție", dep: "Persoane întreținute",
+        dis: "Persoane cu dizabilitate", manual: "Scutire manuală"
+    },
+    social: "Fond social angajator (CNAS)",
+    medical: "CNAM (asigurare medicală angajat)"
+};
 
 /* =========================
    LANGUAGE
@@ -29,14 +63,17 @@ options.forEach(option => {
     option.addEventListener("click", () => {
         const lang = option.dataset.lang;
 
-        if (langFlag) {
-            langFlag.src =
-                lang === "RO"
-                    ? "images/flag-romania.svg"
-                    : "images/flag-russia.svg";
-        }
-
         langMenu?.classList.remove("active");
+
+        // Romanian pages live in the root folder, Russian pages in /ru/ with the same file names.
+        const inRussian = document.documentElement.lang === "ru";
+        const file = location.pathname.split("/").pop() || "index.html";
+
+        if (lang === "RU" && !inRussian) {
+            location.href = "ru/" + file + location.search;
+        } else if (lang === "RO" && inRussian) {
+            location.href = "../" + file + location.search;
+        }
     });
 });
 
@@ -44,28 +81,6 @@ document.addEventListener("click", (e) => {
     if (!e.target.closest(".lang-dropdown")) {
         langMenu?.classList.remove("active");
     }
-});
-
-/* =========================
-   INPUT FORMATTING
-========================= */
-
-const allMoneyInputs = document.querySelectorAll(".income-input, .expense-input");
-
-allMoneyInputs.forEach(input => {
-
-    input.addEventListener("input", (e) => {
-        let raw = e.target.value.replace(/[^\d]/g, "").slice(0, MAX_DIGITS);
-        e.target.value = raw ? Number(raw).toLocaleString("en-US") : "0";
-    });
-
-    input.addEventListener("focus", () => {
-        if (input.value === "0") input.value = "";
-    });
-
-    input.addEventListener("blur", () => {
-        if (input.value.trim() === "") input.value = "0";
-    });
 });
 
 /* =========================
@@ -84,6 +99,78 @@ faqItems.forEach(item => {
         if (!open) item.classList.add("open");
     });
 });
+
+/* =========================
+   INPUT FORMATTING
+   Reusable for every calculator page.
+   - .income-input / .expense-input        -> money (1,000)
+   - [data-format="money"]                 -> money (1,000)
+   - [data-format="percent"]               -> number, optional decimals, 0–max
+   - [data-format="count"]                 -> whole number, up to 2 digits
+   On focus a "0" disappears so you can type right away;
+   on blur an empty field goes back to "0".
+========================= */
+
+function formatMoney(value) {
+    const raw = value.replace(/[^\d]/g, "").slice(0, MAX_DIGITS);
+    return raw ? Number(raw).toLocaleString("en-US") : "0";
+}
+
+function formatCount(value) {
+    const raw = value.replace(/[^\d]/g, "").slice(0, 2);
+    return raw ? String(Number(raw)) : "0";
+}
+
+function formatPercent(value, max) {
+    let v = value.replace(",", ".").replace(/[^\d.]/g, "");
+    const parts = v.split(".");
+    const intPart = String(Number(parts[0].slice(0, 2) || "0"));
+
+    if (parts.length > 1) {
+        v = intPart + "." + parts.slice(1).join("").slice(0, 2);
+    } else {
+        v = intPart;
+    }
+
+    if (Number(v) > max) v = String(max);
+    return v;
+}
+
+function setupNumericField(input) {
+    const format =
+        input.dataset.format ||
+        (input.classList.contains("income-input") ||
+         input.classList.contains("expense-input") ? "money" : null);
+
+    if (!format) return;
+
+    const max = Number(input.dataset.max) || 20;
+
+    input.addEventListener("input", () => {
+        if (format === "money")   input.value = formatMoney(input.value);
+        if (format === "count")   input.value = formatCount(input.value);
+        if (format === "percent") input.value = formatPercent(input.value, max);
+    });
+
+    input.addEventListener("focus", () => {
+        if (input.value === "0") {
+            input.value = "";
+        } else {
+            // select existing value so the first keystroke replaces it
+            setTimeout(() => input.select(), 0);
+        }
+    });
+
+    input.addEventListener("blur", () => {
+        let v = input.value.trim();
+        if (v.endsWith(".")) v = v.slice(0, -1);
+        input.value = (v === "" || v === ".") ? "0" : v;
+    });
+}
+
+document
+    .querySelectorAll(".income-input, .expense-input, [data-format]")
+    .forEach(setupNumericField);
 
 /* =========================
    SEGMENT CONTROL
@@ -109,12 +196,7 @@ segmentItems.forEach(item => {
 
         // Hidden accessible label for the input (the visible label is just "Salariu")
         if (salaryLabel) {
-            salaryLabel.textContent =
-                calcMode === "net"
-                    ? "Salariu net"
-                    : calcMode === "brut"
-                        ? "Salariu brut"
-                        : "Salariul total";
+            salaryLabel.textContent = TXT.salaryLabel[calcMode];
         }
     });
 });
@@ -145,15 +227,15 @@ function updateAdvancedOverview() {
     if (!advancedOverview) return;
 
     advancedOverview.textContent = [
-        `CNAS angajator: ${selectText("FondSocial")}`,
-        `CNAM: ${inputVal("AsigMedAtManual")}%`,
-        `IT Park: ${selectText("AngajatiIT")}`,
-        `Sindicat: ${selectText("CotizatieSindicat")}`,
-        `Scutire: ${selectText("ScutPers")}`,
-        `Soț/soție: ${selectText("ScutSot")}`,
-        `Persoane întreținute: ${inputVal("NrPersIntr")}`,
-        `Persoane cu dizabilitate: ${inputVal("NrPersIntrI")}`,
-        `Scutire manuală: ${inputVal("ScutireManuala")}`
+        `${TXT.ov.cnasEmp}: ${selectText("FondSocial")}`,
+        `${TXT.ov.cnam}: ${inputVal("AsigMedAtManual")}%`,
+        `${TXT.ov.it}: ${selectText("AngajatiIT")}`,
+        `${TXT.ov.union}: ${selectText("CotizatieSindicat")}`,
+        `${TXT.ov.exempt}: ${selectText("ScutPers")}`,
+        `${TXT.ov.spouse}: ${selectText("ScutSot")}`,
+        `${TXT.ov.dep}: ${inputVal("NrPersIntr")} ${TXT.pers}`,
+        `${TXT.ov.dis}: ${inputVal("NrPersIntrI")} ${TXT.pers}`,
+        `${TXT.ov.manual}: ${inputVal("ScutireManuala")} ${TXT.lei}`
     ].join(" / ");
 }
 
@@ -169,6 +251,7 @@ if (advancedBtn && advancedOptions && advancedIcon) {
     advancedOptions.querySelectorAll("select, input").forEach(el => {
         el.addEventListener("input", updateAdvancedOverview);
         el.addEventListener("change", updateAdvancedOverview);
+        el.addEventListener("blur", updateAdvancedOverview);
     });
 
     updateAdvancedOverview();
@@ -197,7 +280,7 @@ function getOptions() {
     const isITPark   = document.getElementById("AngajatiIT")?.value === "1";
     const unionMode  = document.getElementById("CotizatieSindicat")?.value ?? "0";
     const cnasEmpRate = parseFloat(document.getElementById("FondSocial")?.value ?? "24") / 100;
-    const cnamRate   = parseFloat(document.getElementById("AsigMedAtManual")?.value ?? "9") / 100;
+    const cnamRate   = (parseFloat(document.getElementById("AsigMedAtManual")?.value) || 0) / 100;
     return { isITPark, unionMode, cnasEmpRate, cnamRate };
 }
 
@@ -280,7 +363,7 @@ function updateCalcBtnState() {
 amountInput?.addEventListener("input", updateCalcBtnState);
 updateCalcBtnState();
 
-// Enter (desktop or phone keyboard) runs the calculation from the amount field or the advanced number fields
+// Enter (desktop or phone keyboard) runs the calculation from the amount field or the advanced fields
 const enterFields = [
     amountInput,
     ...document.querySelectorAll("#advanced-options input")
@@ -335,7 +418,7 @@ calcBtn?.addEventListener("click", () => {
     if (!result) return;
 
     const fmt = (val) =>
-        (val ?? 0).toLocaleString("en-EN", { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + " lei";
+        (val ?? 0).toLocaleString("en-EN", { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + " " + TXT.lei;
 
     const set = (id, val) => {
         const el = document.getElementById(id);
@@ -346,14 +429,14 @@ calcBtn?.addEventListener("click", () => {
     const socialLabel = document.getElementById("socialLabel");
     if (socialLabel) {
         const rate = document.getElementById("FondSocial")?.value ?? "24";
-        socialLabel.textContent = `Fond social angajator (CNAS) ${rate}%`;
+        socialLabel.textContent = `${TXT.social} ${rate}%`;
     }
 
     // Update medical label to reflect current rate
     const medicalLabel = document.getElementById("medicalLabel");
     if (medicalLabel) {
         const rate = document.getElementById("AsigMedAtManual")?.value ?? "9";
-        medicalLabel.textContent = `CNAM (asigurare medicală angajat) ${rate}%`;
+        medicalLabel.textContent = `${TXT.medical} ${rate}%`;
     }
 
     set("netResult",          result.net);
@@ -371,7 +454,7 @@ calcBtn?.addEventListener("click", () => {
 });
 
 /* =========================
-   CHART (UNCHANGED SAFE)
+   BUDGET CHART
 ========================= */
 
 const canvas = document.getElementById("chart");
@@ -442,6 +525,440 @@ if (canvas) {
     window.addEventListener("resize", drawChart);
 
     drawChart();
+}
+
+/* =========================
+   INVESTMENT CALCULATOR
+   (only runs on calculator-de-investitii.html)
+========================= */
+
+function initInvestmentCalculator() {
+
+    const parseNum = (id) => {
+        const v = document.getElementById(id)?.value ?? "0";
+        return Number(String(v).replace(/[^\d.]/g, "")) || 0;
+    };
+
+    const fmt = (n) =>
+        Math.round(n).toLocaleString("en-US") + " lei";
+
+    const fmtPlain = (n) =>
+        Math.round(n).toLocaleString("en-US");
+
+    /* ---- input formatting ---- */
+    ["startAmount","endKnown","targetAmount","contribution"].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener("input", () => {
+            let raw = el.value.replace(/[^\d]/g, "").slice(0, 12);
+            el.value = raw ? Number(raw).toLocaleString("en-US") : "0";
+            calculate();
+        });
+        el.addEventListener("focus", () => { if (el.value === "0") el.value = ""; });
+        el.addEventListener("blur",  () => { if (!el.value.trim()) el.value = "0"; calculate(); });
+    });
+
+    ["rate", "years"].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener("input", () => calculate());
+    });
+
+    ["compoundFreq", "contribFreq"].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener("change", () => calculate());
+    });
+
+    document.querySelectorAll('input[name="contribTiming"]').forEach(radio => {
+        radio.addEventListener("change", () => calculate());
+    });
+
+    /* ---- tabs ---- */
+    let mode = "end"; // contribution | end | rate | start | length
+    let currentSchedule = null;
+    let scheduleView = "yearly";
+
+    const rowTarget        = document.getElementById("rowTarget");
+    const rowEndKnown      = document.getElementById("rowEndKnown");
+    const rowStart         = document.getElementById("rowStart");
+    const rowYears         = document.getElementById("rowYears");
+    const rowRate          = document.getElementById("rowRate");
+    const rowContribution  = document.getElementById("rowContribution");
+    const mainLabelEl      = document.getElementById("mainLabel");
+
+    function applyTabVisibility() {
+        [rowTarget, rowEndKnown, rowStart, rowYears, rowRate, rowContribution].forEach(r => r.classList.add("hidden"));
+
+        if (mode === "end") {
+            rowStart.classList.remove("hidden");
+            rowYears.classList.remove("hidden");
+            rowRate.classList.remove("hidden");
+            rowContribution.classList.remove("hidden");
+        } else if (mode === "contribution") {
+            rowTarget.classList.remove("hidden");
+            rowStart.classList.remove("hidden");
+            rowYears.classList.remove("hidden");
+            rowRate.classList.remove("hidden");
+        } else if (mode === "rate") {
+            rowStart.classList.remove("hidden");
+            rowEndKnown.classList.remove("hidden");
+            rowYears.classList.remove("hidden");
+            rowContribution.classList.remove("hidden");
+        } else if (mode === "start") {
+            rowEndKnown.classList.remove("hidden");
+            rowYears.classList.remove("hidden");
+            rowRate.classList.remove("hidden");
+            rowContribution.classList.remove("hidden");
+        } else if (mode === "length") {
+            rowStart.classList.remove("hidden");
+            rowEndKnown.classList.remove("hidden");
+            rowRate.classList.remove("hidden");
+            rowContribution.classList.remove("hidden");
+        }
+
+        calculate();
+    }
+
+    document.querySelectorAll("#tabRow .tab-item").forEach(item => {
+        item.addEventListener("click", () => {
+            document.querySelectorAll("#tabRow .tab-item").forEach(i => i.classList.remove("active"));
+            item.classList.add("active");
+            mode = item.dataset.tab;
+            applyTabVisibility();
+        });
+    });
+
+    /* ---- core math ---- */
+
+    function fvLumpSum(PV, r, n, years) {
+        if (n === "continuous") return PV * Math.exp(r * years);
+        const rPer = r / n;
+        return PV * Math.pow(1 + rPer, n * years);
+    }
+
+    function fvContributions(PMT, contribFreqN, r, n, years, atBeginning) {
+        if (!PMT || !contribFreqN) return 0;
+        const totalContribs = Math.max(0, Math.round(contribFreqN * years));
+        const yearsPerContrib = 1 / contribFreqN;
+        let total = 0;
+        for (let k = 0; k < totalContribs; k++) {
+            const depositTime = atBeginning ? k * yearsPerContrib : (k + 1) * yearsPerContrib;
+            const yearsToGrow = years - depositTime;
+            if (yearsToGrow < 0) continue;
+            total += fvLumpSum(PMT, r, n, yearsToGrow);
+        }
+        return total;
+    }
+
+    function totalFV(PV, PMT, contribFreqN, r, n, years, atBeginning) {
+        return fvLumpSum(PV, r, n, years) + fvContributions(PMT, contribFreqN, r, n, years, atBeginning);
+    }
+
+    function solveRate(PV, PMT, contribFreqN, n, years, atBeginning, targetFV) {
+        let lo = -0.5, hi = 2.0;
+        for (let i = 0; i < 100; i++) {
+            const mid = (lo + hi) / 2;
+            const fv = totalFV(PV, PMT, contribFreqN, mid, n, years, atBeginning);
+            if (fv < targetFV) lo = mid; else hi = mid;
+        }
+        return (lo + hi) / 2;
+    }
+
+    function solveYears(PV, PMT, contribFreqN, r, n, atBeginning, targetFV) {
+        let lo = 0, hi = 100;
+        for (let i = 0; i < 100; i++) {
+            const mid = (lo + hi) / 2;
+            const fv = totalFV(PV, PMT, contribFreqN, r, n, mid, atBeginning);
+            if (fv < targetFV) lo = mid; else hi = mid;
+        }
+        return (lo + hi) / 2;
+    }
+
+    function solveStart(targetFV, PMT, contribFreqN, r, n, years, atBeginning) {
+        const fvContrib = fvContributions(PMT, contribFreqN, r, n, years, atBeginning);
+        const remaining = targetFV - fvContrib;
+        const growth = n === "continuous" ? Math.exp(r * years) : Math.pow(1 + r / n, n * years);
+        return remaining / growth;
+    }
+
+    function solveContribution(targetFV, PV, contribFreqN, r, n, years, atBeginning) {
+        const fvPV = fvLumpSum(PV, r, n, years);
+        const remaining = targetFV - fvPV;
+        if (remaining <= 0) return 0;
+        const perUnit = fvContributions(1, contribFreqN, r, n, years, atBeginning);
+        if (perUnit <= 0) return 0;
+        return remaining / perUnit;
+    }
+
+    /* ---- schedule ---- */
+
+    function buildSchedule(PV, PMT, contribFreqN, r, n, years, atBeginning) {
+        const months = Math.max(1, Math.round(years * 12));
+        const monthlyRate = (n === "continuous")
+            ? Math.exp(r / 12) - 1
+            : Math.pow(1 + r / n, n / 12) - 1;
+
+        const contribEveryMonths = contribFreqN === 12 ? 1 : 12;
+
+        let balance = PV;
+        const monthly = [];
+        let yearDeposit = 0, yearInterest = 0;
+
+        for (let m = 1; m <= months; m++) {
+            let deposit = 0;
+            const isContribMonth = atBeginning
+                ? ((m - 1) % contribEveryMonths === 0)
+                : (m % contribEveryMonths === 0);
+
+            if (isContribMonth) deposit = PMT;
+
+            if (atBeginning && deposit) balance += deposit;
+
+            const interest = balance * monthlyRate;
+            balance += interest;
+
+            if (!atBeginning && deposit) balance += deposit;
+
+            yearDeposit += deposit;
+            yearInterest += interest;
+
+            const isYearEnd = (m % 12 === 0) || (m === months);
+
+            monthly.push({ month: m, deposit, interest, balance, isYearEnd });
+
+            if (isYearEnd) {
+                monthly[monthly.length - 1].yearDeposit = yearDeposit;
+                monthly[monthly.length - 1].yearInterest = yearInterest;
+                yearDeposit = 0;
+                yearInterest = 0;
+            }
+        }
+
+        const yearly = [];
+        let yIdx = 0;
+        for (let i = 0; i < monthly.length; i++) {
+            if (monthly[i].isYearEnd) {
+                yIdx++;
+                yearly.push({
+                    year: yIdx,
+                    deposit: monthly[i].yearDeposit,
+                    interest: monthly[i].yearInterest,
+                    balance: monthly[i].balance
+                });
+            }
+        }
+
+        return { monthly, yearly };
+    }
+
+    /* ---- pie chart ---- */
+
+    function drawPie(startPct, contribPct, interestPct) {
+        const pie = document.getElementById("pieChart");
+        const size = 220;
+        pie.width = size;
+        pie.height = size;
+        const pctx = pie.getContext("2d");
+        pctx.clearRect(0, 0, size, size);
+
+        const center = size / 2;
+        const radius = size * 0.4;
+        const thickness = size * 0.16;
+
+        const segments = [
+            { pct: startPct, color: "#005451" },
+            { pct: contribPct, color: "#FAD1D7" },
+            { pct: interestPct, color: "#E84231" }
+        ];
+
+        let start = -Math.PI / 2;
+        segments.forEach(seg => {
+            if (seg.pct <= 0) return;
+            const angle = (seg.pct / 100) * Math.PI * 2;
+            pctx.beginPath();
+            pctx.arc(center, center, radius, start, start + angle);
+            pctx.strokeStyle = seg.color;
+            pctx.lineWidth = thickness;
+            pctx.stroke();
+            start += angle;
+        });
+    }
+
+    /* ---- bar chart ---- */
+
+    function renderBars(yearlyData, PV) {
+        const container = document.getElementById("barChart");
+        container.innerHTML = "";
+
+        let cumDeposit = 0;
+        const maxFV = yearlyData[yearlyData.length - 1]?.balance || 1;
+
+        const step = yearlyData.length <= 10 ? 1 : yearlyData.length <= 20 ? 2 : 5;
+        const trackMaxHeight = 170; // px
+
+        yearlyData.forEach((d, i) => {
+            cumDeposit += d.deposit;
+
+            const showRow = (i + 1) % step === 0 || i === yearlyData.length - 1;
+            if (!showRow) return;
+
+            const totalPx = Math.max(2, (d.balance / maxFV) * trackMaxHeight);
+            const startPx = Math.min((PV / maxFV) * trackMaxHeight, totalPx);
+            const contribPx = Math.min((cumDeposit / maxFV) * trackMaxHeight, totalPx - startPx);
+            const interestPx = Math.max(0, totalPx - startPx - contribPx);
+
+            const col = document.createElement("div");
+            col.className = "stick-col";
+            col.innerHTML = `
+                <span class="stick-value">${fmtPlain(d.balance)}</span>
+                <div class="stick-track" style="height:${totalPx}px;">
+                    <div class="stick-interest" style="height:${interestPx}px;"></div>
+                    <div class="stick-contrib" style="height:${contribPx}px;"></div>
+                    <div class="stick-start" style="height:${startPx}px;"></div>
+                </div>
+                <span class="stick-label">An ${d.year}</span>
+            `;
+            container.appendChild(col);
+        });
+    }
+
+    /* ---- schedule table ---- */
+
+    function renderSchedule() {
+        const head = document.getElementById("scheduleHead");
+        const body = document.getElementById("scheduleBody");
+        if (!currentSchedule) return;
+
+        if (scheduleView === "yearly") {
+            head.innerHTML = `<th>An</th><th>Depunere</th><th>Dobândă</th><th>Sold final</th>`;
+            body.innerHTML = currentSchedule.yearly.map(d => `
+                <tr class="year-end">
+                    <td>${d.year}</td>
+                    <td>${fmt(d.deposit)}</td>
+                    <td>${fmt(d.interest)}</td>
+                    <td>${fmt(d.balance)}</td>
+                </tr>
+            `).join("");
+        } else {
+            head.innerHTML = `<th>Lună</th><th>Depunere</th><th>Dobândă</th><th>Sold final</th>`;
+            body.innerHTML = currentSchedule.monthly.map(d => `
+                <tr class="${d.isYearEnd ? 'year-end' : ''}">
+                    <td>${d.month}</td>
+                    <td>${fmt(d.deposit)}</td>
+                    <td>${fmt(d.interest)}</td>
+                    <td>${fmt(d.balance)}</td>
+                </tr>
+            `).join("");
+        }
+    }
+
+    document.querySelectorAll("#scheduleToggle .freq-item").forEach(item => {
+        item.addEventListener("click", () => {
+            document.querySelectorAll("#scheduleToggle .freq-item").forEach(i => i.classList.remove("active"));
+            item.classList.add("active");
+            scheduleView = item.dataset.view;
+            renderSchedule();
+        });
+    });
+
+    /* ---- main calculate ---- */
+
+    function calculate() {
+
+        const compoundSel = document.getElementById("compoundFreq").value;
+        const n = compoundSel === "continuous" ? "continuous" : Number(compoundSel);
+        const contribFreqN = Number(document.getElementById("contribFreq").value);
+        const atBeginning = document.querySelector('input[name="contribTiming"]:checked').value === "begin";
+
+        let PV, PMT, r, years, FV;
+        PMT = parseNum("contribution");
+        r = parseNum("rate") / 100;
+        years = Math.max(0.1, parseNum("years"));
+
+        if (mode === "end") {
+            PV = parseNum("startAmount");
+            FV = totalFV(PV, PMT, contribFreqN, r, n, years, atBeginning);
+            mainLabelEl.textContent = "Valoarea finală";
+
+        } else if (mode === "contribution") {
+            FV = parseNum("targetAmount");
+            PV = parseNum("startAmount");
+            PMT = solveContribution(FV, PV, contribFreqN, r, n, years, atBeginning);
+            mainLabelEl.textContent = "Contribuție necesară per perioadă";
+
+        } else if (mode === "rate") {
+            PV = parseNum("startAmount");
+            FV = parseNum("endKnown");
+            PMT = parseNum("contribution");
+            r = solveRate(PV, PMT, contribFreqN, n, years, atBeginning, FV);
+            mainLabelEl.textContent = "Rata dobânzii necesară";
+
+        } else if (mode === "start") {
+            FV = parseNum("endKnown");
+            PV = solveStart(FV, PMT, contribFreqN, r, n, years, atBeginning);
+            mainLabelEl.textContent = "Suma inițială necesară";
+
+        } else if (mode === "length") {
+            PV = parseNum("startAmount");
+            FV = parseNum("endKnown");
+            years = solveYears(PV, PMT, contribFreqN, r, n, atBeginning, FV);
+            mainLabelEl.textContent = "Durata necesară";
+        }
+
+        // Guard against invalid numbers
+        if (!isFinite(PV)) PV = 0;
+        if (!isFinite(PMT)) PMT = 0;
+        if (!isFinite(r)) r = 0;
+        if (!isFinite(years) || years <= 0) years = 0.1;
+        if (!isFinite(FV)) FV = totalFV(PV, PMT, contribFreqN, r, n, years, atBeginning);
+
+        // Main value depends on the selected tab
+        if (mode === "end") {
+            document.getElementById("mainValue").textContent = fmt(FV);
+        } else if (mode === "start") {
+            document.getElementById("mainValue").textContent = fmt(PV);
+        } else if (mode === "contribution") {
+            document.getElementById("mainValue").textContent = fmt(PMT);
+        } else if (mode === "rate") {
+            document.getElementById("mainValue").textContent = (r * 100).toFixed(2) + "%";
+        } else if (mode === "length") {
+            document.getElementById("mainValue").textContent = years.toFixed(1) + " ani";
+        }
+
+        const totalContribAmount = PMT * contribFreqN * years;
+        const totalInterest = FV - PV - totalContribAmount;
+
+        document.getElementById("resStart").textContent = fmt(PV);
+        document.getElementById("resContribs").textContent = fmt(totalContribAmount);
+        document.getElementById("resInterest").textContent = fmt(Math.max(0, totalInterest));
+
+        // Pie chart
+        const totalForPie = Math.max(FV, 1);
+        const startPct = Math.max(0, Math.min(100, (PV / totalForPie) * 100));
+        const contribPct = Math.max(0, Math.min(100 - startPct, (totalContribAmount / totalForPie) * 100));
+        const interestPct = Math.max(0, 100 - startPct - contribPct);
+
+        drawPie(startPct, contribPct, interestPct);
+        document.getElementById("pieCenterValue").textContent = fmt(FV);
+        document.getElementById("legendStart").textContent = `Suma inițială — ${startPct.toFixed(0)}%`;
+        document.getElementById("legendContrib").textContent = `Contribuții — ${contribPct.toFixed(0)}%`;
+        document.getElementById("legendInterest").textContent = `Dobândă — ${interestPct.toFixed(0)}%`;
+
+        // Schedule + bar chart (capped at 50 years for performance)
+        const scheduleYears = Math.min(years, 50);
+        currentSchedule = buildSchedule(PV, PMT, contribFreqN, r, n, scheduleYears, atBeginning);
+        renderSchedule();
+        renderBars(currentSchedule.yearly, PV);
+    }
+
+    document.getElementById("calc-btn")?.addEventListener("click", calculate);
+
+    applyTabVisibility(); // also runs the first calculation
+}
+
+if (document.getElementById("tabRow")) {
+    initInvestmentCalculator();
 }
 
 });

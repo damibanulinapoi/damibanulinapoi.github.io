@@ -1,3 +1,7 @@
+/* =====================================================
+   SHARED STYLES — used by every page (style.css)
+===================================================== */
+
 /* Fonts */
 @font-face {
     font-family: 'Roca One';
@@ -451,7 +455,7 @@ body {
     display: none;
 }
 
-/* CURRENCY LABEL */
+/* CURRENCY / UNIT LABEL (lei, %, pers.) */
 .currency {
     position: absolute;
     right: 4px;
@@ -756,7 +760,6 @@ body {
     justify-content: space-between;
     align-items: center;
 }
-
 /* =========================
    ADVANCED OPTIONS
 ========================= */
@@ -834,6 +837,42 @@ body {
     padding: 0 8px;
 }
 
+/* Typed fields with a unit (%, lei, pers.): right-aligned like the main inputs */
+.advanced-row .input-wrapper {
+    flex-shrink: 0;
+}
+
+.advanced-row .input-wrapper input {
+    text-align: right;
+    padding: 0 26px 0 8px;
+    outline: none;
+}
+
+/* Units (%, p., lei) all start at the same left edge (18px from the right),
+   numbers all end 8px before it -> identical spacing in every field */
+.advanced-row .input-wrapper .currency {
+    right: auto;
+    left: calc(100% - 18px);
+    text-align: left;
+}
+
+/* dropdown values right-aligned too, with a small custom arrow */
+.advanced-row select {
+    appearance: none;
+    -webkit-appearance: none;
+    text-align: left;
+    text-align-last: left;
+    padding: 0 24px 0 8px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23A0A7A7' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+}
+
+.advanced-row .input-wrapper input:focus {
+    border-color: var(--color-orange);
+    transition: border-color 0.2s ease;
+}
+
 /* Overview of current values (hidden while expanded) */
 .advanced-overview {
     line-height: 18px;
@@ -841,4 +880,408 @@ body {
 
 .advanced-wrapper.is-open .advanced-overview {
     display: none;
+}
+
+/* =====================================================
+   INVESTMENT CALCULATOR
+===================================================== */
+
+/* Tabs (5 calculation modes) */
+.tab-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.tab-row {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 999px;
+    background: #fff;
+    box-sizing: border-box;
+    width: max-content;
+    min-width: 100%;
+}
+
+.tab-item {
+    flex: 1;
+    white-space: nowrap;
+    padding: 6px 12px;
+    border-radius: 999px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s ease;
+    user-select: none;
+    background: transparent;
+    font-size: 13px;
+    font-family: "Archivo", sans-serif;
+    color: var(--color-text-secondary);
+}
+
+.tab-item.active {
+    background: #FEF0EE;
+    color: var(--color-orange);
+    font-weight: 500;
+}
+
+/* Form rows */
+.invest-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.invest-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.invest-row.hidden {
+    display: none;
+}
+
+.invest-row label {
+    font-size: 14px;
+    line-height: 16px;
+    font-family: "Archivo", sans-serif;
+    color: var(--color-text-primary);
+    flex: 1;
+}
+
+.invest-input-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.invest-input {
+    width: 110px;
+    height: 36px;
+    border: 1px solid var(--color-card-border);
+    border-radius: 4px;
+    background: var(--color-background);
+    box-sizing: border-box;
+    font-family: "Archivo", sans-serif;
+    font-size: 14px;
+    color: var(--color-text-primary);
+    outline: none;
+    text-align: right;
+    padding: 0 30px 0 4px;
+}
+
+.invest-input:focus {
+    border-color: var(--color-orange);
+    transition: border-color 0.2s ease;
+}
+
+.invest-input::-webkit-outer-spin-button,
+.invest-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.invest-input[type="number"] { appearance: textfield; }
+
+.invest-suffix {
+    position: absolute;
+    right: 6px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    pointer-events: none;
+    user-select: none;
+}
+
+.invest-select {
+    height: 36px;
+    border: 1px solid var(--color-card-border);
+    border-radius: 4px;
+    padding: 0 8px;
+    font-size: 13px;
+    font-family: "Archivo", sans-serif;
+    background: var(--color-background);
+    color: var(--color-text-primary);
+    outline: none;
+    width: 150px;
+    flex-shrink: 0;
+}
+
+/* Radio-style choice (contribute at beginning/end) */
+.radio-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.radio-options {
+    display: flex;
+    gap: 16px;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.radio-option input {
+    accent-color: var(--color-orange);
+    width: 14px;
+    height: 14px;
+}
+
+.radio-option span {
+    font-size: 13px;
+    font-family: "Archivo", sans-serif;
+    color: var(--color-text-primary);
+}
+
+.section-label {
+    font-size: 12px;
+    font-family: "Archivo", sans-serif;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* ---- RESULTS ---- */
+.invest-result-block {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.result-highlight {
+    background: var(--color-orange);
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.result-highlight .result-label {
+    font-size: 12px;
+    font-family: "Archivo", sans-serif;
+    color: rgba(255,255,255,0.8);
+}
+
+.result-highlight .result-value {
+    font-family: "Roca One", serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.result-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background: var(--color-card);
+    border: 1px solid var(--color-card-border);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.result-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(0,0,0,0.045);
+}
+
+.result-line:last-child { border-bottom: none; }
+
+.result-line .result-value {
+    font-family: "Archivo", sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--color-text-primary);
+}
+
+/* Pie chart + legend */
+.pie-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.pie-wrap {
+    position: relative;
+    width: 220px;
+    height: 220px;
+}
+
+.pie-wrap canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.pie-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: none;
+}
+
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.legend-dot.start     { background: #005451; }
+.legend-dot.contrib   { background: #FAD1D7; }
+.legend-dot.interest  { background: #E84231; }
+
+.legend-item span {
+    font-size: 12px;
+    font-family: "Archivo", sans-serif;
+    color: var(--color-text-secondary);
+}
+
+/* Vertical bar (stick) chart */
+.bar-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    padding: 0 4px;
+    height: 220px;
+    overflow-x: auto;
+}
+
+.stick-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    flex: 1;
+    min-width: 28px;
+    height: 100%;
+}
+
+.stick-value {
+    font-size: 10px;
+    font-family: "Archivo", sans-serif;
+    color: var(--color-text-primary);
+    white-space: nowrap;
+}
+
+.stick-track {
+    width: 16px;
+    display: flex;
+    flex-direction: column-reverse;
+    border-radius: 999px 999px 0 0;
+    overflow: hidden;
+    background: #e8e8ea;
+}
+
+.stick-start    { width: 100%; background: #005451; }
+.stick-contrib  { width: 100%; background: #FAD1D7; }
+.stick-interest { width: 100%; background: #E84231; }
+
+.stick-label {
+    font-size: 10px;
+    font-family: "Archivo", sans-serif;
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+}
+
+/* Schedule table */
+.schedule-toggle {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 999px;
+    background: #fff;
+    box-sizing: border-box;
+    width: max-content;
+}
+
+.schedule-toggle .freq-item {
+    padding: 6px 16px;
+    border-radius: 999px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s ease;
+    user-select: none;
+    font-size: 13px;
+    font-family: "Archivo", sans-serif;
+    color: var(--color-text-secondary);
+}
+
+.schedule-toggle .freq-item.active {
+    background: #FEF0EE;
+    color: var(--color-orange);
+    font-weight: 500;
+}
+
+.schedule-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--color-card-border);
+    border-radius: 8px;
+}
+
+table.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: "Archivo", sans-serif;
+    font-size: 12.5px;
+    min-width: 480px;
+}
+
+table.schedule-table th {
+    background: var(--color-background);
+    color: var(--color-text-secondary);
+    font-weight: 500;
+    text-align: right;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--color-card-border);
+    position: sticky;
+    top: 0;
+}
+
+table.schedule-table th:first-child,
+table.schedule-table td:first-child {
+    text-align: left;
+}
+
+table.schedule-table td {
+    text-align: right;
+    padding: 6px 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.045);
+    color: var(--color-text-primary);
+    white-space: nowrap;
+}
+
+table.schedule-table tr.year-end td {
+    background: var(--color-background);
+    font-weight: bold;
+}
+
+.schedule-scroll {
+    max-height: 420px;
+    overflow-y: auto;
 }
