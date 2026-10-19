@@ -1091,4 +1091,136 @@ if (document.getElementById("tabRow")) {
     initInvestmentCalculator();
 }
 
+
+/* =========================
+   BUDGET CALCULATOR
+   (only runs on calculator-de-buget.html)
+   Needs / wants / savings come from data-group on each .expense-input
+========================= */
+
+function initBudgetCalculator() {
+
+    const incomeInput   = document.getElementById("amount");
+    const expenseInputs = document.querySelectorAll(".expense-input");
+    const $ = (id) => document.getElementById(id);
+
+    // Texts written by the script (the rest lives in the HTML)
+    const B = LANG === "ru" ? {
+        savings: "Накопления",
+        deficit: "Дефицит",
+        hints: {
+            empty:   { emoji: "🤔", title: "Что-то забыли?",
+                       text: "Проверьте ещё раз выше, всё ли вы ввели, и исправьте данные." },
+            deficit: { emoji: "😬", title: "Расходы превышают доход",
+                       text: "Вы тратите больше, чем зарабатываете. Проверьте категории выше и найдите, где можно сократить расходы." },
+            needs:   { emoji: "🏠", title: "Потребности превышают 50% дохода",
+                       text: "Попробуйте снизить постоянные расходы, например коммунальные услуги или транспорт, чтобы больше оставалось на накопления." },
+            wants:   { emoji: "🛍️", title: "Желания превышают 30% дохода",
+                       text: "Небольшое сокращение покупок или развлечений поможет откладывать больше." },
+            low:     { emoji: "💰", title: "Накопления меньше 20% дохода",
+                       text: "Откладывайте деньги в начале месяца, до того как начнёте тратить." },
+            great:   { emoji: "🎉", title: "Вы укладываетесь в правило 50-30-20!",
+                       text: "Ваши деньги сбалансированно распределены между потребностями, желаниями и накоплениями. Так держать!" }
+        }
+    } : {
+        savings: "Economisiri",
+        deficit: "Deficit",
+        hints: {
+            empty:   { emoji: "🤔", title: "Ai uitat ceva?",
+                       text: "Verifică din nou mai sus dacă ai introdus totul și corectează-ți intrările." },
+            deficit: { emoji: "😬", title: "Cheltuielile depășesc venitul",
+                       text: "Ai cheltuit mai mult decât câștigi. Verifică categoriile de mai sus și vezi unde poți reduce costurile." },
+            needs:   { emoji: "🏠", title: "Nevoile depășesc 50% din venit",
+                       text: "Încearcă să reduci costurile fixe, cum ar fi utilitățile sau transportul, ca să rămână mai mult pentru economii." },
+            wants:   { emoji: "🛍️", title: "Dorințele depășesc 30% din venit",
+                       text: "Câteva tăieri mici la shopping sau la ieșiri te pot ajuta să economisești mai mult." },
+            low:     { emoji: "💰", title: "Economiile sunt sub 20% din venit",
+                       text: "Încearcă să pui bani deoparte la începutul lunii, înainte să începi să cheltuiești." },
+            great:   { emoji: "🎉", title: "Te încadrezi în regula 50-30-20!",
+                       text: "Banii tăi sunt împărțiți echilibrat între nevoi, dorințe și economii. Continuă așa!" }
+        }
+    };
+
+    const money = (n) => Math.round(n).toLocaleString("en-US") + " " + TXT.lei;
+    const pct   = (n) => n + " %";
+
+    /* "Ce e asta?" opens the matching FAQ item */
+    $("ruleLink")?.addEventListener("click", (e) => {
+        const target = $("faq-categorii");
+        if (!target) return;
+
+        e.preventDefault();
+        document.querySelectorAll(".item").forEach(i => i.classList.remove("open"));
+        target.classList.add("open");
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    function pickHint(income, expenses, needsP, wantsP, savingsP) {
+        if (income === 0 || expenses === 0) return B.hints.empty;
+        if (expenses > income)              return B.hints.deficit;
+        if (needsP > 50)                    return B.hints.needs;
+        if (wantsP > 30)                    return B.hints.wants;
+        if (savingsP < 20)                  return B.hints.low;
+        return B.hints.great;
+    }
+
+    function update() {
+
+        const income = parseNumber(incomeInput.value);
+
+        const groups = { needs: 0, wants: 0 };
+        expenseInputs.forEach(input => {
+            const g = input.dataset.group;
+            if (g in groups) groups[g] += parseNumber(input.value);
+        });
+
+        const expenses = groups.needs + groups.wants;
+        const balance  = income - expenses;
+        const savings  = Math.max(0, balance);
+
+        /* ---- At a glance ---- */
+        $("glanceIncome").textContent       = money(income);
+        $("glanceExpenses").textContent     = money(expenses);
+        $("glanceBalance").textContent      = money(balance);
+        $("glanceBalanceLabel").textContent = balance < 0 ? B.deficit : B.savings;
+
+        $("glanceBalance").classList.toggle("is-negative", balance < 0);
+        $("glanceBalanceLabel").classList.toggle("is-negative", balance < 0);
+
+        /* ---- 50-30-20 (percentages of net income) ---- */
+        let needsP = 0, wantsP = 0, savingsP = 0;
+
+        if (income > 0) {
+            needsP   = Math.round(groups.needs / income * 100);
+            wantsP   = Math.round(groups.wants / income * 100);
+            // Savings = the rest, so the three parts add up to 100 %
+            savingsP = balance > 0 ? Math.max(0, 100 - needsP - wantsP) : 0;
+        }
+
+        $("needsPct").textContent   = pct(needsP);
+        $("wantsPct").textContent   = pct(wantsP);
+        $("savingsPct").textContent = pct(savingsP);
+
+        $("needsAmt").textContent   = money(groups.needs);
+        $("wantsAmt").textContent   = money(groups.wants);
+        $("savingsAmt").textContent = money(savings);
+
+        /* ---- Feedback ---- */
+        const hint = pickHint(income, expenses, needsP, wantsP, savingsP);
+        $("hintEmoji").textContent = hint.emoji;
+        $("hintTitle").textContent = hint.title;
+        $("hintText").textContent  = hint.text;
+    }
+
+    // The money formatting above (setupNumericField) is registered first, so the value is already formatted
+    incomeInput.addEventListener("input", update);
+    expenseInputs.forEach(input => input.addEventListener("input", update));
+
+    update();
+}
+
+if (document.getElementById("glanceBalance")) {
+    initBudgetCalculator();
+}
+
 });

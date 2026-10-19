@@ -475,7 +475,8 @@ body {
     appearance: textfield;
 }
 
-.income-input:focus {
+.income-input:focus,
+.expense-input:focus {
     border-color: var(--color-orange);
     transition: border-color 0.2s ease;
 }
@@ -1423,4 +1424,89 @@ body.menu-locked {
     display: block;
     padding: 8px 0;
     text-decoration: none;
+}
+
+/* =====================================================
+   BUDGET CALCULATOR
+===================================================== */
+
+/* At a glance: negative balance (deficit) */
+.is-negative {
+    color: var(--color-orange);
+}
+
+/* "Ce e asta?" link under the 50-30-20 title */
+.rule-link {
+    display: inline-block;
+    text-decoration: underline;
+}
+
+.rule-link:focus-visible {
+    outline: 2px solid var(--color-orange);
+    outline-offset: 2px;
+}
+
+/* 50-30-20 check: three equal boxes, only the numbers change */
+.rule-card {
+    border: 1px solid var(--color-card-border);
+    border-radius: 8px;
+    background: var(--color-card);
+    overflow: hidden;
+}
+
+.rule-bar {
+    display: flex;
+}
+
+.rule-seg {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 16px 4px;
+    text-align: center;
+}
+
+.rule-seg svg {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 4px;
+}
+
+.rule-seg--needs   { background: var(--color-orange); color: #fff; }
+.rule-seg--wants   { background: var(--color-pink);   color: var(--color-text-primary); }
+.rule-seg--savings { background: var(--color-green);  color: #fff; }
+
+.rule-pct {
+    font-family: "Archivo", sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.rule-name,
+.rule-amt {
+    font-family: "Roca One", serif;
+    font-size: 12.44px;
+    line-height: 16px;
+}
+
+.rule-hint {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 12px;
+}
+
+.rule-hint-emoji {
+    font-size: 32px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+/* Keeps the FAQ item clear of the sticky header when "Ce e asta?" scrolls to it */
+.item {
+    scroll-margin-top: 96px;
 }
