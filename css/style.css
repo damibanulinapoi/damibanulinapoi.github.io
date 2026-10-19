@@ -1510,3 +1510,20 @@ body.menu-locked {
 .item {
     scroll-margin-top: 96px;
 }
+
+/* Links inside FAQ answers */
+.answer-box a {
+    color: var(--color-orange);
+}
+
+/* Link under the 50-30-20 feedback (to the investment calculator) */
+.hint-link {
+    display: inline-block;
+    margin-top: 4px;
+    color: var(--color-orange);
+    text-decoration: underline;
+}
+
+.hint-link[hidden] {
+    display: none;
+}

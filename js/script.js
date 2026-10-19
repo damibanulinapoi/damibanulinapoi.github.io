@@ -1107,8 +1107,13 @@ function initBudgetCalculator() {
     // Texts written by the script (the rest lives in the HTML)
     const B = LANG === "ru" ? {
         savings: "Накопления",
+        link: "Посмотрите, как могут расти ваши накопления со временем",
         deficit: "Дефицит",
         hints: {
+            needsOk: { emoji: "👍", title: "Вы хорошо откладываете.",
+                       text: "Потребности превышают 50%, но для накоплений остаётся место.", link: true },
+            wantsOk: { emoji: "👍", title: "Вы хорошо откладываете.",
+                       text: "Желания превышают 30%, но для накоплений остаётся место.", link: true },
             empty:   { emoji: "🤔", title: "Что-то забыли?",
                        text: "Проверьте ещё раз выше, всё ли вы ввели, и исправьте данные." },
             deficit: { emoji: "😬", title: "Расходы превышают доход",
@@ -1120,12 +1125,17 @@ function initBudgetCalculator() {
             low:     { emoji: "💰", title: "Накопления меньше 20% дохода",
                        text: "Откладывайте деньги в начале месяца, до того как начнёте тратить." },
             great:   { emoji: "🎉", title: "Вы укладываетесь в правило 50-30-20!",
-                       text: "Ваши деньги сбалансированно распределены между потребностями, желаниями и накоплениями. Так держать!" }
+                       text: "Ваши деньги сбалансированно распределены между потребностями, желаниями и накоплениями. Так держать!", link: true }
         }
     } : {
         savings: "Economisiri",
+        link: "Vezi cât pot crește economiile tale în timp",
         deficit: "Deficit",
         hints: {
+            needsOk: { emoji: "👍", title: "Economisești bine.",
+                       text: "Nevoile sunt peste 50%, dar rămâne loc pentru economii.", link: true },
+            wantsOk: { emoji: "👍", title: "Economisești bine.",
+                       text: "Dorințele sunt peste 30%, dar rămâne loc pentru economii.", link: true },
             empty:   { emoji: "🤔", title: "Ai uitat ceva?",
                        text: "Verifică din nou mai sus dacă ai introdus totul și corectează-ți intrările." },
             deficit: { emoji: "😬", title: "Cheltuielile depășesc venitul",
@@ -1137,31 +1147,44 @@ function initBudgetCalculator() {
             low:     { emoji: "💰", title: "Economiile sunt sub 20% din venit",
                        text: "Încearcă să pui bani deoparte la începutul lunii, înainte să începi să cheltuiești." },
             great:   { emoji: "🎉", title: "Te încadrezi în regula 50-30-20!",
-                       text: "Banii tăi sunt împărțiți echilibrat între nevoi, dorințe și economii. Continuă așa!" }
+                       text: "Banii tăi sunt împărțiți echilibrat între nevoi, dorințe și economii. Continuă așa!", link: true }
         }
     };
 
     const money = (n) => Math.round(n).toLocaleString("en-US") + " " + TXT.lei;
     const pct   = (n) => n + " %";
 
-    /* "Ce e asta?" opens the matching FAQ item */
-    $("ruleLink")?.addEventListener("click", (e) => {
+    /* "Ce e asta?" (and a link ending in #faq-categorii) opens the 50-30-20 FAQ answer */
+    function openRuleFaq(smooth) {
         const target = $("faq-categorii");
         if (!target) return;
 
-        e.preventDefault();
         document.querySelectorAll(".item").forEach(i => i.classList.remove("open"));
         target.classList.add("open");
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        target.scrollIntoView({ behavior: smooth ? "smooth" : "auto", block: "start" });
+    }
+
+    $("ruleLink")?.addEventListener("click", (e) => {
+        e.preventDefault();
+        openRuleFaq(true);
     });
+
+    if (location.hash === "#faq-categorii") openRuleFaq(false);
 
     function pickHint(income, expenses, needsP, wantsP, savingsP) {
         if (income === 0 || expenses === 0) return B.hints.empty;
         if (expenses > income)              return B.hints.deficit;
-        if (needsP > 50)                    return B.hints.needs;
-        if (wantsP > 30)                    return B.hints.wants;
-        if (savingsP < 20)                  return B.hints.low;
-        return B.hints.great;
+
+        // Saving 20 % or more: always a positive message (with the link to the investment calculator)
+        if (savingsP >= 20) {
+            if (needsP > 50) return B.hints.needsOk;
+            if (wantsP > 30) return B.hints.wantsOk;
+            return B.hints.great;
+        }
+
+        if (needsP > 50) return B.hints.needs;
+        if (wantsP > 30) return B.hints.wants;
+        return B.hints.low;
     }
 
     function update() {
@@ -1210,6 +1233,12 @@ function initBudgetCalculator() {
         $("hintEmoji").textContent = hint.emoji;
         $("hintTitle").textContent = hint.title;
         $("hintText").textContent  = hint.text;
+
+        const hintLink = $("hintLink");
+        if (hintLink) {
+            hintLink.textContent = B.link;
+            hintLink.hidden = !hint.link;
+        }
     }
 
     // The money formatting above (setupNumericField) is registered first, so the value is already formatted
