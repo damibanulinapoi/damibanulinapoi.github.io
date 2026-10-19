@@ -69,15 +69,18 @@ options.forEach(option => {
         // Pages whose Russian file name is different are listed here (RO file -> RU file).
         // Pages not listed keep the same file name in both languages.
         const PAGE_NAMES = {
-            "calculator-de-salariu.html": "калькулятор-зарплаты.html"
+            "calculator-de-salariu.html": "калькулятор-зарплаты.html",
+            "calculator-de-buget.html": "калькулятор-бюджета.html"
         };
         const PAGE_NAMES_REVERSE = Object.fromEntries(
             Object.entries(PAGE_NAMES).map(([ro, ru]) => [ru, ro])
         );
 
         const inRussian = document.documentElement.lang === "ru";
-        // decodeURIComponent: Cyrillic file names appear percent-encoded in the URL
-        const file = decodeURIComponent(location.pathname.split("/").pop() || "index.html");
+        // decodeURIComponent: Cyrillic file names appear percent-encoded in the URL.
+        // normalize: same letters always compare equal; ".html" is added when the host hides it.
+        let file = decodeURIComponent(location.pathname.split("/").pop() || "index.html").normalize("NFC");
+        if (!file.includes(".")) file += ".html";
 
         if (lang === "RU" && !inRussian) {
             location.href = "ru/" + encodeURIComponent(PAGE_NAMES[file] || file) + location.search;
@@ -110,7 +113,7 @@ if (siteHeader && menuIcon) {
     const MENU = LANG === "ru" ? [
         { label: "Калькуляторы", children: [
             { label: "Калькулятор зарплаты",  href: "калькулятор-зарплаты.html" },
-            { label: "Калькулятор бюджета",   href: "calculator-de-buget.html" },
+            { label: "Калькулятор бюджета",   href: "калькулятор-бюджета.html" },
             { label: "Калькулятор инвестиций", href: "calculator-de-investitii.html" }
         ]},
         { label: "Сравнение цен", href: "#" },

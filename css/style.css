@@ -18,11 +18,44 @@
 }
 
 @font-face {
-    font-family: 'Archivo';
-    src: url('../fonts/Archivo-Regular.ttf') format('truetype');
-    font-weight: normal;
+    font-family: 'Inter';
+    src: url('../fonts/Inter-Regular.tff') format('truetype');
+    font-weight: 400;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+:root {
+    --font-body:    "Inter", sans-serif;
+    --font-display: "Roca One", serif;
+
+    --fs-h1: 36.49px;  --lh-h1: 56px;
+    --fs-h2: 32.44px;  --lh-h2: 48px;
+    --fs-h3: 28.83px;  --lh-h3: 40px;
+    --fs-h4: 25.63px;  --lh-h4: 40px;
+    --fs-h5: 22.78px;  --lh-h5: 32px;
+    --fs-h6: 20.25px;  --lh-h6: 32px;
+    --fs-body1: 18px;  --lh-body1: 24px;
+    --fs-body2: 16px;  --lh-body2: 24px;
+    --fs-small: 14.22px; --lh-small: 20px;
+}
+
+h1, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.05em;
+    color: var(--color-text-primary);
+}
+h1 { font-size: var(--fs-h1); line-height: var(--lh-h1); }
+h3 { font-size: var(--fs-h3); line-height: var(--lh-h3); }
+h4 { font-size: var(--fs-h4); line-height: var(--lh-h4); }
+h5 { font-size: var(--fs-h5); line-height: var(--lh-h5); }
 
 h1, h2, h3, h4, h5, h6, p {
     margin: 0;
@@ -31,59 +64,75 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 h2 {
-    font-size: 25.23px;
-    line-height: 32px;
-    font-family: "Roca One", serif;
+    font-size: var(--fs-h2);
+    line-height: var(--lh-h2);
+    font-family: var(--font-display);
     font-weight: 400;
     letter-spacing: -0.05em;
     color: var(--color-text-primary);
 }
 
 h6 {
-    font-size: 15.75px;
-    line-height: 20px;
-    font-family: "Archivo", sans-serif;
+    font-size: var(--fs-h6);
+    line-height: var(--lh-h6);
+    font-family: var(--font-body);
     font-weight: normal;
     color: var(--color-text-primary);
 }
 
 .body1 {
-    font-size: 14px;
-    line-height: 16px;
-    font-family: "Archivo", sans-serif;
+    font-size: var(--fs-body1);
+    line-height: var(--lh-body1);
+    font-family: var(--font-body);
     font-weight: normal;
     color: var(--color-text-primary);
 }
 
 .body1-bold {
-    font-size: 14px;
-    line-height: 16px;
-    font-family: "Archivo", sans-serif;
+    font-size: var(--fs-body1);
+    line-height: var(--lh-body1);
+    font-family: var(--font-body);
     font-weight: normal;
     color: var(--color-text-primary);
     font-weight: bold;
 }
 
 .body1-secondary {
-    font-size: 14px;
-    line-height: 16px;
-    font-family: "Archivo", sans-serif;
+    font-size: var(--fs-body1);
+    line-height: var(--lh-body1);
+    font-family: var(--font-body);
     font-weight: normal;
     color: var(--color-text-secondary);
 }
 
 .body2 {
-    font-size: 12.44px;
-    line-height: 16px;
-    font-family: "Archivo", sans-serif;
+    font-size: var(--fs-body2);
+    line-height: var(--lh-body2);
+    font-family: var(--font-body);
     font-weight: normal;
     color: var(--color-text-primary);
 }
 
 .body2-secondary {
-    font-size: 12.44px;
-    line-height: 16px;
-    font-family: "Archivo", sans-serif;
+    font-size: var(--fs-body2);
+    line-height: var(--lh-body2);
+    font-family: var(--font-body);
+    font-weight: normal;
+    color: var(--color-text-secondary);
+}
+
+.small {
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+    font-family: var(--font-body);
+    font-weight: normal;
+    color: var(--color-text-primary);
+}
+
+.small-secondary {
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+    font-family: var(--font-body);
     font-weight: normal;
     color: var(--color-text-secondary);
 }
@@ -116,7 +165,7 @@ body {
 
   background-attachment: fixed;
 
-  font-family: 'Archivo', sans-serif;
+  font-family: var(--font-body);
   margin: 0;
   padding: 0;
   overflow-x: hidden;
@@ -250,6 +299,13 @@ body {
     transition: 0.2s;
 }
 
+.lang-option {
+    font-family: var(--font-body);
+    font-size: var(--fs-body2);
+    line-height: var(--lh-body2);
+    color: var(--color-text-primary);
+}
+
 .lang-option:hover {
     background: #f5f5f5;
 }
@@ -282,16 +338,16 @@ body {
     flex-wrap: wrap;
     gap: 4px;
 
-    font-family: "Archivo", sans-serif;
+    font-family: var(--font-body);
     font-weight: 500;
-    font-size: 12px;
-    line-height: 14px;
+    font-size: var(--fs-body1);
+    line-height: var(--lh-body1);
 }
 
 .breadcrumb a {
-    font-size: 14px;
-    line-height: 16px;
-    font-family: "Archivo", sans-serif;
+    font-size: var(--fs-body1);
+    line-height: var(--lh-body1);
+    font-family: var(--font-body);
     font-weight: normal;
     color: var(--color-orange);
     text-decoration: none;
@@ -307,9 +363,9 @@ body {
 
 .breadcrumb .separator,
 .breadcrumb span {
-    font-size: 14px;
-    line-height: 16px;
-    font-family: "Archivo", sans-serif;
+    font-size: var(--fs-body1);
+    line-height: var(--lh-body1);
+    font-family: var(--font-body);
     font-weight: normal;
     color: var(--color-text-secondary);
 }
@@ -345,25 +401,25 @@ body {
 
 .section-break {
   height: 16px;
-  margin: 56px auto;
-  background: #F8F8F9;
+  margin: 40px auto;
+  background: var(--color-card);
   border-radius: 999px;
   box-shadow: inset 0 4px 4px -1px rgba(0, 0, 0, 0.05);
 }
 
 /* CARD SECTION */
 .income-section {
-    padding: 8px;
+    padding: 8px 8px;
     gap: 8px;
     display: flex;
     flex-direction: column;
     background: var(--color-card);
     border: 1px solid var(--color-card-border);
     border-radius: 8px;
-    box-sizing: border-box;
 }
 
 .income-divider {
+    margin: 0px 8px;
     height: 1px;
     background: rgba(0,0,0,0.045);
 }
@@ -384,6 +440,7 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
+    padding: 8px;
 }
 
 .income-icon {
@@ -399,9 +456,9 @@ body {
 }
 
 .income-description {
-    font-family: "Archivo", sans-serif;
-    font-size: 13px;
-    line-height: 16px;
+    font-family: var(--font-body);
+    font-size: var(--fs-body2);
+    line-height: var(--lh-body2);
     color: var(--color-text-secondary);
 }
 
@@ -413,41 +470,41 @@ body {
 
 /* INPUT */
 .income-input {
-    width: 80px;
-    height: 36px;
+    width: 112px;
+    height: 40px;
     border: 1px solid var(--color-card);
     border-radius: 4px;
     background: var(--color-background);
     box-sizing: border-box;
-    font-family: "Archivo", sans-serif;
-    font-size: 14px;
-    line-height: 16px;
+    font-family: var(--font-body);
+    font-size: var(--fs-body1);
+    line-height: var(--lh-body1);
     color: var(--color-text-primary);
     outline: none;
     flex-shrink: 0;
 
     text-align: right;
 
-    padding: 0 20px 0 4px;
+    padding: 0 32px 0 8px;
 }
 
 .expense-input {
-    width: 80px;
-    height: 36px;
+    width: 112px;
+    height: 40px;
     border: 1px solid var(--color-card);
     border-radius: 4px;
     background: var(--color-background);
     box-sizing: border-box;
-    font-family: "Archivo", sans-serif;
-    font-size: 14px;
-    line-height: 16px;
+    font-family: var(--font-body);
+    font-size: var(--fs-body1);
+    line-height: var(--lh-body1);
     color: var(--color-text-primary);
     outline: none;
     flex-shrink: 0;
 
     text-align: right;
 
-    padding: 0 20px 0 4px;
+    padding: 0 32px 0 8px;
 }
 
 /* remove placeholder styling (no longer needed) */
@@ -459,10 +516,11 @@ body {
 .currency {
     position: absolute;
     right: 4px;
-    font-size: 14px;
+    font-size: var(--fs-body1);
     color: var(--color-text-primary);
     pointer-events: none; /* not clickable */
     user-select: none;
+    line-height: var(--lh-body1);
 }
 
 /* REMOVE NUMBER ARROWS */
@@ -572,9 +630,9 @@ body {
 }
 
 .footer-links a {
-    font-family: 'Archivo', sans-serif;
-    font-size: 12px;
-    line-height: 14px;
+    font-family: var(--font-body);
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
     color: var(--color-text-primary);
     text-decoration: none;
 }
@@ -596,9 +654,9 @@ body {
 /* Copyright */
 .footer-copy {
     margin-top: 16px;
-    font-family: 'Archivo', sans-serif;
-    font-size: 12px;
-    line-height: 14px;
+    font-family: var(--font-body);
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
     color: var(--color-text-secondary);
 }
 
@@ -652,10 +710,10 @@ body {
 }
 
 .calc-hint-text {
-    font-family: "Roca One", serif;
+    font-family: var(--font-display);
     font-weight: 700;
-    font-size: 14px;
-    line-height: 16px;
+    font-size: var(--fs-body1);
+    line-height: var(--lh-body1);
     color: var(--color-text-primary);
 }
 
@@ -726,7 +784,6 @@ body {
 }
 
 .salary-row .segment-item span {
-  font-size: 14px;
   white-space: nowrap;
 }
 
@@ -736,48 +793,54 @@ body {
 }
 
 .body1-red {
-  color: var(--color-orange);
-  font-size: 14px;
-  font-weight: normal;
+    color: var(--color-orange);
+    font-size: var(--fs-body1);
+    font-weight: normal;
+    line-height: var(--lh-body1);
+    font-family: var(--font-body);
 }
 
 /* BUTTON */
 .btn {
-    width: calc(100%);
-    height: 40px;
+    width: max-content; 
     background-color: var(--color-orange);
     border: none;
-    border-radius: 8px;
+    border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     cursor: pointer;
-    text-decoration: none; /* removes underline (for <a>) */
-    color: white; /* ensures text doesn't turn blue */
+    text-decoration: none;
+    color: white;
+    padding: 8px 16px; 
+}
+
+.btn-wide {
+    background-color: var(--color-orange);
+    border: none;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    padding: 8px 16px; 
 }
 
 .btn-text {
-    font-family: "Roca One", serif;
+    font-family: var(--font-body);
     font-weight: 700;
-    font-size: 16px;
-    line-height: 16px;
+    font-size: var(--fs-body2);
+    line-height: var(--lh-body2);
     color: white;
 }
 
-/* Disabled (e.g. no amount entered yet) */
 .btn:disabled {
     background-color: var(--color-text-disabled);
     cursor: not-allowed;
-}
-
-.btn-icon {
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
 }
 
 /* RESULTS */
@@ -796,6 +859,7 @@ body {
 }
 
 .result-row {
+    padding: 8px 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -814,11 +878,11 @@ body {
 .advanced-box {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding: 9px;
+    padding: 8px 8px;
     border: 1px solid var(--color-card-border);
-    border-radius: 8px;
+    border-radius: 4px;
     background: var(--color-card);
+    overflow: hidden;
 }
 
 .advanced-btn {
@@ -834,9 +898,9 @@ body {
 }
 
 .advanced-icon {
-    font-family: "Archivo", sans-serif;
-    font-size: 24px;
-    line-height: 16px;
+    font-family: var(--font-body);
+    font-size: var(--fs-h5);
+    line-height: var(--lh-body1);
     color: var(--color-text-primary);
     margin-left: auto;
 }
@@ -863,18 +927,19 @@ body {
 
 .advanced-row select,
 .advanced-row input {
-    width: 120px;
-    height: 32px;
+    width: 132px;
+    height: 40px;
 
     border: 1px solid var(--color-card-border);
     border-radius: 4px;
     background: var(--color-card);
 
-    font-family: "Archivo", sans-serif;
-    font-size: 14px;
+    font-family: var(--font-body);
+    font-size: var(--fs-body1);
     color: var(--color-text-primary);
 
     padding: 0 8px;
+    line-height: var(--lh-body1);
 }
 
 /* Typed fields with a unit (%, lei, pers.): right-aligned like the main inputs */
@@ -884,7 +949,7 @@ body {
 
 .advanced-row .input-wrapper input {
     text-align: right;
-    padding: 0 26px 0 8px;
+    padding: 0 36px 0 8px;
     outline: none;
 }
 
@@ -892,8 +957,10 @@ body {
    numbers all end 8px before it -> identical spacing in every field */
 .advanced-row .input-wrapper .currency {
     right: auto;
-    left: calc(100% - 18px);
+    left: calc(100% - 28px);
     text-align: left;
+    font-size: var(--fs-body2);
+    line-height: var(--lh-body2);
 }
 
 /* dropdown values right-aligned too, with a small custom arrow */
@@ -915,7 +982,7 @@ body {
 
 /* Overview of current values (hidden while expanded) */
 .advanced-overview {
-    line-height: 18px;
+    line-height: var(--lh-body2);
 }
 
 .advanced-wrapper.is-open .advanced-overview {
@@ -955,9 +1022,10 @@ body {
     transition: 0.2s ease;
     user-select: none;
     background: transparent;
-    font-size: 13px;
-    font-family: "Archivo", sans-serif;
+    font-size: var(--fs-small);
+    font-family: var(--font-body);
     color: var(--color-text-secondary);
+    line-height: var(--lh-small);
 }
 
 .tab-item.active {
@@ -985,9 +1053,9 @@ body {
 }
 
 .invest-row label {
-    font-size: 14px;
-    line-height: 16px;
-    font-family: "Archivo", sans-serif;
+    font-size: var(--fs-body1);
+    line-height: var(--lh-body1);
+    font-family: var(--font-body);
     color: var(--color-text-primary);
     flex: 1;
 }
@@ -1000,18 +1068,19 @@ body {
 }
 
 .invest-input {
-    width: 110px;
+    width: 120px;
     height: 36px;
     border: 1px solid var(--color-card-border);
     border-radius: 4px;
     background: var(--color-background);
     box-sizing: border-box;
-    font-family: "Archivo", sans-serif;
-    font-size: 14px;
+    font-family: var(--font-body);
+    font-size: var(--fs-body1);
     color: var(--color-text-primary);
     outline: none;
     text-align: right;
-    padding: 0 30px 0 4px;
+    padding: 0 38px 0 8px;
+    line-height: var(--lh-body1);
 }
 
 .invest-input:focus {
@@ -1026,10 +1095,11 @@ body {
 .invest-suffix {
     position: absolute;
     right: 6px;
-    font-size: 13px;
+    font-size: var(--fs-small);
     color: var(--color-text-secondary);
     pointer-events: none;
     user-select: none;
+    line-height: var(--lh-small);
 }
 
 .invest-select {
@@ -1037,13 +1107,14 @@ body {
     border: 1px solid var(--color-card-border);
     border-radius: 4px;
     padding: 0 8px;
-    font-size: 13px;
-    font-family: "Archivo", sans-serif;
+    font-size: var(--fs-body2);
+    font-family: var(--font-body);
     background: var(--color-background);
     color: var(--color-text-primary);
     outline: none;
-    width: 150px;
+    width: 160px;
     flex-shrink: 0;
+    line-height: var(--lh-body2);
 }
 
 /* Radio-style choice (contribute at beginning/end) */
@@ -1072,17 +1143,19 @@ body {
 }
 
 .radio-option span {
-    font-size: 13px;
-    font-family: "Archivo", sans-serif;
+    font-size: var(--fs-body2);
+    font-family: var(--font-body);
     color: var(--color-text-primary);
+    line-height: var(--lh-body2);
 }
 
 .section-label {
-    font-size: 12px;
-    font-family: "Archivo", sans-serif;
+    font-size: var(--fs-small);
+    font-family: var(--font-body);
     color: var(--color-text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.04em;
+    line-height: var(--lh-small);
 }
 
 /* ---- RESULTS ---- */
@@ -1102,16 +1175,18 @@ body {
 }
 
 .result-highlight .result-label {
-    font-size: 12px;
-    font-family: "Archivo", sans-serif;
+    font-size: var(--fs-small);
+    font-family: var(--font-body);
     color: rgba(255,255,255,0.8);
+    line-height: var(--lh-small);
 }
 
 .result-highlight .result-value {
-    font-family: "Roca One", serif;
-    font-size: 24px;
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
     font-weight: 700;
     color: #fff;
+    line-height: var(--lh-h3);
 }
 
 .result-rows {
@@ -1135,10 +1210,11 @@ body {
 .result-line:last-child { border-bottom: none; }
 
 .result-line .result-value {
-    font-family: "Archivo", sans-serif;
-    font-size: 14px;
+    font-family: var(--font-body);
+    font-size: var(--fs-body1);
     font-weight: bold;
     color: var(--color-text-primary);
+    line-height: var(--lh-body1);
 }
 
 /* Pie chart + legend */
@@ -1195,9 +1271,10 @@ body {
 .legend-dot.interest  { background: #E84231; }
 
 .legend-item span {
-    font-size: 12px;
-    font-family: "Archivo", sans-serif;
+    font-size: var(--fs-small);
+    font-family: var(--font-body);
     color: var(--color-text-secondary);
+    line-height: var(--lh-small);
 }
 
 /* Vertical bar (stick) chart */
@@ -1217,15 +1294,16 @@ body {
     justify-content: flex-end;
     gap: 6px;
     flex: 1;
-    min-width: 28px;
+    min-width: 64px;
     height: 100%;
 }
 
 .stick-value {
-    font-size: 10px;
-    font-family: "Archivo", sans-serif;
+    font-size: var(--fs-small);
+    font-family: var(--font-body);
     color: var(--color-text-primary);
     white-space: nowrap;
+    line-height: var(--lh-small);
 }
 
 .stick-track {
@@ -1242,10 +1320,11 @@ body {
 .stick-interest { width: 100%; background: #E84231; }
 
 .stick-label {
-    font-size: 10px;
-    font-family: "Archivo", sans-serif;
+    font-size: var(--fs-small);
+    font-family: var(--font-body);
     color: var(--color-text-secondary);
     white-space: nowrap;
+    line-height: var(--lh-small);
 }
 
 /* Schedule table */
@@ -1267,9 +1346,10 @@ body {
     cursor: pointer;
     transition: 0.2s ease;
     user-select: none;
-    font-size: 13px;
-    font-family: "Archivo", sans-serif;
+    font-size: var(--fs-small);
+    font-family: var(--font-body);
     color: var(--color-text-secondary);
+    line-height: var(--lh-small);
 }
 
 .schedule-toggle .freq-item.active {
@@ -1287,9 +1367,10 @@ body {
 table.schedule-table {
     width: 100%;
     border-collapse: collapse;
-    font-family: "Archivo", sans-serif;
-    font-size: 12.5px;
+    font-family: var(--font-body);
+    font-size: var(--fs-small);
     min-width: 480px;
+    line-height: var(--lh-small);
 }
 
 table.schedule-table th {
@@ -1480,17 +1561,17 @@ body.menu-locked {
 .rule-seg--savings { background: var(--color-green);  color: #fff; }
 
 .rule-pct {
-    font-family: "Archivo", sans-serif;
+    font-family: var(--font-body);
     font-weight: bold;
-    font-size: 14px;
-    line-height: 16px;
+    font-size: var(--fs-body1);
+    line-height: var(--lh-body1);
 }
 
 .rule-name,
 .rule-amt {
-    font-family: "Roca One", serif;
-    font-size: 12.44px;
-    line-height: 16px;
+    font-family: var(--font-display);
+    font-size: var(--fs-body2);
+    line-height: var(--lh-body2);
 }
 
 .rule-hint {
@@ -1501,7 +1582,7 @@ body.menu-locked {
 }
 
 .rule-hint-emoji {
-    font-size: 32px;
+    font-size: var(--fs-h2);
     line-height: 1;
     flex-shrink: 0;
 }
@@ -1526,4 +1607,12 @@ body.menu-locked {
 
 .hint-link[hidden] {
     display: none;
+}
+
+.card{
+    padding: 16px;
+    border-radius: 4px;
+    color: var(--color-orange);
+        box-sizing: border-box;
+
 }
