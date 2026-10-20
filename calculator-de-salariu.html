@@ -81,13 +81,13 @@
                     <div class="segment-wrapper">
                         <div class="segment" id="segment">
                             <div class="segment-item" data-value="net">
-                                <span class="body1-secondary">Salariu net</span>
+                                <span class="body2-secondary">Salariu net</span>
                             </div>
                             <div class="segment-item active" data-value="brut">
-                                <span class="body1-red">Salariu brut</span>
+                                <span class="body2-red">Salariu brut</span>
                             </div>
                             <div class="segment-item" data-value="total">
-                                <span class="body1-secondary">Salariu total</span>
+                                <span class="body2-secondary">Salariu total</span>
                             </div>
                         </div>
                     </div>
@@ -117,14 +117,14 @@
 
                     <div class="advanced-box">
                         <button type="button" id="advanced-btn" class="advanced-btn">
-                            <span class="body1">Opțiuni avansate</span>
+                            <span class="body2">Opțiuni avansate</span>
                             <span id="advanced-icon" class="advanced-icon">+</span>
                         </button>
 
                         <div id="advanced-options" class="advanced-options">
 
                             <div class="advanced-row">
-                                <label class="body1" for="FondSocial">CNAS angajator</label>
+                                <label class="body2" for="FondSocial">CNAS angajator</label>
                                 <select id="FondSocial">
                                     <option value="24" selected>24%</option>
                                     <option value="29">29%</option>
@@ -134,7 +134,7 @@
                             </div>
 
                             <div class="advanced-row">
-                                <label class="body1" for="AsigMedAtManual">CNAM angajat</label>
+                                <label class="body2" for="AsigMedAtManual">CNAM angajat</label>
                                 <div class="input-wrapper">
                                     <input
                                         id="AsigMedAtManual" class="unit-pct"
@@ -150,7 +150,7 @@
                             </div>
 
                             <div class="advanced-row">
-                                <label class="body1" for="AngajatiIT">Angajat IT Park</label>
+                                <label class="body2" for="AngajatiIT">Angajat IT Park</label>
                                 <select id="AngajatiIT">
                                     <option value="0" selected>Nu</option>
                                     <option value="1">Da</option>
@@ -158,7 +158,7 @@
                             </div>
 
                             <div class="advanced-row">
-                                <label class="body1" for="CotizatieSindicat">Cotizație sindicat</label>
+                                <label class="body2" for="CotizatieSindicat">Cotizație sindicat</label>
                                 <select id="CotizatieSindicat">
                                     <option value="0" selected>Fără</option>
                                     <option value="1">1% angajat</option>
@@ -167,7 +167,7 @@
                             </div>
 
                             <div class="advanced-row">
-                                <label class="body1" for="ScutPers">Scutire personală</label>
+                                <label class="body2" for="ScutPers">Scutire personală</label>
                                 <select id="ScutPers">
                                     <option value="0">Fără</option>
                                     <option value="2475" selected>Normală</option>
@@ -176,7 +176,7 @@
                             </div>
 
                             <div class="advanced-row">
-                                <label class="body1" for="ScutSot">Scutire p/u soț/soție</label>
+                                <label class="body2" for="ScutSot">Scutire p/u soț/soție</label>
                                 <select id="ScutSot">
                                     <option value="0" selected>Nu</option>
                                     <option value="1815">Da</option>
@@ -184,7 +184,7 @@
                             </div>
 
                             <div class="advanced-row">
-                                <label class="body1" for="NrPersIntr">Persoane întreținute</label>
+                                <label class="body2" for="NrPersIntr">Persoane întreținute</label>
                                 <div class="input-wrapper">
                                     <input
                                         id="NrPersIntr" class="unit-p"
@@ -199,7 +199,7 @@
                             </div>
 
                             <div class="advanced-row">
-                                <label class="body1" for="NrPersIntrI">Persoane cu dizabilitate</label>
+                                <label class="body2" for="NrPersIntrI">Persoane cu dizabilitate</label>
                                 <div class="input-wrapper">
                                     <input
                                         id="NrPersIntrI" class="unit-p"
@@ -214,7 +214,7 @@
                             </div>
 
                             <div class="advanced-row">
-                                <label class="body1" for="ScutireManuala">Scutire manuală</label>
+                                <label class="body2" for="ScutireManuala">Scutire manuală</label>
                                 <div class="input-wrapper">
                                     <input
                                         id="ScutireManuala" class="unit-lei"
@@ -232,7 +232,7 @@
                     </div>
 
                     <!-- Overview of current option values (hidden while expanded) -->
-                    <p class="body2-secondary advanced-overview" id="advanced-overview"></p>
+                    <p class="small-secondary advanced-overview" id="advanced-overview"></p>
 
                 </div>
 
@@ -243,59 +243,59 @@
 <div class="resultat">
 
     <div class="result-row">
-        <p class="body1">Salariu net</p>
-        <p class="body1" id="netResult">0 lei</p>
+        <p class="body2">Salariu net</p>
+        <p class="body2" id="netResult">0 lei</p>
     </div>
 
     <div class="result-row">
-        <p class="body1">Salariu brut</p>
-        <p class="body1" id="brutResult">0 lei</p>
+        <p class="body2">Salariu brut</p>
+        <p class="body2" id="brutResult">0 lei</p>
     </div>
 
     <div class="result-row">
-        <p class="body1">Salariul total</p>
-        <p class="body1" id="totalResult">0 lei</p>
-    </div>
-
-    <div class="income-divider"></div>
-
-    <div class="result-row">
-        <p class="body1">Scutire totală lunară</p>
-        <p class="body1" id="scutireResult">0 lei</p>
-    </div>
-
-    <div class="result-row">
-        <p class="body1">Venit impozabil</p>
-        <p class="body1" id="impozabilResult">0 lei</p>
+        <p class="body2">Salariul total</p>
+        <p class="body2" id="totalResult">0 lei</p>
     </div>
 
     <div class="income-divider"></div>
 
     <div class="result-row">
-        <p class="body1">CNAS angajat (6%)</p>
-        <p class="body1" id="cnasEmployeeResult">0 lei</p>
+        <p class="body2">Scutire totală lunară</p>
+        <p class="body2" id="scutireResult">0 lei</p>
     </div>
 
     <div class="result-row">
-        <p class="body1" id="socialLabel">Fond social angajator (CNAS)</p>
-        <p class="body1" id="socialResult">0 lei</p>
+        <p class="body2">Venit impozabil</p>
+        <p class="body2" id="impozabilResult">0 lei</p>
+    </div>
+
+    <div class="income-divider"></div>
+
+    <div class="result-row">
+        <p class="body2">CNAS angajat (6%)</p>
+        <p class="body2" id="cnasEmployeeResult">0 lei</p>
+    </div>
+
+    <div class="result-row">
+        <p class="body2" id="socialLabel">Fond social angajator (CNAS)</p>
+        <p class="body2" id="socialResult">0 lei</p>
     </div>
 
     <div class="income-divider income-divider--dotted"></div>
 
     <div class="result-row">
-        <p class="body1" id="medicalLabel">CNAM (asigurare medicală angajat)</p>
-        <p class="body1" id="medicalResult">0 lei</p>
+        <p class="body2" id="medicalLabel">CNAM (asigurare medicală angajat)</p>
+        <p class="body2" id="medicalResult">0 lei</p>
     </div>
 
     <div class="result-row">
-        <p class="body1">Impozit pe venit (12%)</p>
-        <p class="body1" id="taxResult">0 lei</p>
+        <p class="body2">Impozit pe venit (12%)</p>
+        <p class="body2" id="taxResult">0 lei</p>
     </div>
 
     <div class="result-row">
-        <p class="body1-bold">Total impozite / contribuții</p>
-        <p class="body1-bold" id="totalTaxResult">0 lei</p>
+        <p class="body2-bold">Total impozite / contribuții</p>
+        <p class="body2-bold" id="totalTaxResult">0 lei</p>
     </div>
 
 </div>
@@ -314,7 +314,7 @@
         <!-- Item 1 -->
         <div class="item open">
             <div class="question">
-                <p class="body1">1. Care este diferența dintre salariu net, brut și costul total?</p>
+                <p class="body2">1. Care este diferența dintre salariu net, brut și costul total?</p>
                 <img class="icon" src="images/arrow-down.svg" alt="toggle">
             </div>
             <div class="answer">
@@ -329,7 +329,7 @@
         <!-- Item 2 -->
         <div class="item">
             <div class="question">
-                <p class="body1">2. Ce reprezintă fondul social (CNAS) al angajatorului?</p>
+                <p class="body2">2. Ce reprezintă fondul social (CNAS) al angajatorului?</p>
                 <img class="icon" src="images/arrow-down.svg" alt="toggle">
             </div>
             <div class="answer">
@@ -346,7 +346,7 @@
         <!-- Item 3 -->
         <div class="item">
             <div class="question">
-                <p class="body1">3. Ce reprezintă asigurarea medicală obligatorie (CNAM) de 9%?</p>
+                <p class="body2">3. Ce reprezintă asigurarea medicală obligatorie (CNAM) de 9%?</p>
                 <img class="icon" src="images/arrow-down.svg" alt="toggle">
             </div>
             <div class="answer">
@@ -359,7 +359,7 @@
         <!-- Item 4 -->
         <div class="item">
             <div class="question">
-                <p class="body1">4. Ce este venitul impozabil?</p>
+                <p class="body2">4. Ce este venitul impozabil?</p>
                 <img class="icon" src="images/arrow-down.svg" alt="toggle">
             </div>
             <div class="answer">
@@ -372,7 +372,7 @@
         <!-- Item 5 -->
         <div class="item">
             <div class="question">
-                <p class="body1">5. Ce scutiri fiscale sunt disponibile în 2026?</p>
+                <p class="body2">5. Ce scutiri fiscale sunt disponibile în 2026?</p>
                 <img class="icon" src="images/arrow-down.svg" alt="toggle">
             </div>
             <div class="answer">
@@ -391,7 +391,7 @@
         <!-- Item 6 -->
         <div class="item">
             <div class="question">
-                <p class="body1">6. Ce înseamnă CNAS angajat (6%) în rezultate?</p>
+                <p class="body2">6. Ce înseamnă CNAS angajat (6%) în rezultate?</p>
                 <img class="icon" src="images/arrow-down.svg" alt="toggle">
             </div>
             <div class="answer">

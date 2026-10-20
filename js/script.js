@@ -319,11 +319,11 @@ segmentItems.forEach(item => {
 
         segmentItems.forEach(i => {
             i.classList.remove("active");
-            i.querySelector("span").className = "body1-secondary";
+            i.querySelector("span").className = "body2-secondary";
         });
 
         item.classList.add("active");
-        item.querySelector("span").className = "body1-red";
+        item.querySelector("span").className = "body2-red";
 
         calcMode = item.dataset.value;
 
