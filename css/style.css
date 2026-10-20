@@ -755,7 +755,6 @@ body {
   border-radius: 8px;
   background: #fff;
   box-sizing: border-box;
-  gap: 4px;
 }
 
 .segment-item {
@@ -774,12 +773,11 @@ body {
   border: none;
   background: transparent;
   padding: 0;
-  gap: 4px;
 }
 
 .salary-row .segment-item {
-  border-radius: 999px;
-  padding: 8px 8px;
+  border-radius: 20px;
+  padding: 10px 8px;
 }
 
 .salary-row .segment-item span {
@@ -858,7 +856,6 @@ body {
 }
 
 .result-row {
-    padding: 8px 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -877,11 +874,10 @@ body {
 .advanced-box {
     display: flex;
     flex-direction: column;
-    padding: 8px 8px;
+    padding: 8px;
     border: 1px solid var(--color-card-border);
     border-radius: 4px;
     background: var(--color-card);
-    overflow: hidden;
 }
 
 .advanced-btn {
@@ -1617,7 +1613,7 @@ body.menu-locked {
     padding: 16px;
     display: flex;
     flex-direction: column;
-    border-radius: 4px;
+    border-radius: 8px;
     gap: 16px;
     background: #E3E3E7;
     color: var(--color-text-primary);
