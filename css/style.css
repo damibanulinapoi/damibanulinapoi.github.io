@@ -88,18 +88,18 @@ h6 {
     color: var(--color-text-primary);
 }
 
-.body1-bold {
-    font-size: var(--fs-body1);
-    line-height: var(--lh-body1);
+.body2-bold {
+    font-size: var(--fs-body2);
+    line-height: var(--lh-body2);
     font-family: var(--font-body);
     font-weight: normal;
     color: var(--color-text-primary);
     font-weight: bold;
 }
 
-.body1-secondary {
-    font-size: var(--fs-body1);
-    line-height: var(--lh-body1);
+.body2-secondary {
+    font-size: var(--fs-body2);
+    line-height: var(--lh-body2);
     font-family: var(--font-body);
     font-weight: normal;
     color: var(--color-text-secondary);
@@ -113,9 +113,9 @@ h6 {
     color: var(--color-text-primary);
 }
 
-.body2-secondary {
-    font-size: var(--fs-body2);
-    line-height: var(--lh-body2);
+.small-secondary {
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
     font-family: var(--font-body);
     font-weight: normal;
     color: var(--color-text-secondary);
@@ -780,7 +780,7 @@ body {
 
 .salary-row .segment-item {
   border-radius: 999px;
-  padding: 8px 4px;
+  padding: 8px 8px;
 }
 
 .salary-row .segment-item span {
