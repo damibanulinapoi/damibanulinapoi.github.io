@@ -570,11 +570,15 @@ body {
     width: 24px;
     height: 24px;
     flex-shrink: 0;
-    transition: transform 0.25s ease;
+    background-color: currentColor; /* Keeps it matching your text color */
+    -webkit-mask: url('images/plus.svg') no-repeat center / contain;
+    mask: url('images/plus.svg') no-repeat center / contain;
 }
 
+/* Instantly swaps the SVG shape when open, keeping your layout structure identical */
 .item.open .icon {
-    transform: rotate(180deg);
+    -webkit-mask: url("images/minus.svg") no-repeat center / contain;
+    mask: url("images/minus.svg") no-repeat center / contain;
 }
 
 .answer {
@@ -1604,10 +1608,6 @@ body.menu-locked {
     display: none;
 }
 
-/* =====================================================
-   ABOUT PAGE (despre.html) — append to the end of style.css
-===================================================== */
-
 .about .page-body { display: flex; flex-direction: column; gap: 24px; padding-bottom: 8px; }
 .about .calculator-hero { gap: 24px; }
 .about-text { display: flex; flex-direction: column; gap: 24px; }
@@ -1638,5 +1638,5 @@ body.menu-locked {
 
 /* FAQ rows as grey cards, answer inline under the question */
 .about .faq .item { background: #E3E3E7; border: none; border-radius: 4px;}
-.about .faq .answer { padding: 0 0 4px; }
+.about .faq .answer { padding: 0 8px 8px 8px; }
 .about .faq .answer p { color: var(--color-text-primary); }
