@@ -18,21 +18,21 @@
 }
 
 @font-face {
-    font-family: 'Inter';
-    src: url('../fonts/Inter-Regular.tff') format('truetype');
+    font-family: 'Archivo';
+    src: url('../fonts/Archivo-Regular.tff') format('truetype');
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'Inter';
-    src: url('../fonts/Inter-Bold.ttf') format('truetype');
+    font-family: 'Archivo';
+    src: url('../fonts/Archivo-Bold.ttf') format('truetype');
     font-weight: 700;
     font-style: normal;
 }
 
 :root {
-    --font-body:    "Inter", sans-serif;
+    --font-body:    "Archivo", sans-serif;
     --font-display: "Roca One", serif;
 
     --fs-h1: 36.49px;  --lh-h1: 56px;
