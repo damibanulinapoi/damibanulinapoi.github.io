@@ -808,7 +808,7 @@ body {
     cursor: pointer;
     text-decoration: none;
     color: white;
-    padding: 8px 16px; 
+    padding: 10px 16px; 
 }
 
 .btn-wide {
@@ -822,7 +822,7 @@ body {
     cursor: pointer;
     text-decoration: none;
     color: white;
-    padding: 8px 16px; 
+    padding: 10px 16px; 
 }
 
 .btn-text {
@@ -1604,10 +1604,39 @@ body.menu-locked {
     display: none;
 }
 
-.card{
-    padding: 16px;
-    border-radius: 4px;
-    color: var(--color-orange);
-        box-sizing: border-box;
+/* =====================================================
+   ABOUT PAGE (despre.html) — append to the end of style.css
+===================================================== */
 
+.about .page-body { display: flex; flex-direction: column; gap: 24px; padding-bottom: 8px; }
+.about .calculator-hero { gap: 24px; }
+.about-text { display: flex; flex-direction: column; gap: 24px; }
+
+/* grey cards (the base .card only sets padding/radius/orange text) */
+.about-card {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+    gap: 16px;
+    background: #E3E3E7;
+    color: var(--color-text-primary);
 }
+.about-card .about-text { gap: 24px; }
+.about-contact { display: flex; flex-direction: column; gap: 16px; }
+.about .section-break { margin: 0 auto; width: 100%; }
+
+/* social / email pills */
+.contact-list { display: flex; flex-direction: column; gap: 8px; }
+.contact-pill {
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    height: 40px; border-radius: 20px;
+    background: #D6D6DC; text-decoration: none;
+}
+.contact-pill img { width: 24px; height: 24px; display: block; }
+.contact-or { text-align: center; }
+
+/* FAQ rows as grey cards, answer inline under the question */
+.about .faq .item { background: #E3E3E7; border: none; border-radius: 4px;}
+.about .faq .answer { padding: 0 0 4px; }
+.about .faq .answer p { color: var(--color-text-primary); }
