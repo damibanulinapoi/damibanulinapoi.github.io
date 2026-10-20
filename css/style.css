@@ -388,6 +388,11 @@ body {
     display: block;
 }
 
+.calculator-categorie {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
 
 .section-break {
   height: 16px;
@@ -397,43 +402,16 @@ body {
   box-shadow: inset 0 4px 4px -1px rgba(0, 0, 0, 0.05);
 }
 
-/* STACK — vertical block with 8px between children.
-   .calculator-categorie = plain stack (title + card)
-   .item / .income-section = the same stack, drawn as a white card with 8px padding */
-.calculator-categorie,
-.item,
+/* CARD SECTION */
 .income-section {
+    padding: 8px 8px;
+    gap: 8px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-}
-
-/* CARD — one look for every white bordered box */
-.item,
-.income-section,
-.advanced-box {
     background: var(--color-card);
     border: 1px solid var(--color-card-border);
     border-radius: 8px;
-    overflow: hidden;
 }
-
-.item,
-.income-section {
-    padding: 8px;
-}
-
-/* The advanced box has no padding of its own (its header is the 40px bar) and tighter corners */
-.advanced-box {
-    display: flex;
-    flex-direction: column;
-    border-radius: 4px;
-}
-
-/* Rows inside an .item: the card's 8px padding replaces the rows' own padding/margins */
-.item .income-row   { padding: 0; }
-.item .result-row   { padding: 0 8px; }
-.item .income-divider { margin: 0; }
 
 .income-divider {
     margin: 0px 8px;
@@ -573,35 +551,19 @@ body {
     gap: 8px;
 }
 
+.item {
+    border: 1px solid var(--color-card-border);
+    border-radius: 8px;
+    background: var(--color-card);
+    overflow: hidden;
+}
+
 .question {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 8px;
-    padding: 0;
-    min-height: 22px;
+    padding: 8px;
     cursor: pointer;
-}
-
-/* + / − indicator (same as the advanced options box); the old arrow image is hidden */
-.question .icon {
-    display: none;
-}
-
-.question::after,
-.advanced-icon {
-    content: "+";
-    flex-shrink: 0;
-    width: 24px;
-    text-align: center;
-    font-family: var(--font-body);
-    font-size: var(--fs-h5);
-    line-height: 20px;
-    color: var(--color-text-primary);
-}
-
-.item.open .question::after {
-    content: "\2212";
 }
 
 .icon {
@@ -617,7 +579,8 @@ body {
 
 .answer {
     display: none;
-    padding: 0;
+    padding: 8px;
+    padding-top: 0;
 }
 
 .item.open .answer {
@@ -845,7 +808,7 @@ body {
     cursor: pointer;
     text-decoration: none;
     color: white;
-    padding: 10px 16px; 
+    padding: 8px 16px; 
 }
 
 .btn-wide {
@@ -859,7 +822,7 @@ body {
     cursor: pointer;
     text-decoration: none;
     color: white;
-    padding: 10px 16px; 
+    padding: 8px 16px; 
 }
 
 .btn-text {
@@ -907,13 +870,22 @@ body {
 }
 
 /* Bordered box: header always visible, grey options box inside when open */
+.advanced-box {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 8px;
+    border: 1px solid var(--color-card-border);
+    border-radius: 4px;
+    background: var(--color-card);
+    overflow: hidden;
+}
+
 .advanced-btn {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: 9px 8px;
-    min-height: 38px;
+    padding: 0;
     border: none;
     background: transparent;
     cursor: pointer;
@@ -921,6 +893,10 @@ body {
 }
 
 .advanced-icon {
+    font-family: var(--font-body);
+    font-size: var(--fs-h5);
+    line-height: var(--lh-body1);
+    color: var(--color-text-primary);
     margin-left: auto;
 }
 
@@ -930,7 +906,6 @@ body {
     flex-direction: column;
     gap: 8px;
     padding: 8px;
-    margin: 0 8px 8px;
     border-radius: 4px;
     background: var(--color-background);
 }
@@ -1629,41 +1604,10 @@ body.menu-locked {
     display: none;
 }
 
-/* =====================================================
-   ABOUT PAGE (despre.html) — append to the end of style.css
-===================================================== */
-
-body.about { background-color: var(--color-background); }
-
-.about .page-body { display: flex; flex-direction: column; gap: 24px; padding-bottom: 8px; }
-.about .calculator-hero { gap: 24px; }
-.about-text { display: flex; flex-direction: column; gap: 24px; }
-
-/* grey cards (the base .card only sets padding/radius/orange text) */
-.about-card {
+.card{
     padding: 16px;
-    display: flex;
-    flex-direction: column;
     border-radius: 4px;
-    gap: 16px;
-    background: #E4E4E7;
-    color: var(--color-text-primary);
-}
-.about-card .about-text { gap: 24px; }
-.about-contact { display: flex; flex-direction: column; gap: 16px; }
-.about .section-break { margin: 0 auto; width: 100%; }
+    color: var(--color-orange);
+        box-sizing: border-box;
 
-/* social / email pills */
-.contact-list { display: flex; flex-direction: column; gap: 8px; }
-.contact-pill {
-    display: flex; align-items: center; justify-content: center; gap: 12px;
-    height: 40px; border-radius: 20px;
-    background: #D6D6DC; text-decoration: none;
 }
-.contact-pill img { width: 24px; height: 24px; display: block; }
-.contact-or { text-align: center; }
-
-/* FAQ rows as grey cards, answer inline under the question */
-.about .faq .item { background: #E4E4E7; border: none; border-radius: 4px; }
-.about .faq .answer { padding: 0 0 4px; }
-.about .faq .answer p { color: var(--color-text-primary); }
