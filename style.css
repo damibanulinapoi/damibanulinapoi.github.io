@@ -18,21 +18,21 @@
 }
 
 @font-face {
-    font-family: 'Inter';
-    src: url('../fonts/Inter-Regular.tff') format('truetype');
+    font-family: 'Archivo';
+    src: url('../fonts/Archivo-Regular.tff') format('truetype');
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'Inter';
-    src: url('../fonts/Inter-Bold.ttf') format('truetype');
+    font-family: 'Archivo';
+    src: url('../fonts/Archivo-Bold.ttf') format('truetype');
     font-weight: 700;
     font-style: normal;
 }
 
 :root {
-    --font-body:    "Inter", sans-serif;
+    --font-body:    "Archivo", sans-serif;
     --font-display: "Roca One", serif;
 
     --fs-h1: 36.49px;  --lh-h1: 56px;
@@ -42,8 +42,8 @@
     --fs-h5: 22.78px;  --lh-h5: 32px;
     --fs-h6: 20.25px;  --lh-h6: 32px;
     --fs-body1: 18px;  --lh-body1: 24px;
-    --fs-body2: 16px;  --lh-body2: 24px;
-    --fs-small: 14.22px; --lh-small: 20px;
+    --fs-body2: 16px;  --lh-body2: 20px;
+    --fs-small: 14.22px; --lh-small: 18px;
 }
 
 h1, h3, h4, h5 {
@@ -88,18 +88,18 @@ h6 {
     color: var(--color-text-primary);
 }
 
-.body1-bold {
-    font-size: var(--fs-body1);
-    line-height: var(--lh-body1);
+.body2-bold {
+    font-size: var(--fs-body2);
+    line-height: var(--lh-body2);
     font-family: var(--font-body);
     font-weight: normal;
     color: var(--color-text-primary);
     font-weight: bold;
 }
 
-.body1-secondary {
-    font-size: var(--fs-body1);
-    line-height: var(--lh-body1);
+.body2-secondary {
+    font-size: var(--fs-body2);
+    line-height: var(--lh-body2);
     font-family: var(--font-body);
     font-weight: normal;
     color: var(--color-text-secondary);
@@ -113,9 +113,9 @@ h6 {
     color: var(--color-text-primary);
 }
 
-.body2-secondary {
-    font-size: var(--fs-body2);
-    line-height: var(--lh-body2);
+.small-secondary {
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
     font-family: var(--font-body);
     font-weight: normal;
     color: var(--color-text-secondary);
@@ -337,16 +337,11 @@ body {
     align-items: center;
     flex-wrap: wrap;
     gap: 4px;
-
-    font-family: var(--font-body);
-    font-weight: 500;
-    font-size: var(--fs-body1);
-    line-height: var(--lh-body1);
 }
 
 .breadcrumb a {
-    font-size: var(--fs-body1);
-    line-height: var(--lh-body1);
+    font-size: var(--fs-body2);
+    line-height: var(--lh-body2);
     font-family: var(--font-body);
     font-weight: normal;
     color: var(--color-orange);
@@ -363,8 +358,8 @@ body {
 
 .breadcrumb .separator,
 .breadcrumb span {
-    font-size: var(--fs-body1);
-    line-height: var(--lh-body1);
+    font-size: var(--fs-body2);
+    line-height: var(--lh-body2);
     font-family: var(--font-body);
     font-weight: normal;
     color: var(--color-text-secondary);
@@ -470,41 +465,41 @@ body {
 
 /* INPUT */
 .income-input {
-    width: 112px;
+    width: 96px;
     height: 40px;
     border: 1px solid var(--color-card);
     border-radius: 4px;
     background: var(--color-background);
     box-sizing: border-box;
     font-family: var(--font-body);
-    font-size: var(--fs-body1);
-    line-height: var(--lh-body1);
+    font-size: var(--fs-body2);
+    line-height: var(--lh-body2);
     color: var(--color-text-primary);
     outline: none;
     flex-shrink: 0;
 
     text-align: right;
 
-    padding: 0 32px 0 8px;
+    padding: 0 24px 0 8px;
 }
 
 .expense-input {
-    width: 112px;
+    width: 96px;
     height: 40px;
     border: 1px solid var(--color-card);
     border-radius: 4px;
     background: var(--color-background);
     box-sizing: border-box;
     font-family: var(--font-body);
-    font-size: var(--fs-body1);
-    line-height: var(--lh-body1);
+    font-size: var(--fs-body2);
+    line-height: var(--lh-body2);
     color: var(--color-text-primary);
     outline: none;
     flex-shrink: 0;
 
     text-align: right;
 
-    padding: 0 32px 0 8px;
+    padding: 0 24px 0 8px;
 }
 
 /* remove placeholder styling (no longer needed) */
@@ -516,11 +511,11 @@ body {
 .currency {
     position: absolute;
     right: 4px;
-    font-size: var(--fs-body1);
+    font-size: var(--fs-body2);
     color: var(--color-text-primary);
     pointer-events: none; /* not clickable */
     user-select: none;
-    line-height: var(--lh-body1);
+    line-height: var(--lh-body2);
 }
 
 /* REMOVE NUMBER ARROWS */
@@ -780,7 +775,7 @@ body {
 
 .salary-row .segment-item {
   border-radius: 999px;
-  padding: 8px 4px;
+  padding: 8px 8px;
 }
 
 .salary-row .segment-item span {
@@ -792,11 +787,11 @@ body {
   background: #FEF0EE;
 }
 
-.body1-red {
+.body2-red {
     color: var(--color-orange);
-    font-size: var(--fs-body1);
+    font-size: var(--fs-body2);
     font-weight: normal;
-    line-height: var(--lh-body1);
+    line-height: var(--lh-body2);
     font-family: var(--font-body);
 }
 
@@ -813,7 +808,7 @@ body {
     cursor: pointer;
     text-decoration: none;
     color: white;
-    padding: 8px 16px; 
+    padding: 10px 16px; 
 }
 
 .btn-wide {
@@ -827,7 +822,7 @@ body {
     cursor: pointer;
     text-decoration: none;
     color: white;
-    padding: 8px 16px; 
+    padding: 10px 16px; 
 }
 
 .btn-text {
@@ -935,11 +930,11 @@ body {
     background: var(--color-card);
 
     font-family: var(--font-body);
-    font-size: var(--fs-body1);
+    font-size: var(--fs-body2);
     color: var(--color-text-primary);
 
     padding: 0 8px;
-    line-height: var(--lh-body1);
+    line-height: var(--lh-body2);
 }
 
 /* Typed fields with a unit (%, lei, pers.): right-aligned like the main inputs */
@@ -1609,10 +1604,39 @@ body.menu-locked {
     display: none;
 }
 
-.card{
-    padding: 16px;
-    border-radius: 4px;
-    color: var(--color-orange);
-        box-sizing: border-box;
+/* =====================================================
+   ABOUT PAGE (despre.html) — append to the end of style.css
+===================================================== */
 
+.about .page-body { display: flex; flex-direction: column; gap: 24px; padding-bottom: 8px; }
+.about .calculator-hero { gap: 24px; }
+.about-text { display: flex; flex-direction: column; gap: 24px; }
+
+/* grey cards (the base .card only sets padding/radius/orange text) */
+.about-card {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+    gap: 16px;
+    background: #E3E3E7;
+    color: var(--color-text-primary);
 }
+.about-card .about-text { gap: 24px; }
+.about-contact { display: flex; flex-direction: column; gap: 16px; }
+.about .section-break { margin: 0 auto; width: 100%; }
+
+/* social / email pills */
+.contact-list { display: flex; flex-direction: column; gap: 8px; }
+.contact-pill {
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    height: 40px; border-radius: 20px;
+    background: #D6D6DC; text-decoration: none;
+}
+.contact-pill img { width: 24px; height: 24px; display: block; }
+.contact-or { text-align: center; }
+
+/* FAQ rows as grey cards, answer inline under the question */
+.about .faq .item { background: #E3E3E7; border: none; border-radius: 4px;}
+.about .faq .answer { padding: 0 0 4px; }
+.about .faq .answer p { color: var(--color-text-primary); }
