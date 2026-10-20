@@ -118,7 +118,7 @@ if (siteHeader && menuIcon) {
         ]},
         { label: "Сравнение цен", href: "#" },
         { label: "Советы",        href: "#" },
-        { label: "О нас",         href: "#" }
+        { label: "О нас",         href: "despre.html" }
     ] : [
         { label: "Calculatoare", children: [
             { label: "Calculator de salariu",   href: "calculator-de-salariu.html" },
@@ -127,7 +127,7 @@ if (siteHeader && menuIcon) {
         ]},
         { label: "Comparații de prețuri", href: "#" },
         { label: "Sfaturi",               href: "#" },
-        { label: "Despre noi",            href: "#" }
+        { label: "Despre noi",            href: "despre.html" }
     ];
 
     const overlay = document.createElement("nav");
@@ -150,10 +150,9 @@ if (siteHeader && menuIcon) {
             row.className = "menu-row";
             row.append(label);
 
-            const chevron = document.createElement("img");
+            const chevron = document.createElement("span");
             chevron.className = "menu-chevron";
-            chevron.src = ROOT + "images/arrow-down.svg";
-            chevron.alt = "";
+            chevron.setAttribute("aria-hidden", "true");
             row.append(chevron);
 
             const sub = document.createElement("ul");
@@ -184,8 +183,11 @@ if (siteHeader && menuIcon) {
     overlay.append(list);
     document.body.append(overlay);
 
-    const menuSrc = menuIcon.getAttribute("src");
-    const closeSrc = menuSrc.replace("menu.svg", "close.svg");
+    // Same images folder as the icon already in the HTML (images/ or ../images/)
+    const imgDir   = menuIcon.getAttribute("src").replace(/[^/]*$/, "");
+    const menuSrc  = imgDir + "menu-open.svg";    // the 3 lines
+    const closeSrc = imgDir + "menu-close.svg";   // the X
+    menuIcon.setAttribute("src", menuSrc);
 
     menuIcon.setAttribute("role", "button");
     menuIcon.setAttribute("tabindex", "0");
@@ -378,7 +380,6 @@ if (advancedBtn && advancedOptions && advancedIcon) {
         const isOpen = advancedOptions.classList.toggle("show");
 
         advancedWrapper?.classList.toggle("is-open", isOpen);
-        advancedIcon.textContent = isOpen ? "−" : "+";
     });
 
     advancedOptions.querySelectorAll("select, input").forEach(el => {

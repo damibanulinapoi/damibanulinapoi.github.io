@@ -19,7 +19,7 @@
 
 @font-face {
     font-family: 'Archivo';
-    src: url('../fonts/Archivo-Regular.tff') format('truetype');
+    src: url('../fonts/Archivo-Regular.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
 }
@@ -238,6 +238,8 @@ body {
 .menu {
     width: 32px;
     height: 32px;
+    min-width: 32px;
+    object-fit: contain;   /* hamburger and X always fill the same 32x32 box */
     display: block;
     flex-shrink: 0;
 }
@@ -566,19 +568,36 @@ body {
     cursor: pointer;
 }
 
-.icon {
+/* =====================================================
+   OPEN / CLOSE ICON (plus <-> minus)
+   One shared icon for every open/close control:
+   FAQ questions, "Opțiuni avansate", hamburger sub-menu.
+   The icons are inlined as data URIs, so they work on file://
+   and need no extra files. Color follows the text color.
+===================================================== */
+
+:root {
+    --icon-plus:  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 5v14M5 12h14' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    --icon-minus: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12h14' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+.icon,
+.menu-chevron {
+    display: block;
     width: 24px;
     height: 24px;
     flex-shrink: 0;
-    background-color: currentColor; /* Keeps it matching your text color */
-    -webkit-mask: url('images/plus.svg') no-repeat center / contain;
-    mask: url('images/plus.svg') no-repeat center / contain;
+    background-color: currentColor; /* follows the text color */
+    -webkit-mask: var(--icon-plus) no-repeat center / contain;
+    mask: var(--icon-plus) no-repeat center / contain;
 }
 
-/* Instantly swaps the SVG shape when open, keeping your layout structure identical */
-.item.open .icon {
-    -webkit-mask: url("images/minus.svg") no-repeat center / contain;
-    mask: url("images/minus.svg") no-repeat center / contain;
+/* Open state -> minus */
+.item.open .icon,
+.advanced-wrapper.is-open .icon,
+.menu-item.open .menu-chevron {
+    -webkit-mask: var(--icon-minus) no-repeat center / contain;
+    mask: var(--icon-minus) no-repeat center / contain;
 }
 
 .answer {
@@ -890,13 +909,11 @@ body {
     background: transparent;
     cursor: pointer;
     text-align: left;
+    color: var(--color-text-primary);
 }
 
+/* The plus/minus itself comes from the shared .icon rule above */
 .advanced-icon {
-    font-family: var(--font-body);
-    font-size: var(--fs-h5);
-    line-height: var(--lh-body1);
-    color: var(--color-text-primary);
     margin-left: auto;
 }
 
@@ -1411,24 +1428,29 @@ table.schedule-table tr.year-end td {
 }
 
 /* Header while the menu is open: full width, flat, divider underneath */
+/* Padding is chosen so the logo, flag and menu icon stay exactly where they were:
+   normal header = 16px margin + 1px border + 16px side padding (33px) / 8px top padding (25px).
+   Total height 25 + 40 + 24 + 1 = 90px (the overlay below starts at 90px). */
 .header.menu-open {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     margin: 0;
-    padding: 24px 32px;
+    padding: 25px 33px 24px;
     border: none;
     border-bottom: 1px solid var(--color-card-border);
     border-radius: 0;
-    outline: none;
+    /* Inner line: 9px in from every edge of the bar, same as the normal header */
+    outline: 1px solid rgba(0,0,0,0.045);
+    outline-offset: -9px;
 }
 
 /* Full-screen panel under the header */
 .menu-overlay {
     display: none;
     position: fixed;
-    top: 88px;
+    top: 90px;
     left: 0;
     right: 0;
     bottom: 0;
@@ -1475,16 +1497,7 @@ body.menu-locked {
     cursor: pointer;
 }
 
-.menu-chevron {
-    width: 24px;
-    height: 24px;
-    flex-shrink: 0;
-    transition: transform 0.25s ease;
-}
-
-.menu-item.open .menu-chevron {
-    transform: rotate(180deg);
-}
+/* The plus/minus on the sub-menu row comes from the shared .menu-chevron rule above */
 
 /* Sub-list (e.g. the calculators) */
 .menu-sub {
@@ -1509,6 +1522,18 @@ body.menu-locked {
 /* At a glance: negative balance (deficit) */
 .is-negative {
     color: var(--color-orange);
+}
+
+/* "Pe scurt": rows sit 8px from the card edges, 8px apart */
+.calculator-categorie > .item:has(> .result-row) {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px;
+}
+
+.calculator-categorie > .item:has(> .result-row) .income-divider {
+    margin: 0;
 }
 
 /* "Ce e asta?" link under the 50-30-20 title */
@@ -1619,7 +1644,7 @@ body.menu-locked {
     color: var(--color-text-primary);
 }
 .about-card .about-text { gap: 24px; }
-.about-contact { display: flex; flex-direction: column; gap: 16px; }
+.about-contact { display: flex; flex-direction: column; gap: 16px; scroll-margin-top: 96px; }
 .about .section-break { margin: 0 auto; width: 100%; }
 
 /* social / email pills */
