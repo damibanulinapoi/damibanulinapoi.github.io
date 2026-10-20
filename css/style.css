@@ -337,16 +337,11 @@ body {
     align-items: center;
     flex-wrap: wrap;
     gap: 4px;
-
-    font-family: var(--font-body);
-    font-weight: 500;
-    font-size: var(--fs-body1);
-    line-height: var(--lh-body1);
 }
 
 .breadcrumb a {
-    font-size: var(--fs-body1);
-    line-height: var(--lh-body1);
+    font-size: var(--fs-body2);
+    line-height: var(--lh-body2);
     font-family: var(--font-body);
     font-weight: normal;
     color: var(--color-orange);
@@ -363,8 +358,8 @@ body {
 
 .breadcrumb .separator,
 .breadcrumb span {
-    font-size: var(--fs-body1);
-    line-height: var(--lh-body1);
+    font-size: var(--fs-body2);
+    line-height: var(--lh-body2);
     font-family: var(--font-body);
     font-weight: normal;
     color: var(--color-text-secondary);
