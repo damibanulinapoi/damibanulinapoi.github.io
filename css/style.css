@@ -1636,6 +1636,7 @@ body.menu-locked {
     display: flex;
     flex-direction: column;
     gap: 40px;
+    padding-top: 24px;      /* space between the top image and "Misiunea Noastră" */
     padding-bottom: 8px;
 }
 
