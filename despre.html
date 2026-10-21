@@ -40,46 +40,81 @@
     </div>
 </header>
 
-<!-- HERO (full width, slides behind the header) -->
-<section class="about-hero about-hero--top">
-    <img class="about-hero-img" src="images/Despre.webp" alt="" loading="eager" fetchpriority="high">
-
-    <div class="about-hero-content">
-        <h1 class="about-hero-title">Despre noi</h1>
-        <p class="body1 about-hero-lead">Un proiect făcut de moldoveni, pentru moldoveni care vor să înțeleagă încotro se duc banii lor.</p>
-    </div>
-</section>
-
 <main class="page-body">
 
     <!-- 1. DESPRE (misiune + poveste + principii) -->
     <section class="about-intro">
 
+        <!-- HEADER + FOUNDER -->
         <div class="about-block">
-            <h3>Misiunea Noastră</h3>
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html">acasă</a>
+                <span class="separator">/</span>
+                <span>despre</span>
+            </nav>
 
-            <div class="about-text">
-                <p class="body1">Acest site este un proiect pur informativ și educațional, creat special pentru moldovenii care vor să înțeleagă mai bine cum își gestionează finanțele.</p>
-                <p class="body1">Aici găsești doar instrumente practice, calculatoare și explicații clare menite să te ajute să economisești mai inteligent, să câștigi mai mult din deciziile tale financiare sau să înveți bazele investițiilor acasă, în Moldova.</p>
-            </div>
+            <h3>Despre noi</h3>
+            <p class="body1">Suntem un proiect făcut de moldoveni, pentru moldoveni care vor să înțeleagă încotro se duc banii lor.</p>
+
+        <div class="about-founder">
+            <picture>
+                <source type="image/avif" srcset="images/portret.avif">
+                <source type="image/webp" srcset="images/portret.webp">
+                <img class="about-portrait" src="images/portret.jpg" alt="Vitalie Draguțan, fondatorul Dă-mi Banul Înapoi" width="900" height="1125" loading="eager">
+            </picture>
+
+        <figure class="about-quote">
+            <blockquote>
+                <p>Am creat această platformă din dorința de a împărtăși ceea ce am învățat pe propria piele. Am fost și eu acolo — îngropat într-o datorie de peste 17.000 € și fără o direcție clară. Știu ce înseamnă să câștigi bani buni, dar la final de lună să nu-ți rămână nimic. Iar după ce am reușit să scap definitiv de datorii și să încep să investesc corect, am realizat cât de greu este să găsești informații clare, transparente și aplicabile despre educația financiară direct aici, în Moldova.</p>
+            </blockquote>
+            <figcaption>— <strong>Vitalie Draguțan</strong>, Fondator <em>Dă-mi Banul Înapoi</em></figcaption>
+        </figure>
+        </div>
         </div>
 
-        <div class="about-block">
-            <h3>Povestea din spatele proiectului</h3>
+        <!-- POVESTEA (pașii) -->
+        <div class="about-steps">
 
-            <div class="about-text">
-                <p class="body1">Totul a pornit de la o întrebare simplă: De ce educația financiară ni se predă peste tot în termeni atât de plictisiți sau complicați, când tot ce ne dorim este să știm clar ce facem cu salariul de la sfârșit de lună?</p>
-                <p class="body1">În Moldova, mulți dintre noi am învățat despre bani din mers sau din greșeli. Ne dorim să schimbăm asta. Vrem să oferim un spațiu unde calculul unui salariu net, împărțirea unui buget sau înțelegerea primelor investiții (cum ar fi titlurile de stat sau depozitele) să fie la fel de simple ca o căutare pe telefon.</p>
+                <div class="about-step">
+                    <h4>1. Cum am ajuns la 17.000 € datorie: iluzia creditelor ieftine</h4>
+                    <p class="body1">Pe când studiam în Danemarca, pe lângă jobul part-time, am decis să iau un împrumut studențesc datorită dobânzilor mici. Planul meu inițial era să investesc acei bani pentru a obține un profit. Însă, neavând o educație financiară structurată, am sfârșit prin a specula banii pe acțiuni riscante, criptomonede și prin a-i cheltui pe vacanțe. Fără să-mi dau seama, ajunsesem să depind de banii din credit pentru a-mi finanța stilul de viață, deși veniturile mele de bază erau suficiente.</p>
+                </div>
+
+                <div class="about-step">
+                    <h4>2. Cum am scăpat de datorie în 6 luni</h4>
+                    <p class="body1">Când m-am întors în Moldova, am înfruntat realitatea: aveam o datorie de <strong>127.005 DKK (aproximativ 17.000 €)</strong>. Am luat o decizie fermă — trebuia să scap definitiv de această povară.</p>
+                    <p class="body1">În doar 6 luni de zile, între <strong>20 iunie și 19 decembrie 2024</strong>, am achitat integral tot creditul. Eram extrem de motivat și aveam un singur scop. Pentru a reuși:</p>
+                    <ul class="about-list">
+                        <li class="body1">Am locuit cu părinții pentru a reduce cheltuielile de trai la minimum.</li>
+                        <li class="body1">Mi-am retras fondurile din pilonul de pensie (<em>retirement</em>) acumulat în Danemarca.</li>
+                        <li class="body1">Am lichidat toate investițiile rămase.</li>
+                        <li class="body1">Am vândut tot ce aveam de valoare — de la monitorul de la calculator, ceasurile de mână, până și din perechile de încălțăminte.</li>
+                    </ul>
+                    <p class="body1">Pe <strong>19 decembrie 2024</strong>, am achitat ultimul bănuț și am devenit liber de datorii.</p>
+                </div>
+
+                <div class="about-step">
+                    <h4>3. Ce am descoperit după: zidul informațional din Moldova</h4>
+                    <p class="body1">Scăpat de datorii, mi-am stabilit o regulă clară: să investesc lunar între 15% și 20% din venitul net în fonduri indexate (ETF-uri). Când am încercat să aplic asta din Moldova, m-am lovit de o lipsă totală de informații locale. Majoritatea celor din jur tranzacționau doar criptomonede sau nu auziseră de fonduri indexate ori de brokeri internaționali compatibili cu țara noastră.</p>
+                </div>
+
             </div>
-        </div>
 
+        <!-- PRINCIPII (include misiunea) -->
         <div class="card about-card">
-            <h3>Principiile în care credem</h3>
+            <h4>Principiile în care credem</h4>
+            <p class="body2">Experiența fondatorului ne-a arătat ce lipsea în Moldova, așa că am creat platforma pe care ne-am fi dorit să o găsim. Scopul nostru este simplu: să te ajutăm să eviți greșelile pe care le-am făcut noi, să scapi de datorii și să-ți construiești pas cu pas independența financiară. Iată ce ne ghidează:</p>
 
             <div class="about-text">
-                <p class="body2">Fără limbaj de lemn:<br>Explicăm totul pe limba noastră, clar și fără brizbrizuri financiare menite să te bage în ceață.</p>
-                <p class="body2">100% Independent și Gratuit:<br>Calculatoarele și instrumentele noastre sunt făcute să te ajute, fără comisioane ascunse și fără promovare mascată pentru credite cu dobânzi uriașe.</p>
-                <p class="body2">Confidențialitate totală:<br>Datele tale financiare rămân la tine. Noi îți oferim doar unelte curate ca să vezi unde se duc banii tăi.</p>
+                <p class="body2"><strong>Scapă de datorii.</strong><br>Cel care împrumută este sclavul creditorului. Datoriile ne iau libertatea de a alege, de aceea le punem pe primul loc.</p>
+                <p class="body2"><strong>Nu-ți finanța stilul de viață din credit.</strong><br>Creditul nu înlocuiește veniturile. Dacă nu îți permiți ceva din banii tăi, nu îți permiți.</p>
+                <p class="body2"><strong>Cheltuiește mai puțin decât câștigi.</strong><br>Nu salariul mare te face înstărit, ci diferența dintre ce câștigi și ce cheltuiești.</p>
+                <p class="body2"><strong>Plătește-te pe tine primul.</strong><br>Pune deoparte o parte fixă din venit, la începutul lunii, înainte să începi să cheltuiești.</p>
+                <p class="body2"><strong>Investește simplu și pe termen lung.</strong><br>Fonduri indexate (ETF-uri), nu speculații pe acțiuni riscante sau criptomonede.</p>
+                <p class="body2"><strong>Fără limbaj de lemn.</strong><br>Explicăm totul clar, pe limba noastră, fără brizbrizuri financiare menite să te bage în ceață.</p>
+                <p class="body2"><strong>100% gratuit și independent.</strong><br>Nu vindem cursuri, nu avem reclame și nu promovăm produse financiare îndoielnice sau credite cu dobânzi uriașe.</p>
+                <p class="body2"><strong>Practic și adaptat Moldovei.</strong><br>Ghiduri transparente și actualizate despre economisire, buget, venituri și investiții accesibile de aici, din Moldova.</p>
+                <p class="body2"><strong>Confidențialitate totală.</strong><br>Datele tale financiare rămân la tine. Noi îți oferim doar unelte curate ca să vezi unde se duc banii tăi.</p>
             </div>
 
             <a class="btn" href="calculatoare.html"><span class="btn-text">Află Mai Mult</span></a>
@@ -87,25 +122,24 @@
 
     </section>
 
+    <div class="section-break"></div>
+
     <!-- CONTACT -->
     <section class="about-contact" id="contact">
-        <div class="about-hero about-hero--band">
-            <img class="about-hero-img" src="images/Contact.webp" alt="" loading="lazy">
-
-            <div class="about-hero-content">
-                <h2 class="about-hero-title">Contactează-ne</h2>
-                <p class="body1 about-hero-lead">Întrebări, probleme sau pur și simplu o părere – suntem <strong>aici pentru tine</strong>.</p>
-            </div>
+        <div class="about-block">
+            <h3>Contactează-ne</h3>
+            <p class="body1">Întrebări, probleme sau pur și simplu o părere – suntem <strong>aici pentru tine</strong>.</p>
+            <img class="about-contact-img" src="images/Contact.webp" alt="" width="1200" height="675" loading="lazy">
         </div>
 
         <div class="about-block">
-            <h3>Ai o întrebare rapidă? Verifică mai întâi Întrebările Frecvente</h3>
+            <h4>Ai o întrebare rapidă? Verifică mai întâi Întrebările Frecvente</h4>
             <p class="body2">O mare parte din nelămuriri — cum ar fi introducerea veniturilor, cheltuielile anuale sau cum funcționează regula 50-30-20 — au deja răspunsuri clare acolo.</p>
             <a class="btn" href="#faq"><span class="btn-text">Click Aici</span></a>
         </div>
 
         <div class="card about-card">
-            <h3>Nu ai găsit răspunsul pe care îl căutai?</h3>
+            <h4>Nu ai găsit răspunsul pe care îl căutai?</h4>
             <p class="body2">Scrie-ne direct pe rețelele de socializare sau email pentru idei de îmbunătățire, feedback, întrebări la care FAQ-ul nu a răspuns sau propuneri de colaborare de oricare fel.</p>
 
             <div class="contact-list">
@@ -130,7 +164,7 @@
         </div>
 
         <div class="card about-card">
-            <h3>Vrei o analiză detaliată a situației tale financiare?</h3>
+            <h4>Vrei o analiză detaliată a situației tale financiare?</h4>
             <p class="body2">Dacă simți că ai nevoie de un <strong>feedback personalizat</strong> și claritate pe bugetul tău, completează formularul nostru dedicat, <strong>mai jos</strong>.</p>
             <a class="btn" href="https://forms.gle/tHDjZBzbqGx8Cw5T6" target="_blank" rel="noopener"><span class="btn-text">Click Aici</span></a>
             <p class="body2">După completare, vom analiza datele și vom lua noi legătura cu tine.</p>

@@ -1636,7 +1636,6 @@ body.menu-locked {
     display: flex;
     flex-direction: column;
     gap: 40px;
-    padding-top: 24px;      /* space between the top image and "Misiunea Noastră" */
     padding-bottom: 8px;
 }
 
@@ -1684,72 +1683,134 @@ body.menu-locked {
 .about .faq .answer { padding: 0 8px 8px 8px; }
 .about .faq .answer p { color: var(--color-text-primary); }
 
-/* ===== ABOUT: IMAGE HEROES ===== */
+/* ===== ABOUT: CONTACT IMAGE ===== */
 
-.about-hero {
-    --hero-h: 320px;                  /* visible height, same for both images */
-    position: relative;
-    display: flex;
-    align-items: flex-end;
-    overflow: hidden;
-    background: var(--color-green);   /* shows while the image loads */
-}
-
-/* top hero: pulled up behind the sticky header (header block = 90px), edge to edge */
-.about-hero--top {
-    margin-top: -90px;
-    min-height: calc(var(--hero-h) + 90px);   /* +90px = the part hidden behind the header */
-}
-
-/* contact band: breaks out of the 24px page margins, edge to edge */
-.about-hero--band {
-    margin-inline: -24px;
-    min-height: var(--hero-h);
-}
-
-.about-hero-img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+/* contact image: rounded card, same radius as the portrait */
+.about-contact-img {
     display: block;
-}
-
-/* dark gradient so the white text is always readable */
-.about-hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        to bottom,
-        rgba(0,0,0,0.10) 0%,
-        rgba(0,0,0,0.25) 40%,
-        rgba(0,0,0,0.75) 100%
-    );
-}
-
-.about-hero-content {
-    position: relative;
-    z-index: 1;
     width: 100%;
-    padding: 24px 24px 32px;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 8px;
+    background: var(--color-card-border);
+}
+
+/* ===== ABOUT: STORY (quote, steps, bullet lists) ===== */
+
+/* founder quote: white card with an orange bar on the left */
+.about-quote {
+    margin: 0;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: var(--color-card);
+    border: 1px solid var(--color-card-border);
+    border-left: 4px solid var(--color-orange);
+    border-radius: 8px;
+}
+
+.about-quote blockquote {
+    margin: 0;
+    padding: 0;
+}
+
+.about-quote blockquote p {
+    font-family: var(--font-display);
+    font-size: var(--fs-h6);
+    line-height: var(--lh-h6);
+    color: var(--color-text-primary);
+}
+
+.about-quote figcaption {
+    font-family: var(--font-body);
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+    color: var(--color-text-secondary);
+}
+
+.about-quote figcaption strong {
+    color: var(--color-text-primary);
+}
+
+/* story steps: 24px between steps, 16px inside each */
+.about-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.about-step {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-.about-hero .about-hero-title {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: var(--fs-h1);
-    line-height: var(--lh-h1);
-    letter-spacing: -0.03em;
-    color: #fff;
+/* bullet list with an orange dot */
+.about-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
-.about-hero .about-hero-lead {
-    color: rgba(255,255,255,0.88);
-    max-width: 420px;
+.about-list li {
+    position: relative;
+    padding-left: 20px;
 }
+
+.about-list li::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-text-primary);
+}
+
+/* the mission block: title, text, list and closing line 16px apart */
+.about-block .about-list { margin: 0; }
+
+/* ===== ABOUT: FOUNDER (portrait + quote) ===== */
+
+.about-founder {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.about-portrait {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center 20%;   /* keeps the face in frame if the box gets cropped */
+    border-radius: 8px;
+    background: var(--color-card-border);
+}
+
+/* wider screens: portrait on the left, quote on the right */
+@media (min-width: 768px) {
+    .about-founder {
+        flex-direction: row;
+        align-items: stretch;
+        gap: 24px;
+    }
+
+    .about-portrait {
+        width: 40%;
+        flex-shrink: 0;
+    }
+
+    .about-founder .about-quote {
+        flex: 1;
+        justify-content: center;
+    }
+}
+
