@@ -1,131 +1,145 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Financial Calculators</title>
-
-<style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #f4f6f9, #e9eef5);
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-    }
-
-    .container {
-        max-width: 900px;
-        width: 100%;
-        text-align: center;
-    }
-
-    h1 {
-        font-size: 34px;
-        margin-bottom: 10px;
-        color: #222;
-    }
-
-    p {
-        color: #666;
-        margin-bottom: 40px;
-        font-size: 16px;
-    }
-
-    .cards {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-    }
-
-    @media (max-width: 700px) {
-        .cards {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    .card {
-        background: white;
-        padding: 25px;
-        border-radius: 18px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-        cursor: pointer;
-        transition: 0.25s ease;
-        text-decoration: none;
-        color: inherit;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba(0,0,0,0.12);
-    }
-
-    .icon {
-        font-size: 40px;
-        margin-bottom: 10px;
-    }
-
-    .title {
-        font-size: 20px;
-        font-weight: bold;
-        margin-bottom: 8px;
-    }
-
-    .desc {
-        font-size: 14px;
-        color: #666;
-        line-height: 1.5;
-    }
-
-    .tag {
-        position: absolute;
-        top: 12px;
-        right: 12px;
-        background: #e63b2e;
-        color: white;
-        font-size: 12px;
-        padding: 4px 8px;
-        border-radius: 8px;
-    }
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculatoare – Dă-mi Banul Înapoi</title>
+    <meta name="description" content="Calculatoare financiare gratuite pentru Moldova: buget, salariu, investiții și altele.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/svg+xml" href="images/logo-small.svg">
 </head>
 
 <body>
 
-<div class="container">
+<!-- Header -->
+<header class="header">
 
-    <h1>Financial Calculators</h1>
-    <p>Quickly calculate budgets and salaries with simple, fast tools designed for Moldova.</p>
-
-    <div class="cards">
-
-        <a href="calculator-de-buget.html" class="card">
-            <div class="tag">Budget</div>
-            <div class="icon">💰</div>
-            <div class="title">Budget Calculator</div>
-            <div class="desc">
-                Plan your monthly budget, track income and expenses, and manage your money smarter.
-            </div>
+    <div class="left">
+        <a href="index.html">
+            <img src="images/logo-text.svg" class="logo">
         </a>
+    </div>
 
-        <a href="calculator-de-salariu.html" class="card">
-            <div class="tag">Salary</div>
-            <div class="icon">📊</div>
-            <div class="title">Salary Calculator</div>
-            <div class="desc">
-                Convert net, gross, and total salary with Moldova tax rules in seconds.
+    <div class="right">
+
+        <div class="lang-dropdown">
+
+            <button class="lang-btn" id="langBtn">
+                <img src="images/flag-romania.svg" id="langFlag">
+            </button>
+
+            <div class="lang-menu" id="langMenu">
+
+                <button class="lang-option" data-lang="RO">
+                    <img src="images/flag-romania.svg">
+                    <span>Română</span>
+                </button>
+
+                <button class="lang-option" data-lang="RU">
+                    <img src="images/flag-russia.svg">
+                    <span>Русский</span>
+                </button>
+
             </div>
-        </a>
+
+        </div>
+        <img src="images/menu-open.svg" class="menu">
 
     </div>
 
-</div>
+</header>
+
+<main class="page-body calc-hub">
+
+    <section class="hub-intro">
+        <h3>Calculatoare</h3>
+        <p class="body1"><strong>Alege</strong> un calculator de <strong>mai jos</strong> pentru a-ți planifica mai bine finanțele.</p>
+
+        <picture>
+            <source type="image/avif" srcset="images/calculatoare.avif">
+            <source type="image/webp" srcset="images/calculatoare.webp">
+            <img class="hub-hero-img" src="images/calculatoare.jpg" alt="" width="736" height="414" loading="eager" fetchpriority="high">
+        </picture>
+    </section>
+
+    <section class="hub-list">
+        <a class="calc-card" href="calculator-de-buget.html">
+            <span class="calc-card-icon"><img src="images/budget.png" alt="" width="22" height="22"></span>
+            <h4 class="calc-card-title">Calculator de buget</h4>
+            <p class="body2 calc-card-desc">Organizează-ți <strong>veniturile</strong> și <strong>cheltuielile</strong> lunare pentru a vedea exact <strong>unde se duc</strong> banii tăi.</p>
+            <span class="calc-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></span>
+        </a>
+
+        <a class="calc-card" href="calculator-de-salariu.html">
+            <span class="calc-card-icon"><img src="images/venit.svg" alt="" width="22" height="22"></span>
+            <h4 class="calc-card-title">Calculator de salariu</h4>
+            <p class="body2 calc-card-desc">Calculează-ți exact <strong>salariul net</strong> și <strong>contribuțiile sociale</strong> deduse lunar.</p>
+            <span class="calc-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></span>
+        </a>
+
+        <a class="calc-card" href="calculator-de-investitii.html">
+            <span class="calc-card-icon"><img src="images/investitii.png" alt="" width="22" height="22"></span>
+            <h4 class="calc-card-title">Calculator de investiții</h4>
+            <p class="body2 calc-card-desc">Estimează cum va <strong>crește portofoliul tău</strong> în timp prin puterea <strong>dobânzii</strong> compuse.</p>
+            <span class="calc-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></span>
+        </a>
+
+        <a class="calc-card" href="calculator-de-ipoteca.html">
+            <span class="calc-card-icon"><img src="images/locuință.svg" alt="" width="22" height="22"></span>
+            <h4 class="calc-card-title">Calculator de ipotecă</h4>
+            <p class="body2 calc-card-desc">Calculează <strong>rata lunară</strong> pentru viitoarea ta locuință, incluzând <strong>dobânzile</strong> și <strong>prima rată</strong>.</p>
+            <span class="calc-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></span>
+        </a>
+
+        <a class="calc-card" href="calculator-de-imprumut.html">
+            <span class="calc-card-icon"><img src="images/datorii.svg" alt="" width="22" height="22"></span>
+            <h4 class="calc-card-title">Calculator de împrumut</h4>
+            <p class="body2 calc-card-desc">Află rapid care va fi <strong>rata lunară</strong> și <strong>dobânda</strong> totală pentru împrumutul dorit.</p>
+            <span class="calc-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></span>
+        </a>
+
+        <a class="calc-card" href="calculator-de-pensionare.html">
+            <span class="calc-card-icon"><img src="images/pensionare.png" alt="" width="22" height="22"></span>
+            <h4 class="calc-card-title">Calculator de pensionare</h4>
+            <p class="body2 calc-card-desc">Află când poți <strong>ieși la pensie</strong> și de ce fonduri ai nevoie pentru a-ți menține stilul de viață.</p>
+            <span class="calc-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></span>
+        </a>
+    </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <img
+        src="images/logo-text.svg"
+        alt="Dă-mi Banul Înapoi"
+        class="footer-logo"
+    />
+
+    <div class="footer-links">
+        <a href="despre.html">Despre noi</a>
+        <a href="despre.html#contact">Contactează-ne</a>
+    </div>
+
+    <div class="social-icons">
+
+        <a href="https://www.facebook.com/damibanulinapoi/">
+            <img src="images/facebook.svg" alt="Facebook">
+        </a>
+
+        <a href="https://www.instagram.com/damibanulinapoi/">
+            <img src="images/instagram.svg" alt="Instagram">
+        </a>
+
+        <a href="https://www.youtube.com/@damibanulinapoi/">
+            <img src="images/youtube.svg" alt="YouTube">
+        </a>
+    </div>
+
+    <p class="footer-copy">© 2026 Dă-mi Banul Înapoi</p>
+</footer>
+
+<script src="js/script.js"></script>
 
 </body>
 </html>
