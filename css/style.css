@@ -335,13 +335,14 @@ body {
 }
 
 .hero-back {
-    display: block;
-    width: fit-content;
+    display: inline-block;
+    align-self: flex-start;
     font-family: var(--font-body);
     font-size: var(--fs-body2);
     line-height: 24px;
     color: var(--color-orange);
     text-decoration: none;
+    margin-bottom: -8px;   /* hero gap is 16px, so 16 - 8 = 8px to the title */
 }
 
 .hero-back:hover,
