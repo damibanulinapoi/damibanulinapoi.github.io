@@ -335,8 +335,8 @@ body {
 }
 
 .hero-back {
-    display: inline-block;
-    align-self: flex-start;
+    display: block;
+    width: fit-content;
     font-family: var(--font-body);
     font-size: var(--fs-body2);
     line-height: 24px;
