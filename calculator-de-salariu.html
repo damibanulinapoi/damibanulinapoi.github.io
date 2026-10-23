@@ -51,15 +51,7 @@
 <div class="page-body">
     <!-- SECTION CALCULATOR HERO -->
     <section class="calculator-hero">
-        <nav class="breadcrumb" aria-label="Breadcrumb">
-            <a href="/">acasă</a>
-            <span class="separator">/</span>
-
-            <a href="/calculatoare">calculatoare</a>
-            <span class="separator">/</span>
-
-            <span>calculator de salariu</span>
-        </nav>
+        <a href="calculatoare.html" class="hero-back">← Calculatoare</a>
 
         <h3>Calculator de Salariu</h3>
 
@@ -236,9 +228,15 @@
 
                 </div>
 
-                <button id="calculează-btn" class="btn-wide" disabled>
-                    <span class="btn-text">Calculează</span>
-                </button>
+                <div class="btn-row">
+                    <button id="calculează-btn" class="btn-wide" disabled>
+                        <span class="btn-text">Calculează</span>
+                    </button>
+
+                    <button type="button" id="reset-btn" class="btn-wide btn-reset">
+                        <span class="btn-text">Reset Opțiuni</span>
+                    </button>
+                </div>
 
 <div class="resultat">
 
@@ -277,14 +275,14 @@
     </div>
 
     <div class="result-row">
-        <p class="body2" id="socialLabel">Fond social angajator (CNAS)</p>
+        <p class="body2" id="socialLabel">CNAS angajator</p>
         <p class="body2" id="socialResult">0 lei</p>
     </div>
 
     <div class="income-divider income-divider--dotted"></div>
 
     <div class="result-row">
-        <p class="body2" id="medicalLabel">CNAM (asigurare medicală angajat)</p>
+        <p class="body2" id="medicalLabel">CNAM angajat</p>
         <p class="body2" id="medicalResult">0 lei</p>
     </div>
 

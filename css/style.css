@@ -279,7 +279,7 @@ body {
     padding: 8px;
     border-radius: 8px;
     background: var(--color-card);
-    border: 1px solid var(--color-card-border);
+    box-shadow: inset 0 0 0 1px var(--color-card-border);
     z-index: 100;
 }
 
@@ -295,7 +295,7 @@ body {
     gap: 8px;
     width: 100%;
     padding: 8px 8px;
-    border: 1px solid rgba(0,0,0,0.045);
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.045);
     background: white;
     cursor: pointer;
     transition: 0.2s;
@@ -334,15 +334,17 @@ body {
     gap: 24px;
 }
 
+/* TOP BACK LINK ("← Calculatoare")
+   .calculator-hero has a 16px gap, so -8px leaves 8px between the link and the title */
 .hero-back {
     display: inline-block;
     align-self: flex-start;
+    margin-bottom: -8px;
     font-family: var(--font-body);
     font-size: var(--fs-body2);
     line-height: 24px;
     color: var(--color-orange);
     text-decoration: none;
-    margin-bottom: -8px;   /* hero gap is 16px, so 16 - 8 = 8px to the title */
 }
 
 .hero-back:hover,
@@ -351,39 +353,6 @@ body {
 .hero-back:visited {
     color: var(--color-orange);
     text-decoration: none;
-}
-
-.breadcrumb {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 4px;
-}
-
-.breadcrumb a {
-    font-size: var(--fs-body2);
-    line-height: var(--lh-body2);
-    font-family: var(--font-body);
-    font-weight: normal;
-    color: var(--color-orange);
-    text-decoration: none;
-}
-
-.breadcrumb a:hover,
-.breadcrumb a:focus,
-.breadcrumb a:active,
-.breadcrumb a:visited {
-    color: var(--color-orange);
-    text-decoration: none;
-}
-
-.breadcrumb .separator,
-.breadcrumb span {
-    font-size: var(--fs-body2);
-    line-height: var(--lh-body2);
-    font-family: var(--font-body);
-    font-weight: normal;
-    color: var(--color-text-secondary);
 }
 
 /* IMAGE BOX */
@@ -430,7 +399,7 @@ body {
     display: flex;
     flex-direction: column;
     background: var(--color-card);
-    border: 1px solid var(--color-card-border);
+    box-shadow: inset 0 0 0 1px var(--color-card-border);
     border-radius: 8px;
 }
 
@@ -573,7 +542,7 @@ body {
 }
 
 .item {
-    border: 1px solid var(--color-card-border);
+    box-shadow: inset 0 0 0 1px var(--color-card-border);
     border-radius: 8px;
     background: var(--color-card);
     overflow: hidden;
@@ -789,7 +758,7 @@ body {
   display: flex;
   width: 100%;
   padding: 4px;
-  border: 1px solid #ccc;
+  box-shadow: inset 0 0 0 1px #ccc;
   border-radius: 8px;
   background: #fff;
   box-sizing: border-box;
@@ -809,6 +778,7 @@ body {
 /* Toggle: no outer border, pill-shaped options (Salariu net | Salariu brut | Salariu total) */
 .salary-row .segment {
   border: none;
+  box-shadow: none;
   background: transparent;
   padding: 0;
 }
@@ -865,6 +835,28 @@ body {
     padding: 10px 16px; 
 }
 
+/* Calculează + Resetează side by side: equal width, 8px apart */
+.btn-row {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-row .btn-wide {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+/* Resetează: light pink pill, orange regular text, grey ring (as in the design) */
+.btn-reset {
+    background-color: #FEF0EE;
+    box-shadow: inset 0 0 0 1px var(--color-card-border), inset 0 0 0 4px var(--color-card);
+}
+
+.btn-reset .btn-text {
+    color: var(--color-orange);
+    font-weight: 400;
+}
+
 .btn-text {
     font-family: var(--font-body);
     font-weight: 700;
@@ -913,7 +905,7 @@ body {
     display: flex;
     flex-direction: column;
     padding: 8px;
-    border: 1px solid var(--color-card-border);
+    box-shadow: inset 0 0 0 1px var(--color-card-border);
     border-radius: 4px;
     background: var(--color-card);
 }
@@ -1035,7 +1027,7 @@ body {
     display: flex;
     gap: 4px;
     padding: 4px;
-    border: 1px solid #ccc;
+    box-shadow: inset 0 0 0 1px #ccc;
     border-radius: 999px;
     background: #fff;
     box-sizing: border-box;
@@ -1225,7 +1217,7 @@ body {
     flex-direction: column;
     gap: 0;
     background: var(--color-card);
-    border: 1px solid var(--color-card-border);
+    box-shadow: inset 0 0 0 1px var(--color-card-border);
     border-radius: 8px;
     overflow: hidden;
 }
@@ -1363,7 +1355,7 @@ body {
     display: flex;
     gap: 4px;
     padding: 4px;
-    border: 1px solid #ccc;
+    box-shadow: inset 0 0 0 1px #ccc;
     border-radius: 999px;
     background: #fff;
     box-sizing: border-box;
@@ -1391,7 +1383,8 @@ body {
 
 .schedule-table-wrap {
     overflow-x: auto;
-    border: 1px solid var(--color-card-border);
+    outline: 1px solid var(--color-card-border);
+    outline-offset: -1px;
     border-radius: 8px;
 }
 
@@ -1568,7 +1561,8 @@ body.menu-locked {
 
 /* 50-30-20 check: three equal boxes, only the numbers change */
 .rule-card {
-    border: 1px solid var(--color-card-border);
+    outline: 1px solid var(--color-card-border);
+    outline-offset: -1px;
     border-radius: 8px;
     background: var(--color-card);
     overflow: hidden;
@@ -1698,7 +1692,7 @@ body.menu-locked {
 .contact-or { text-align: center; }
 
 /* FAQ rows as grey cards, answer inline under the question */
-.about .faq .item { background: #E3E3E7; border: none; border-radius: 4px;}
+.about .faq .item { background: #E3E3E7; border: none; box-shadow: none; border-radius: 4px;}
 .about .faq .answer { padding: 0 8px 8px 8px; }
 .about .faq .answer p { color: var(--color-text-primary); }
 
@@ -1725,7 +1719,7 @@ body.menu-locked {
     flex-direction: column;
     gap: 16px;
     background: var(--color-card);
-    border: 1px solid var(--color-card-border);
+    box-shadow: inset 0 0 0 1px var(--color-card-border);
     border-radius: 8px;
 }
 
@@ -1847,7 +1841,7 @@ body.menu-locked {
 .calc-hub {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 24px;
     max-width: 808px;
     margin-inline: auto;
     padding-inline: 24px;

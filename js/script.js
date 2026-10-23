@@ -28,8 +28,8 @@ const TXT = LANG === "ru" ? {
         exempt: "Освобождение", spouse: "Супруг(а)", dep: "Иждивенцы",
         dis: "Иждивенцы с инвалидностью", manual: "Освобождение вручную"
     },
-    social: "Социальный фонд работодателя (CNAS)",
-    medical: "CNAM (медицинское страхование работника)"
+    social: "CNAS работодателя",
+    medical: "CNAM работника"
 } : {
     lei: "lei",
     pers: "p.",
@@ -39,8 +39,8 @@ const TXT = LANG === "ru" ? {
         exempt: "Scutire", spouse: "Soț/soție", dep: "Persoane întreținute",
         dis: "Persoane cu dizabilitate", manual: "Scutire manuală"
     },
-    social: "Fond social angajator (CNAS)",
-    medical: "CNAM (asigurare medicală angajat)"
+    social: "CNAS angajator",
+    medical: "CNAM angajat"
 };
 
 /* =========================
@@ -585,6 +585,31 @@ calcBtn?.addEventListener("click", () => {
     set("totalTaxResult",     result.totalTaxes);
 
     document.querySelector(".resultat")?.classList.add("show");
+});
+
+/* =========================
+   RESET ADVANCED OPTIONS
+   Puts every advanced option back to the value written in the HTML
+   (CNAS 24%, CNAM 9%, IT Park Nu, Scutire normală, 0 persoane ...)
+========================= */
+
+document.getElementById("reset-btn")?.addEventListener("click", () => {
+
+    document.querySelectorAll("#advanced-options select").forEach(sel => {
+        const idx = [...sel.options].findIndex(o => o.defaultSelected);
+        sel.selectedIndex = idx === -1 ? 0 : idx;
+    });
+
+    document.querySelectorAll("#advanced-options input").forEach(inp => {
+        inp.value = inp.defaultValue;
+    });
+
+    updateAdvancedOverview();
+
+    // If results are already on screen, refresh them with the default options
+    if (document.querySelector(".resultat.show") && calcBtn && !calcBtn.disabled) {
+        calcBtn.click();
+    }
 });
 
 /* =========================
