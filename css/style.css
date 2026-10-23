@@ -334,6 +334,24 @@ body {
     gap: 24px;
 }
 
+.hero-back {
+    display: inline-block;
+    align-self: flex-start;
+    font-family: var(--font-body);
+    font-size: var(--fs-body2);
+    line-height: 24px;
+    color: var(--color-orange);
+    text-decoration: none;
+}
+
+.hero-back:hover,
+.hero-back:focus,
+.hero-back:active,
+.hero-back:visited {
+    color: var(--color-orange);
+    text-decoration: none;
+}
+
 .breadcrumb {
     display: flex;
     align-items: center;
@@ -1828,7 +1846,7 @@ body.menu-locked {
 .calc-hub {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 40px;
     max-width: 808px;
     margin-inline: auto;
     padding-inline: 24px;
