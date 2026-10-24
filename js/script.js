@@ -28,8 +28,8 @@ const TXT = LANG === "ru" ? {
         exempt: "Освобождение", spouse: "Супруг(а)", dep: "Иждивенцы",
         dis: "Иждивенцы с инвалидностью", manual: "Освобождение вручную"
     },
-    social: "Социальный фонд работодателя (CNAS)",
-    medical: "CNAM (медицинское страхование работника)"
+    social: "CNAS работодателя",
+    medical: "CNAM работника"
 } : {
     lei: "lei",
     pers: "p.",
@@ -39,8 +39,8 @@ const TXT = LANG === "ru" ? {
         exempt: "Scutire", spouse: "Soț/soție", dep: "Persoane întreținute",
         dis: "Persoane cu dizabilitate", manual: "Scutire manuală"
     },
-    social: "Fond social angajator (CNAS)",
-    medical: "CNAM (asigurare medicală angajat)"
+    social: "CNAS angajator",
+    medical: "CNAM angajat"
 };
 
 /* =========================
@@ -69,15 +69,18 @@ options.forEach(option => {
         // Pages whose Russian file name is different are listed here (RO file -> RU file).
         // Pages not listed keep the same file name in both languages.
         const PAGE_NAMES = {
-            "calculator-de-salariu.html": "калькулятор-зарплаты.html"
+            "calculator-de-salariu.html": "калькулятор-зарплаты.html",
+            "calculator-de-buget.html": "калькулятор-бюджета.html"
         };
         const PAGE_NAMES_REVERSE = Object.fromEntries(
             Object.entries(PAGE_NAMES).map(([ro, ru]) => [ru, ro])
         );
 
         const inRussian = document.documentElement.lang === "ru";
-        // decodeURIComponent: Cyrillic file names appear percent-encoded in the URL
-        const file = decodeURIComponent(location.pathname.split("/").pop() || "index.html");
+        // decodeURIComponent: Cyrillic file names appear percent-encoded in the URL.
+        // normalize: same letters always compare equal; ".html" is added when the host hides it.
+        let file = decodeURIComponent(location.pathname.split("/").pop() || "index.html").normalize("NFC");
+        if (!file.includes(".")) file += ".html";
 
         if (lang === "RU" && !inRussian) {
             location.href = "ru/" + encodeURIComponent(PAGE_NAMES[file] || file) + location.search;
@@ -110,12 +113,12 @@ if (siteHeader && menuIcon) {
     const MENU = LANG === "ru" ? [
         { label: "Калькуляторы", children: [
             { label: "Калькулятор зарплаты",  href: "калькулятор-зарплаты.html" },
-            { label: "Калькулятор бюджета",   href: "calculator-de-buget.html" },
+            { label: "Калькулятор бюджета",   href: "калькулятор-бюджета.html" },
             { label: "Калькулятор инвестиций", href: "calculator-de-investitii.html" }
         ]},
         { label: "Сравнение цен", href: "#" },
         { label: "Советы",        href: "#" },
-        { label: "О нас",         href: "#" }
+        { label: "О нас",         href: "despre.html" }
     ] : [
         { label: "Calculatoare", children: [
             { label: "Calculator de salariu",   href: "calculator-de-salariu.html" },
@@ -124,7 +127,7 @@ if (siteHeader && menuIcon) {
         ]},
         { label: "Comparații de prețuri", href: "#" },
         { label: "Sfaturi",               href: "#" },
-        { label: "Despre noi",            href: "#" }
+        { label: "Despre noi",            href: "despre.html" }
     ];
 
     const overlay = document.createElement("nav");
@@ -147,10 +150,9 @@ if (siteHeader && menuIcon) {
             row.className = "menu-row";
             row.append(label);
 
-            const chevron = document.createElement("img");
+            const chevron = document.createElement("span");
             chevron.className = "menu-chevron";
-            chevron.src = ROOT + "images/arrow-down.svg";
-            chevron.alt = "";
+            chevron.setAttribute("aria-hidden", "true");
             row.append(chevron);
 
             const sub = document.createElement("ul");
@@ -181,8 +183,11 @@ if (siteHeader && menuIcon) {
     overlay.append(list);
     document.body.append(overlay);
 
-    const menuSrc = menuIcon.getAttribute("src");
-    const closeSrc = menuSrc.replace("menu.svg", "close.svg");
+    // Same images folder as the icon already in the HTML (images/ or ../images/)
+    const imgDir   = menuIcon.getAttribute("src").replace(/[^/]*$/, "");
+    const menuSrc  = imgDir + "menu-open.svg";    // the 3 lines
+    const closeSrc = imgDir + "menu-close.svg";   // the X
+    menuIcon.setAttribute("src", menuSrc);
 
     menuIcon.setAttribute("role", "button");
     menuIcon.setAttribute("tabindex", "0");
@@ -316,11 +321,11 @@ segmentItems.forEach(item => {
 
         segmentItems.forEach(i => {
             i.classList.remove("active");
-            i.querySelector("span").className = "body1-secondary";
+            i.querySelector("span").className = "body2-secondary";
         });
 
         item.classList.add("active");
-        item.querySelector("span").className = "body1-red";
+        item.querySelector("span").className = "body2-red";
 
         calcMode = item.dataset.value;
 
@@ -375,7 +380,6 @@ if (advancedBtn && advancedOptions && advancedIcon) {
         const isOpen = advancedOptions.classList.toggle("show");
 
         advancedWrapper?.classList.toggle("is-open", isOpen);
-        advancedIcon.textContent = isOpen ? "−" : "+";
     });
 
     advancedOptions.querySelectorAll("select, input").forEach(el => {
@@ -581,6 +585,31 @@ calcBtn?.addEventListener("click", () => {
     set("totalTaxResult",     result.totalTaxes);
 
     document.querySelector(".resultat")?.classList.add("show");
+});
+
+/* =========================
+   RESET ADVANCED OPTIONS
+   Puts every advanced option back to the value written in the HTML
+   (CNAS 24%, CNAM 9%, IT Park Nu, Scutire normală, 0 persoane ...)
+========================= */
+
+document.getElementById("reset-btn")?.addEventListener("click", () => {
+
+    document.querySelectorAll("#advanced-options select").forEach(sel => {
+        const idx = [...sel.options].findIndex(o => o.defaultSelected);
+        sel.selectedIndex = idx === -1 ? 0 : idx;
+    });
+
+    document.querySelectorAll("#advanced-options input").forEach(inp => {
+        inp.value = inp.defaultValue;
+    });
+
+    updateAdvancedOverview();
+
+    // If results are already on screen, refresh them with the default options
+    if (document.querySelector(".resultat.show") && calcBtn && !calcBtn.disabled) {
+        calcBtn.click();
+    }
 });
 
 /* =========================
