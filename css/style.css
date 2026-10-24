@@ -20,42 +20,9 @@
 @font-face {
     font-family: 'Archivo';
     src: url('../fonts/Archivo-Regular.ttf') format('truetype');
-    font-weight: 400;
+    font-weight: normal;
     font-style: normal;
 }
-
-@font-face {
-    font-family: 'Archivo';
-    src: url('../fonts/Archivo-Bold.ttf') format('truetype');
-    font-weight: 700;
-    font-style: normal;
-}
-
-:root {
-    --font-body:    "Archivo", sans-serif;
-    --font-display: "Roca One", serif;
-
-    --fs-h1: 36.49px;  --lh-h1: 56px;
-    --fs-h2: 32.44px;  --lh-h2: 48px;
-    --fs-h3: 28.83px;  --lh-h3: 40px;
-    --fs-h4: 25.63px;  --lh-h4: 40px;
-    --fs-h5: 22.78px;  --lh-h5: 32px;
-    --fs-h6: 20.25px;  --lh-h6: 32px;
-    --fs-body1: 18px;  --lh-body1: 24px;
-    --fs-body2: 16px;  --lh-body2: 20px;
-    --fs-small: 14.22px; --lh-small: 18px;
-}
-
-h1, h3, h4, h5 {
-    font-family: var(--font-display);
-    font-weight: 400;
-    letter-spacing: -0.05em;
-    color: var(--color-text-primary);
-}
-h1 { font-size: var(--fs-h1); line-height: var(--lh-h1); }
-h3 { font-size: var(--fs-h3); line-height: var(--lh-h3); }
-h4 { font-size: var(--fs-h4); line-height: var(--lh-h4); }
-h5 { font-size: var(--fs-h5); line-height: var(--lh-h5); }
 
 h1, h2, h3, h4, h5, h6, p {
     margin: 0;
@@ -64,75 +31,59 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 h2 {
-    font-size: var(--fs-h2);
-    line-height: var(--lh-h2);
-    font-family: var(--font-display);
+    font-size: 25.23px;
+    line-height: 32px;
+    font-family: "Roca One", serif;
     font-weight: 400;
     letter-spacing: -0.05em;
     color: var(--color-text-primary);
 }
 
 h6 {
-    font-size: var(--fs-h6);
-    line-height: var(--lh-h6);
-    font-family: var(--font-body);
+    font-size: 15.75px;
+    line-height: 20px;
+    font-family: "Archivo", sans-serif;
     font-weight: normal;
     color: var(--color-text-primary);
 }
 
 .body1 {
-    font-size: var(--fs-body1);
-    line-height: var(--lh-body1);
-    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 16px;
+    font-family: "Archivo", sans-serif;
     font-weight: normal;
     color: var(--color-text-primary);
 }
 
-.body2-bold {
-    font-size: var(--fs-body2);
-    line-height: var(--lh-body2);
-    font-family: var(--font-body);
+.body1-bold {
+    font-size: 14px;
+    line-height: 16px;
+    font-family: "Archivo", sans-serif;
     font-weight: normal;
     color: var(--color-text-primary);
     font-weight: bold;
 }
 
-.body2-secondary {
-    font-size: var(--fs-body2);
-    line-height: var(--lh-body2);
-    font-family: var(--font-body);
+.body1-secondary {
+    font-size: 14px;
+    line-height: 16px;
+    font-family: "Archivo", sans-serif;
     font-weight: normal;
     color: var(--color-text-secondary);
 }
 
 .body2 {
-    font-size: var(--fs-body2);
-    line-height: var(--lh-body2);
-    font-family: var(--font-body);
+    font-size: 12.44px;
+    line-height: 16px;
+    font-family: "Archivo", sans-serif;
     font-weight: normal;
     color: var(--color-text-primary);
 }
 
-.small-secondary {
-    font-size: var(--fs-small);
-    line-height: var(--lh-small);
-    font-family: var(--font-body);
-    font-weight: normal;
-    color: var(--color-text-secondary);
-}
-
-.small {
-    font-size: var(--fs-small);
-    line-height: var(--lh-small);
-    font-family: var(--font-body);
-    font-weight: normal;
-    color: var(--color-text-primary);
-}
-
-.small-secondary {
-    font-size: var(--fs-small);
-    line-height: var(--lh-small);
-    font-family: var(--font-body);
+.body2-secondary {
+    font-size: 12.44px;
+    line-height: 16px;
+    font-family: "Archivo", sans-serif;
     font-weight: normal;
     color: var(--color-text-secondary);
 }
@@ -165,7 +116,7 @@ body {
 
   background-attachment: fixed;
 
-  font-family: var(--font-body);
+  font-family: 'Archivo', sans-serif;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
@@ -238,8 +189,6 @@ body {
 .menu {
     width: 32px;
     height: 32px;
-    min-width: 32px;
-    object-fit: contain;   /* hamburger and X always fill the same 32x32 box */
     display: block;
     flex-shrink: 0;
 }
@@ -279,7 +228,7 @@ body {
     padding: 8px;
     border-radius: 8px;
     background: var(--color-card);
-    box-shadow: inset 0 0 0 1px var(--color-card-border);
+    border: 1px solid var(--color-card-border);
     z-index: 100;
 }
 
@@ -295,17 +244,10 @@ body {
     gap: 8px;
     width: 100%;
     padding: 8px 8px;
-    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.045);
+    border: 1px solid rgba(0,0,0,0.045);
     background: white;
     cursor: pointer;
     transition: 0.2s;
-}
-
-.lang-option {
-    font-family: var(--font-body);
-    font-size: var(--fs-body2);
-    line-height: var(--lh-body2);
-    color: var(--color-text-primary);
 }
 
 .lang-option:hover {
@@ -334,25 +276,42 @@ body {
     gap: 24px;
 }
 
-/* TOP BACK LINK ("← Calculatoare")
-   .calculator-hero has a 16px gap, so -8px leaves 8px between the link and the title */
-.hero-back {
-    display: inline-block;
-    align-self: flex-start;
-    margin-bottom: -8px;
-    font-family: var(--font-body);
-    font-size: var(--fs-body2);
-    line-height: 24px;
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+
+    font-family: "Archivo", sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.breadcrumb a {
+    font-size: 14px;
+    line-height: 16px;
+    font-family: "Archivo", sans-serif;
+    font-weight: normal;
     color: var(--color-orange);
     text-decoration: none;
 }
 
-.hero-back:hover,
-.hero-back:focus,
-.hero-back:active,
-.hero-back:visited {
+.breadcrumb a:hover,
+.breadcrumb a:focus,
+.breadcrumb a:active,
+.breadcrumb a:visited {
     color: var(--color-orange);
     text-decoration: none;
+}
+
+.breadcrumb .separator,
+.breadcrumb span {
+    font-size: 14px;
+    line-height: 16px;
+    font-family: "Archivo", sans-serif;
+    font-weight: normal;
+    color: var(--color-text-secondary);
 }
 
 /* IMAGE BOX */
@@ -386,25 +345,25 @@ body {
 
 .section-break {
   height: 16px;
-  margin: 40px auto;
-  background: var(--color-card);
+  margin: 56px auto;
+  background: #F8F8F9;
   border-radius: 999px;
   box-shadow: inset 0 4px 4px -1px rgba(0, 0, 0, 0.05);
 }
 
 /* CARD SECTION */
 .income-section {
-    padding: 8px 8px;
+    padding: 8px;
     gap: 8px;
     display: flex;
     flex-direction: column;
     background: var(--color-card);
-    box-shadow: inset 0 0 0 1px var(--color-card-border);
+    border: 1px solid var(--color-card-border);
     border-radius: 8px;
+    box-sizing: border-box;
 }
 
 .income-divider {
-    margin: 0px 8px;
     height: 1px;
     background: rgba(0,0,0,0.045);
 }
@@ -425,7 +384,6 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 8px;
 }
 
 .income-icon {
@@ -441,9 +399,9 @@ body {
 }
 
 .income-description {
-    font-family: var(--font-body);
-    font-size: var(--fs-body2);
-    line-height: var(--lh-body2);
+    font-family: "Archivo", sans-serif;
+    font-size: 13px;
+    line-height: 16px;
     color: var(--color-text-secondary);
 }
 
@@ -455,41 +413,41 @@ body {
 
 /* INPUT */
 .income-input {
-    width: 96px;
-    height: 40px;
+    width: 80px;
+    height: 36px;
     border: 1px solid var(--color-card);
     border-radius: 4px;
     background: var(--color-background);
     box-sizing: border-box;
-    font-family: var(--font-body);
-    font-size: var(--fs-body2);
-    line-height: var(--lh-body2);
+    font-family: "Archivo", sans-serif;
+    font-size: 14px;
+    line-height: 16px;
     color: var(--color-text-primary);
     outline: none;
     flex-shrink: 0;
 
     text-align: right;
 
-    padding: 0 24px 0 8px;
+    padding: 0 20px 0 4px;
 }
 
 .expense-input {
-    width: 96px;
-    height: 40px;
+    width: 80px;
+    height: 36px;
     border: 1px solid var(--color-card);
     border-radius: 4px;
     background: var(--color-background);
     box-sizing: border-box;
-    font-family: var(--font-body);
-    font-size: var(--fs-body2);
-    line-height: var(--lh-body2);
+    font-family: "Archivo", sans-serif;
+    font-size: 14px;
+    line-height: 16px;
     color: var(--color-text-primary);
     outline: none;
     flex-shrink: 0;
 
     text-align: right;
 
-    padding: 0 24px 0 8px;
+    padding: 0 20px 0 4px;
 }
 
 /* remove placeholder styling (no longer needed) */
@@ -501,11 +459,10 @@ body {
 .currency {
     position: absolute;
     right: 4px;
-    font-size: var(--fs-body2);
+    font-size: 14px;
     color: var(--color-text-primary);
     pointer-events: none; /* not clickable */
     user-select: none;
-    line-height: var(--lh-body2);
 }
 
 /* REMOVE NUMBER ARROWS */
@@ -542,7 +499,7 @@ body {
 }
 
 .item {
-    box-shadow: inset 0 0 0 1px var(--color-card-border);
+    border: 1px solid var(--color-card-border);
     border-radius: 8px;
     background: var(--color-card);
     overflow: hidden;
@@ -556,36 +513,15 @@ body {
     cursor: pointer;
 }
 
-/* =====================================================
-   OPEN / CLOSE ICON (plus <-> minus)
-   One shared icon for every open/close control:
-   FAQ questions, "Opțiuni avansate", hamburger sub-menu.
-   The icons are inlined as data URIs, so they work on file://
-   and need no extra files. Color follows the text color.
-===================================================== */
-
-:root {
-    --icon-plus:  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 5v14M5 12h14' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
-    --icon-minus: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12h14' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
-}
-
-.icon,
-.menu-chevron {
-    display: block;
+.icon {
     width: 24px;
     height: 24px;
     flex-shrink: 0;
-    background-color: currentColor; /* follows the text color */
-    -webkit-mask: var(--icon-plus) no-repeat center / contain;
-    mask: var(--icon-plus) no-repeat center / contain;
+    transition: transform 0.25s ease;
 }
 
-/* Open state -> minus */
-.item.open .icon,
-.advanced-wrapper.is-open .icon,
-.menu-item.open .menu-chevron {
-    -webkit-mask: var(--icon-minus) no-repeat center / contain;
-    mask: var(--icon-minus) no-repeat center / contain;
+.item.open .icon {
+    transform: rotate(180deg);
 }
 
 .answer {
@@ -636,9 +572,9 @@ body {
 }
 
 .footer-links a {
-    font-family: var(--font-body);
-    font-size: var(--fs-small);
-    line-height: var(--lh-small);
+    font-family: 'Archivo', sans-serif;
+    font-size: 12px;
+    line-height: 14px;
     color: var(--color-text-primary);
     text-decoration: none;
 }
@@ -660,9 +596,9 @@ body {
 /* Copyright */
 .footer-copy {
     margin-top: 16px;
-    font-family: var(--font-body);
-    font-size: var(--fs-small);
-    line-height: var(--lh-small);
+    font-family: 'Archivo', sans-serif;
+    font-size: 12px;
+    line-height: 14px;
     color: var(--color-text-secondary);
 }
 
@@ -716,10 +652,10 @@ body {
 }
 
 .calc-hint-text {
-    font-family: var(--font-display);
+    font-family: "Roca One", serif;
     font-weight: 700;
-    font-size: var(--fs-body1);
-    line-height: var(--lh-body1);
+    font-size: 14px;
+    line-height: 16px;
     color: var(--color-text-primary);
 }
 
@@ -758,10 +694,11 @@ body {
   display: flex;
   width: 100%;
   padding: 4px;
-  box-shadow: inset 0 0 0 1px #ccc;
+  border: 1px solid #ccc;
   border-radius: 8px;
   background: #fff;
   box-sizing: border-box;
+  gap: 4px;
 }
 
 .segment-item {
@@ -778,17 +715,18 @@ body {
 /* Toggle: no outer border, pill-shaped options (Salariu net | Salariu brut | Salariu total) */
 .salary-row .segment {
   border: none;
-  box-shadow: none;
   background: transparent;
   padding: 0;
+  gap: 4px;
 }
 
 .salary-row .segment-item {
-  border-radius: 20px;
-  padding: 10px 8px;
+  border-radius: 999px;
+  padding: 8px 4px;
 }
 
 .salary-row .segment-item span {
+  font-size: 14px;
   white-space: nowrap;
 }
 
@@ -797,77 +735,49 @@ body {
   background: #FEF0EE;
 }
 
-.body2-red {
-    color: var(--color-orange);
-    font-size: var(--fs-body2);
-    font-weight: normal;
-    line-height: var(--lh-body2);
-    font-family: var(--font-body);
+.body1-red {
+  color: var(--color-orange);
+  font-size: 14px;
+  font-weight: normal;
 }
 
 /* BUTTON */
 .btn {
-    width: max-content; 
+    width: calc(100%);
+    height: 40px;
     background-color: var(--color-orange);
     border: none;
-    border-radius: 20px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     cursor: pointer;
-    text-decoration: none;
-    color: white;
-    padding: 10px 16px; 
-}
-
-.btn-wide {
-    background-color: var(--color-orange);
-    border: none;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    cursor: pointer;
-    text-decoration: none;
-    color: white;
-    padding: 10px 16px; 
-}
-
-/* Calculează + Resetează side by side: equal width, 8px apart */
-.btn-row {
-    display: flex;
-    gap: 8px;
-}
-
-.btn-row .btn-wide {
-    flex: 1 1 0;
-    min-width: 0;
-}
-
-/* Resetează: light pink pill, orange regular text, grey ring (as in the design) */
-.btn-reset {
-    background-color: #FEF0EE;
-    box-shadow: inset 0 0 0 1px var(--color-card-border), inset 0 0 0 4px var(--color-card);
-}
-
-.btn-reset .btn-text {
-    color: var(--color-orange);
-    font-weight: 400;
+    text-decoration: none; /* removes underline (for <a>) */
+    color: white; /* ensures text doesn't turn blue */
 }
 
 .btn-text {
-    font-family: var(--font-body);
+    font-family: "Roca One", serif;
     font-weight: 700;
-    font-size: var(--fs-body2);
-    line-height: var(--lh-body2);
+    font-size: 16px;
+    line-height: 16px;
     color: white;
 }
 
+/* Disabled (e.g. no amount entered yet) */
 .btn:disabled {
     background-color: var(--color-text-disabled);
     cursor: not-allowed;
+}
+
+.btn-icon {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 /* RESULTS */
@@ -904,9 +814,10 @@ body {
 .advanced-box {
     display: flex;
     flex-direction: column;
-    padding: 8px;
-    box-shadow: inset 0 0 0 1px var(--color-card-border);
-    border-radius: 4px;
+    gap: 8px;
+    padding: 9px;
+    border: 1px solid var(--color-card-border);
+    border-radius: 8px;
     background: var(--color-card);
 }
 
@@ -920,11 +831,13 @@ body {
     background: transparent;
     cursor: pointer;
     text-align: left;
-    color: var(--color-text-primary);
 }
 
-/* The plus/minus itself comes from the shared .icon rule above */
 .advanced-icon {
+    font-family: "Archivo", sans-serif;
+    font-size: 24px;
+    line-height: 16px;
+    color: var(--color-text-primary);
     margin-left: auto;
 }
 
@@ -950,19 +863,18 @@ body {
 
 .advanced-row select,
 .advanced-row input {
-    width: 132px;
-    height: 40px;
+    width: 120px;
+    height: 32px;
 
     border: 1px solid var(--color-card-border);
     border-radius: 4px;
     background: var(--color-card);
 
-    font-family: var(--font-body);
-    font-size: var(--fs-body2);
+    font-family: "Archivo", sans-serif;
+    font-size: 14px;
     color: var(--color-text-primary);
 
     padding: 0 8px;
-    line-height: var(--lh-body2);
 }
 
 /* Typed fields with a unit (%, lei, pers.): right-aligned like the main inputs */
@@ -972,7 +884,7 @@ body {
 
 .advanced-row .input-wrapper input {
     text-align: right;
-    padding: 0 36px 0 8px;
+    padding: 0 26px 0 8px;
     outline: none;
 }
 
@@ -980,10 +892,8 @@ body {
    numbers all end 8px before it -> identical spacing in every field */
 .advanced-row .input-wrapper .currency {
     right: auto;
-    left: calc(100% - 28px);
+    left: calc(100% - 18px);
     text-align: left;
-    font-size: var(--fs-body2);
-    line-height: var(--lh-body2);
 }
 
 /* dropdown values right-aligned too, with a small custom arrow */
@@ -1005,7 +915,7 @@ body {
 
 /* Overview of current values (hidden while expanded) */
 .advanced-overview {
-    line-height: var(--lh-body2);
+    line-height: 18px;
 }
 
 .advanced-wrapper.is-open .advanced-overview {
@@ -1027,7 +937,7 @@ body {
     display: flex;
     gap: 4px;
     padding: 4px;
-    box-shadow: inset 0 0 0 1px #ccc;
+    border: 1px solid #ccc;
     border-radius: 999px;
     background: #fff;
     box-sizing: border-box;
@@ -1045,10 +955,9 @@ body {
     transition: 0.2s ease;
     user-select: none;
     background: transparent;
-    font-size: var(--fs-small);
-    font-family: var(--font-body);
+    font-size: 13px;
+    font-family: "Archivo", sans-serif;
     color: var(--color-text-secondary);
-    line-height: var(--lh-small);
 }
 
 .tab-item.active {
@@ -1076,9 +985,9 @@ body {
 }
 
 .invest-row label {
-    font-size: var(--fs-body1);
-    line-height: var(--lh-body1);
-    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 16px;
+    font-family: "Archivo", sans-serif;
     color: var(--color-text-primary);
     flex: 1;
 }
@@ -1091,19 +1000,18 @@ body {
 }
 
 .invest-input {
-    width: 120px;
+    width: 110px;
     height: 36px;
     border: 1px solid var(--color-card-border);
     border-radius: 4px;
     background: var(--color-background);
     box-sizing: border-box;
-    font-family: var(--font-body);
-    font-size: var(--fs-body1);
+    font-family: "Archivo", sans-serif;
+    font-size: 14px;
     color: var(--color-text-primary);
     outline: none;
     text-align: right;
-    padding: 0 38px 0 8px;
-    line-height: var(--lh-body1);
+    padding: 0 30px 0 4px;
 }
 
 .invest-input:focus {
@@ -1118,11 +1026,10 @@ body {
 .invest-suffix {
     position: absolute;
     right: 6px;
-    font-size: var(--fs-small);
+    font-size: 13px;
     color: var(--color-text-secondary);
     pointer-events: none;
     user-select: none;
-    line-height: var(--lh-small);
 }
 
 .invest-select {
@@ -1130,14 +1037,13 @@ body {
     border: 1px solid var(--color-card-border);
     border-radius: 4px;
     padding: 0 8px;
-    font-size: var(--fs-body2);
-    font-family: var(--font-body);
+    font-size: 13px;
+    font-family: "Archivo", sans-serif;
     background: var(--color-background);
     color: var(--color-text-primary);
     outline: none;
-    width: 160px;
+    width: 150px;
     flex-shrink: 0;
-    line-height: var(--lh-body2);
 }
 
 /* Radio-style choice (contribute at beginning/end) */
@@ -1166,19 +1072,17 @@ body {
 }
 
 .radio-option span {
-    font-size: var(--fs-body2);
-    font-family: var(--font-body);
+    font-size: 13px;
+    font-family: "Archivo", sans-serif;
     color: var(--color-text-primary);
-    line-height: var(--lh-body2);
 }
 
 .section-label {
-    font-size: var(--fs-small);
-    font-family: var(--font-body);
+    font-size: 12px;
+    font-family: "Archivo", sans-serif;
     color: var(--color-text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    line-height: var(--lh-small);
 }
 
 /* ---- RESULTS ---- */
@@ -1198,18 +1102,16 @@ body {
 }
 
 .result-highlight .result-label {
-    font-size: var(--fs-small);
-    font-family: var(--font-body);
+    font-size: 12px;
+    font-family: "Archivo", sans-serif;
     color: rgba(255,255,255,0.8);
-    line-height: var(--lh-small);
 }
 
 .result-highlight .result-value {
-    font-family: var(--font-display);
-    font-size: var(--fs-h3);
+    font-family: "Roca One", serif;
+    font-size: 24px;
     font-weight: 700;
     color: #fff;
-    line-height: var(--lh-h3);
 }
 
 .result-rows {
@@ -1217,7 +1119,7 @@ body {
     flex-direction: column;
     gap: 0;
     background: var(--color-card);
-    box-shadow: inset 0 0 0 1px var(--color-card-border);
+    border: 1px solid var(--color-card-border);
     border-radius: 8px;
     overflow: hidden;
 }
@@ -1233,11 +1135,10 @@ body {
 .result-line:last-child { border-bottom: none; }
 
 .result-line .result-value {
-    font-family: var(--font-body);
-    font-size: var(--fs-body1);
+    font-family: "Archivo", sans-serif;
+    font-size: 14px;
     font-weight: bold;
     color: var(--color-text-primary);
-    line-height: var(--lh-body1);
 }
 
 /* Pie chart + legend */
@@ -1294,10 +1195,9 @@ body {
 .legend-dot.interest  { background: #E84231; }
 
 .legend-item span {
-    font-size: var(--fs-small);
-    font-family: var(--font-body);
+    font-size: 12px;
+    font-family: "Archivo", sans-serif;
     color: var(--color-text-secondary);
-    line-height: var(--lh-small);
 }
 
 /* Vertical bar (stick) chart */
@@ -1317,16 +1217,15 @@ body {
     justify-content: flex-end;
     gap: 6px;
     flex: 1;
-    min-width: 64px;
+    min-width: 28px;
     height: 100%;
 }
 
 .stick-value {
-    font-size: var(--fs-small);
-    font-family: var(--font-body);
+    font-size: 10px;
+    font-family: "Archivo", sans-serif;
     color: var(--color-text-primary);
     white-space: nowrap;
-    line-height: var(--lh-small);
 }
 
 .stick-track {
@@ -1343,11 +1242,10 @@ body {
 .stick-interest { width: 100%; background: #E84231; }
 
 .stick-label {
-    font-size: var(--fs-small);
-    font-family: var(--font-body);
+    font-size: 10px;
+    font-family: "Archivo", sans-serif;
     color: var(--color-text-secondary);
     white-space: nowrap;
-    line-height: var(--lh-small);
 }
 
 /* Schedule table */
@@ -1355,7 +1253,7 @@ body {
     display: flex;
     gap: 4px;
     padding: 4px;
-    box-shadow: inset 0 0 0 1px #ccc;
+    border: 1px solid #ccc;
     border-radius: 999px;
     background: #fff;
     box-sizing: border-box;
@@ -1369,10 +1267,9 @@ body {
     cursor: pointer;
     transition: 0.2s ease;
     user-select: none;
-    font-size: var(--fs-small);
-    font-family: var(--font-body);
+    font-size: 13px;
+    font-family: "Archivo", sans-serif;
     color: var(--color-text-secondary);
-    line-height: var(--lh-small);
 }
 
 .schedule-toggle .freq-item.active {
@@ -1383,18 +1280,16 @@ body {
 
 .schedule-table-wrap {
     overflow-x: auto;
-    outline: 1px solid var(--color-card-border);
-    outline-offset: -1px;
+    border: 1px solid var(--color-card-border);
     border-radius: 8px;
 }
 
 table.schedule-table {
     width: 100%;
     border-collapse: collapse;
-    font-family: var(--font-body);
-    font-size: var(--fs-small);
+    font-family: "Archivo", sans-serif;
+    font-size: 12.5px;
     min-width: 480px;
-    line-height: var(--lh-small);
 }
 
 table.schedule-table th {
@@ -1440,29 +1335,24 @@ table.schedule-table tr.year-end td {
 }
 
 /* Header while the menu is open: full width, flat, divider underneath */
-/* Padding is chosen so the logo, flag and menu icon stay exactly where they were:
-   normal header = 16px margin + 1px border + 16px side padding (33px) / 8px top padding (25px).
-   Total height 25 + 40 + 24 + 1 = 90px (the overlay below starts at 90px). */
 .header.menu-open {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     margin: 0;
-    padding: 25px 33px 24px;
+    padding: 24px 32px;
     border: none;
     border-bottom: 1px solid var(--color-card-border);
     border-radius: 0;
-    /* Inner line: 9px in from every edge of the bar, same as the normal header */
-    outline: 1px solid rgba(0,0,0,0.045);
-    outline-offset: -9px;
+    outline: none;
 }
 
 /* Full-screen panel under the header */
 .menu-overlay {
     display: none;
     position: fixed;
-    top: 90px;
+    top: 88px;
     left: 0;
     right: 0;
     bottom: 0;
@@ -1509,7 +1399,16 @@ body.menu-locked {
     cursor: pointer;
 }
 
-/* The plus/minus on the sub-menu row comes from the shared .menu-chevron rule above */
+.menu-chevron {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    transition: transform 0.25s ease;
+}
+
+.menu-item.open .menu-chevron {
+    transform: rotate(180deg);
+}
 
 /* Sub-list (e.g. the calculators) */
 .menu-sub {
@@ -1536,18 +1435,6 @@ body.menu-locked {
     color: var(--color-orange);
 }
 
-/* "Pe scurt": rows sit 8px from the card edges, 8px apart */
-.calculator-categorie > .item:has(> .result-row) {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 8px;
-}
-
-.calculator-categorie > .item:has(> .result-row) .income-divider {
-    margin: 0;
-}
-
 /* "Ce e asta?" link under the 50-30-20 title */
 .rule-link {
     display: inline-block;
@@ -1561,8 +1448,7 @@ body.menu-locked {
 
 /* 50-30-20 check: three equal boxes, only the numbers change */
 .rule-card {
-    outline: 1px solid var(--color-card-border);
-    outline-offset: -1px;
+    border: 1px solid var(--color-card-border);
     border-radius: 8px;
     background: var(--color-card);
     overflow: hidden;
@@ -1594,17 +1480,17 @@ body.menu-locked {
 .rule-seg--savings { background: var(--color-green);  color: #fff; }
 
 .rule-pct {
-    font-family: var(--font-body);
+    font-family: "Archivo", sans-serif;
     font-weight: bold;
-    font-size: var(--fs-body1);
-    line-height: var(--lh-body1);
+    font-size: 14px;
+    line-height: 16px;
 }
 
 .rule-name,
 .rule-amt {
-    font-family: var(--font-display);
-    font-size: var(--fs-body2);
-    line-height: var(--lh-body2);
+    font-family: "Roca One", serif;
+    font-size: 12.44px;
+    line-height: 16px;
 }
 
 .rule-hint {
@@ -1615,7 +1501,7 @@ body.menu-locked {
 }
 
 .rule-hint-emoji {
-    font-size: var(--fs-h2);
+    font-size: 32px;
     line-height: 1;
     flex-shrink: 0;
 }
@@ -1641,306 +1527,3 @@ body.menu-locked {
 .hint-link[hidden] {
     display: none;
 }
-
-/* ===== ABOUT PAGE ===== */
-
-/* 40px between every section: hero blocks, card, section breaks, contact, FAQ */
-.about .page-body {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    padding-bottom: 8px;
-}
-
-/* section 1 (about): its blocks and the card are 40px apart */
-.about-intro { display: flex; flex-direction: column; gap: 40px; }
-
-.about-block {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.about-text { display: flex; flex-direction: column; gap: 24px; }
-
-/* grey cards (the base .card only sets padding/radius/orange text) */
-.about-card {
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    border-radius: 8px;
-    gap: 16px;
-    background: #E3E3E7;
-    color: var(--color-text-primary);
-}
-.about-card .about-text { gap: 24px; }
-
-/* contact: intro block and the three cards are 40px apart */
-.about-contact { display: flex; flex-direction: column; gap: 40px; scroll-margin-top: 96px; }
-
-/* the page gap already gives the 40px, so the break needs no margin of its own */
-.about .section-break { margin: 0 auto; width: 100%; }
-
-/* social / email pills */
-.contact-list { display: flex; flex-direction: column; gap: 8px; }
-.contact-pill {
-    display: flex; align-items: center; justify-content: center; gap: 12px;
-    height: 40px; border-radius: 20px;
-    background: #D6D6DC; text-decoration: none;
-}
-.contact-pill img { width: 24px; height: 24px; display: block; }
-.contact-or { text-align: center; }
-
-/* FAQ rows as grey cards, answer inline under the question */
-.about .faq .item { background: #E3E3E7; border: none; box-shadow: none; border-radius: 4px;}
-.about .faq .answer { padding: 0 8px 8px 8px; }
-.about .faq .answer p { color: var(--color-text-primary); }
-
-/* ===== ABOUT: CONTACT IMAGE ===== */
-
-/* contact image: rounded card, same radius as the portrait */
-.about-contact-img {
-    display: block;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    border-radius: 8px;
-    background: var(--color-card-border);
-}
-
-/* ===== ABOUT: STORY (quote, steps, bullet lists) ===== */
-
-/* founder quote: white card with an orange bar on the left */
-.about-quote {
-    margin: 0;
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    background: var(--color-card);
-    box-shadow: inset 0 0 0 1px var(--color-card-border);
-    border-radius: 8px;
-}
-
-.about-quote blockquote {
-    margin: 0;
-    padding: 0;
-}
-
-.about-quote blockquote p {
-    font-family: var(--font-body);
-    font-size: var(--fs-body1);
-    line-height: var(--lh-body1);
-    color: var(--color-text-primary);
-}
-
-.about-quote figcaption {
-    font-family: var(--font-body);
-    font-size: var(--fs-small);
-    line-height: var(--lh-small);
-    color: var(--color-text-secondary);
-}
-
-.about-quote figcaption strong {
-    color: var(--color-text-primary);
-}
-
-/* story steps: 24px between steps, 16px inside each */
-.about-steps {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-}
-
-.about-step {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-/* bullet list with an orange dot */
-.about-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.about-list li {
-    position: relative;
-    padding-left: 20px;
-}
-
-.about-list li::before {
-    content: "";
-    position: absolute;
-    left: 4px;
-    top: 9px;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--color-text-primary);
-}
-
-/* the mission block: title, text, list and closing line 16px apart */
-.about-block .about-list { margin: 0; }
-
-/* ===== ABOUT: FOUNDER (portrait + quote) ===== */
-
-.about-founder {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.about-portrait {
-    display: block;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    object-position: center 20%;   /* keeps the face in frame if the box gets cropped */
-    border-radius: 8px;
-    background: var(--color-card-border);
-}
-
-/* wider screens: portrait on the left, quote on the right */
-@media (min-width: 768px) {
-    .about-founder {
-        flex-direction: row;
-        align-items: stretch;
-        gap: 24px;
-    }
-
-    .about-portrait {
-        width: 40%;
-        flex-shrink: 0;
-    }
-
-    .about-founder .about-quote {
-        flex: 1;
-        justify-content: center;
-    }
-}
-
-/* ABOUT FAQ: spacing between paragraphs and link color inside answers */
-.about .faq .answer p + p { margin-top: 8px; }
-.about .faq .answer a { color: var(--color-orange); }
-
-/* keeps the story clear of the sticky header when "mai sus" scrolls to it */
-#povestea { scroll-margin-top: 96px; }
-
-/* =====================================================
-   CALCULATORS HUB (calculatoare.html)
-===================================================== */
-
-/* centered column on wide screens; the 24px side margin stays on phones */
-.calc-hub {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    max-width: 808px;
-    margin-inline: auto;
-    padding-inline: 24px;
-}
-
-/* title, one-line intro and photo: 16px apart */
-.hub-intro {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.hub-hero-img {
-    display: block;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    border-radius: 8px;
-    background: var(--color-card-border);
-}
-
-.hub-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-/* one calculator: icon + title on top, description + arrow underneath */
-.calc-card {
-    display: grid;
-    grid-template-columns: 32px 1fr 40px;
-    column-gap: 8px;
-    row-gap: 8px;
-    align-items: center;
-    padding: 12px 8px;
-    background: #E3E3E7;
-    border-radius: 8px;
-    text-decoration: none;
-    color: var(--color-text-primary);
-}
-
-.calc-card:active {
-    background: #D6D6DC;
-}
-
-.calc-card:focus-visible {
-    outline: 2px solid var(--color-orange);
-    outline-offset: 2px;
-}
-
-.calc-card-icon {
-    grid-column: 1;
-    grid-row: 1;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.calc-card-icon img {
-    display: block;
-    width: 22px;
-    height: 22px;
-    object-fit: contain;
-}
-
-.calc-card-title {
-    grid-column: 2 / 4;
-    grid-row: 1;
-    margin: 0;
-    font-size: var(--fs-h5);
-    line-height: var(--lh-h5);
-}
-
-.calc-card-desc {
-    grid-column: 1 / 3;
-    grid-row: 2;
-    line-height: 24px;
-}
-
-.calc-card-go {
-    grid-column: 3;
-    grid-row: 2;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--color-orange);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.calc-card-go svg {
-    display: block;
-    width: 20px;
-    height: 20px;
-}
-

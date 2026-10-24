@@ -42,7 +42,7 @@
     </div>
 
 </div>
-        <img src="images/menu-open.svg" class="menu">
+        <img src="images/menu.svg" class="menu">
 
     </div>
 
@@ -52,9 +52,17 @@
 
     <!-- SECTION CALCULATOR HERO -->
     <section class="calculator-hero">
-        <a href="calculatoare.html" class="hero-back">← Calculatoare</a>
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="/">acasă</a>
+            <span class="separator">/</span>
 
-        <h3>Calculator de Buget</h3>
+            <a href="/calculatoare">calculatoare</a>
+            <span class="separator">/</span>
+
+            <span>calculator de buget</span>
+        </nav>
+
+        <h2>Calculator de Buget</h2>
 
         <p class="body1">
             Obține o imagine de ansamblu asupra veniturilor și cheltuielilor tale
@@ -63,7 +71,11 @@
         </p>
     </section>
 
-    <div class="section-break"></div>
+    <!-- Hint above the calculator (replaces the white spacer) -->
+    <div class="calc-hint">
+        <img src="images/arrow-down.svg" alt="" class="calc-hint-icon">
+        <span class="calc-hint-text">Modifica valorile de mai jos</span>
+    </div>
 
     <!-- SECTION CALCULATOR -->
     <section class="calculator">
@@ -71,11 +83,11 @@
         <!-- VENIT -->
         <div class="calculator-categorie">
             <div>
-                <p class="body1">Venit lunar</p>
-                <p class="body2-secondary">Care este venitul tău net lunar? Pe lângă salariu, sunt incluse și alte venituri, cum ar fi chiria, dividendele etc.</p>
+                <h6>Venit lunar</h6>
+                <p class="body1-secondary">Care este venitul tău net lunar? Pe lângă salariu, sunt incluse și alte venituri, cum ar fi chiria, dividendele etc.</p>
             </div>
 
-            <div class="item">
+            <div class="income-section">
                 <div class="income-row">
                     <img
                         src="images/venit.svg"
@@ -84,8 +96,8 @@
                     >
 
                     <div class="income-content">
-                        <p class="body2">Venitul net</p>
-                        <p class="small-secondary">
+                        <p class="body1">Venitul net</p>
+                        <p class="body2-secondary">
                             Suma tuturor veniturilor
                         </p>
                     </div>
@@ -109,18 +121,18 @@
         <!-- EXPENSES -->
         <div class="calculator-categorie">
             <div>
-                <p class="body1">Cheltuieli lunare</p>
-                <p class="body2-secondary">Pe ce cheltuiești bani în fiecare lună? Estimează-ți costurile lunare în următoarele categorii.</p>
+                <h6>Cheltuieli lunare</h6>
+                <p class="body1-secondary">Pe ce cheltuiești bani în fiecare lună? Estimează-ți costurile lunare în următoarele categorii.</p>
             </div>
 
-            <div class="item">
+            <div class="income-section">
                 <!-- Categoria Locuință -->
                 <div class="income-row">
                     <img src="images/locuință.svg" alt="" class="income-icon">
 
                     <div class="income-content">
-                        <p class="body2">Locuință</p>
-                        <p class="small-secondary">Chirie, ipotecă și altele</p>
+                        <p class="body1">Locuință</p>
+                        <p class="body2-secondary">Chirie, ipotecă și altele</p>
                     </div>
 
                     <div class="input-wrapper">
@@ -136,8 +148,8 @@
                     <img src="images/utilități.svg" alt="" class="income-icon">
 
                     <div class="income-content">
-                        <p class="body2">Utilități</p>
-                        <p class="small-secondary">
+                        <p class="body1">Utilități</p>
+                        <p class="body2-secondary">
                             Electricitate, internet, întreținere bloc și altele
                         </p>
                     </div>
@@ -155,8 +167,8 @@
                     <img src="images/datorii.svg" alt="" class="income-icon">
 
                     <div class="income-content">
-                        <p class="body2">Datorii</p>
-                        <p class="small-secondary">Credite, împrumuturi și altele</p>
+                        <p class="body1">Datorii</p>
+                        <p class="body2-secondary">Credite, împrumuturi și altele</p>
                     </div>
 
                     <div class="input-wrapper">
@@ -172,8 +184,8 @@
                     <img src="images/mâncare.svg" alt="" class="income-icon">
 
                     <div class="income-content">
-                        <p class="body2">Mâncare</p>
-                        <p class="small-secondary">
+                        <p class="body1">Mâncare</p>
+                        <p class="body2-secondary">
                             Mese zilnice, supermarket, gustări și altele
                         </p>
                     </div>
@@ -191,8 +203,8 @@
                     <img src="images/transport.svg" alt="" class="income-icon">
 
                     <div class="income-content">
-                        <p class="body2">Transport</p>
-                        <p class="small-secondary">
+                        <p class="body1">Transport</p>
+                        <p class="body2-secondary">
                             Combustibil, transport public, leasing și altele
                         </p>
                     </div>
@@ -210,8 +222,8 @@
                     <img src="images/îngrijire-personală.svg" alt="" class="income-icon">
 
                     <div class="income-content">
-                        <p class="body2">Îngrijire personală</p>
-                        <p class="small-secondary">
+                        <p class="body1">Îngrijire personală</p>
+                        <p class="body2-secondary">
                             Frizer, igienă, cosmetică și altele
                         </p>
                     </div>
@@ -229,8 +241,8 @@
                     <img src="images/abonamente.svg" alt="" class="income-icon">
 
                     <div class="income-content">
-                        <p class="body2">Abonamente</p>
-                        <p class="small-secondary">
+                        <p class="body1">Abonamente</p>
+                        <p class="body2-secondary">
                             Telefon, sală, aplicații și altele
                         </p>
                     </div>
@@ -248,8 +260,8 @@
                     <img src="images/shopping.svg" alt="" class="income-icon">
 
                     <div class="income-content">
-                        <p class="body2">Shopping</p>
-                        <p class="small-secondary">
+                        <p class="body1">Shopping</p>
+                        <p class="body2-secondary">
                             Haine, cadouri, accesorii și altele
                         </p>
                     </div>
@@ -267,8 +279,8 @@
                     <img src="images/ieșiri&distracție.svg" alt="" class="income-icon">
 
                     <div class="income-content">
-                        <p class="body2">Ieșiri & distracție</p>
-                        <p class="small-secondary">
+                        <p class="body1">Ieșiri & distracție</p>
+                        <p class="body2-secondary">
                             Restaurante, cafenele, evenimente și altele
                         </p>
                     </div>
@@ -286,8 +298,8 @@
                     <img src="images/donații.svg" alt="" class="income-icon">
 
                     <div class="income-content">
-                        <p class="body2">Donații</p>
-                        <p class="small-secondary">Cauze caritabile</p>
+                        <p class="body1">Donații</p>
+                        <p class="body2-secondary">Cauze caritabile</p>
                     </div>
 
                     <div class="input-wrapper">
@@ -301,26 +313,26 @@
 
         <!-- AT A GLANCE -->
         <div class="calculator-categorie">
-            <p class="body1">Pe scurt</p>
+            <h6>Pe scurt</h6>
 
-            <div class="item">
+            <div class="income-section">
                 <div class="result-row">
-                    <p class="body2">Venit</p>
-                    <p class="body2" id="glanceIncome">0 lei</p>
+                    <p class="body1">Venit</p>
+                    <p class="body1" id="glanceIncome">0 lei</p>
                 </div>
 
                 <div class="income-divider"></div>
 
                 <div class="result-row">
-                    <p class="body2">Cheltuieli</p>
-                    <p class="body2" id="glanceExpenses">0 lei</p>
+                    <p class="body1">Cheltuieli</p>
+                    <p class="body1" id="glanceExpenses">0 lei</p>
                 </div>
 
                 <div class="income-divider"></div>
 
                 <div class="result-row">
-                    <p class="body2-bold" id="glanceBalanceLabel">Economisiri</p>
-                    <p class="body2-bold" id="glanceBalance">0 lei</p>
+                    <p class="body1-bold" id="glanceBalanceLabel">Economisiri</p>
+                    <p class="body1-bold" id="glanceBalance">0 lei</p>
                 </div>
             </div>
         </div>
@@ -328,8 +340,8 @@
         <!-- SECTION 50-30-20 -->
         <div class="calculator-categorie">
             <div>
-                <p class="body1">Împărțirea ta 50-30-20</p>
-                <a href="#faq-categorii" class="body2-secondary rule-link" id="ruleLink">Ce e asta?</a>
+                <h6>Împărțirea ta 50-30-20</h6>
+                <a href="#faq-categorii" class="body1-secondary rule-link" id="ruleLink">Ce e asta?</a>
             </div>
 
             <div class="rule-card">
@@ -377,9 +389,9 @@
                 <div class="rule-hint" aria-live="polite">
                     <span class="rule-hint-emoji" id="hintEmoji" aria-hidden="true">🤔</span>
                     <div>
-                        <p class="body2" id="hintTitle">Ai uitat ceva?</p>
-                        <p class="body2" id="hintText">Verifică din nou mai sus dacă ai introdus totul și corectează-ți intrările.</p>
-                        <a href="calculator-de-investitii.html" class="body2 hint-link" id="hintLink" hidden>Vezi cât pot crește economiile tale în timp</a>
+                        <p class="body1" id="hintTitle">Ai uitat ceva?</p>
+                        <p class="body1" id="hintText">Verifică din nou mai sus dacă ai introdus totul și corectează-ți intrările.</p>
+                        <a href="calculator-de-investitii.html" class="body1 hint-link" id="hintLink" hidden>Vezi cât pot crește economiile tale în timp</a>
                     </div>
                 </div>
 
@@ -391,15 +403,15 @@
     <div class="section-break"></div>
 
     <section class="faq">
-        <h3>Întrebări Frecvente</h3>
+        <h2>Întrebări Frecvente</h2>
 
         <div class="accordion">
 
             <!-- Item 1 -->
             <div class="item open">
                 <div class="question">
-                    <p class="body1">Cum se calculează rezultatele?</p>
-                    <div class="icon" aria-hidden="true"></div>
+                    <p class="body1">1. Cum se calculează rezultatele?</p>
+                    <img class="icon" src="images/arrow-down.svg" alt="toggle">
                 </div>
 
                 <div class="answer">
@@ -412,8 +424,8 @@
             <!-- Item 2 -->
             <div class="item" id="faq-categorii">
                 <div class="question">
-                    <p class="body1">Ce înseamnă împărțirea 50-30-20 pe care o văd la final?</p>
-                    <div class="icon" aria-hidden="true"></div>
+                    <p class="body1">2. Ce înseamnă împărțirea 50-30-20 pe care o văd la final?</p>
+                    <img class="icon" src="images/arrow-down.svg" alt="toggle">
                 </div>
 
                 <div class="answer">
@@ -430,8 +442,8 @@
             <!-- Item 3 -->
             <div class="item">
                 <div class="question">
-                    <p class="body1">De ce trebuie să introduc venitul net și nu cel brut?</p>
-                    <div class="icon" aria-hidden="true"></div>
+                    <p class="body1">3. De ce trebuie să introduc venitul net și nu cel brut?</p>
+                    <img class="icon" src="images/arrow-down.svg" alt="toggle">
                 </div>
 
                 <div class="answer">
@@ -445,8 +457,8 @@
             <!-- Item 4 -->
             <div class="item">
                 <div class="question">
-                    <p class="body1">Ce se întâmplă dacă la final rezultatul arată că cheltuiesc mai mult decât câștig?</p>
-                    <div class="icon" aria-hidden="true"></div>
+                    <p class="body1">4. Ce se întâmplă dacă la final rezultatul arată că cheltuiesc mai mult decât câștig?</p>
+                    <img class="icon" src="images/arrow-down.svg" alt="toggle">
                 </div>
 
                 <div class="answer">
@@ -459,8 +471,8 @@
             <!-- Item 5 -->
             <div class="item">
                 <div class="question">
-                    <p class="body1">Ce fac cu cheltuielile anuale?</p>
-                    <div class="icon" aria-hidden="true"></div>
+                    <p class="body1">5. Ce fac cu cheltuielile anuale?</p>
+                    <img class="icon" src="images/arrow-down.svg" alt="toggle">
                 </div>
 
                 <div class="answer">
@@ -475,8 +487,8 @@
             <!-- Item 6 -->
             <div class="item">
                 <div class="question">
-                    <p class="body1">Sunt sigure datele mele financiare? Îmi cereți contul bancar?</p>
-                    <div class="icon" aria-hidden="true"></div>
+                    <p class="body1">6. Sunt sigure datele mele financiare? Îmi cereți contul bancar?</p>
+                    <img class="icon" src="images/arrow-down.svg" alt="toggle">
                 </div>
 
                 <div class="answer">
@@ -502,8 +514,8 @@
     />
 
     <div class="footer-links">
-        <a href="despre.html#contact">Contactează-ne</a>
-        <a href="despre.html">Despre noi</a>
+        <a href="#">Contactează-ne</a>
+        <a href="#">Despre noi</a>
     </div>
 
     <div class="social-icons">
