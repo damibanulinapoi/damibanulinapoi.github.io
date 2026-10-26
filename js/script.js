@@ -109,9 +109,10 @@ if (siteHeader && menuIcon) {
 
     const ROOT = LANG === "ru" ? "../" : "";   // Russian pages sit inside /ru/
 
-    // An entry with "children" opens a sub-list; one with only "href" is a plain link.
+    // An entry with "children" has a sub-list: its word is a link (href),
+    // its plus/minus opens the sub-list. One with only "href" is a plain link.
     const MENU = LANG === "ru" ? [
-        { label: "Калькуляторы", children: [
+        { label: "Калькуляторы", href: "calculatoare.html", children: [
             { label: "Калькулятор зарплаты",  href: "калькулятор-зарплаты.html" },
             { label: "Калькулятор бюджета",   href: "калькулятор-бюджета.html" },
             { label: "Калькулятор инвестиций", href: "calculator-de-investitii.html" }
@@ -120,7 +121,7 @@ if (siteHeader && menuIcon) {
         { label: "Советы",        href: "#" },
         { label: "О нас",         href: "despre.html" }
     ] : [
-        { label: "Calculatoare", children: [
+        { label: "Calculatoare", href: "calculatoare.html", children: [
             { label: "Calculator de salariu",   href: "calculator-de-salariu.html" },
             { label: "Calculator de buget",     href: "calculator-de-buget.html" },
             { label: "Calculator de investiții", href: "calculator-de-investitii.html" }
@@ -145,15 +146,28 @@ if (siteHeader && menuIcon) {
         label.textContent = item.label;
 
         if (item.children) {
-            const row = document.createElement("button");
-            row.type = "button";
-            row.className = "menu-row";
-            row.append(label);
+            const row = document.createElement("div");
+            row.className = "menu-row menu-row--split";
+
+            // The word: goes to the calculators page
+            const link = document.createElement("a");
+            link.className = "menu-label";
+            link.href = item.href;
+            link.append(label);
+
+            // The plus/minus: opens and closes the sub-list
+            const toggle = document.createElement("button");
+            toggle.type = "button";
+            toggle.className = "menu-toggle";
+            toggle.setAttribute("aria-label", item.label);
+            toggle.setAttribute("aria-expanded", "false");
 
             const chevron = document.createElement("span");
             chevron.className = "menu-chevron";
             chevron.setAttribute("aria-hidden", "true");
-            row.append(chevron);
+            toggle.append(chevron);
+
+            row.append(link, toggle);
 
             const sub = document.createElement("ul");
             sub.className = "menu-sub";
@@ -167,7 +181,11 @@ if (siteHeader && menuIcon) {
                 sub.append(subLi);
             });
 
-            row.addEventListener("click", () => li.classList.toggle("open"));
+            toggle.addEventListener("click", () => {
+                const open = li.classList.toggle("open");
+                toggle.setAttribute("aria-expanded", String(open));
+            });
+
             li.append(row, sub);
         } else {
             const a = document.createElement("a");

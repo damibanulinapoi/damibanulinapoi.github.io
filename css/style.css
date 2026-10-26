@@ -1505,6 +1505,29 @@ body.menu-locked {
     cursor: pointer;
 }
 
+/* Split row (e.g. "Calculatoare"): the word is a link, the plus/minus is its own button */
+.menu-row--split {
+    padding: 0;
+    cursor: default;
+}
+
+.menu-label {
+    flex: 1;
+    padding: 16px 0;
+    color: inherit;
+    text-decoration: none;
+}
+
+.menu-toggle {
+    display: flex;
+    align-items: center;
+    padding: 16px 0 16px 24px;
+    border: none;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+}
+
 /* The plus/minus on the sub-menu row comes from the shared .menu-chevron rule above */
 
 /* Sub-list (e.g. the calculators) */
@@ -1970,7 +1993,14 @@ body.menu-locked {
     text-align: center;
 }
 
-.home-hero h2 strong { font-weight: 700; }
+.home-hero h1 strong { font-weight: 700; }
+
+/* headline on two rows, no gap between them */
+.hero-line {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
 
 /* "Vreau să ..." card */
 .home-intent {
@@ -2007,9 +2037,9 @@ body.menu-locked {
     stroke-linejoin: round;
 }
 
-.intent-pill--save   { background: var(--color-orange); color: #fff; }
-.intent-pill--invest { background: var(--color-pink);   color: var(--color-green); }
-.intent-pill--earn   { background: var(--color-green);  color: var(--color-orange); }
+.intent-pill--save   { background: var(--color-orange);   color: var(--color-pink); }
+.intent-pill--invest { background: var(--color-pink);  color: var(--color-green); }
+.intent-pill--earn   { background: var(--color-green); color: var(--color-orange); }
 
 .intent-or { text-align: center; }
 
