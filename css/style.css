@@ -215,6 +215,14 @@ body {
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
+    transition: border-color 0.2s ease, outline-color 0.2s ease;
+}
+
+/* Menu open: borders fade out. They stay in the layout (just transparent),
+   so nothing moves by even 1px. */
+.header.menu-open {
+    border-color: transparent;
+    outline-color: transparent;
 }
 
 .left {
@@ -1441,41 +1449,25 @@ table.schedule-table tr.year-end td {
     cursor: pointer;
 }
 
-/* Header while the menu is open: full width, flat, divider underneath */
-/* Padding is chosen so the logo, flag and menu icon stay exactly where they were:
-   normal header = 16px margin + 1px border + 16px side padding (33px) / 8px top padding (25px).
-   Total height 25 + 40 + 24 + 1 = 90px (the overlay below starts at 90px). */
-.header.menu-open {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    margin: 0;
-    padding: 25px 33px 24px;
-    border: none;
-    border-bottom: 1px solid var(--color-card-border);
-    border-radius: 0;
-    /* Inner line: 9px in from every edge of the bar, same as the normal header */
-    outline: 1px solid rgba(0,0,0,0.045);
-    outline-offset: -9px;
-}
-
-/* Full-screen panel under the header */
+/* The header is NOT touched when the menu opens: same position, size and padding,
+   so logo, flag and icon stay exactly where they are.
+   The panel sits behind it (z-index 99 < 100) and only fades in. */
 .menu-overlay {
-    display: none;
     position: fixed;
-    top: 90px;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     z-index: 99;
-    padding: 16px 32px 32px;
+    padding: 90px 32px 32px;   /* 16 margin + 58 header + 16 gap */
     overflow-y: auto;
     background: var(--color-card);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0s linear 0.2s;
 }
 
 .menu-overlay.show {
-    display: block;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.2s ease;
 }
 
 .menu-overlay ul {
@@ -1483,6 +1475,8 @@ table.schedule-table tr.year-end td {
     margin: 0;
     padding: 0;
 }
+
+html { scrollbar-gutter: stable; }
 
 body.menu-locked {
     overflow: hidden;
@@ -1925,12 +1919,14 @@ body.menu-locked {
 .calc-card-desc {
     grid-column: 1 / 3;
     grid-row: 2;
+    align-self: end;
     line-height: 24px;
 }
 
 .calc-card-go {
     grid-column: 3;
     grid-row: 2;
+    align-self: end;           /* always sits on the bottom edge, whatever the text height */
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -1946,3 +1942,99 @@ body.menu-locked {
     height: 20px;
 }
 
+/* =====================================================
+   HOME (index.html)
+   Same building blocks as the rest of the site:
+   .about-card (grey card), .about-list (bullets), .btn, .section-break
+===================================================== */
+
+/* 40px between every section, like the About page */
+.home .page-body {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    max-width: 808px;
+    margin-inline: auto;
+    padding-inline: 24px;
+    margin-top: 40px;
+}
+
+.home .section-break { margin: 0 auto; width: 100%; }
+
+/* hero: centered title + intro */
+.home-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    text-align: center;
+}
+
+.home-hero h2 strong { font-weight: 700; }
+
+/* "Vreau să ..." card */
+.home-intent {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+    border-radius: 8px;
+    background: #E3E3E7;
+}
+
+
+.intent-pill {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+    padding: 0 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: var(--fs-body1);
+    line-height: var(--lh-body1);
+}
+
+.intent-pill svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.intent-pill--save   { background: var(--color-orange); color: #fff; }
+.intent-pill--invest { background: var(--color-pink);   color: var(--color-green); }
+.intent-pill--earn   { background: var(--color-green);  color: var(--color-orange); }
+
+.intent-or { text-align: center; }
+
+.intent-pill--learn { background: var(--color-background); color: var(--color-text-primary); }
+
+html { scroll-behavior: smooth; }
+.home-start { scroll-margin-top: 96px; }
+
+/* "Începe cu începutul": title, photo, cards */
+.home-start {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.home-start .hub-hero-img { margin-bottom: 0; }
+
+.home-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.home-card { scroll-margin-top: 96px; }
+
+/* paragraph-only card (Bugetul) keeps the same rhythm as the list cards */
+.home-card p + .btn,
+.home-card ul + .btn { margin-top: 0; }

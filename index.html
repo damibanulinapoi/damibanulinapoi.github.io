@@ -1,205 +1,148 @@
 <!DOCTYPE html>
 <html lang="ro">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dă-mi Banul Înapoi – Educație financiară pentru Moldova</title>
+    <meta name="description" content="Economisește, investește și multiplică-ți veniturile. O platformă simplă creată special pentru oportunitățile și nevoile din Moldova.">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/landing.css">
     <link rel="icon" type="image/svg+xml" href="images/logo-small.svg">
 </head>
 
-<body>
+<body class="home">
 
 <!-- Header -->
 <header class="header">
+
     <div class="left">
         <a href="index.html">
-            <img src="images/logo-text.svg" class="logo">
+            <img src="images/logo-text.svg" class="logo" alt="Dă-mi Banul Înapoi">
         </a>
     </div>
+
     <div class="right">
+
         <div class="lang-dropdown">
-            <button class="lang-btn" id="langBtn">
-                <img src="images/flag-romania.svg" id="langFlag">
+
+            <button class="lang-btn" id="langBtn" aria-label="Limba">
+                <img src="images/flag-romania.svg" id="langFlag" alt="">
             </button>
+
             <div class="lang-menu" id="langMenu">
+
                 <button class="lang-option" data-lang="RO">
-                    <img src="images/flag-romania.svg">
+                    <img src="images/flag-romania.svg" alt="">
                     <span>Română</span>
                 </button>
+
                 <button class="lang-option" data-lang="RU">
-                    <img src="images/flag-russia.svg">
+                    <img src="images/flag-russia.svg" alt="">
                     <span>Русский</span>
                 </button>
+
             </div>
+
         </div>
-        <img src="images/menu-open.svg" class="menu">
+        <img src="images/menu-open.svg" class="menu" alt="">
+
     </div>
+
 </header>
 
-<!-- HERO -->
-<section class="lp-hero">
-    <div class="lp-hero-img">
+<main class="page-body">
+
+    <!-- HERO + "Vreau să ..." -->
+    <section class="home-hero">
+        <h1>Ce poți face cu banii, aici acasă în <strong>Moldova</strong>?</h1>
+        <p class="body1"><strong>Economisește, investește și multiplică-ți veniturile.</strong> O platformă simplă creată special pentru oportunitățile și nevoile de aici.</p>
+    </section>
+
+    <section class="home-intent">
+        <h4>Vreau să ...</h4>
+
+        <a class="intent-pill intent-pill--save" href="economiseste.html">
+            <span>... economisesc</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+        </a>
+
+        <a class="intent-pill intent-pill--invest" href="investeste.html">
+            <span>... investesc</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+        </a>
+
+        <a class="intent-pill intent-pill--earn" href="castiga.html">
+            <span>... câștig</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+        </a>
+
+        <p class="body2 intent-or">sau</p>
+
+        <a class="intent-pill intent-pill--learn" href="#incepe">
+            <span>... să mă educ</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </a>
+    </section>
+
+    <div class="section-break"></div>
+
+    <!-- ÎNCEPE CU ÎNCEPUTUL -->
+    <section class="home-start" id="incepe">
+        <h3>Începe cu începutul</h3>
+
         <picture>
-            <source type="image/avif" srcset="
-                images/hero-480.avif 480w,
-                images/hero-768.avif 768w,
-                images/hero-1200.avif 1200w,
-                images/hero-1920.avif 1920w">
-            <source type="image/webp" srcset="
-                images/hero-480.webp 480w,
-                images/hero-768.webp 768w,
-                images/hero-1200.webp 1200w,
-                images/hero-1920.webp 1920w">
-            <img
-                src="images/hero-768.webp"
-                alt="Hero"
-                width="768"
-                height="500"
-                loading="eager"
-                fetchpriority="high"
-            >
+            <source type="image/avif" srcset="images/calculatoare.avif">
+            <source type="image/webp" srcset="images/calculatoare.webp">
+            <img class="hub-hero-img" src="images/calculatoare.jpg" alt="" width="736" height="414" loading="eager" fetchpriority="high">
         </picture>
-        <div class="lp-hero-overlay"></div>
-    </div>
 
-    <div class="lp-hero-content">
-        <p class="lp-eyebrow">educație financiară pentru Moldova</p>
-        <h1 class="lp-headline">Nu câștigile<br>te fac bogat.<br>Obiceiurile.</h1>
-        <p class="lp-subhead">Calculatoare, sfaturi și instrumente ca să-ți ții banii acolo unde le e locul — în buzunarul tău.</p>
-        <a href="calculatoare.html" class="lp-cta">Vezi calculatoarele →</a>
-    </div>
-</section>
+        <div class="home-cards">
 
-<!-- WHAT WE DO -->
-<div class="lp-body">
-
-    <section class="lp-mission">
-        <p class="lp-section-label">ce facem</p>
-        <h2>Un loc pentru moldoveni<br>care vor mai mult<br>din banii lor</h2>
-        <p class="lp-mission-text">Nu trebuie să câștigi mult ca să devii mai înstărit. Trebuie să cheltuiești mai puțin decât câștiști, să economisești constant și să iei decizii financiare mai bune. Noi suntem aici să te ajutăm cu asta.</p>
-    </section>
-
-    <!-- PILLARS -->
-    <section class="lp-pillars">
-        <div class="lp-pillar">
-            <div class="lp-pillar-icon">🧮</div>
-            <h3 class="lp-pillar-title">Calculatoare utile</h3>
-            <p class="lp-pillar-text">Salariu net, buget lunar, rate — totul calculat corect, fără formule complicate.</p>
-        </div>
-        <div class="lp-pillar">
-            <div class="lp-pillar-icon">📊</div>
-            <h3 class="lp-pillar-title">Comparații de prețuri</h3>
-            <p class="lp-pillar-text">Unde găsești cel mai bun deal? Te ajutăm să compari înainte să cheltuiești.</p>
-        </div>
-        <div class="lp-pillar">
-            <div class="lp-pillar-icon">💡</div>
-            <h3 class="lp-pillar-title">Sfaturi practice</h3>
-            <p class="lp-pillar-text">Cum să economisești, unde să investești în Moldova și cum să-ți construiești un viitor financiar stabil.</p>
-        </div>
-    </section>
-
-    <!-- CALCULATORS -->
-    <section class="lp-section">
-        <p class="lp-section-label">calculatoare</p>
-        <h2>Instrumente gratuite<br>pentru finanțele tale</h2>
-
-        <div class="lp-cards">
-
-            <a href="calculator-de-salariu.html" class="lp-card">
-                <div class="lp-card-top">
-                    <div class="lp-card-icon-wrap">
-                        <img src="images/venit.svg" alt="" class="lp-card-icon">
-                    </div>
-                    <span class="lp-card-tag">Calculator</span>
-                </div>
-                <h3 class="lp-card-title">Calculator de Salariu</h3>
-                <p class="lp-card-desc">Află cât primești în mână din salariul brut. Net, brut sau cost total — calculat la secundă.</p>
-                <span class="lp-card-link">Calculează →</span>
-            </a>
-
-            <a href="calculator-de-buget.html" class="lp-card">
-                <div class="lp-card-top">
-                    <div class="lp-card-icon-wrap lp-card-icon-wrap--green">
-                        <img src="images/economisiri.png" alt="" class="lp-card-icon">
-                    </div>
-                    <span class="lp-card-tag">Calculator</span>
-                </div>
-                <h3 class="lp-card-title">Calculator de Buget</h3>
-                <p class="lp-card-desc">Vizualizează unde se duc banii tăi în fiecare lună și găsește unde poți economisi mai mult.</p>
-                <span class="lp-card-link">Calculează →</span>
-            </a>
-
-        </div>
-    </section>
-
-    <!-- MONEY PRINCIPLES -->
-    <section class="lp-principles">
-        <p class="lp-section-label">filozofia noastră</p>
-        <h2>Câteva adevăruri<br>despre bani</h2>
-
-        <div class="lp-principle-list">
-
-            <div class="lp-principle">
-                <span class="lp-principle-num">01</span>
-                <div>
-                    <p class="lp-principle-title">Un leu economisit azi valorează mai mult decât zece lei cheltuiți mâine.</p>
-                    <p class="lp-principle-body">Dobânda compusă lucrează pentru tine dacă începi devreme. Un mic sacrificiu acum poate însemna libertate financiară mai târziu.</p>
-                </div>
+            <div class="card about-card home-card" id="pasii">
+                <h4>Cei 7 pași:</h4>
+                <ul class="about-list">
+                    <li class="body1"><strong>Pasul 1:</strong> Economisește 1.000 de euro (sau echivalentul în MDL) pentru un fond de urgență de început.</li>
+                    <li class="body1"><strong>Pasul 2:</strong> Plătește toate datoriile (cu excepția creditului ipotecar), folosind metoda bulgărelui de zăpadă.</li>
+                    <li class="body1"><strong>Pasul 3:</strong> Economisește echivalentul a 3–6 luni de cheltuieli într-un fond de urgență complet finanțat.</li>
+                    <li class="body1"><strong>Pasul 4:</strong> Investește 15% din venitul tău/familiei tale pentru pensie.</li>
+                    <li class="body1"><strong>Pasul 5:</strong> Economisește pentru fondul de studii al copiilor tăi.</li>
+                    <li class="body1"><strong>Pasul 6:</strong> Plătește-ți casa mai devreme.</li>
+                    <li class="body1"><strong>Pasul 7:</strong> Construiește avere și oferă cu generozitate.</li>
+                </ul>
+                <a class="btn" href="despre.html"><span class="btn-text">Află Mai Mult</span></a>
             </div>
 
-            <div class="lp-divider"></div>
-
-            <div class="lp-principle">
-                <span class="lp-principle-num">02</span>
-                <div>
-                    <p class="lp-principle-title">Bugetul nu este o restricție. Este un plan.</p>
-                    <p class="lp-principle-body">Când știi unde se duc banii, tu decizi — nu întâmplarea, nu publicitatea, nu presiunea socială.</p>
-                </div>
+            <div class="card about-card home-card" id="principii">
+                <h4>Principiile:</h4>
+                <ul class="about-list">
+                    <li class="body1"><strong>Fă-ți Un Buget:</strong> Mai întâi de toate, fă-ți un buget scris</li>
+                    <li class="body1"><strong>Scapă De Datorii:</strong> Pentru a construi avere, trebuie să scapi de datorii</li>
+                    <li class="body1"><strong>Relații Sănătoase:</strong> Relațiile sănătoase au un impact major asupra finanțelor.</li>
+                    <li class="body1"><strong>Economisește:</strong> Economisește și investește.</li>
+                    <li class="body1"><strong>Dăruiește:</strong> Toți cei care câștigă cu adevărat în viața financiară sunt oameni darnici.</li>
+                </ul>
+                <a class="btn" href="despre.html"><span class="btn-text">Află Mai Mult</span></a>
             </div>
 
-            <div class="lp-divider"></div>
-
-            <div class="lp-principle">
-                <span class="lp-principle-num">03</span>
-                <div>
-                    <p class="lp-principle-title">Nu ai nevoie de un salariu mare. Ai nevoie de obiceiuri bune.</p>
-                    <p class="lp-principle-body">Oamenii cu venituri mari pot fi la fel de săraci ca cei cu venituri mici dacă cheltuiesc tot ce câștigă. Diferența o face marja, nu suma.</p>
-                </div>
-            </div>
-
-            <div class="lp-divider"></div>
-
-            <div class="lp-principle">
-                <span class="lp-principle-num">04</span>
-                <div>
-                    <p class="lp-principle-title">Moldova are opțiuni de investiții. Trebuie doar să le cunoști.</p>
-                    <p class="lp-principle-body">De la depozite bancare la titluri de stat și fonduri, există modalități accesibile de a-ți pune banii la muncă chiar dacă nu ești expert.</p>
-                </div>
+            <div class="card about-card home-card" id="bugetul">
+                <h4>Bugetul:</h4>
+                <p class="body1">Fără un buget, este imposibil să aplici eficient oricare dintre Baby Step-uri. Un buget nu este o restricție sau o pedeapsă, ci un instrument de libertate: îți dă permisiunea de a cheltui banii fără vinovăție, pentru că fiecare leu are deja o destinație stabilită.</p>
+                <a class="btn" href="calculator-de-buget.html"><span class="btn-text">Află Mai Mult</span></a>
             </div>
 
         </div>
     </section>
 
-    <!-- CTA BANNER -->
-    <section class="lp-banner">
-        <p class="lp-banner-label">începe azi</p>
-        <h2 class="lp-banner-title">Cât rămâne în buzunarul tău din salariul tău?</h2>
-        <p class="lp-banner-sub">Folosește calculatorul de salariu și află în 30 de secunde.</p>
-        <a href="calculator-de-salariu.html" class="lp-cta lp-cta--dark">Calculează acum →</a>
-    </section>
-
-</div>
+</main>
 
 <!-- Footer -->
 <footer class="footer">
     <img src="images/logo-text.svg" alt="Dă-mi Banul Înapoi" class="footer-logo">
+
     <div class="footer-links">
         <a href="despre.html#contact">Contactează-ne</a>
         <a href="despre.html">Despre noi</a>
     </div>
+
     <div class="social-icons">
         <a href="https://www.facebook.com/damibanulinapoi/">
             <img src="images/facebook.svg" alt="Facebook">
@@ -211,6 +154,7 @@
             <img src="images/youtube.svg" alt="YouTube">
         </a>
     </div>
+
     <p class="footer-copy">© 2026 Dă-mi Banul Înapoi</p>
 </footer>
 
