@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://SITE-DOMAIN/sitemap.xml
+Sitemap: https://damibanulinapoi.github.io/sitemap.xml
