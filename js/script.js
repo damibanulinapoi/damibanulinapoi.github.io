@@ -181,7 +181,10 @@ if (siteHeader && menuIcon) {
                 sub.append(subLi);
             });
 
-            toggle.addEventListener("click", () => {
+            // Click anywhere on the row opens/closes the sub-list,
+            // except on the word itself (that one is a link to the page)
+            row.addEventListener("click", (e) => {
+                if (e.target.closest("a")) return;
                 const open = li.classList.toggle("open");
                 toggle.setAttribute("aria-expanded", String(open));
             });
@@ -201,33 +204,33 @@ if (siteHeader && menuIcon) {
     overlay.append(list);
     document.body.append(overlay);
 
-    // Same images folder as the icon already in the HTML (images/ or ../images/)
-    const imgDir   = menuIcon.getAttribute("src").replace(/[^/]*$/, "");
-    const menuSrc  = imgDir + "menu-open.svg";    // the 3 lines
-    const closeSrc = imgDir + "menu-close.svg";   // the X
-    menuIcon.setAttribute("src", menuSrc);
-
-    menuIcon.setAttribute("role", "button");
-    menuIcon.setAttribute("tabindex", "0");
-    menuIcon.setAttribute("aria-label", LANG === "ru" ? "Меню" : "Meniu");
+    // The icon in the HTML (an <img>) is replaced by two CSS lines,
+    // so they can slide together and cross into an X (see .menu-icon in style.css)
+    const burger = document.createElement("span");
+    burger.className = "menu menu-icon";
+    burger.setAttribute("role", "button");
+    burger.setAttribute("tabindex", "0");
+    burger.setAttribute("aria-label", LANG === "ru" ? "Меню" : "Meniu");
+    burger.setAttribute("aria-expanded", "false");
+    menuIcon.replaceWith(burger);
 
     function setMenu(open) {
         siteHeader.classList.toggle("menu-open", open);
         overlay.classList.toggle("show", open);
         document.body.classList.toggle("menu-locked", open);
-        menuIcon.setAttribute("src", open ? closeSrc : menuSrc);
-        menuIcon.setAttribute("aria-expanded", String(open));
+        burger.classList.toggle("is-open", open);
+        burger.setAttribute("aria-expanded", String(open));
         langMenu?.classList.remove("active");
     }
 
-    menuIcon.addEventListener("click", () => {
+    burger.addEventListener("click", () => {
         setMenu(!overlay.classList.contains("show"));
     });
 
-    menuIcon.addEventListener("keydown", (e) => {
+    burger.addEventListener("keydown", (e) => {
         if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
-            menuIcon.click();
+            burger.click();
         }
     });
 
