@@ -23,6 +23,7 @@
     <link rel="preload" href="fonts/RocaOne-Th.woff2" as="font" type="font/woff2" crossorigin>
 
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/budget-export.css">
     <link rel="icon" type="image/svg+xml" href="images/logo-small.svg">
 </head>
 
@@ -365,6 +366,21 @@
                     </div>
                 </div>
 
+
+            </div>
+        </div>
+
+        <!-- EXPORT: outside the 50-30-20 section and its feedback card -->
+        <div class="calculator-categorie">
+            <div class="export-actions">
+                <button type="button" class="export-btn" id="csvBtn">
+                    <img src="images/csv.svg" alt="" width="24" height="24">
+                    <span>Descarcă șablon de buget (.csv)</span>
+                </button>
+                <button type="button" class="export-btn" id="pdfBtn">
+                    <img src="images/pdf.svg" alt="" width="24" height="24">
+                    <span>Printează / salvează rezumatul (.pdf)</span>
+                </button>
             </div>
         </div>
 
@@ -477,6 +493,7 @@
 <footer class="footer" id="site-footer"></footer>
 
 <script src="js/script.js"></script>
+<script src="js/budget-export.js"></script>
 
 </body>
 </html>

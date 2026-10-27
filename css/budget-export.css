@@ -1,0 +1,148 @@
+/* =====================================================
+   BUDGET EXPORT: the two buttons + the print summary
+   (calculator-de-buget.html only)
+===================================================== */
+
+.export-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.export-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 44px;
+    padding: 8px 16px;
+    background: var(--color-card);
+    border: 1px solid var(--color-card-border);
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-size: var(--fs-body2);
+    line-height: var(--lh-body2);
+    color: var(--color-text-primary);
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.export-btn:active {
+    background: var(--color-background);
+}
+
+.export-btn:focus-visible {
+    outline: 2px solid var(--color-orange);
+    outline-offset: 2px;
+}
+
+.export-btn img {
+    width: 24px;
+    height: 24px;
+    display: block;
+    flex-shrink: 0;
+}
+
+/* ---- print summary: invisible on screen, the only thing printed ---- */
+
+.print-summary {
+    display: none;
+}
+
+@page {
+    margin: 16mm;
+}
+
+@media print {
+    body > *:not(#printSummary) {
+        display: none !important;
+    }
+
+    body {
+        background: #fff;
+    }
+
+    .print-summary {
+        display: block;
+        font-family: var(--font-body);
+        font-size: 12pt;
+        line-height: 1.4;
+        color: #1F2937;
+    }
+
+    .print-summary h1 {
+        font-size: 24pt;
+        line-height: 1.2;
+        margin: 0 0 4px;
+    }
+
+    .print-summary h2 {
+        font-size: 16pt;
+        line-height: 1.2;
+        margin: 24px 0 8px;
+    }
+
+    .print-summary .ps-meta {
+        color: #A0A7A7;
+        margin: 0 0 24px;
+    }
+
+    .print-summary table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .print-summary td,
+    .print-summary th {
+        padding: 6px 4px;
+        border-bottom: 1px solid #e3e3e7;
+        text-align: right;
+        font-weight: normal;
+    }
+
+    .print-summary td:first-child,
+    .print-summary th:first-child {
+        text-align: left;
+    }
+
+    .print-summary tr {
+        break-inside: avoid;
+    }
+
+    .print-summary .ps-group td,
+    .print-summary .ps-total td {
+        font-weight: bold;
+    }
+
+    .print-summary .ps-item td:first-child {
+        padding-left: 20px;
+    }
+
+    .print-summary .ps-item td {
+        color: #4b5563;
+    }
+
+    .print-summary .ps-split th {
+        color: #A0A7A7;
+    }
+
+    .print-summary .ps-hint {
+        margin-top: 24px;
+        padding: 12px 16px;
+        background: #F1F1F3;
+        border-radius: 8px;
+        break-inside: avoid;
+    }
+
+    .print-summary .ps-hint p {
+        margin: 4px 0 0;
+    }
+
+    /* keep the colors of the page if the browser allows */
+    .print-summary * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
