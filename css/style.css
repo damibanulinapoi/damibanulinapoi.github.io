@@ -5,30 +5,38 @@
 /* Fonts */
 @font-face {
     font-family: 'Roca One';
-    src: url('../fonts/RocaOne-Th.ttf') format('truetype');
+    src: url('../fonts/RocaOne-Th.woff2') format('woff2'),
+         url('../fonts/RocaOne-Th.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
     font-family: 'Roca One';
-    src: url('../fonts/RocaOne-Bold.ttf') format('truetype');
+    src: url('../fonts/RocaOne-Bold.woff2') format('woff2'),
+         url('../fonts/RocaOne-Bold.ttf') format('truetype');
     font-weight: 700;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
     font-family: 'Archivo';
-    src: url('../fonts/Archivo-Regular.ttf') format('truetype');
+    src: url('../fonts/Archivo-Regular.woff2') format('woff2'),
+         url('../fonts/Archivo-Regular.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
     font-family: 'Archivo';
-    src: url('../fonts/Archivo-Bold.ttf') format('truetype');
+    src: url('../fonts/Archivo-Bold.woff2') format('woff2'),
+         url('../fonts/Archivo-Bold.ttf') format('truetype');
     font-weight: 700;
     font-style: normal;
+    font-display: swap;
 }
 
 :root {
@@ -62,6 +70,10 @@ h1, h2, h3, h4, h5, h6, p {
     padding: 0;
     box-sizing: border-box;
 }
+
+/* Same look as h3 / h4, on any heading tag (one h1 per page, headings in order) */
+.h3 { font-size: var(--fs-h3); line-height: var(--lh-h3); }
+.h4 { font-size: var(--fs-h4); line-height: var(--lh-h4); }
 
 h2 {
     font-size: var(--fs-h2);
@@ -129,14 +141,6 @@ h6 {
     color: var(--color-text-primary);
 }
 
-.small-secondary {
-    font-size: var(--fs-small);
-    line-height: var(--lh-small);
-    font-family: var(--font-body);
-    font-weight: normal;
-    color: var(--color-text-secondary);
-}
-
 /* COLORS */
 :root {
     /* Primary */
@@ -173,18 +177,6 @@ body {
   position: relative;
 }
 
-.hero_img {
-    position: absolute;
-    z-index: -1;
-    margin-top: -88px;
-}
-
-.hero_img img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
 /* Visually hidden (still read by screen readers) */
 .sr-only {
     position: absolute;
@@ -199,6 +191,8 @@ body {
 }
 
 /* Header */
+.header:empty { min-height: 58px; }   /* keeps the space until script.js fills it */
+
 .header {
     position: sticky;
     top: 16px;
@@ -220,6 +214,17 @@ body {
 
 /* Menu open: borders fade out. They stay in the layout (just transparent),
    so nothing moves by even 1px. */
+.header.menu-open .lang-dropdown {
+    opacity: 0;
+    visibility: hidden;        /* still takes its space, so nothing in the bar moves */
+    pointer-events: none;
+    transition: opacity 0.2s ease, visibility 0s linear 0.2s;
+}
+
+.lang-dropdown {
+    transition: opacity 0.2s ease, visibility 0s;
+}
+
 .header.menu-open {
     border-color: transparent;
     outline-color: transparent;
@@ -365,29 +370,6 @@ body {
     text-decoration: none;
 }
 
-/* IMAGE BOX */
-.hero-image {
-    flex-shrink: 0;
-
-    width: 120px;
-    aspect-ratio: 1 / 1;
-
-    padding: 16px;
-    box-sizing: border-box;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* IMAGE */
-.hero-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-}
-
 .calculator-categorie {
     display: flex;
     flex-direction: column;
@@ -448,13 +430,6 @@ body {
 .income-content {
     flex: 1;
     min-width: 0;
-}
-
-.income-description {
-    font-family: var(--font-body);
-    font-size: var(--fs-body2);
-    line-height: var(--lh-body2);
-    color: var(--color-text-secondary);
 }
 
 .input-wrapper {
@@ -551,7 +526,8 @@ body {
     gap: 8px;
 }
 
-.item {
+.item,
+.panel {
     box-shadow: inset 0 0 0 1px var(--color-card-border);
     border-radius: 8px;
     background: var(--color-card);
@@ -693,62 +669,9 @@ body {
     color: var(--color-text-secondary);
 }
 
-.chart-wrapper {
-    display: flex;
-    justify-content: center;
-    margin-top: 48px;
-}
-
-.chart-box {
-    position: relative;
-    width: 320px;
-    height: 320px;
-}
-
-.chart-box canvas {
-    width: 100%;
-    height: 100%;
-}
-
-.center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-}
-
 /* =========================
    SALARY ROW: label + segment + input on one line
 ========================= */
-
-/* Hint bar above the calculator ("Modifica valorile de mai jos") */
-.calc-hint {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 56px 0 16px;
-    height: 36px;
-    padding: 0 8px;
-    background: var(--color-card);
-    border: 1px solid var(--color-card-border);
-    border-radius: 8px;
-}
-
-.calc-hint-icon {
-    width: 24px;
-    height: 24px;
-    flex-shrink: 0;
-    display: block;
-}
-
-.calc-hint-text {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: var(--fs-body1);
-    line-height: var(--lh-body1);
-    color: var(--color-text-primary);
-}
 
 .salary-row {
     display: flex;
@@ -1584,14 +1507,14 @@ body.menu-locked {
 }
 
 /* "Pe scurt": rows sit 8px from the card edges, 8px apart */
-.calculator-categorie > .item:has(> .result-row) {
+.calculator-categorie > .panel:has(> .result-row) {
     display: flex;
     flex-direction: column;
     gap: 8px;
     padding: 8px;
 }
 
-.calculator-categorie > .item:has(> .result-row) .income-divider {
+.calculator-categorie > .panel:has(> .result-row) .income-divider {
     margin: 0;
 }
 
@@ -2039,7 +1962,6 @@ body.menu-locked {
     border-radius: 8px;
     background: #E3E3E7;
 }
-
 
 .intent-pill {
     display: flex;

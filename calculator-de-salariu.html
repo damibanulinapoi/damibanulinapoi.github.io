@@ -3,57 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator de Salariu – Dă-mi Banul Înapoi</title>
+    <title>Calculator de salariu – Dă-mi Banul Înapoi</title>
+    <meta name="description" content="Calculator de salariu pentru Moldova: află salariul net, brut și costul total pentru angajator, cu CNAS, CNAM și impozit pe venit.">
+    <meta name="theme-color" content="#F1F1F3">
+    <link rel="canonical" href="https://SITE-DOMAIN/calculator-de-salariu.html">
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Dă-mi Banul Înapoi">
+    <meta property="og:locale" content="ro_RO">
+    <meta property="og:title" content="Calculator de salariu – Dă-mi Banul Înapoi">
+    <meta property="og:description" content="Calculator de salariu pentru Moldova: află salariul net, brut și costul total pentru angajator, cu CNAS, CNAM și impozit pe venit.">
+    <meta property="og:url" content="https://SITE-DOMAIN/calculator-de-salariu.html">
+    <meta property="og:image" content="https://SITE-DOMAIN/images/calculatoare.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Fonts used on every page: start loading them right away -->
+    <link rel="preload" href="fonts/Archivo-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/RocaOne-Th.woff2" as="font" type="font/woff2" crossorigin>
+
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/svg+xml" href="images/logo-small.svg">
 </head>
 
 <body>
 
-<!-- Header -->
-<header class="header">
+<!-- Header (built by js/script.js) -->
+<header class="header" id="site-header"></header>
 
-    <div class="left">
-        <a href="index.html">
-            <img src="images/logo-text.svg" class="logo">
-        </a>
-    </div>
-
-    <div class="right">
-
-        <div class="lang-dropdown">
-
-            <button class="lang-btn" id="langBtn">
-                <img src="images/flag-romania.svg" id="langFlag">
-            </button>
-
-            <div class="lang-menu" id="langMenu">
-
-                <button class="lang-option" data-lang="RO">
-                    <img src="images/flag-romania.svg">
-                    <span>Română</span>
-                </button>
-
-                <button class="lang-option" data-lang="RU">
-                    <img src="images/flag-russia.svg">
-                    <span>Русский</span>
-                </button>
-
-            </div>
-
-        </div>
-        <img src="images/menu-open.svg" class="menu">
-
-    </div>
-
-</header>
-
-<div class="page-body">
+<main class="page-body">
     <!-- SECTION CALCULATOR HERO -->
     <section class="calculator-hero">
         <a href="calculatoare.html" class="hero-back">← Calculatoare</a>
 
-        <h3>Calculator de salariu</h3>
+        <h1 class="h3">Calculator de salariu</h1>
 
         <p class="body1"><strong>Află exact câți bani primești în mână și ce taxe plătești.</strong> Introdu suma brută, netă sau costul total al angajatorului pentru a afla detaliat distribuția impozitelor și contribuțiilor sociale.</p>
     </section>
@@ -229,12 +212,12 @@
                 </div>
 
                 <div class="btn-row">
-                    <button id="calculează-btn" class="btn-wide" disabled>
+                    <button id="salary-calc-btn" class="btn-wide" disabled>
                         <span class="btn-text">Calculează</span>
                     </button>
 
                     <button type="button" id="reset-btn" class="btn-wide btn-reset">
-                        <span class="btn-text">Reset Opțiuni</span>
+                        <span class="btn-text">Reset opțiuni</span>
                     </button>
                 </div>
 
@@ -251,7 +234,7 @@
     </div>
 
     <div class="result-row">
-        <p class="body2">Salariul total</p>
+        <p class="body2">Salariu total</p>
         <p class="body2" id="totalResult">0 lei</p>
     </div>
 
@@ -305,7 +288,7 @@
     <div class="section-break"></div>
 
 <section class="faq">
-    <h3>Întrebări frecvente</h3>
+    <h2 class="h3">Întrebări frecvente</h2>
 
     <div class="accordion">
 
@@ -401,38 +384,10 @@
 
     </div>
 </section>
-</div>
+</main>
 
-<!-- Footer -->
-<footer class="footer">
-    <img
-        src="images/logo-text.svg"
-        alt="Dă-mi Banul Înapoi"
-        class="footer-logo"
-    />
-
-    <div class="footer-links">
-        <a href="despre.html#contact">Contactează-ne</a>
-        <a href="despre.html">Despre noi</a>
-    </div>
-
-    <div class="social-icons">
-
-        <a href="https://www.facebook.com/damibanulinapoi/">
-            <img src="images/facebook.svg" alt="Facebook">
-        </a>
-
-        <a href="https://www.instagram.com/damibanulinapoi/">
-            <img src="images/instagram.svg" alt="Instagram">
-        </a>
-
-        <a href="https://www.youtube.com/@damibanulinapoi/">
-            <img src="images/youtube.svg" alt="YouTube">
-        </a>
-    </div>
-
-    <p class="footer-copy">© 2026 Dă-mi Banul Înapoi</p>
-</footer>
+<!-- Footer (built by js/script.js) -->
+<footer class="footer" id="site-footer"></footer>
 
 <script src="js/script.js"></script>
 

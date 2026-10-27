@@ -3,46 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator de Investiții – Dă-mi Banul Înapoi</title>
+    <title>Calculator de investiții – Dă-mi Banul Înapoi</title>
+    <meta name="description" content="Calculator de investiții gratuit: estimează valoarea finală, contribuția necesară, rata dobânzii sau durata pentru obiectivul tău financiar.">
+    <meta name="theme-color" content="#F1F1F3">
+    <link rel="canonical" href="https://SITE-DOMAIN/calculator-de-investitii.html">
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Dă-mi Banul Înapoi">
+    <meta property="og:locale" content="ro_RO">
+    <meta property="og:title" content="Calculator de investiții – Dă-mi Banul Înapoi">
+    <meta property="og:description" content="Calculator de investiții gratuit: estimează valoarea finală, contribuția necesară, rata dobânzii sau durata pentru obiectivul tău financiar.">
+    <meta property="og:url" content="https://SITE-DOMAIN/calculator-de-investitii.html">
+    <meta property="og:image" content="https://SITE-DOMAIN/images/calculatoare.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Fonts used on every page: start loading them right away -->
+    <link rel="preload" href="fonts/Archivo-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/RocaOne-Th.woff2" as="font" type="font/woff2" crossorigin>
+
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/svg+xml" href="images/logo-small.svg">
 </head>
 
 <body>
 
-<!-- Header -->
-<header class="header">
-    <div class="left">
-        <a href="index.html">
-            <img src="images/logo-text.svg" class="logo">
-        </a>
-    </div>
-    <div class="right">
-        <div class="lang-dropdown">
-            <button class="lang-btn" id="langBtn">
-                <img src="images/flag-romania.svg" id="langFlag">
-            </button>
-            <div class="lang-menu" id="langMenu">
-                <button class="lang-option" data-lang="RO">
-                    <img src="images/flag-romania.svg">
-                    <span>Română</span>
-                </button>
-                <button class="lang-option" data-lang="RU">
-                    <img src="images/flag-russia.svg">
-                    <span>Русский</span>
-                </button>
-            </div>
-        </div>
-        <img src="images/menu-open.svg" class="menu">
-    </div>
-</header>
+<!-- Header (built by js/script.js) -->
+<header class="header" id="site-header"></header>
 
-<div class="page-body">
+<main class="page-body">
 
     <!-- HERO -->
     <section class="calculator-hero">
         <a href="calculatoare.html" class="hero-back">← Calculatoare</a>
-        <h2>Calculator de investiții</h2>
+        <h1 class="h3">Calculator de investiții</h1>
         <p class="body1">Acest calculator poate fi folosit pentru a determina orice parametru lipsă dintr-un plan de investiții. Alege ce vrei să calculezi din tab-urile de mai jos.</p>
     </section>
 
@@ -70,7 +64,7 @@
                     <div class="invest-row hidden" id="rowTarget">
                         <label>Obiectivul tău (valoare finală)</label>
                         <div class="invest-input-wrap">
-                            <input type="text" id="targetAmount" class="invest-input" inputmode="numeric" value="50,000">
+                            <input type="text" id="targetAmount" class="invest-input" inputmode="numeric" value="50.000">
                             <span class="invest-suffix">lei</span>
                         </div>
                     </div>
@@ -79,7 +73,7 @@
                     <div class="invest-row hidden" id="rowEndKnown">
                         <label>Valoare finală cunoscută</label>
                         <div class="invest-input-wrap">
-                            <input type="text" id="endKnown" class="invest-input" inputmode="numeric" value="50,000">
+                            <input type="text" id="endKnown" class="invest-input" inputmode="numeric" value="50.000">
                             <span class="invest-suffix">lei</span>
                         </div>
                     </div>
@@ -88,7 +82,7 @@
                     <div class="invest-row" id="rowStart">
                         <label>Suma inițială</label>
                         <div class="invest-input-wrap">
-                            <input type="text" id="startAmount" class="invest-input" inputmode="numeric" value="20,000">
+                            <input type="text" id="startAmount" class="invest-input" inputmode="numeric" value="20.000">
                             <span class="invest-suffix">lei</span>
                         </div>
                     </div>
@@ -135,7 +129,7 @@
                     <div class="invest-row" id="rowContribution">
                         <label>Contribuție suplimentară</label>
                         <div class="invest-input-wrap">
-                            <input type="text" id="contribution" class="invest-input" inputmode="numeric" value="1,000">
+                            <input type="text" id="contribution" class="invest-input" inputmode="numeric" value="1.000">
                             <span class="invest-suffix">lei</span>
                         </div>
                     </div>
@@ -282,7 +276,7 @@
 
     <!-- FAQ -->
     <section class="faq">
-        <h2>Întrebări frecvente</h2>
+        <h2 class="h3">Întrebări frecvente</h2>
         <div class="accordion">
 
             <div class="item open">
@@ -352,28 +346,10 @@
         </div>
     </section>
 
-</div>
+</main>
 
-<!-- Footer -->
-<footer class="footer">
-    <img src="images/logo-text.svg" alt="Dă-mi Banul Înapoi" class="footer-logo">
-    <div class="footer-links">
-        <a href="despre.html#contact">Contactează-ne</a>
-        <a href="despre.html">Despre noi</a>
-    </div>
-    <div class="social-icons">
-        <a href="https://www.facebook.com/damibanulinapoi/">
-            <img src="images/facebook.svg" alt="Facebook">
-        </a>
-        <a href="https://www.instagram.com/damibanulinapoi/">
-            <img src="images/instagram.svg" alt="Instagram">
-        </a>
-        <a href="https://www.youtube.com/@damibanulinapoi/">
-            <img src="images/youtube.svg" alt="YouTube">
-        </a>
-    </div>
-    <p class="footer-copy">© 2026 Dă-mi Banul Înapoi</p>
-</footer>
+<!-- Footer (built by js/script.js) -->
+<footer class="footer" id="site-footer"></footer>
 
 <script src="js/script.js"></script>
 

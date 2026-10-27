@@ -1,8 +1,64 @@
 /* =====================================================
    SHARED SCRIPT — used by every page (script.js)
-   Sections: helpers, language, FAQ, money inputs,
-   salary calculator, budget chart, investment calculator
+   Sections: header + footer, helpers, language, menu, FAQ,
+   number inputs, salary / investment / budget calculators
 ===================================================== */
+
+/* =====================================================
+   SITE HEADER + FOOTER
+   Written once here and filled into <header id="site-header">
+   and <footer id="site-footer"> on every page.
+   Runs right away (before the rest) so the menu code finds them.
+===================================================== */
+(function buildSiteChrome() {
+    const ru   = document.documentElement.lang === "ru";
+    const img  = (ru ? "../" : "") + "images/";
+    const brand = "Dă-mi Banul Înapoi";
+
+    const header = document.getElementById("site-header");
+    if (header) {
+        header.innerHTML = `
+    <div class="left">
+        <a href="index.html">
+            <img src="${img}logo-text.svg" class="logo" alt="${brand}">
+        </a>
+    </div>
+    <div class="right">
+        <div class="lang-dropdown">
+            <button class="lang-btn" id="langBtn" aria-label="${ru ? "Язык" : "Limba"}">
+                <img src="${img}${ru ? "flag-russia" : "flag-romania"}.svg" id="langFlag" alt="">
+            </button>
+            <div class="lang-menu" id="langMenu">
+                <button class="lang-option" data-lang="RO">
+                    <img src="${img}flag-romania.svg" alt="">
+                    <span>Română</span>
+                </button>
+                <button class="lang-option" data-lang="RU">
+                    <img src="${img}flag-russia.svg" alt="">
+                    <span>Русский</span>
+                </button>
+            </div>
+        </div>
+        <span class="menu menu-icon" role="button" tabindex="0" aria-label="${ru ? "Меню" : "Meniu"}" aria-expanded="false"></span>
+    </div>`;
+    }
+
+    const footer = document.getElementById("site-footer");
+    if (footer) {
+        footer.innerHTML = `
+    <img src="${img}logo-text.svg" alt="${brand}" class="footer-logo">
+    <div class="footer-links">
+        <a href="despre.html#contact">${ru ? "Свяжитесь с нами" : "Contactează-ne"}</a>
+        <a href="despre.html">${ru ? "О нас" : "Despre noi"}</a>
+    </div>
+    <div class="social-icons">
+        <a href="https://www.facebook.com/damibanulinapoi/"><img src="${img}facebook.svg" alt="Facebook"></a>
+        <a href="https://www.instagram.com/damibanulinapoi/"><img src="${img}instagram.svg" alt="Instagram"></a>
+        <a href="https://www.youtube.com/@damibanulinapoi/"><img src="${img}youtube.svg" alt="YouTube"></a>
+    </div>
+    <p class="footer-copy">© ${new Date().getFullYear()} ${brand}</p>`;
+    }
+})();
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -19,6 +75,16 @@ const parseNumber = (val) =>
    The page language comes from <html lang="ro"> or <html lang="ru">. */
 const LANG = document.documentElement.lang === "ru" ? "ru" : "ro";
 
+/* Number style for the whole site: 1.234.567 (Romanian; Russian pages use a space).
+   Decimals are written with a comma (6,5). */
+const THOUSANDS = LANG === "ru" ? "\u00A0" : ".";
+function fmtInt(n) {
+    const r = Math.round(n);
+    if (!isFinite(r)) return "0";
+    const s = String(Math.abs(r)).replace(/\B(?=(\d{3})+(?!\d))/g, THOUSANDS);
+    return (r < 0 ? "-" : "") + s;
+}
+
 const TXT = LANG === "ru" ? {
     lei: "л",
     pers: "ч",
@@ -33,7 +99,7 @@ const TXT = LANG === "ru" ? {
 } : {
     lei: "lei",
     pers: "p.",
-    salaryLabel: { net: "Salariu net", brut: "Salariu brut", total: "Salariul total" },
+    salaryLabel: { net: "Salariu net", brut: "Salariu brut", total: "Salariu total" },
     ov: {
         cnasEmp: "CNAS angajator", cnam: "CNAM", it: "IT Park", union: "Sindicat",
         exempt: "Scutire", spouse: "Soț/soție", dep: "Persoane întreținute",
@@ -204,15 +270,8 @@ if (siteHeader && menuIcon) {
     overlay.append(list);
     document.body.append(overlay);
 
-    // The icon in the HTML (an <img>) is replaced by two CSS lines,
-    // so they can slide together and cross into an X (see .menu-icon in style.css)
-    const burger = document.createElement("span");
-    burger.className = "menu menu-icon";
-    burger.setAttribute("role", "button");
-    burger.setAttribute("tabindex", "0");
-    burger.setAttribute("aria-label", LANG === "ru" ? "Меню" : "Meniu");
-    burger.setAttribute("aria-expanded", "false");
-    menuIcon.replaceWith(burger);
+    // The two lines of the icon are drawn by CSS (.menu-icon in style.css)
+    const burger = menuIcon;
 
     function setMenu(open) {
         siteHeader.classList.toggle("menu-open", open);
@@ -243,7 +302,7 @@ if (siteHeader && menuIcon) {
    FAQ
 ========================= */
 
-const faqItems = document.querySelectorAll(".item");
+const faqItems = document.querySelectorAll(".accordion .item");
 
 faqItems.forEach(item => {
     const q = item.querySelector(".question");
@@ -269,7 +328,7 @@ faqItems.forEach(item => {
 
 function formatMoney(value) {
     const raw = value.replace(/[^\d]/g, "").slice(0, MAX_DIGITS);
-    return raw ? Number(raw).toLocaleString("en-US") : "0";
+    return raw ? fmtInt(Number(raw)) : "0";
 }
 
 function formatCount(value) {
@@ -289,7 +348,7 @@ function formatPercent(value, max) {
     }
 
     if (Number(v) > max) v = String(max);
-    return v;
+    return v.replace(".", ",");
 }
 
 function setupNumericField(input) {
@@ -319,7 +378,7 @@ function setupNumericField(input) {
 
     input.addEventListener("blur", () => {
         let v = input.value.trim();
-        if (v.endsWith(".")) v = v.slice(0, -1);
+        if (v.endsWith(".") || v.endsWith(",")) v = v.slice(0, -1);
         input.value = (v === "" || v === ".") ? "0" : v;
     });
 }
@@ -435,7 +494,7 @@ function getOptions() {
     const isITPark   = document.getElementById("AngajatiIT")?.value === "1";
     const unionMode  = document.getElementById("CotizatieSindicat")?.value ?? "0";
     const cnasEmpRate = parseFloat(document.getElementById("FondSocial")?.value ?? "24") / 100;
-    const cnamRate   = (parseFloat(document.getElementById("AsigMedAtManual")?.value) || 0) / 100;
+    const cnamRate   = (parseFloat(String(document.getElementById("AsigMedAtManual")?.value).replace(",", ".")) || 0) / 100;
     return { isITPark, unionMode, cnasEmpRate, cnamRate };
 }
 
@@ -506,7 +565,7 @@ function calcFromBrut(brut) {
    CALCULATOR BUTTON
 ========================= */
 
-const calcBtn = document.getElementById("calculează-btn");
+const calcBtn = document.getElementById("salary-calc-btn");
 const amountInput = document.getElementById("amount");
 
 // Button stays disabled until an amount greater than 0 is entered
@@ -573,7 +632,7 @@ calcBtn?.addEventListener("click", () => {
     if (!result) return;
 
     const fmt = (val) =>
-        (val ?? 0).toLocaleString("en-EN", { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + " " + TXT.lei;
+        fmtInt(val ?? 0) + " " + TXT.lei;
 
     const set = (id, val) => {
         const el = document.getElementById(id);
@@ -634,96 +693,24 @@ document.getElementById("reset-btn")?.addEventListener("click", () => {
 });
 
 /* =========================
-   BUDGET CHART
-========================= */
-
-const canvas = document.getElementById("chart");
-
-if (canvas) {
-
-    const ctx = canvas.getContext("2d");
-
-    const incomeInput = document.getElementById("amount");
-    const expenseInputs = document.querySelectorAll(".expense-input");
-
-    const colors = [
-        "#243e92","#3c59c0","#5a7fe0",
-        "#10312a","#174741","#0f615c",
-        "#2ca153","#218f4a","#55cc80",
-        "#fe7f07","#d46f05","#ffa03a",
-        "#c93a3a","#e55252","#ff7a7a"
-    ];
-
-    function drawChart() {
-
-        const income = parseNumber(incomeInput?.value);
-
-        const expenses = [...expenseInputs].map(i =>
-            parseNumber(i.value)
-        );
-
-        const size = canvas.clientWidth;
-        const center = size / 2;
-
-        canvas.width = size;
-        canvas.height = size;
-
-        ctx.clearRect(0, 0, size, size);
-
-        const base = size * 0.35;
-        const thick = size * 0.12;
-
-        ctx.beginPath();
-        ctx.arc(center, center, base, 0, Math.PI * 2);
-        ctx.strokeStyle = "#eee";
-        ctx.lineWidth = thick;
-        ctx.stroke();
-
-        if (!income) return;
-
-        let start = -Math.PI / 2;
-
-        expenses.forEach((v, i) => {
-
-            if (!v) return;
-
-            const angle = (v / income) * Math.PI * 2;
-
-            ctx.beginPath();
-            ctx.arc(center, center, base, start, start + angle);
-
-            ctx.strokeStyle = colors[i % colors.length];
-            ctx.lineWidth = thick;
-            ctx.stroke();
-
-            start += angle;
-        });
-    }
-
-    incomeInput?.addEventListener("input", drawChart);
-    expenseInputs.forEach(i => i.addEventListener("input", drawChart));
-    window.addEventListener("resize", drawChart);
-
-    drawChart();
-}
-
-/* =========================
    INVESTMENT CALCULATOR
    (only runs on calculator-de-investitii.html)
 ========================= */
 
 function initInvestmentCalculator() {
 
+    // money fields: "20.000" -> 20000; rate / years accept a comma: "6,5" -> 6.5
     const parseNum = (id) => {
-        const v = document.getElementById(id)?.value ?? "0";
-        return Number(String(v).replace(/[^\d.]/g, "")) || 0;
+        const v = String(document.getElementById(id)?.value ?? "0");
+        if (id === "rate" || id === "years") {
+            return Number(v.replace(",", ".").replace(/[^\d.]/g, "")) || 0;
+        }
+        return Number(v.replace(/[^\d]/g, "")) || 0;
     };
 
-    const fmt = (n) =>
-        Math.round(n).toLocaleString("en-US") + " lei";
+    const fmt = (n) => fmtInt(n) + " lei";
 
-    const fmtPlain = (n) =>
-        Math.round(n).toLocaleString("en-US");
+    const fmtPlain = (n) => fmtInt(n);
 
     /* ---- input formatting ---- */
     ["startAmount","endKnown","targetAmount","contribution"].forEach(id => {
@@ -731,7 +718,7 @@ function initInvestmentCalculator() {
         if (!el) return;
         el.addEventListener("input", () => {
             let raw = el.value.replace(/[^\d]/g, "").slice(0, 12);
-            el.value = raw ? Number(raw).toLocaleString("en-US") : "0";
+            el.value = raw ? fmtInt(Number(raw)) : "0";
             calculate();
         });
         el.addEventListener("focus", () => { if (el.value === "0") el.value = ""; });
@@ -741,7 +728,14 @@ function initInvestmentCalculator() {
     ["rate", "years"].forEach(id => {
         const el = document.getElementById(id);
         if (!el) return;
-        el.addEventListener("input", () => calculate());
+        el.addEventListener("input", () => {
+            // digits and one comma (a dot typed on the keyboard becomes a comma), max 2 decimals
+            let v = el.value.replace(/[^\d.,]/g, "").replace(/\./g, ",");
+            const i = v.indexOf(",");
+            if (i !== -1) v = v.slice(0, i + 1) + v.slice(i + 1).replace(/,/g, "").slice(0, 2);
+            el.value = v;
+            calculate();
+        });
     });
 
     ["compoundFreq", "contribFreq"].forEach(id => {
@@ -1101,9 +1095,9 @@ function initInvestmentCalculator() {
         } else if (mode === "contribution") {
             document.getElementById("mainValue").textContent = fmt(PMT);
         } else if (mode === "rate") {
-            document.getElementById("mainValue").textContent = (r * 100).toFixed(2) + "%";
+            document.getElementById("mainValue").textContent = (r * 100).toFixed(2).replace(".", ",") + "%";
         } else if (mode === "length") {
-            document.getElementById("mainValue").textContent = years.toFixed(1) + " ani";
+            document.getElementById("mainValue").textContent = years.toFixed(1).replace(".", ",") + " ani";
         }
 
         const totalContribAmount = PMT * contribFreqN * years;
@@ -1178,7 +1172,7 @@ function initBudgetCalculator() {
                        text: "Ваши деньги сбалансированно распределены между потребностями, желаниями и накоплениями. Так держать!", link: true }
         }
     } : {
-        savings: "Economisiri",
+        savings: "Economii",
         link: "Vezi cât pot crește economiile tale în timp",
         deficit: "Deficit",
         hints: {
@@ -1201,7 +1195,7 @@ function initBudgetCalculator() {
         }
     };
 
-    const money = (n) => Math.round(n).toLocaleString("en-US") + " " + TXT.lei;
+    const money = (n) => fmtInt(n) + " " + TXT.lei;
     const pct   = (n) => n + " %";
 
     /* "Ce e asta?" (and a link ending in #faq-categorii) opens the 50-30-20 FAQ answer */
@@ -1209,7 +1203,7 @@ function initBudgetCalculator() {
         const target = $("faq-categorii");
         if (!target) return;
 
-        document.querySelectorAll(".item").forEach(i => i.classList.remove("open"));
+        document.querySelectorAll(".accordion .item").forEach(i => i.classList.remove("open"));
         target.classList.add("open");
         target.scrollIntoView({ behavior: smooth ? "smooth" : "auto", block: "start" });
     }

@@ -3,42 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Despre – Dă-mi Banul Înapoi</title>
+    <title>Despre noi – Dă-mi Banul Înapoi</title>
+    <meta name="description" content="Un proiect făcut de moldoveni, pentru moldoveni: povestea fondatorului, principiile noastre și cum ne poți contacta.">
+    <meta name="theme-color" content="#F1F1F3">
+    <link rel="canonical" href="https://SITE-DOMAIN/despre.html">
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Dă-mi Banul Înapoi">
+    <meta property="og:locale" content="ro_RO">
+    <meta property="og:title" content="Despre noi – Dă-mi Banul Înapoi">
+    <meta property="og:description" content="Un proiect făcut de moldoveni, pentru moldoveni: povestea fondatorului, principiile noastre și cum ne poți contacta.">
+    <meta property="og:url" content="https://SITE-DOMAIN/despre.html">
+    <meta property="og:image" content="https://SITE-DOMAIN/images/calculatoare.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Fonts used on every page: start loading them right away -->
+    <link rel="preload" href="fonts/Archivo-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/RocaOne-Th.woff2" as="font" type="font/woff2" crossorigin>
+
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/svg+xml" href="images/logo-small.svg">
 </head>
 
 <body class="about">
 
-<!-- Header -->
-<header class="header">
-    <div class="left">
-        <a href="index.html">
-            <img src="images/logo-text.svg" class="logo" alt="Dă-mi Banul Înapoi">
-        </a>
-    </div>
-
-    <div class="right">
-        <div class="lang-dropdown">
-            <button class="lang-btn" id="langBtn" aria-label="Limba">
-                <img src="images/flag-romania.svg" id="langFlag" alt="">
-            </button>
-
-            <div class="lang-menu" id="langMenu">
-                <button class="lang-option" data-lang="RO">
-                    <img src="images/flag-romania.svg" alt="">
-                    <span>Română</span>
-                </button>
-                <button class="lang-option" data-lang="RU">
-                    <img src="images/flag-russia.svg" alt="">
-                    <span>Русский</span>
-                </button>
-            </div>
-        </div>
-
-        <img src="images/menu-open.svg" class="menu" alt="">
-    </div>
-</header>
+<!-- Header (built by js/script.js) -->
+<header class="header" id="site-header"></header>
 
 <main class="page-body">
 
@@ -48,7 +39,7 @@
         <!-- HEADER + FOUNDER -->
         <div class="about-block">
 
-            <h3>Despre noi</h3>
+            <h1 class="h3">Despre noi</h1>
             <p class="body1">Suntem un proiect făcut de moldoveni, pentru moldoveni care vor să înțeleagă încotro se duc banii lor.</p>
 
         <div class="about-founder">
@@ -71,12 +62,12 @@
         <div class="about-steps">
 
                 <div class="about-step">
-                    <h4>1. Cum am ajuns la 17.000 € datorie: iluzia creditelor ieftine</h4>
+                    <h2 class="h4">1. Cum am ajuns la 17.000 € datorie: iluzia creditelor ieftine</h2>
                     <p class="body1">Pe când studiam în Danemarca, pe lângă jobul part-time, am decis să iau un împrumut studențesc datorită dobânzilor mici. Planul meu inițial era să investesc acei bani pentru a obține un profit. Însă, neavând o educație financiară structurată, am sfârșit prin a specula banii pe acțiuni riscante, criptomonede și prin a-i cheltui pe vacanțe. Fără să-mi dau seama, ajunsesem să depind de banii din credit pentru a-mi finanța stilul de viață, deși veniturile mele de bază erau suficiente.</p>
                 </div>
 
                 <div class="about-step">
-                    <h4>2. Cum am scăpat de datorie în 6 luni</h4>
+                    <h2 class="h4">2. Cum am scăpat de datorie în 6 luni</h2>
                     <p class="body1">Când m-am întors în Moldova, am înfruntat realitatea: aveam o datorie de <strong>127.005 DKK (aproximativ 17.000 €)</strong>. Am luat o decizie fermă — trebuia să scap definitiv de această povară.</p>
                     <p class="body1">În doar 6 luni de zile, între <strong>20 iunie și 19 decembrie 2024</strong>, am achitat integral tot creditul. Eram extrem de motivat și aveam un singur scop. Pentru a reuși:</p>
                     <ul class="about-list">
@@ -89,7 +80,7 @@
                 </div>
 
                 <div class="about-step">
-                    <h4>3. Ce am descoperit după: zidul informațional din Moldova</h4>
+                    <h2 class="h4">3. Ce am descoperit după: zidul informațional din Moldova</h2>
                     <p class="body1">Scăpat de datorii, mi-am stabilit o regulă clară: să investesc lunar între 15% și 20% din venitul net în fonduri indexate (ETF-uri). Când am încercat să aplic asta din Moldova, m-am lovit de o lipsă totală de informații locale. Majoritatea celor din jur tranzacționau doar criptomonede sau nu auziseră de fonduri indexate ori de brokeri internaționali compatibili cu țara noastră.</p>
                 </div>
 
@@ -97,7 +88,7 @@
 
         <!-- PRINCIPII (include misiunea) -->
         <div class="card about-card">
-            <h4>Principiile în care credem</h4>
+            <h2 class="h4">Principiile în care credem</h2>
             <p class="body2">Experiența fondatorului ne-a arătat ce lipsea în Moldova, așa că am creat platforma pe care ne-am fi dorit să o găsim. Scopul nostru este simplu: să te ajutăm să eviți greșelile pe care le-am făcut noi, să scapi de datorii și să-ți construiești pas cu pas independența financiară. Iată ce ne ghidează:</p>
 
             <div class="about-text">
@@ -112,7 +103,7 @@
                 <p class="body2"><strong>Confidențialitate totală.</strong><br>Datele tale financiare rămân la tine. Noi îți oferim doar unelte curate ca să vezi unde se duc banii tăi.</p>
             </div>
 
-            <a class="btn" href="calculatoare.html"><span class="btn-text">Află Mai Mult</span></a>
+            <a class="btn" href="calculatoare.html"><span class="btn-text">Află mai mult</span></a>
         </div>
 
     </section>
@@ -122,7 +113,7 @@
     <!-- CONTACT -->
     <section class="about-contact" id="contact">
         <div class="about-block">
-            <h3>Contactează-ne</h3>
+            <h2 class="h3">Contactează-ne</h2>
             <p class="body1">Întrebări, probleme sau pur și simplu o părere – suntem <strong>aici pentru tine</strong>.</p>
             <picture>
                 <source type="image/avif" srcset="images/contact-600.avif 600w, images/contact-1200.avif 1200w" sizes="calc(100vw - 48px)">
@@ -132,13 +123,13 @@
         </div>
 
         <div class="about-block">
-            <h4>Ai o întrebare rapidă? Verifică mai întâi Întrebările frecvente</h4>
+            <h3 class="h4">Ai o întrebare rapidă? Verifică mai întâi întrebările frecvente</h3>
             <p class="body2">O mare parte din nelămuriri — cum ar fi introducerea veniturilor, cheltuielile anuale sau cum funcționează regula 50-30-20 — au deja răspunsuri clare acolo.</p>
-            <a class="btn" href="#faq"><span class="btn-text">Click Aici</span></a>
+            <a class="btn" href="#faq"><span class="btn-text">Click aici</span></a>
         </div>
 
         <div class="card about-card">
-            <h4>Nu ai găsit răspunsul pe care îl căutai?</h4>
+            <h3 class="h4">Nu ai găsit răspunsul pe care îl căutai?</h3>
             <p class="body2">Scrie-ne direct pe rețelele de socializare sau email pentru idei de îmbunătățire, feedback, întrebări la care FAQ-ul nu a răspuns sau propuneri de colaborare de oricare fel.</p>
 
             <div class="contact-list">
@@ -163,9 +154,9 @@
         </div>
 
         <div class="card about-card">
-            <h4>Vrei o analiză detaliată a situației tale financiare?</h4>
+            <h3 class="h4">Vrei o analiză detaliată a situației tale financiare?</h3>
             <p class="body2">Dacă simți că ai nevoie de un <strong>feedback personalizat</strong> și claritate pe bugetul tău, completează formularul nostru dedicat, <strong>mai jos</strong>.</p>
-            <a class="btn" href="https://forms.gle/tHDjZBzbqGx8Cw5T6" target="_blank" rel="noopener"><span class="btn-text">Click Aici</span></a>
+            <a class="btn" href="https://forms.gle/tHDjZBzbqGx8Cw5T6" target="_blank" rel="noopener"><span class="btn-text">Click aici</span></a>
             <p class="body2">După completare, vom analiza datele și vom lua noi legătura cu tine.</p>
         </div>
     </section>
@@ -174,7 +165,7 @@
 
     <!-- FAQ -->
     <section class="faq" id="faq">
-        <h3>Întrebări frecvente</h3>
+        <h2 class="h3">Întrebări frecvente</h2>
 
         <div class="accordion">
 
@@ -184,7 +175,7 @@
                     <div class="icon"></div>
                 </div>
                 <div class="answer">
-                    <p class="body2">Calculatorul scade suma tuturor cheltuielilor din venitul gospodăriei pentru a determina soldul. Pentru cecul 50-30-20, cheltuielile sunt atribuite celor trei categorii și se calculează ponderea lor din totalul cheltuielilor.</p>
+                    <p class="body2">Calculatorul scade suma tuturor cheltuielilor din venitul gospodăriei pentru a determina soldul. Pentru verificarea 50-30-20, cheltuielile sunt atribuite celor trei categorii și se calculează ponderea lor din venitul tău net.</p>
                 </div>
             </div>
 
@@ -213,24 +204,10 @@
 
 </main>
 
-<!-- Footer -->
-<footer class="footer">
-    <img src="images/logo-text.svg" alt="Dă-mi Banul Înapoi" class="footer-logo">
-
-    <div class="footer-links">
-        <a href="#contact">Contactează-ne</a>
-        <a href="despre.html">Despre noi</a>
-    </div>
-
-    <div class="social-icons">
-        <a href="https://www.facebook.com/damibanulinapoi/"><img src="images/facebook.svg" alt="Facebook"></a>
-        <a href="https://www.instagram.com/damibanulinapoi/"><img src="images/instagram.svg" alt="Instagram"></a>
-        <a href="https://www.youtube.com/@damibanulinapoi/"><img src="images/youtube.svg" alt="YouTube"></a>
-    </div>
-
-    <p class="footer-copy">© 2026 Dă-mi Banul Înapoi</p>
-</footer>
+<!-- Footer (built by js/script.js) -->
+<footer class="footer" id="site-footer"></footer>
 
 <script src="js/script.js"></script>
+
 </body>
 </html>

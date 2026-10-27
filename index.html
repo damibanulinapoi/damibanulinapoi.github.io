@@ -5,49 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dă-mi Banul Înapoi – Educație financiară pentru Moldova</title>
     <meta name="description" content="Economisește, investește și multiplică-ți veniturile. O platformă simplă creată special pentru oportunitățile și nevoile din Moldova.">
+    <meta name="theme-color" content="#F1F1F3">
+    <link rel="canonical" href="https://SITE-DOMAIN/">
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Dă-mi Banul Înapoi">
+    <meta property="og:locale" content="ro_RO">
+    <meta property="og:title" content="Dă-mi Banul Înapoi – Educație financiară pentru Moldova">
+    <meta property="og:description" content="Economisește, investește și multiplică-ți veniturile. O platformă simplă creată special pentru oportunitățile și nevoile din Moldova.">
+    <meta property="og:url" content="https://SITE-DOMAIN/">
+    <meta property="og:image" content="https://SITE-DOMAIN/images/calculatoare.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Fonts used on every page: start loading them right away -->
+    <link rel="preload" href="fonts/Archivo-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/RocaOne-Th.woff2" as="font" type="font/woff2" crossorigin>
+
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/svg+xml" href="images/logo-small.svg">
 </head>
 
 <body class="home">
 
-<!-- Header -->
-<header class="header">
-
-    <div class="left">
-        <a href="index.html">
-            <img src="images/logo-text.svg" class="logo" alt="Dă-mi Banul Înapoi">
-        </a>
-    </div>
-
-    <div class="right">
-
-        <div class="lang-dropdown">
-
-            <button class="lang-btn" id="langBtn" aria-label="Limba">
-                <img src="images/flag-romania.svg" id="langFlag" alt="">
-            </button>
-
-            <div class="lang-menu" id="langMenu">
-
-                <button class="lang-option" data-lang="RO">
-                    <img src="images/flag-romania.svg" alt="">
-                    <span>Română</span>
-                </button>
-
-                <button class="lang-option" data-lang="RU">
-                    <img src="images/flag-russia.svg" alt="">
-                    <span>Русский</span>
-                </button>
-
-            </div>
-
-        </div>
-        <img src="images/menu-open.svg" class="menu" alt="">
-
-    </div>
-
-</header>
+<!-- Header (built by js/script.js) -->
+<header class="header" id="site-header"></header>
 
 <main class="page-body">
 
@@ -61,7 +43,7 @@
     </section>
 
     <section class="home-intent">
-        <h4>Vreau să ...</h4>
+        <h2 class="h4">Vreau să ...</h2>
 
         <a class="intent-pill intent-pill--save" href="economiseste.html">
             <span>... economisesc</span>
@@ -90,7 +72,7 @@
 
     <!-- ÎNCEPE CU ÎNCEPUTUL -->
     <section class="home-start" id="incepe">
-        <h3>Începe cu începutul</h3>
+        <h2 class="h3">Începe cu începutul</h2>
 
         <picture>
             <source type="image/avif" srcset="images/calculatoare.avif">
@@ -101,7 +83,7 @@
         <div class="home-cards">
 
             <div class="card about-card home-card" id="pasii">
-                <h4>Cei 7 pași:</h4>
+                <h3 class="h4">Cei 7 pași:</h3>
                 <ul class="about-list">
                     <li class="body1"><strong>Pasul 1:</strong> Economisește 1.000 de euro (sau echivalentul în MDL) pentru un fond de urgență de început.</li>
                     <li class="body1"><strong>Pasul 2:</strong> Plătește toate datoriile (cu excepția creditului ipotecar), folosind metoda bulgărelui de zăpadă.</li>
@@ -111,25 +93,26 @@
                     <li class="body1"><strong>Pasul 6:</strong> Plătește-ți casa mai devreme.</li>
                     <li class="body1"><strong>Pasul 7:</strong> Construiește avere și oferă cu generozitate.</li>
                 </ul>
-                <a class="btn" href="despre.html"><span class="btn-text">Află Mai Mult</span></a>
+                <p class="small-secondary">Cei 7 pași sunt adaptați după metoda „Baby Steps” a lui Dave Ramsey, pentru realitățile din Moldova.</p>
+                <a class="btn" href="despre.html"><span class="btn-text">Află mai mult</span></a>
             </div>
 
             <div class="card about-card home-card" id="principii">
-                <h4>Principiile:</h4>
+                <h3 class="h4">Principiile:</h3>
                 <ul class="about-list">
-                    <li class="body1"><strong>Fă-ți Un Buget:</strong> Mai întâi de toate, fă-ți un buget scris</li>
-                    <li class="body1"><strong>Scapă De Datorii:</strong> Pentru a construi avere, trebuie să scapi de datorii</li>
-                    <li class="body1"><strong>Relații Sănătoase:</strong> Relațiile sănătoase au un impact major asupra finanțelor.</li>
+                    <li class="body1"><strong>Fă-ți un buget:</strong> Mai întâi de toate, fă-ți un buget scris</li>
+                    <li class="body1"><strong>Scapă de datorii:</strong> Pentru a construi avere, trebuie să scapi de datorii</li>
+                    <li class="body1"><strong>Relații sănătoase:</strong> Relațiile sănătoase au un impact major asupra finanțelor.</li>
                     <li class="body1"><strong>Economisește:</strong> Economisește și investește.</li>
                     <li class="body1"><strong>Dăruiește:</strong> Toți cei care câștigă cu adevărat în viața financiară sunt oameni darnici.</li>
                 </ul>
-                <a class="btn" href="despre.html"><span class="btn-text">Află Mai Mult</span></a>
+                <a class="btn" href="despre.html"><span class="btn-text">Află mai mult</span></a>
             </div>
 
             <div class="card about-card home-card" id="bugetul">
-                <h4>Bugetul:</h4>
-                <p class="body1">Fără un buget, este imposibil să aplici eficient oricare dintre Baby Step-uri. Un buget nu este o restricție sau o pedeapsă, ci un instrument de libertate: îți dă permisiunea de a cheltui banii fără vinovăție, pentru că fiecare leu are deja o destinație stabilită.</p>
-                <a class="btn" href="calculator-de-buget.html"><span class="btn-text">Află Mai Mult</span></a>
+                <h3 class="h4">Bugetul:</h3>
+                <p class="body1">Fără un buget, este imposibil să aplici eficient oricare dintre cei 7 pași. Un buget nu este o restricție sau o pedeapsă, ci un instrument de libertate: îți dă permisiunea de a cheltui banii fără vinovăție, pentru că fiecare leu are deja o destinație stabilită.</p>
+                <a class="btn" href="calculator-de-buget.html"><span class="btn-text">Află mai mult</span></a>
             </div>
 
         </div>
@@ -137,29 +120,8 @@
 
 </main>
 
-<!-- Footer -->
-<footer class="footer">
-    <img src="images/logo-text.svg" alt="Dă-mi Banul Înapoi" class="footer-logo">
-
-    <div class="footer-links">
-        <a href="despre.html#contact">Contactează-ne</a>
-        <a href="despre.html">Despre noi</a>
-    </div>
-
-    <div class="social-icons">
-        <a href="https://www.facebook.com/damibanulinapoi/">
-            <img src="images/facebook.svg" alt="Facebook">
-        </a>
-        <a href="https://www.instagram.com/damibanulinapoi/">
-            <img src="images/instagram.svg" alt="Instagram">
-        </a>
-        <a href="https://www.youtube.com/@damibanulinapoi/">
-            <img src="images/youtube.svg" alt="YouTube">
-        </a>
-    </div>
-
-    <p class="footer-copy">© 2026 Dă-mi Banul Înapoi</p>
-</footer>
+<!-- Footer (built by js/script.js) -->
+<footer class="footer" id="site-footer"></footer>
 
 <script src="js/script.js"></script>
 
