@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abonament mobil: cum economisești la telefon – Dă-mi Banul Înapoi</title>
+    <meta name="description" content="Compară abonamentele Orange, Moldcell și Moldtelecom, află cât poți economisi la telefon și când iese mai ieftin abonamentul decât cartela prepay.">
+    <meta name="theme-color" content="#F1F1F3">
+    <link rel="canonical" href="https://damibanulinapoi.github.io/telefonie-mobila.html">
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Dă-mi Banul Înapoi">
+    <meta property="og:locale" content="ro_RO">
+    <meta property="og:title" content="Abonament mobil: cum economisești la telefon – Dă-mi Banul Înapoi">
+    <meta property="og:description" content="Compară abonamentele Orange, Moldcell și Moldtelecom, află cât poți economisi la telefon și când iese mai ieftin abonamentul decât cartela prepay.">
+    <meta property="og:url" content="https://damibanulinapoi.github.io/telefonie-mobila.html">
+    <meta property="og:image" content="https://damibanulinapoi.github.io/images/calculatoare.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Fonts used on every page: start loading them right away -->
+    <link rel="preload" href="fonts/Archivo-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/RocaOne-Th.woff2" as="font" type="font/woff2" crossorigin>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/telefonie-mobila.css">
+    <link rel="icon" type="image/svg+xml" href="images/logo-small.svg">
+</head>
+
+<body>
+
+<!-- Header (built by js/script.js) -->
+<header class="header" id="site-header"></header>
+
+<main class="page-body phone-page">
+
+    <!-- HERO -->
+    <section class="calculator-hero">
+        <a href="economiseste.html" class="hero-back">← Economisește</a>
+        <h1 class="h3">Economisește la abonamentul de telefon</h1>
+        <p class="body1"><strong>Ai putea plăti mai puțin pentru același telefon.</strong> Spune-ne cât cheltui pe lună și îți arătăm abonamentele Orange, Moldcell și Moldtelecom care costă mai puțin decât plătești acum.</p>
+    </section>
+
+    <!-- SAVINGS FINDER -->
+    <section class="calculator pm-checker" id="verifica">
+        <h2 class="sr-only">Află cât poți economisi</h2>
+
+        <div class="calculator-categorie">
+            <div class="income-section">
+                <div class="invest-grid">
+
+                    <div class="invest-row">
+                        <label for="pmSpend">Cât plătești acum pe lună</label>
+                        <div class="invest-input-wrap">
+                            <input type="text" id="pmSpend" class="invest-input" inputmode="numeric" maxlength="6" value="0" autocomplete="off">
+                            <span class="invest-suffix">lei</span>
+                        </div>
+                    </div>
+
+                    <div class="invest-row">
+                        <label for="pmType">Ce ai acum</label>
+                        <select id="pmType" class="invest-select">
+                            <option value="abonament" selected>Abonament</option>
+                            <option value="prepay">Cartelă (prepay)</option>
+                        </select>
+                    </div>
+
+                    <div class="invest-row">
+                        <label for="pmGb">Internet de care ai nevoie</label>
+                        <select id="pmGb" class="invest-select">
+                            <option value="0" selected>Oricât</option>
+                            <option value="10">Cel puțin 10 GB</option>
+                            <option value="20">Cel puțin 20 GB</option>
+                            <option value="50">Cel puțin 50 GB</option>
+                            <option value="100">Cel puțin 100 GB</option>
+                            <option value="9999">Nelimitat</option>
+                        </select>
+                    </div>
+
+                    <div class="invest-row">
+                        <label for="pmSig">Semnătură mobilă</label>
+                        <select id="pmSig" class="invest-select">
+                            <option value="0" selected>Nu contează</option>
+                            <option value="1">O vreau</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <button type="button" id="pmBtn" class="btn" disabled>
+                    <span class="btn-text">Vezi cât poți economisi</span>
+                </button>
+                <p class="small-secondary">Nu salvăm și nu trimitem nimic: calculul se face în browserul tău.</p>
+            </div>
+        </div>
+
+        <div class="pm-results" id="pmResults" hidden aria-live="polite"></div>
+    </section>
+
+    <div class="section-break"></div>
+
+    <!-- TIPS -->
+    <section class="pm-section" id="sfaturi">
+        <h2 class="h3">Cum găsești abonamentul potrivit</h2>
+        <p class="body1">Cel mai ieftin abonament nu este mereu cel mai bun. Iată cum alegi unul care îți ține factura mică, fără să rămâi fără minute sau internet.</p>
+        <div class="pm-tips">
+            <div class="card about-card">
+                <h3 class="h5">1. Uită-te la ce consumi de fapt</h3>
+                <p class="body2">Deschide aplicația operatorului (My Orange, my moldcell sau My Moldtelecom) și vezi minutele, SMS-urile și GB consumați în ultimele 3 luni. Mulți oameni plătesc pentru pachete mari pe care nu le folosesc. Dacă ești mai mereu pe Wi-Fi, 10–20 GB pot fi de ajuns.</p>
+            </div>
+            <div class="card about-card">
+                <h3 class="h5">2. Calculează prețul pe 24 de luni</h3>
+                <p class="body2">Prețul redus ține 12 sau 24 de luni, apoi se aplică prețul standard. Adună ce plătești în ambele perioade și împarte la 24. Exemplu: Orange One 170 costă 119 lei în primele 12 luni și 170 lei apoi, deci în medie ≈ 144,5 lei pe lună, nu 119.</p>
+            </div>
+            <div class="card about-card">
+                <h3 class="h5">3. Compară GB și minute, nu doar prețul</h3>
+                <p class="body2">Un abonament mai mic poate fi mai scump pe GB decât unul mai mare. Verifică ce este „bonus” (GB în plus acordați de operator în anumite condiții) și ce este inclus permanent, plus dacă minutele sunt nelimitate doar în rețeaua operatorului sau spre toate rețelele.</p>
+            </div>
+            <div class="card about-card">
+                <h3 class="h5">4. Folosește portarea</h3>
+                <p class="body2">Cele mai bune prețuri sunt de obicei pentru clienți noi: la conectare, la portare sau la trecerea de la cartelă la abonament. Îți păstrezi numărul. Moldtelecom, de exemplu, face portarea gratuit în maximum 5 zile lucrătoare.</p>
+            </div>
+            <div class="card about-card">
+                <h3 class="h5">5. Citește condițiile contractului</h3>
+                <p class="body2">Verifică durata minimă (12 sau 24 de luni), penalitățile la reziliere anticipată și ce se întâmplă cu prețul și cu bonusul după perioada de ofertă. Dacă iei și un telefon în rate, încheierea contractului mai devreme poate costa mai mult.</p>
+            </div>
+            <div class="card about-card">
+                <h3 class="h5">6. Combină cu alte servicii</h3>
+                <p class="body2">Dacă ai (sau iei) internet fix de la același operator, abonamentul mobil poate ieși mai ieftin: Moldtelecom Start 120 costă 80 lei cu internet prin fibră, iar Orange One 170 costă 130 lei cu pachetul Love. Abonamentele de familie (Orange Family, Moldcell Lumo Family) pot reduce costul pe persoană.</p>
+            </div>
+            <div class="card about-card">
+                <h3 class="h5">7. Nu uita de semnătura mobilă</h3>
+                <p class="body2">Dacă folosești serviciile online ale statului (EVO, MPass, MSign), semnătura mobilă îți permite să semnezi documente de pe telefon. Se activează doar la Orange sau Moldcell. Moldtelecom nu o oferă. O poți activa și pe o cartelă PrePay Orange sau Moldcell, dacă nu vrei să-ți schimbi abonamentul.</p>
+            </div>
+            <div class="card about-card">
+                <h3 class="h5">8. Revizuiește o dată pe an</h3>
+                <p class="body2">Operatorii își schimbă des gamele și prețurile. Verifică o dată pe an dacă nu poți plăti mai puțin. Poți întreba și operatorul actual dacă îți face o ofertă la fel de bună ca cea pentru clienții noi.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-break"></div>
+
+    <!-- ABONAMENT VS PREPAY -->
+    <section class="pm-section" id="abonament-vs-prepay">
+        <h2 class="h3">Abonament sau cartelă (prepay)?</h2>
+        <p class="body1"><strong>De obicei, la același consum, abonamentul iese mai ieftin.</strong> Primești mai mult internet și mai multe minute pe leu, minute nelimitate în rețea, roaming în UE și bonusuri la conectare. Cartela se plătește pe pachete scurte, adesea de 15 zile, iar prețul pe GB este mai mare.</p>
+        <p class="body2">Excepții: dacă folosești foarte puțin, o cartelă de aproximativ 30 de lei poate costa mai puțin, iar la cartelă nu ai contract și poți pleca oricând. Compară pe consumul tău, nu pe medii.</p>
+
+        <div class="plans-wrap">
+            <table class="plans-table is-mid">
+                <thead>
+                    <tr><th>Variantă</th><th>Ce plătești pe lună</th><th>Ce primești</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Moldtelecom Fly Prepay 50</strong><span class="pm-sub">cartelă, 15 zile</span></td><td>100 lei<span class="pm-sub">2 pachete de 50 lei</span></td><td>40 GB și 500 min naționale</td></tr>
+                    <tr><td><strong>Orange PrePay 60</strong><span class="pm-sub">cartelă, 15 zile</span></td><td>120 lei<span class="pm-sub">2 pachete de 60 lei</span></td><td>30 GB și 300 min</td></tr>
+                    <tr><td><strong>Orange One 170</strong><span class="pm-sub">abonament, 12 luni</span></td><td>119 lei<span class="pm-sub">apoi 170 lei</span></td><td>20 GB + 20 GB bonus, nelimitat în rețea, 450 min/SMS, roaming UE</td></tr>
+                    <tr><td><strong>Moldtelecom Start 120</strong><span class="pm-sub">abonament, 24 luni</span></td><td>95 lei<span class="pm-sub">apoi 120 lei</span></td><td>Internet nelimitat*, nelimitat în rețeaua Moldtelecom, roaming UE</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="small-secondary">Exemple din ofertele operatorilor, <span data-updated></span>. La cartelă am presupus că reactivezi pachetul de 15 zile de două ori pe lună. Diferența nu e mare în toate cazurile: la același preț, o cartelă poate da uneori mai mult internet decât un abonament mic.</p>
+    </section>
+
+    <div class="section-break"></div>
+
+    <!-- THE 3 COMPANIES -->
+    <section class="pm-section" id="companii">
+        <h2 class="h3">Cele trei companii pe scurt</h2>
+        <div class="plans-wrap">
+            <table class="plans-table is-wide">
+                <thead>
+                    <tr><th></th><th>Orange Moldova</th><th>Moldcell</th><th>Moldtelecom (Unité)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Cel mai ieftin abonament</strong></td><td data-cheapest="orange"></td><td data-cheapest="moldcell"></td><td data-cheapest="moldtelecom"></td></tr>
+                    <tr><td><strong>Internet nelimitat</strong></td><td>Doar One 400</td><td>Nu, până la 200 GB + 200 GB bonus</td><td>Da*, pe toate abonamentele</td></tr>
+                    <tr><td><strong>Semnătură mobilă</strong></td><td><span class="pm-yes">✓ Da</span><span class="pm-sub">și pe eSIM, activare gratuită</span></td><td><span class="pm-yes">✓ Da</span></td><td><span class="pm-no">✕ Nu</span></td></tr>
+                    <tr><td><strong>Roaming UE „ca acasă”</strong></td><td>Da</td><td>Da</td><td>Da</td></tr>
+                    <tr><td><strong>5G</strong></td><td>Da</td><td>Da</td><td>Da (rețeaua 5G MAX, unde există acoperire)</td></tr>
+                    <tr><td><strong>eSIM</strong></td><td>Da</td><td>Da</td><td>Da</td></tr>
+                    <tr><td><strong>Perioadă de ofertă</strong></td><td>12 luni</td><td>24 luni</td><td>24 luni</td></tr>
+                    <tr><td><strong>Oferta completă</strong></td><td><a href="https://www.orange.md/ro/abonament" target="_blank" rel="noopener">orange.md</a></td><td><a href="https://eshop.moldcell.md/ro/abonament/conectare" target="_blank" rel="noopener">moldcell.md</a></td><td><a href="https://www.moldtelecom.md/ro/mobile/" target="_blank" rel="noopener">moldtelecom.md</a></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <div class="section-break"></div>
+
+    <!-- ALL PLANS -->
+    <section class="pm-section" id="comparatie">
+        <h2 class="h3">Toate abonamentele, într-un singur tabel</h2>
+        <p class="body1">Prețuri în lei pe lună, preluate de pe site-urile operatorilor în <span data-updated></span>.</p>
+
+        <div class="tab-wrapper">
+            <div class="tab-row" id="pmTabs">
+                <div class="tab-item active" data-op="all">Toate</div>
+                <div class="tab-item" data-op="orange">Orange</div>
+                <div class="tab-item" data-op="moldcell">Moldcell</div>
+                <div class="tab-item" data-op="moldtelecom">Moldtelecom</div>
+            </div>
+        </div>
+
+        <div class="plans-wrap">
+            <table class="plans-table is-wide">
+                <thead>
+                    <tr>
+                        <th>Abonament</th>
+                        <th>Preț (lei/lună)</th>
+                        <th>Ofertă</th>
+                        <th>Minute</th>
+                        <th>SMS</th>
+                        <th>Internet</th>
+                        <th>Roaming UE</th>
+                        <th>Semnătură mobilă</th>
+                    </tr>
+                </thead>
+                <tbody id="plansBody"></tbody>
+            </table>
+        </div>
+        <p class="small-secondary plans-hint">Derulează tabelul lateral pentru toate coloanele →</p>
+
+        <div class="pm-note">
+            <p class="small-secondary">Prețul „la ofertă” se aplică de regulă la conectare nouă, portare sau trecere de la cartelă, pentru perioada indicată; apoi se plătește prețul standard. „GB bonus” înseamnă internet în plus acordat de operator în anumite condiții. Roaming UE: internetul disponibil în Uniunea Europeană, din cel inclus în abonament.</p>
+            <p class="small-secondary">* Moldtelecom: internetul este „nelimitat”, dar după un anumit volum viteza se poate reduce. Pentru pachetele Moldtelecom am trecut doar ce am putut confirma de pe pagina operatorului; minutele către alte rețele, GB-ul din roaming și reducerile curente le găsești pe moldtelecom.md.</p>
+            <p class="small-secondary">Nu sunt incluse abonamentele pentru familie, studenți și seniori, nici ofertele pentru firme. Informativ: operatorul poate schimba prețurile oricând.</p>
+        </div>
+    </section>
+
+    <div class="section-break"></div>
+
+    <!-- FAQ -->
+    <section class="faq">
+        <h2 class="h3">Întrebări frecvente</h2>
+        <div class="accordion">
+            <div class="item open">
+                <div class="question">
+                    <p class="body1">Pot să-mi păstrez numărul dacă schimb operatorul?</p>
+                    <div class="icon" aria-hidden="true"></div>
+                </div>
+                <div class="answer">
+                    <div class="answer-box"><p class="body2">Da, prin portare. Cea mai bună ofertă se primește adesea tocmai la portare. Procesul durează de obicei câteva zile lucrătoare, iar numărul rămâne al tău.</p></div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="question">
+                    <p class="body1">Ce înseamnă „20 GB + 20 GB bonus”?</p>
+                    <div class="icon" aria-hidden="true"></div>
+                </div>
+                <div class="answer">
+                    <div class="answer-box"><p class="body2">Primul număr este internetul inclus permanent în abonament, iar al doilea este un bonus acordat de operator, de exemplu la conectare sau într-un pachet de familie. Condițiile (cât timp ține bonusul) diferă de la operator, așa că verifică-le înainte să semnezi.</p></div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="question">
+                    <p class="body1">De ce prețul din tabel diferă de cel de pe site-ul operatorului?</p>
+                    <div class="icon" aria-hidden="true"></div>
+                </div>
+                <div class="answer">
+                    <div class="answer-box"><p class="body2">Operatorii afișează adesea prețul redus pentru clienți noi. Noi arătăm ambele prețuri: cel la ofertă și cel standard, ca să vezi cât plătești după ce se termină perioada promoțională.</p></div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="question">
+                    <p class="body1">Ce se întâmplă dacă îmi termin GB-ul?</p>
+                    <div class="icon" aria-hidden="true"></div>
+                </div>
+                <div class="answer">
+                    <div class="answer-box"><p class="body2">Depinde de operator: fie viteza internetului se reduce, fie poți cumpăra opțiuni extra (de exemplu, Orange vinde 5 GB cu 60 lei, iar Moldcell 10 GB cu 90 lei). Citește condițiile abonamentului înainte să-l alegi.</p></div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="question">
+                    <p class="body1">Cine oferă semnătura mobilă?</p>
+                    <div class="icon" aria-hidden="true"></div>
+                </div>
+                <div class="answer">
+                    <div class="answer-box"><p class="body2">La momentul verificării, semnătura mobilă se activează la Orange și la Moldcell, inclusiv pe cartele PrePay. Orange o oferă și pe eSIM. Moldtelecom (Unité) nu este printre operatorii care o oferă. Detalii găsești pe <a href="https://evo.gov.md/acasa/semnatura-electronica" target="_blank" rel="noopener">evo.gov.md</a>.</p></div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="question">
+                    <p class="body1">Cât de actuale sunt prețurile?</p>
+                    <div class="icon" aria-hidden="true"></div>
+                </div>
+                <div class="answer">
+                    <div class="answer-box"><p class="body2">Le-am preluat din paginile oficiale ale operatorilor în <span data-updated></span>, dar ele se pot schimba oricând. Prețul final îl confirmă operatorul. Dacă observi o diferență, <a href="despre.html#contact">scrie-ne</a> și corectăm.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- Footer (built by js/script.js) -->
+<footer class="footer" id="site-footer"></footer>
+
+<script src="js/script.js"></script>
+<script src="js/telefonie-mobila.js"></script>
+
+</body>
+</html>
