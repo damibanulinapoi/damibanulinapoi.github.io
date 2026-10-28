@@ -1,10 +1,12 @@
 /* =====================================================
    TELEFONIE MOBILĂ (telefonie-mobila.html only)
-   1. DATA   - all plans live in the PLANS list below. To update a price
-               or add a plan, edit ONLY that list: the table, the
-               "cheapest" cells and the savings finder all read from it.
+   1. DATA   - every plan lives in the DATA list below (one row = one line
+               of the Excel "Abonamente telefonie mobilă"). To update a
+               price or add a plan, edit ONLY that list: the sortable table,
+               the "cheapest" cells and the savings finder all read from it.
    2. Savings finder ("Vezi cât poți economisi")
-   3. Plans table with company filter
+   3. One table with all plans: click a header to sort, click again to
+      reverse, a third click goes back to the original order
 ===================================================== */
 (function () {
 
@@ -12,67 +14,57 @@
 
     const UPDATED = "octombrie 2026";
 
-    // signature = can you get the mobile signature (semnătură electronică mobilă) from this operator?
+    // url = where the operator shows its offers
     const OPS = {
-        orange:      { name: "Orange Moldova",      signature: true,  url: "https://www.orange.md/ro/abonament" },
-        moldcell:    { name: "Moldcell",            signature: true,  url: "https://eshop.moldcell.md/ro/abonament/conectare" },
-        moldtelecom: { name: "Moldtelecom (Unité)", signature: false, url: "https://www.moldtelecom.md/ro/mobile/" }
+        orange:      { name: "Orange Moldova",      url: "https://www.orange.md/ro/abonament" },
+        moldcell:    { name: "Moldcell",            url: "https://eshop.moldcell.md/ro/abonament/conectare" },
+        moldtelecom: { name: "Moldtelecom (Unité)", url: "https://www.moldtelecom.md/ro/mobile/" }
     };
 
-    /* std        = standard price, lei / month
-       promo      = promotional price (or null), promoMonths = how long it lasts
-       promoNote  = shown when we know a discount exists but not the exact price
-       gbNum      = GB included (9999 = unlimited), used for the "internet needed" filter */
-    const PLANS = [
-        { op: "orange", name: "One 170", std: 170, promo: 119, promoMonths: 12,
-          promoWho: "la conectare, portare sau transfer de la PrePay",
-          minutes: "450 min naționale", minutesNote: "+ nelimitat în rețeaua Orange",
-          sms: "Incluse în cele 450 min/SMS", gb: "20 GB + 20 GB bonus", gbNum: 20, roaming: "13,29 GB" },
-        { op: "orange", name: "One 220", std: 220, promo: 154, promoMonths: 12,
-          promoWho: "la conectare, portare sau transfer de la PrePay",
-          minutes: "Nelimitat național", minutesNote: "500 min spre UE/SEE + 50 min internaționale",
-          sms: "Nelimitat", gb: "60 GB + 60 GB bonus", gbNum: 60, roaming: "17,20 GB" },
-        { op: "orange", name: "One 300", std: 300, promo: 165, promoMonths: 12,
-          promoWho: "la conectare, portare sau transfer de la PrePay",
-          minutes: "Nelimitat național", minutesNote: "500 min spre UE/SEE + 50 min internaționale",
-          sms: "Nelimitat", gb: "100 GB + 100 GB bonus", gbNum: 100, roaming: "23,45 GB" },
-        { op: "orange", name: "One 400", std: 400, promo: null, promoNote: "Reducere posibilă, vezi la operator",
-          minutes: "Nelimitat național", minutesNote: "500 min spre UE/SEE + 100 min internaționale",
-          sms: "Nelimitat", gb: "Nelimitat", gbNum: 9999, roaming: "31,27 GB" },
-
-        { op: "moldcell", name: "Lumo 100", std: 100, promo: null,
-          minutes: "500 min naționale", minutesNote: "+ nelimitat în rețeaua Moldcell · ofertă regională",
-          sms: "Incluse în cele 500 min/SMS", gb: "10 GB + 10 GB bonus", gbNum: 10, roaming: "8 GB" },
-        { op: "moldcell", name: "Lumo 170", std: 170, promo: 110, promoMonths: 24,
-          promoWho: "la conectare sau transfer, contract 24 luni",
-          minutes: "600 min naționale", minutesNote: "+ nelimitat în rețeaua Moldcell",
-          sms: "Incluse în cele 600 min/SMS", gb: "25 GB + 25 GB bonus", gbNum: 25, roaming: "14 GB" },
-        { op: "moldcell", name: "Lumo 220", std: 220, promo: 120, promoMonths: 24,
-          promoWho: "la conectare sau transfer, contract 24 luni",
-          minutes: "Nelimitat național", minutesNote: "500 min UE + Ucraina, 50 min internaționale",
-          sms: "Nelimitat", gb: "60 GB + 60 GB bonus", gbNum: 60, roaming: "18 GB" },
-        { op: "moldcell", name: "Lumo 290", std: 290, promo: 160, promoMonths: 24,
-          promoWho: "la conectare sau transfer, contract 24 luni",
-          minutes: "Nelimitat național", minutesNote: "500 min UE + Ucraina, 50 min internaționale",
-          sms: "Nelimitat", gb: "100 GB + 100 GB bonus", gbNum: 100, roaming: "23 GB" },
-        { op: "moldcell", name: "Lumo 390", std: 390, promo: 195, promoMonths: 24,
-          promoWho: "la conectare sau transfer, contract 24 luni",
-          minutes: "Nelimitat național", minutesNote: "500 min UE + Ucraina, 100 min internaționale",
-          sms: "Nelimitat", gb: "200 GB + 200 GB bonus", gbNum: 200, roaming: "31 GB" },
-
-        { op: "moldtelecom", name: "Start 120", std: 120, promo: 95, promoMonths: 24,
-          promoWho: "la conectare nouă sau portare; 80 lei cu internet fix Moldtelecom",
-          minutes: "Nelimitat în rețeaua Moldtelecom", minutesNote: "Alte rețele: vezi la operator",
-          sms: "Nelimitat în rețeaua Moldtelecom", gb: "Nelimitat*", gbNum: 9999, roaming: "Inclus*" },
-        { op: "moldtelecom", name: "Flex 150", std: 150, promo: null, promoNote: "Reducere lunară posibilă, vezi la operator",
-          minutes: "Nelimitat în rețeaua Moldtelecom", minutesNote: "Alte rețele: vezi la operator",
-          sms: "Nelimitat în rețeaua Moldtelecom", gb: "Nelimitat*", gbNum: 9999, roaming: "Inclus*" },
-        { op: "moldtelecom", name: "Liberty 200", std: 200, promo: null, promoNote: "Reducere lunară posibilă, vezi la operator",
-          minutes: "Nelimitat în rețeaua Moldtelecom", minutesNote: "Alte rețele: vezi la operator",
-          sms: "Nelimitat în rețeaua Moldtelecom", gb: "Nelimitat*", gbNum: 9999, roaming: "Inclus*" },
-        { op: "moldtelecom", name: "Liberty Plus 290", std: 290, promo: null, promoNote: "Reducere lunară posibilă, vezi la operator",
-          minutes: "Nelimitat în rețeaua Moldtelecom", minutesNote: "Alte rețele: vezi la operator",
-          sms: "Nelimitat în rețeaua Moldtelecom", gb: "Nelimitat*", gbNum: 9999, roaming: "Inclus*" }
+    /* Field meaning (same as the Excel columns):
+       name, op          = plan name, operator
+       months            = minimum contract in months (null = none / not stated)
+       c12               = price per month in the first 12 months (lei)
+       c24               = price per month in months 13-24 (only 24-month contracts)
+       cAfter            = price per month after the contract ends
+                           (null = the plan has only one price, c12)
+       gbOffer, gbAfter  = internet during the offer / after the offer
+                           (number = GB, text as written: "40 GB*" = bonus valid 24 months,
+                            "40 GB**" = unlimited above the included GB, reduced speed)
+       roamUE            = internet in EU roaming (GB)
+       netMin            = minutes/SMS inside the operator's network
+       natMin            = national minutes/SMS ("600/100" = 600 min / 100 SMS)
+       intl, intlUE, nonUE = international minutes: total / to EU / to non-EU
+       roamNonUE         = internet in non-EU roaming (GB, or text like "500 MB")
+       offer             = who gets this price
+       sig               = mobile signature: "Da" / "Nu"                          */
+    const DATA = [
+        {"name": "Start 5G", "op": "Moldtelecom", "months": 24, "c12": 85, "c24": 120, "cAfter": 170, "gbOffer": "40 GB**", "gbAfter": null, "roamUE": 13.3, "netMin": "nelimitat", "natMin": "600/100", "intl": null, "intlUE": null, "nonUE": null, "roamNonUE": null, "offer": "Conectare/ Portare/ Transfer PrePay", "sig": "Nu"},
+        {"name": "Pro 5G", "op": "Moldtelecom", "months": 24, "c12": 105, "c24": 150, "cAfter": 210, "gbOffer": "75 GB**", "gbAfter": null, "roamUE": 16.43, "netMin": "nelimitat", "natMin": "nelimitat", "intl": 50, "intlUE": null, "nonUE": null, "roamNonUE": null, "offer": "Conectare/ Portare/ Transfer PrePay", "sig": "Nu"},
+        {"name": "Plus 5G", "op": "Moldtelecom", "months": 24, "c12": 145, "c24": 220, "cAfter": 290, "gbOffer": "100 GB**", "gbAfter": null, "roamUE": 22.68, "netMin": "nelimitat", "natMin": "nelimitat", "intl": 100, "intlUE": null, "nonUE": null, "roamNonUE": null, "offer": "Conectare/ Portare/ Transfer PrePay", "sig": "Nu"},
+        {"name": "Max 5G", "op": "Moldtelecom", "months": 24, "c12": 195, "c24": 280, "cAfter": 390, "gbOffer": "200 GB**", "gbAfter": null, "roamUE": 30.51, "netMin": "nelimitat", "natMin": "nelimitat", "intl": 200, "intlUE": null, "nonUE": null, "roamNonUE": 1, "offer": "Conectare/ Portare/ Transfer PrePay", "sig": "Nu"},
+        {"name": "Lumo 100", "op": "Moldcell", "months": 12, "c12": 100, "c24": null, "cAfter": 100, "gbOffer": 20, "gbAfter": 10, "roamUE": 8, "netMin": "nelimitat", "natMin": 500, "intl": null, "intlUE": null, "nonUE": null, "roamNonUE": null, "offer": "Conectare/ Portare/ Transfer PrePay", "sig": "Da"},
+        {"name": "Lumo 170", "op": "Moldcell", "months": 12, "c12": 110, "c24": null, "cAfter": 170, "gbOffer": 50, "gbAfter": 25, "roamUE": 14, "netMin": "nelimitat", "natMin": 600, "intl": null, "intlUE": null, "nonUE": null, "roamNonUE": null, "offer": "Conectare/ Portare/ Transfer PrePay", "sig": "Da"},
+        {"name": "Lumo 220", "op": "Moldcell", "months": 12, "c12": 150, "c24": null, "cAfter": 220, "gbOffer": 60, "gbAfter": 30, "roamUE": 18, "netMin": "nelimitat", "natMin": "nelimitat", "intl": 50, "intlUE": 500, "nonUE": null, "roamNonUE": null, "offer": "Conectare/ Portare/ Transfer PrePay", "sig": "Da"},
+        {"name": "Lumo 290", "op": "Moldcell", "months": 12, "c12": 160, "c24": null, "cAfter": 290, "gbOffer": 200, "gbAfter": 100, "roamUE": 23, "netMin": "nelimitat", "natMin": "nelimitat", "intl": 50, "intlUE": 500, "nonUE": 30, "roamNonUE": 1, "offer": "Conectare/ Portare/ Transfer PrePay", "sig": "Da"},
+        {"name": "Lumo 390", "op": "Moldcell", "months": 12, "c12": 195, "c24": null, "cAfter": 390, "gbOffer": 400, "gbAfter": 200, "roamUE": 31, "netMin": "nelimitat", "natMin": "nelimitat", "intl": 100, "intlUE": 500, "nonUE": 30, "roamNonUE": 2, "offer": "Conectare/ Portare/ Transfer PrePay", "sig": "Da"},
+        {"name": "One 170", "op": "Orange", "months": 12, "c12": 119, "c24": null, "cAfter": 170, "gbOffer": "40 GB*", "gbAfter": 20, "roamUE": 13.29, "netMin": "nelimitat", "natMin": 450, "intl": null, "intlUE": null, "nonUE": null, "roamNonUE": null, "offer": "Conectare/ Portare/ Transfer PrePay", "sig": "Da"},
+        {"name": "One 220", "op": "Orange", "months": 12, "c12": 154, "c24": null, "cAfter": 220, "gbOffer": "120 GB*", "gbAfter": 60, "roamUE": 17.2, "netMin": "nelimitat", "natMin": "nelimitat", "intl": 50, "intlUE": 500, "nonUE": null, "roamNonUE": null, "offer": "Conectare/ Portare/ Transfer PrePay", "sig": "Da"},
+        {"name": "One 300", "op": "Orange", "months": 12, "c12": 165, "c24": null, "cAfter": 300, "gbOffer": "200 GB*", "gbAfter": 100, "roamUE": 23.45, "netMin": "nelimitat", "natMin": "nelimitat", "intl": 50, "intlUE": 500, "nonUE": 30, "roamNonUE": "500 MB", "offer": "Conectare/ Portare/ Transfer PrePay", "sig": "Da"},
+        {"name": "One 400", "op": "Orange", "months": 12, "c12": 200, "c24": null, "cAfter": 400, "gbOffer": "Nelimitat*", "gbAfter": "Nelimitat", "roamUE": 31.27, "netMin": "nelimitat", "natMin": "nelimitat", "intl": 100, "intlUE": 500, "nonUE": 30, "roamNonUE": "500 MB", "offer": "Conectare/ Portare/ Transfer PrePay", "sig": "Da"},
+        {"name": "Start 5G", "op": "Moldtelecom", "months": null, "c12": 170, "c24": null, "cAfter": null, "gbOffer": "40 GB**", "gbAfter": null, "roamUE": 13.3, "netMin": "nelimitat", "natMin": "600/100", "intl": null, "intlUE": null, "nonUE": null, "roamNonUE": null, "offer": "Modificare", "sig": "Nu"},
+        {"name": "Pro 5G", "op": "Moldtelecom", "months": null, "c12": 210, "c24": null, "cAfter": null, "gbOffer": "75 GB**", "gbAfter": null, "roamUE": 16.43, "netMin": "nelimitat", "natMin": "nelimitat", "intl": 50, "intlUE": null, "nonUE": null, "roamNonUE": null, "offer": "Modificare", "sig": "Nu"},
+        {"name": "Plus 5G", "op": "Moldtelecom", "months": null, "c12": 290, "c24": null, "cAfter": null, "gbOffer": "100 GB**", "gbAfter": null, "roamUE": 22.68, "netMin": "nelimitat", "natMin": "nelimitat", "intl": 100, "intlUE": null, "nonUE": null, "roamNonUE": null, "offer": "Modificare", "sig": "Nu"},
+        {"name": "Max 5G", "op": "Moldtelecom", "months": null, "c12": 390, "c24": null, "cAfter": null, "gbOffer": "200 GB**", "gbAfter": null, "roamUE": 30.51, "netMin": "nelimitat", "natMin": "nelimitat", "intl": 200, "intlUE": null, "nonUE": null, "roamNonUE": 1, "offer": "Modificare", "sig": "Nu"},
+        {"name": "Lumo 100", "op": "Moldcell", "months": null, "c12": 100, "c24": null, "cAfter": null, "gbOffer": 10, "gbAfter": null, "roamUE": 8, "netMin": "nelimitat", "natMin": 500, "intl": null, "intlUE": null, "nonUE": null, "roamNonUE": null, "offer": "Modificare", "sig": "Da"},
+        {"name": "Lumo 170", "op": "Moldcell", "months": null, "c12": 170, "c24": null, "cAfter": null, "gbOffer": 25, "gbAfter": null, "roamUE": 14, "netMin": "nelimitat", "natMin": 600, "intl": null, "intlUE": 500, "nonUE": null, "roamNonUE": null, "offer": "Modificare", "sig": "Da"},
+        {"name": "Lumo 220", "op": "Moldcell", "months": null, "c12": 220, "c24": null, "cAfter": null, "gbOffer": 60, "gbAfter": null, "roamUE": 18, "netMin": "nelimitat", "natMin": "nelimitat", "intl": 50, "intlUE": 500, "nonUE": null, "roamNonUE": null, "offer": "Modificare", "sig": "Da"},
+        {"name": "Lumo 290", "op": "Moldcell", "months": null, "c12": 290, "c24": null, "cAfter": null, "gbOffer": 100, "gbAfter": null, "roamUE": 23, "netMin": "nelimitat", "natMin": "nelimitat", "intl": 50, "intlUE": 500, "nonUE": 30, "roamNonUE": 1, "offer": "Modificare", "sig": "Da"},
+        {"name": "Lumo 390", "op": "Moldcell", "months": null, "c12": 390, "c24": null, "cAfter": null, "gbOffer": 200, "gbAfter": null, "roamUE": 31, "netMin": "nelimitat", "natMin": "nelimitat", "intl": 100, "intlUE": 500, "nonUE": 30, "roamNonUE": 2, "offer": "Modificare", "sig": "Da"},
+        {"name": "One 170", "op": "Orange", "months": 6, "c12": 170, "c24": null, "cAfter": null, "gbOffer": "40 GB*", "gbAfter": 20, "roamUE": 13.29, "netMin": "nelimitat", "natMin": 450, "intl": null, "intlUE": null, "nonUE": null, "roamNonUE": null, "offer": "Modificare", "sig": "Da"},
+        {"name": "One 220", "op": "Orange", "months": 6, "c12": 220, "c24": null, "cAfter": null, "gbOffer": "120 GB*", "gbAfter": 60, "roamUE": 17.2, "netMin": "nelimitat", "natMin": "nelimitat", "intl": 50, "intlUE": 500, "nonUE": null, "roamNonUE": null, "offer": "Modificare", "sig": "Da"},
+        {"name": "One 300", "op": "Orange", "months": 6, "c12": 300, "c24": null, "cAfter": null, "gbOffer": "200 GB*", "gbAfter": 100, "roamUE": 23.45, "netMin": "nelimitat", "natMin": "nelimitat", "intl": 50, "intlUE": 500, "nonUE": 30, "roamNonUE": "500 MB", "offer": "Modificare", "sig": "Da"},
+        {"name": "One 400", "op": "Orange", "months": 6, "c12": 400, "c24": null, "cAfter": null, "gbOffer": "Nelimitat*", "gbAfter": "Nelimitat", "roamUE": 31.27, "netMin": "nelimitat", "natMin": "nelimitat", "intl": 100, "intlUE": 500, "nonUE": 30, "roamNonUE": "500 MB", "offer": "Modificare", "sig": "Da"}
     ];
 
     /* ---------- helpers ---------- */
@@ -83,20 +75,121 @@
         const r = Math.round(n);
         return (r < 0 ? "-" : "") + String(Math.abs(r)).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     };
-    const dec = (n) => (Math.round(n * 10) / 10).toString().replace(".", ",");
-    const eff = (p) => (p.promo !== null && p.promo !== undefined ? p.promo : p.std);
+    // 13.29 -> "13,29", 8 -> "8"
+    const dec = (n) => String(Math.round(n * 100) / 100).replace(".", ",");
+    const has = (v) => v !== null && v !== undefined;
 
-    // average cost per month over 24 months (promo first, standard after)
-    const total24 = (p) => {
-        if (p.promo === null || p.promo === undefined) return p.std * 24;
-        const m = Math.min(p.promoMonths || 12, 24);
-        return p.promo * m + p.std * (24 - m);
+    const ROWS = DATA.map((d, i) => ({
+        ...d,
+        i,
+        key: d.op.toLowerCase(),
+        // a new-customer offer (Conectare / Portare / Transfer) or a standard price (Modificare)
+        kind: /Conectare/.test(d.offer) ? "offer" : "standard",
+        // average price per month over the whole offer period (24-month contracts have two prices)
+        avg: has(d.c24) ? (d.c12 + d.c24) / 2 : d.c12,
+        avgApprox: has(d.c24)
+    }));
+
+    /* ----- internet text -> numbers ----- */
+
+    // for sorting: the GB written in the cell ("40 GB**" -> 40), "Nelimitat" -> 9999
+    const gbSortVal = (v) => {
+        if (!has(v)) return null;
+        if (typeof v === "number") return v;
+        if (/nelimitat/i.test(v)) return 9999;
+        const n = parseFloat(v);
+        return isNaN(n) ? null : n;
     };
+    // for the finder: what you keep after the offer; "**" and "Nelimitat" count as unlimited
+    const gbFinderVal = (r) => {
+        const v = has(r.gbAfter) ? r.gbAfter : r.gbOffer;
+        if (typeof v === "string" && (/nelimitat/i.test(v) || /\*\*/.test(v))) return 9999;
+        return gbSortVal(v) || 0;
+    };
+
+    const gbText = (v) => (typeof v === "number" ? dec(v) + " GB" : v);
+
+    /* ----- minutes ----- */
+
+    const natSortVal = (v) => {
+        if (!has(v)) return null;
+        if (typeof v === "number") return v;
+        if (/nelimitat/i.test(v)) return 99999;
+        const n = parseFloat(v);
+        return isNaN(n) ? null : n;
+    };
+    const natText = (v) => {
+        if (!has(v)) return null;
+        if (typeof v === "number") return v + " min";
+        if (/nelimitat/i.test(v)) return "Nelimitat";
+        if (v.includes("/")) {
+            const [m, s] = v.split("/").map((x) => x.trim());
+            return m + " min / " + s + " SMS";
+        }
+        return v;
+    };
+    const natLong = (v) => {
+        const t = natText(v);
+        if (t === "Nelimitat") return "Nelimitat național";
+        return t && !t.includes("SMS") ? t.replace(" min", " min naționale") : t;
+    };
+
+    /* ----- non-EU roaming -> MB for sorting ----- */
+
+    const roamNonSortVal = (v) => {
+        if (!has(v)) return null;
+        if (typeof v === "number") return v * 1000;
+        const n = parseFloat(v);
+        if (isNaN(n)) return null;
+        return /gb/i.test(v) ? n * 1000 : n;
+    };
+    const roamNonText = (v) => (typeof v === "number" ? dec(v) + " GB" : v);
 
     /* ---------- 2. SAVINGS FINDER ---------- */
 
+    /* The finder only uses plans a new customer can get for everyone:
+       rows that start with "Conectare" and have a price after the offer.
+       (Youth / senior plans and plan-change rows stay in the table only.)  */
+    /* isNew    = the row is for new customers (Conectare / Portare / Transfer PrePay)
+       isChange = the row is for someone who already has an abonament at that operator
+                  and moves to another plan ("Modificare"); its price is the standard price */
+    const ALL = ROWS
+        .map((r) => {
+            const promo = has(r.cAfter) && r.c12 !== r.cAfter;   // Lumo 100 has the same price all the way
+            const second = has(r.c24) ? r.c24 : (has(r.cAfter) ? r.cAfter : r.c12);   // price in months 13-24
+            return {
+                ...r,
+                isNew: /Conectare/.test(r.offer) && has(r.cAfter),
+                isChange: /Modificare/.test(r.offer),
+                promo,
+                eff: r.c12,
+                gbNum: gbFinderVal(r),
+                total24: r.c12 * 12 + second * 12,
+                second
+            };
+        });
+
+    // new-customer plans only (used for the "cheapest plan" cells)
+    const PLANS = ALL.filter((p) => p.isNew);
+
+    /* Which plans can this person actually get?
+       - abonament at operator X: not X's new-customer plans, but X's "Modificare" plans;
+         every other operator's new-customer plans (portare)
+       - cartelă (prepay) or an operator not listed: all new-customer plans */
+    const available = (type, op) => ALL.filter((p) =>
+        type === "abonament" && p.key === op ? p.isChange : p.isNew
+    );
+
+    const gbDisplay = (p) => {
+        const a = gbText(p.gbOffer);
+        if (!has(p.gbAfter)) return a;
+        if (gbSortVal(p.gbAfter) === gbSortVal(p.gbOffer)) return a;
+        return a + ", apoi " + gbText(p.gbAfter);
+    };
+
     const spendInput = $("pmSpend");
     const typeSel    = $("pmType");
+    const opSel      = $("pmOp");
     const gbSel      = $("pmGb");
     const sigSel     = $("pmSig");
     const btn        = $("pmBtn");
@@ -125,26 +218,26 @@
 
         refreshBtn();
 
+        // the operator only matters when you already have an abonament
+        const opRow = $("pmOpRow");
+        const syncOpRow = () => { if (opRow) opRow.hidden = typeSel.value !== "abonament"; };
+        typeSel.addEventListener("change", syncOpRow);
+        syncOpRow();
+
         const optionCard = (p, spend, isBest) => {
-            const op = OPS[p.op];
-            const hasPromo = p.promo !== null && p.promo !== undefined;
-            const months = p.promoMonths || 12;
-            const saveNow = spend - eff(p);
-            const saveAfter = spend - p.std;
-            const save24 = spend * 24 - total24(p);
+            const op = OPS[p.key];
+            const saveNow = spend - p.eff;
+            const save24 = spend * 24 - p.total24;
 
             let lines = `<p class="body2 pm-save">Economisești <strong>${fmt(saveNow)} lei/lună</strong> (${fmt(saveNow * 12)} lei/an)`;
-            if (hasPromo) {
-                lines += ` <span class="pm-sub">în primele ${months} luni</span>`;
-            }
+            if (p.promo) lines += ` <span class="pm-sub">în primele 12 luni</span>`;
             lines += `</p>`;
 
-            if (hasPromo && months < 24 || hasPromo && p.std >= spend) {
-                lines += saveAfter > 0
-                    ? `<p class="small-secondary">După ofertă: ${fmt(p.std)} lei/lună, tot cu ${fmt(saveAfter)} lei mai puțin decât acum.</p>`
-                    : `<p class="small-secondary">După ofertă prețul devine ${fmt(p.std)} lei/lună${saveAfter < 0 ? `, cu ${fmt(-saveAfter)} lei mai mult decât plătești acum` : ""}.</p>`;
-            }
-            if (hasPromo) {
+            if (p.promo) {
+                const next = has(p.c24)
+                    ? `Din luna 13: ${fmt(p.c24)} lei/lună, iar după ${p.months} luni: ${fmt(p.cAfter)} lei/lună.`
+                    : `După primele 12 luni: ${fmt(p.cAfter)} lei/lună${p.cAfter > spend ? `, cu ${fmt(p.cAfter - spend)} lei mai mult decât plătești acum` : ""}.`;
+                lines += `<p class="small-secondary">${next}</p>`;
                 lines += `<p class="small-secondary">Pe 24 de luni: ${save24 >= 0 ? "economisești" : "plătești în plus"} ≈ <strong>${fmt(Math.abs(save24))} lei</strong>.</p>`;
             }
 
@@ -157,17 +250,20 @@
                     </div>
                     <div class="pm-price">
                         ${isBest ? '<span class="pm-badge">Cel mai ieftin</span>' : ""}
-                        <strong>${fmt(eff(p))} lei</strong><span class="small-secondary"> / lună</span>
-                        ${hasPromo ? `<span class="small-secondary pm-strike">standard ${fmt(p.std)} lei</span>` : ""}
+                        <strong>${fmt(p.eff)} lei</strong><span class="small-secondary"> / lună</span>
+                        ${p.promo ? `<span class="small-secondary pm-strike">după ofertă ${fmt(p.cAfter)} lei</span>` : ""}
                     </div>
                 </div>
                 <ul class="pm-chips">
-                    <li>${p.gb}</li>
-                    <li>${p.minutes}</li>
-                    <li class="${op.signature ? "pm-chip-yes" : "pm-chip-no"}">${op.signature ? "✓" : "✕"} Semnătură mobilă</li>
+                    <li>${gbDisplay(p)}</li>
+                    <li>${natLong(p.natMin)}</li>
+                    ${has(p.months) ? `<li>Contract ${p.months} luni</li>` : ""}
+                    <li class="${p.sig === "Da" ? "pm-chip-yes" : "pm-chip-no"}">${p.sig === "Da" ? "✓" : "✕"} Semnătură mobilă</li>
                 </ul>
                 ${lines}
-                ${hasPromo ? `<p class="small-secondary pm-fine">Prețul redus se aplică ${p.promoWho}. Dacă ești deja client al operatorului, condițiile pot diferi.</p>` : ""}
+                <p class="small-secondary pm-fine">${p.isNew
+                    ? `Prețul se aplică la: ${p.offer.split("/").map((s) => s.trim()).join(", ")}.`
+                    : `Prețul standard la trecerea de la alt abonament ${op.name.split(" (")[0]} (fără ofertă pentru clienți noi).`}</p>
                 <a class="pm-link" href="${op.url}" target="_blank" rel="noopener">Vezi oferta pe site-ul ${op.name.split(" (")[0]}</a>
             </article>`;
         };
@@ -179,16 +275,17 @@
             const minGb = Number(gbSel.value);
             const needSig = sigSel.value === "1";
 
-            const fits = PLANS.filter((p) => p.gbNum >= minGb && (!needSig || OPS[p.op].signature));
+            const pool = available(typeSel.value, opSel ? opSel.value : "other");
+            const fits = pool.filter((p) => p.gbNum >= minGb && (!needSig || p.sig === "Da"));
             const cheaper = fits
-                .filter((p) => eff(p) < spend)
-                .sort((a, b) => eff(a) - eff(b) || b.gbNum - a.gbNum);
-            const cheaperAny = PLANS.filter((p) => eff(p) < spend);
+                .filter((p) => p.eff < spend)
+                .sort((a, b) => a.eff - b.eff || b.gbNum - a.gbNum);
+            const cheaperAny = pool.filter((p) => p.eff < spend);
 
             let html = "";
 
             if (cheaper.length) {
-                const best = spend - eff(cheaper[0]);
+                const best = spend - cheaper[0].eff;
                 const shown = cheaper.slice(0, 5);
                 html += `
                 <div class="result-highlight">
@@ -205,14 +302,18 @@
                     <p class="body2">Există ${cheaperAny.length} abonamente care costă mai puțin decât plătești acum, dar nu ating internetul sau semnătura mobilă pe care le-ai cerut. Încearcă să relaxezi unul dintre filtre.</p>
                 </div>`;
             } else {
-                const cheapest = Math.min(...PLANS.map(eff));
+                const cheapest = Math.min(...pool.map((p) => p.eff));
                 html += `
                 <div class="pm-empty">
                     <h3 class="h5">Plătești deja mai puțin decât oricare abonament din listă</h3>
-                    <p class="body2">Cel mai ieftin abonament din tabel costă ${fmt(cheapest)} lei/lună. Dacă plătești mai puțin, probabil folosești puțin telefonul și ai deja o variantă potrivită. Verifică în continuare sfaturile de mai jos și revino când se schimbă ofertele.</p>
+                    <p class="body2">Cel mai ieftin abonament la care poți trece costă ${fmt(cheapest)} lei/lună. Dacă plătești mai puțin, probabil folosești puțin telefonul și ai deja o variantă potrivită. Verifică în continuare sfaturile de mai jos și revino când se schimbă ofertele.</p>
                 </div>`;
             }
 
+            const opName = opSel && OPS[opSel.value] ? OPS[opSel.value].name.split(" (")[0] : "";
+            if (typeSel.value === "abonament" && opName) {
+                html += `<p class="small-secondary">Ai abonament la ${opName}, deci nu poți lua ofertele pentru clienți noi ale ${opName}. Îți arătăm prețurile standard pentru schimbarea abonamentului la ${opName} și ofertele celorlalți operatori, la care treci prin portare.</p>`;
+            }
             if (typeSel.value === "prepay") {
                 html += `<p class="small-secondary">Ai cartelă (prepay), deci poți trece oricând la abonament. Atenție: abonamentele vin cu contract de 12 sau 24 de luni și penalități la reziliere anticipată. Citește mai jos <a href="#abonament-vs-prepay">când merită abonamentul</a>.</p>`;
             } else {
@@ -228,74 +329,149 @@
             calculate();
             results.scrollIntoView({ behavior: "smooth", block: "start" });
         });
-        [typeSel, gbSel, sigSel].forEach((el) => el?.addEventListener("change", () => {
+        [typeSel, opSel, gbSel, sigSel].forEach((el) => el?.addEventListener("change", () => {
             if (!results.hidden) calculate();
         }));
     }
 
-    /* ---------- 3. PLANS TABLE ---------- */
+    /* ---------- 3. ONE TABLE, SORTABLE ---------- */
 
     const tbody = $("plansBody");
 
     if (tbody) {
-        const priceCell = (p) => {
-            const hasPromo = p.promo !== null && p.promo !== undefined;
-            return hasPromo
-                ? `<strong>${fmt(p.promo)}</strong><span class="pm-sub">standard ${fmt(p.std)}</span>`
-                : `<strong>${fmt(p.std)}</strong>`;
+        const dash = '<span class="pm-dash" aria-label="nu este cazul">–</span>';
+        const or = (v, f) => (has(v) ? f(v) : dash);
+
+        // data-sort name in the <th>  ->  value used for sorting (null = empty, always last)
+        const SORT = {
+            name:      (r) => r.name,
+            op:        (r) => r.op,
+            months:    (r) => r.months,
+            cOffer:    (r) => r.avg,
+            cAfter:    (r) => r.cAfter,
+            gbOffer:   (r) => gbSortVal(r.gbOffer),
+            gbAfter:   (r) => gbSortVal(has(r.gbAfter) ? r.gbAfter : r.gbOffer),
+            roamUE:    (r) => r.roamUE,
+            netMin:    (r) => (has(r.netMin) ? (/nelimitat/i.test(r.netMin) ? 1 : 0) : null),
+            natMin:    (r) => natSortVal(r.natMin),
+            intl:      (r) => r.intl,
+            intlUE:    (r) => r.intlUE,
+            nonUE:     (r) => r.nonUE,
+            roamNonUE: (r) => roamNonSortVal(r.roamNonUE),
+            sig:       (r) => r.sig
         };
-        const offerCell = (p) => {
-            if (p.promo !== null && p.promo !== undefined) {
-                return `<span class="pm-yes">Da</span><span class="pm-sub">${p.promoMonths} luni</span>`;
+
+        // Min. către UE, Min. non-UE and Roaming non-UE are hidden for now.
+        // To bring them back: set this to true AND remove the comment around their <th> in the html.
+        const SHOW_HIDDEN_COLS = false;
+
+        const rowHtml = (r) => `
+            <tr>
+                <td><strong>${r.name}</strong></td>
+                <td>${r.op}</td>
+                <td class="num">${or(r.months, (v) => v + " luni")}</td>
+                <td class="num"><strong>${r.avgApprox ? "≈ " + dec(r.avg) : fmt(r.avg)} lei</strong></td>
+                <td class="num">${or(r.cAfter, (v) => fmt(v) + " lei")}</td>
+                <td class="num">${or(r.gbOffer, gbText)}</td>
+                <td class="num">${or(has(r.gbAfter) ? r.gbAfter : r.gbOffer, gbText)}</td>
+                <td class="num">${or(r.roamUE, (v) => dec(v) + " GB")}</td>
+                <td class="num">${or(r.netMin, (v) => natText(v))}</td>
+                <td class="num">${or(r.natMin, natText)}</td>
+                <td class="num">${or(r.intl, (v) => v + " min")}</td>
+                ${SHOW_HIDDEN_COLS ? `<td class="num">${or(r.intlUE, (v) => v + " min")}</td>
+                <td class="num">${or(r.nonUE, (v) => v + " min")}</td>
+                <td class="num">${or(r.roamNonUE, roamNonText)}</td>` : ""}
+                <td>${r.sig === "Da" ? '<span class="pm-yes">✓ Da</span>' : '<span class="pm-no">✕ Nu</span>'}</td>
+            </tr>`;
+
+        let showOffers = true;     // true: new-customer offers; false: standard prices
+        let sort = { key: null, dir: 1 };   // dir: 1 = ascending, -1 = descending
+
+        const heads = document.querySelectorAll("#plansTable th[data-sort]");
+        const countEl = $("plansCount");
+        const toggleBtn = $("pmToggle");
+        const modeNote = $("plansMode");
+
+        const cmp = (a, b) => {
+            if (typeof a === "string" || typeof b === "string") {
+                return String(a).localeCompare(String(b), "ro", { sensitivity: "base" });
             }
-            return p.promoNote
-                ? `Posibil<span class="pm-sub">${p.promoNote}</span>`
-                : "Nu";
+            return a - b;
         };
 
-        const render = (filter) => {
-            let html = "";
-            Object.keys(OPS).forEach((key) => {
-                if (filter !== "all" && filter !== key) return;
-                const op = OPS[key];
-                html += `<tr class="plans-group"><th colspan="8"><span>${op.name}</span></th></tr>`;
-                PLANS.filter((p) => p.op === key).forEach((p) => {
-                    html += `
-                    <tr>
-                        <td><strong>${p.name}</strong></td>
-                        <td>${priceCell(p)}</td>
-                        <td>${offerCell(p)}</td>
-                        <td>${p.minutes}<span class="pm-sub">${p.minutesNote}</span></td>
-                        <td>${p.sms}</td>
-                        <td>${p.gb}</td>
-                        <td>${p.roaming}</td>
-                        <td>${op.signature ? '<span class="pm-yes">✓ Da</span>' : '<span class="pm-no">✕ Nu</span>'}</td>
-                    </tr>`;
-                });
+        const render = () => {
+            let list = ROWS.filter((r) =>
+                r.kind === (showOffers ? "offer" : "standard")
+            );
+
+            if (toggleBtn) {
+                toggleBtn.textContent = showOffers ? "Ascunde ofertele" : "Arată ofertele";
+                toggleBtn.setAttribute("aria-pressed", String(!showOffers));
+            }
+            if (modeNote) {
+                modeNote.textContent = showOffers
+                    ? "Se afișează ofertele pentru clienți noi (conectare, portare, transfer de la PrePay)."
+                    : "Se afișează prețurile standard, pentru cine trece la alt abonament la același operator.";
+            }
+
+            if (sort.key) {
+                const get = SORT[sort.key];
+                const byKey = (x, y) => {
+                    const a = get(x), b = get(y);
+                    // empty cells always go to the bottom, whatever the direction
+                    if (a === null && b === null) return x.i - y.i;
+                    if (a === null) return 1;
+                    if (b === null) return -1;
+                    return cmp(a, b) * sort.dir || x.i - y.i;
+                };
+                list.sort(byKey);
+            }
+
+            tbody.innerHTML = list.map(rowHtml).join("");
+
+            heads.forEach((th) => {
+                const on = th.dataset.sort === sort.key;
+                th.setAttribute("aria-sort", on ? (sort.dir === 1 ? "ascending" : "descending") : "none");
+                th.classList.toggle("is-asc", on && sort.dir === 1);
+                th.classList.toggle("is-desc", on && sort.dir === -1);
             });
-            tbody.innerHTML = html;
+
+            if (countEl) {
+                countEl.textContent = list.length + (list.length === 1 ? " abonament" : " abonamente");
+            }
         };
 
-        render("all");
-
-        document.querySelectorAll("#pmTabs .tab-item").forEach((tab) => {
-            tab.addEventListener("click", () => {
-                document.querySelectorAll("#pmTabs .tab-item").forEach((t) => t.classList.remove("active"));
-                tab.classList.add("active");
-                render(tab.dataset.op);
+        // click: ascending -> descending -> original order
+        heads.forEach((th) => {
+            const b = th.querySelector(".sort-btn");
+            if (!b) return;
+            b.addEventListener("click", () => {
+                const key = th.dataset.sort;
+                if (sort.key !== key) sort = { key, dir: 1 };
+                else if (sort.dir === 1) sort = { key, dir: -1 };
+                else sort = { key: null, dir: 1 };
+                render();
             });
         });
+
+        if (toggleBtn) {
+            toggleBtn.addEventListener("click", () => { showOffers = !showOffers; render(); });
+        }
+
+        render();
+
     }
 
     /* ---------- cheapest plan per company (company comparison table) ---------- */
 
     document.querySelectorAll("[data-cheapest]").forEach((cell) => {
-        const list = PLANS.filter((p) => p.op === cell.dataset.cheapest);
+        const list = PLANS.filter((p) => p.key === cell.dataset.cheapest);
         if (!list.length) return;
-        const best = list.reduce((a, b) => (eff(b) < eff(a) ? b : a));
-        const hasPromo = best.promo !== null && best.promo !== undefined;
-        cell.innerHTML = `${best.name}: <strong>${fmt(eff(best))} lei</strong>` +
-            (hasPromo ? `<span class="pm-sub">la ofertă · standard ${fmt(best.std)} lei</span>` : `<span class="pm-sub">preț standard</span>`);
+        const best = list.reduce((a, b) => (b.eff < a.eff ? b : a));
+        cell.innerHTML = `${best.name}: <strong>${fmt(best.eff)} lei</strong>` +
+            (best.promo
+                ? `<span class="pm-sub">primele 12 luni · apoi ${fmt(has(best.c24) ? best.c24 : best.cAfter)} lei${has(best.c24) ? `, după ${best.months} luni ${fmt(best.cAfter)} lei` : ""}</span>`
+                : `<span class="pm-sub">preț fix</span>`);
     });
 
     document.querySelectorAll("[data-updated]").forEach((el) => { el.textContent = UPDATED; });

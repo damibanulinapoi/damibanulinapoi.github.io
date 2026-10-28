@@ -179,8 +179,9 @@ table.plans-table {
     color: var(--color-text-primary);
 }
 
-.plans-table.is-wide { min-width: 900px; }
-.plans-table.is-mid  { min-width: 560px; }
+.plans-table.is-wide  { min-width: 900px; }
+.plans-table.is-mid   { min-width: 560px; }
+.plans-table.is-xwide { min-width: 1500px; }
 
 .plans-table th,
 .plans-table td {
@@ -210,30 +211,71 @@ table.plans-table {
 
 .plans-table thead th:first-child { background: var(--color-background); z-index: 2; }
 
-/* company title rows */
-.plans-table tr.plans-group th {
-    background: var(--color-background);
-    color: var(--color-text-primary);
-    font-family: var(--font-display);
-    font-size: var(--fs-body2);
-    line-height: var(--lh-body2);
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    padding: 10px;
-}
-
-.plans-table tr.plans-group th span {
-    position: sticky;
-    left: 10px;
-    display: inline-block;
-}
-
 .plans-table td strong { font-weight: bold; }
 
 .pm-yes { color: var(--color-green); font-weight: bold; }
 .pm-no  { color: var(--color-orange); font-weight: bold; }
 
+.pm-dash { color: var(--color-text-secondary); }
+
 .plans-hint { text-align: right; }
+
+.plans-count { margin: 0; }
+
+/* ---------- the one big plans table: sortable headers ---------- */
+
+/* numbers line up on the left edge of the column, never wrap mid-value */
+#plansTable td { white-space: nowrap; }
+#plansTable td .pm-sub { white-space: nowrap; }
+
+/* "Costul per lună" / "Internet" / "Minute internaționale" group titles */
+.plans-table thead th.th-group {
+    text-align: center;
+    color: var(--color-text-primary);
+    border-bottom: 1px solid var(--color-card-border);
+}
+
+/* wrap long header texts instead of making the table even wider */
+.plans-table thead th[data-sort] { white-space: normal; min-width: 90px; }
+.plans-table thead th[data-sort]:first-child { min-width: 120px; }
+
+.sort-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+/* arrow: faint up-down mark when not sorted, solid arrow when sorted */
+.sort-btn::after {
+    content: "↕";
+    flex: none;
+    font-size: 12px;
+    opacity: 0.35;
+}
+
+.plans-table th.is-asc  .sort-btn::after { content: "↑"; opacity: 1; color: var(--color-orange); }
+.plans-table th.is-desc .sort-btn::after { content: "↓"; opacity: 1; color: var(--color-orange); }
+
+.plans-table th.is-asc,
+.plans-table th.is-desc { color: var(--color-text-primary); }
+
+.sort-btn:hover { color: var(--color-text-primary); }
+.sort-btn:hover::after { opacity: 1; }
+
+.sort-btn:focus-visible {
+    outline: 2px solid var(--color-orange);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
 
 /* ---------- tips cards ---------- */
 
@@ -246,3 +288,44 @@ table.plans-table {
 .pm-tips .about-card { gap: 8px; }
 
 .pm-sources a { color: var(--color-orange); }
+
+.pm-checker .invest-row[hidden] { display: none; }
+
+/* toggle between new-customer offers and standard prices */
+.plans-toolbar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.pm-toggle {
+    padding: 8px 16px;
+    border: 1px solid var(--color-card-border);
+    border-radius: 999px;
+    background: var(--color-card);
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+    cursor: pointer;
+}
+
+.pm-toggle:hover { border-color: var(--color-orange); color: var(--color-orange); }
+.pm-toggle[aria-pressed="true"] { background: var(--color-orange); border-color: var(--color-orange); color: #fff; }
+.pm-toggle:focus-visible { outline: 2px solid var(--color-orange); outline-offset: 2px; }
+
+/* internet is the same during and after the offer: one value across both columns */
+#plansTable td.pm-merged { text-align: center; }
+
+/* columns Contract ... Roaming non-UE: values and headers on the right */
+#plansTable th.num,
+#plansTable td.num { text-align: right; }
+#plansTable th.num .sort-btn { justify-content: flex-end; text-align: right; }
+
+/* merged cells stay in the middle (this rule comes after, so it wins) */
+#plansTable td.num.pm-merged { text-align: center; }
+
+/* all column headings on the right */
+#plansTable thead th { text-align: right; }
+#plansTable thead th .sort-btn { justify-content: flex-end; text-align: right; }
