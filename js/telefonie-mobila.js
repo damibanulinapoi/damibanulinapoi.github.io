@@ -1,12 +1,13 @@
 /* =====================================================
-   TELEFONIE MOBILĂ (telefonie-mobila.html only)
+   TELEFONIE MOBILĂ (telefonie-mobila.html, abonamente-mobile.html, compara-abonamente.html)
    1. DATA   - every plan lives in the DATA list below (one row = one line
                of the Excel "Abonamente telefonie mobilă"). To update a
-               price or add a plan, edit ONLY that list: the sortable table,
-               the "cheapest" cells and the savings finder all read from it.
+               price or add a plan, edit ONLY that list: the shop page, the comparison
+               page, the "cheapest" cells and the savings finder all read from it.
    2. Savings finder ("Vezi cât poți economisi")
-   3. One table with all plans: click a header to sort, click again to
-      reverse, a third click goes back to the original order
+   3. Shared plan details (used by the shop and comparison pages)
+   4. Shop page (abonamente-mobile.html): cards, sort, filters, details
+   5. Comparison page (compara-abonamente.html)
 ===================================================== */
 (function () {
 
@@ -79,12 +80,16 @@
     const dec = (n) => String(Math.round(n * 100) / 100).replace(".", ",");
     const has = (v) => v !== null && v !== undefined;
 
+    // readable id used in links, e.g. "orange-one-170-offer"
+    const slug = (t) => t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
     const ROWS = DATA.map((d, i) => ({
         ...d,
         i,
         key: d.op.toLowerCase(),
         // a new-customer offer (Conectare / Portare / Transfer) or a standard price (Modificare)
         kind: /Conectare/.test(d.offer) ? "offer" : "standard",
+        id: slug(d.op + " " + d.name + " " + (/Conectare/.test(d.offer) ? "offer" : "standard")),
         // average price per month over the whole offer period (24-month contracts have two prices)
         avg: has(d.c24) ? (d.c12 + d.c24) / 2 : d.c12,
         avgApprox: has(d.c24)
@@ -107,7 +112,8 @@
         return gbSortVal(v) || 0;
     };
 
-    const gbText = (v) => (typeof v === "number" ? dec(v) + " GB" : v);
+    // "Nelimitat*" -> "GB nelimitat*", so the word does not stand alone
+    const gbText = (v) => (typeof v === "number" ? dec(v) + " GB" : String(v).replace(/^nelimitat/i, "GB nelimitat"));
 
     /* ----- minutes ----- */
 
@@ -294,7 +300,7 @@
                     <span class="result-label">≈ ${fmt(best * 12)} lei pe an · ${cheaper.length} ${cheaper.length === 1 ? "abonament costă" : "abonamente costă"} mai puțin decât plătești acum</span>
                 </div>
                 <div class="pm-options">${shown.map((p, i) => optionCard(p, spend, i === 0)).join("")}</div>
-                ${cheaper.length > shown.length ? `<p class="body2">Mai sunt ${cheaper.length - shown.length} abonamente mai ieftine în <a href="#comparatie">tabelul de mai jos</a>.</p>` : ""}`;
+                ${cheaper.length > shown.length ? `<p class="body2">Mai sunt ${cheaper.length - shown.length} abonamente mai ieftine în <a href="abonamente-mobile.html">pagina cu toate abonamentele</a>.</p>` : ""}`;
             } else if (cheaperAny.length) {
                 html += `
                 <div class="pm-empty">
@@ -334,63 +340,81 @@
         }));
     }
 
-    /* ---------- 3. ONE TABLE, SORTABLE ---------- */
+    /* ---------- 3. SHARED: how a plan is written out ---------- */
 
-    const tbody = $("plansBody");
+    const SHOP_URL = "abonamente-mobile.html";
+    const COMPARE_URL = "compara-abonamente.html";
 
-    if (tbody) {
-        const dash = '<span class="pm-dash" aria-label="nu este cazul">–</span>';
-        const or = (v, f) => (has(v) ? f(v) : dash);
+    const dash = '<span class="pm-dash" aria-label="nu este cazul">–</span>';
+    const or = (v, f) => (has(v) ? f(v) : dash);
+    const sigHtml = (r) => (r.sig === "Da" ? '<span class="pm-yes">✓ Da</span>' : '<span class="pm-no">✕ Nu</span>');
+    const priceText = (r) => (r.avgApprox ? "≈ " + dec(r.avg) : fmt(r.avg)) + " lei";
+    const opShort = (r) => OPS[r.key].name.split(" (")[0];
+    const kindLabel = (r) => (r.kind === "offer" ? "Ofertă pentru clienți noi" : "Preț standard (schimbare abonament)");
+    const gbAfterOf = (r) => (has(r.gbAfter) ? r.gbAfter : r.gbOffer);
+    const byId = (id) => ROWS.find((r) => r.id === id);
 
-        // data-sort name in the <th>  ->  value used for sorting (null = empty, always last)
+    // Min. către UE, Min. non-UE and Roaming non-UE are hidden for now.
+    // To bring them back: set this to true.
+    const SHOW_HIDDEN_COLS = false;
+
+    /* every detail of a plan: used by the details window and by the comparison page */
+    const ATTRS = [
+        ["Tip",                  (r) => kindLabel(r)],
+        ["Preț în ofertă",       (r) => "<strong>" + priceText(r) + "</strong>"],
+        ["Preț după ofertă",     (r) => or(r.cAfter, (v) => fmt(v) + " lei")],
+        ["Contract",             (r) => or(r.months, (v) => v + " luni")],
+        ["Internet în ofertă",   (r) => or(r.gbOffer, gbText)],
+        ["Internet după ofertă", (r) => or(gbAfterOf(r), gbText)],
+        ["Roaming UE",           (r) => or(r.roamUE, (v) => dec(v) + " GB")],
+        ["Min/SMS în rețea",     (r) => or(r.netMin, (v) => natText(v))],
+        ["Min/SMS naționale",    (r) => or(r.natMin, natText)],
+        ["Min. internaționale",  (r) => or(r.intl, (v) => v + " min")]
+    ];
+    if (SHOW_HIDDEN_COLS) {
+        ATTRS.push(
+            ["Min. către UE",     (r) => or(r.intlUE, (v) => v + " min")],
+            ["Min. non-UE",       (r) => or(r.nonUE, (v) => v + " min")],
+            ["Roaming non-UE",    (r) => or(r.roamNonUE, roamNonText)]
+        );
+    }
+    ATTRS.push(["Semnătură mobilă", sigHtml]);
+
+    /* the plans picked for comparison are remembered in the browser, so they
+       are still selected when you come back from the comparison page */
+    const STORE = "pm-compare";
+    const loadCompared = () => {
+        try {
+            const v = JSON.parse(localStorage.getItem(STORE) || "[]");
+            return Array.isArray(v) ? v.filter((id) => byId(id)) : [];
+        } catch (e) { return []; }
+    };
+    const saveCompared = (list) => {
+        try { localStorage.setItem(STORE, JSON.stringify(list)); } catch (e) { /* private mode: fine */ }
+    };
+    const compareLink = (list) => COMPARE_URL + (list.length ? "?p=" + list.join(",") : "");
+
+    /* ---------- 4. SHOP PAGE (abonamente-mobile.html): cards, sort, filters, details ---------- */
+
+    const cardsEl = $("pmCards");
+
+    if (cardsEl) {
         const SORT = {
-            name:      (r) => r.name,
-            op:        (r) => r.op,
-            months:    (r) => r.months,
-            cOffer:    (r) => r.avg,
-            cAfter:    (r) => r.cAfter,
-            gbOffer:   (r) => gbSortVal(r.gbOffer),
-            gbAfter:   (r) => gbSortVal(has(r.gbAfter) ? r.gbAfter : r.gbOffer),
-            roamUE:    (r) => r.roamUE,
-            netMin:    (r) => (has(r.netMin) ? (/nelimitat/i.test(r.netMin) ? 1 : 0) : null),
-            natMin:    (r) => natSortVal(r.natMin),
-            intl:      (r) => r.intl,
-            intlUE:    (r) => r.intlUE,
-            nonUE:     (r) => r.nonUE,
-            roamNonUE: (r) => roamNonSortVal(r.roamNonUE),
-            sig:       (r) => r.sig
+            cOffer: (r) => r.avg,
+            gbOffer: (r) => gbSortVal(r.gbOffer),
+            op: (r) => r.op
         };
 
-        // Min. către UE, Min. non-UE and Roaming non-UE are hidden for now.
-        // To bring them back: set this to true AND remove the comment around their <th> in the html.
-        const SHOW_HIDDEN_COLS = false;
-
-        const rowHtml = (r) => `
-            <tr>
-                <td><strong>${r.name}</strong></td>
-                <td>${r.op}</td>
-                <td class="num">${or(r.months, (v) => v + " luni")}</td>
-                <td class="num"><strong>${r.avgApprox ? "≈ " + dec(r.avg) : fmt(r.avg)} lei</strong></td>
-                <td class="num">${or(r.cAfter, (v) => fmt(v) + " lei")}</td>
-                <td class="num">${or(r.gbOffer, gbText)}</td>
-                <td class="num">${or(has(r.gbAfter) ? r.gbAfter : r.gbOffer, gbText)}</td>
-                <td class="num">${or(r.roamUE, (v) => dec(v) + " GB")}</td>
-                <td class="num">${or(r.netMin, (v) => natText(v))}</td>
-                <td class="num">${or(r.natMin, natText)}</td>
-                <td class="num">${or(r.intl, (v) => v + " min")}</td>
-                ${SHOW_HIDDEN_COLS ? `<td class="num">${or(r.intlUE, (v) => v + " min")}</td>
-                <td class="num">${or(r.nonUE, (v) => v + " min")}</td>
-                <td class="num">${or(r.roamNonUE, roamNonText)}</td>` : ""}
-                <td>${r.sig === "Da" ? '<span class="pm-yes">✓ Da</span>' : '<span class="pm-no">✕ Nu</span>'}</td>
-            </tr>`;
-
-        let showOffers = true;     // true: new-customer offers; false: standard prices
         let sort = { key: null, dir: 1 };   // dir: 1 = ascending, -1 = descending
+        const filters = { hideOffers: false, minGb: 0, min: null, max: null, ops: { orange: true, moldcell: true, moldtelecom: true }, sig: false };
+        const MAX_COMPARE = 8;
+        let compared = loadCompared();
 
-        const heads = document.querySelectorAll("#plansTable th[data-sort]");
         const countEl = $("plansCount");
-        const toggleBtn = $("pmToggle");
-        const modeNote = $("plansMode");
+        const sortSel = $("pmSort");
+        const filterBtn = $("pmFilterBtn");
+        const filterPanel = $("pmFilters");
+        const filterBadge = $("pmFilterCount");
 
         const cmp = (a, b) => {
             if (typeof a === "string" || typeof b === "string") {
@@ -399,67 +423,275 @@
             return a - b;
         };
 
-        const render = () => {
-            let list = ROWS.filter((r) =>
-                r.kind === (showOffers ? "offer" : "standard")
-            );
+        const passes = (r) => {
+            if (filters.hideOffers && r.kind === "offer") return false;
+            if (!filters.ops[r.key]) return false;
+            if (filters.sig && r.sig !== "Da") return false;
+            if (filters.minGb) {
+                const g = gbSortVal(r.gbOffer);
+                if (g === null || g < filters.minGb) return false;
+            }
+            if (filters.min !== null && r.avg < filters.min) return false;
+            if (filters.max !== null && r.avg > filters.max) return false;
+            return true;
+        };
 
-            if (toggleBtn) {
-                toggleBtn.textContent = showOffers ? "Ascunde ofertele" : "Arată ofertele";
-                toggleBtn.setAttribute("aria-pressed", String(!showOffers));
-            }
-            if (modeNote) {
-                modeNote.textContent = showOffers
-                    ? "Se afișează ofertele pentru clienți noi (conectare, portare, transfer de la PrePay)."
-                    : "Se afișează prețurile standard, pentru cine trece la alt abonament la același operator.";
-            }
+        const activeFilters = () =>
+            (filters.hideOffers ? 1 : 0) +
+            (filters.minGb ? 1 : 0) +
+            (filters.min !== null || filters.max !== null ? 1 : 0) +
+            (Object.values(filters.ops).some((v) => !v) ? 1 : 0) +
+            (filters.sig ? 1 : 0);
+
+        /* ----- cards ----- */
+
+        const CMP_ICON = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h14M14 4l4 4-4 4M20 16H6M10 12l-4 4 4 4"/></svg>';
+
+        const OFFER_HINT = "Ofertă: preț pentru conectare nouă, portare sau transfer de la PrePay";
+
+        const cardHtml = (r) => {
+            const on = compared.includes(r.id);
+            return `
+            <article class="pm-card" data-open="${r.id}" tabindex="0" role="button" aria-label="${r.name}, ${opShort(r)}${r.kind === "offer" ? ", ofertă" : ""}: vezi detaliile">
+                <div class="pm-card-top">
+                    <div class="pm-card-title">
+                        ${r.kind === "offer" ? `<span class="pm-badge pm-badge-offer" title="${OFFER_HINT}">Ofertă</span>` : `<span class="pm-badge pm-badge-offer pm-badge-ghost" aria-hidden="true">Ofertă</span>`}
+                        <p class="small-secondary">${opShort(r)}</p>
+                        <h3 class="h5">${r.name}</h3>
+                    </div>
+                    <button type="button" class="pm-cmp${on ? " is-on" : ""}" data-cmp="${r.id}" aria-pressed="${on}" aria-label="Compară ${r.name} de la ${opShort(r)}" title="Compară">${CMP_ICON}</button>
+                </div>
+                <div class="pm-card-price">
+                    <strong>${priceText(r)}</strong>
+                    <span class="small-secondary">/ lună</span>
+                </div>
+                <ul class="pm-chips">
+                    <li>${gbDisplay(r)}</li>
+                    ${has(r.months) ? `<li>Contract ${r.months} luni</li>` : ""}
+                    <li class="${r.sig === "Da" ? "pm-chip-yes" : "pm-chip-no"}">${r.sig === "Da" ? "✓" : "✕"} Semnătură mobilă</li>
+                </ul>
+            </article>`;
+        };
+
+        const emptyHtml = `<div class="pm-empty"><p class="body2">Niciun abonament nu se potrivește filtrelor alese.</p><button type="button" class="pm-toggle" data-reset-filters>Resetează filtrele</button></div>`;
+
+        /* ----- render ----- */
+
+        const render = () => {
+            const list = ROWS.filter(passes);
 
             if (sort.key) {
                 const get = SORT[sort.key];
-                const byKey = (x, y) => {
+                list.sort((x, y) => {
                     const a = get(x), b = get(y);
-                    // empty cells always go to the bottom, whatever the direction
+                    // empty values always go to the end, whatever the direction
                     if (a === null && b === null) return x.i - y.i;
                     if (a === null) return 1;
                     if (b === null) return -1;
                     return cmp(a, b) * sort.dir || x.i - y.i;
-                };
-                list.sort(byKey);
+                });
             }
 
-            tbody.innerHTML = list.map(rowHtml).join("");
+            cardsEl.innerHTML = list.length ? list.map(cardHtml).join("") : emptyHtml;
 
-            heads.forEach((th) => {
-                const on = th.dataset.sort === sort.key;
-                th.setAttribute("aria-sort", on ? (sort.dir === 1 ? "ascending" : "descending") : "none");
-                th.classList.toggle("is-asc", on && sort.dir === 1);
-                th.classList.toggle("is-desc", on && sort.dir === -1);
+            const n = activeFilters();
+            if (filterBadge) { filterBadge.textContent = n; filterBadge.hidden = n === 0; }
+            if (countEl) countEl.textContent = list.length + (list.length === 1 ? " abonament" : " abonamente");
+        };
+
+        if (sortSel) {
+            sortSel.addEventListener("change", () => {
+                const [key, dir] = sortSel.value.split(":");
+                sort = key ? { key, dir: Number(dir) } : { key: null, dir: 1 };
+                render();
             });
+        }
 
-            if (countEl) {
-                countEl.textContent = list.length + (list.length === 1 ? " abonament" : " abonamente");
+        /* ----- filters ----- */
+
+        const fHide = $("pmFHide"), fGb = $("pmFGb"), fMin = $("pmFMin"), fMax = $("pmFMax"), fSig = $("pmFSig");
+        const fOps = document.querySelectorAll("[data-fop]");
+
+        const readFilters = () => {
+            filters.hideOffers = fHide.checked;
+            filters.minGb = Number(fGb.value) || 0;
+            filters.min = digits(fMin.value) ? digits(fMin.value) : null;
+            filters.max = digits(fMax.value) ? digits(fMax.value) : null;
+            filters.sig = fSig.checked;
+            fOps.forEach((c) => { filters.ops[c.dataset.fop] = c.checked; });
+            render();
+        };
+        const resetFilters = () => {
+            fHide.checked = false; fGb.value = "0"; fMin.value = ""; fMax.value = ""; fSig.checked = false;
+            fOps.forEach((c) => { c.checked = true; });
+            readFilters();
+        };
+
+        if (filterBtn && filterPanel && fGb) {
+            filterBtn.addEventListener("click", () => {
+                const open = filterPanel.hidden;
+                filterPanel.hidden = !open;
+                filterBtn.setAttribute("aria-expanded", String(open));
+            });
+            [fHide, fGb, fSig, ...fOps].forEach((el) => el.addEventListener("change", readFilters));
+            [fMin, fMax].forEach((el) => el.addEventListener("input", () => {
+                el.value = el.value.replace(/[^\d]/g, "").slice(0, 5);
+                readFilters();
+            }));
+            $("pmFReset")?.addEventListener("click", resetFilters);
+            document.addEventListener("click", (e) => {
+                if (e.target.closest("[data-reset-filters]")) resetFilters();
+            });
+        }
+
+        /* ----- compare bar (leads to the comparison page) ----- */
+
+        const detail = $("pmDetail");
+        const bar = $("pmCompareBar");
+        const barCount = $("pmCompareCount");
+        const barOpen = $("pmCompareOpen");
+        const barClear = $("pmCompareClear");
+
+        const refreshCompareUi = () => {
+            document.querySelectorAll("[data-cmp]").forEach((b) => {
+                const on = compared.includes(b.dataset.cmp);
+                b.classList.toggle("is-on", on);
+                b.setAttribute("aria-pressed", String(on));
+                const t = b.querySelector(".pm-cmp-text");
+                if (t) t.textContent = on ? "În comparație ✓" : "Adaugă la comparație";
+            });
+            if (bar) {
+                const n = compared.length;
+                bar.hidden = n === 0;
+                barCount.textContent = n === 1 ? "1 abonament ales" : n + " abonamente alese";
+                barOpen.href = compareLink(compared);
+                barOpen.setAttribute("aria-disabled", String(n < 2));
+                barOpen.textContent = n < 2 ? "Alege încă unul" : "Compară";
             }
         };
 
-        // click: ascending -> descending -> original order
-        heads.forEach((th) => {
-            const b = th.querySelector(".sort-btn");
-            if (!b) return;
-            b.addEventListener("click", () => {
-                const key = th.dataset.sort;
-                if (sort.key !== key) sort = { key, dir: 1 };
-                else if (sort.dir === 1) sort = { key, dir: -1 };
-                else sort = { key: null, dir: 1 };
-                render();
-            });
-        });
+        const toggleCompare = (id) => {
+            if (compared.includes(id)) compared = compared.filter((x) => x !== id);
+            else if (compared.length >= MAX_COMPARE) {
+                alert("Poți compara cel mult " + MAX_COMPARE + " abonamente odată.");
+                return;
+            } else compared.push(id);
+            saveCompared(compared);
+            refreshCompareUi();
+        };
 
-        if (toggleBtn) {
-            toggleBtn.addEventListener("click", () => { showOffers = !showOffers; render(); });
+        barOpen?.addEventListener("click", (e) => {
+            if (compared.length < 2) e.preventDefault();
+        });
+        barClear?.addEventListener("click", () => { compared = []; saveCompared(compared); refreshCompareUi(); });
+
+        /* ----- details window ----- */
+
+        const openDetail = (id) => {
+            const r = byId(id);
+            if (!r || !detail) return;
+            const on = compared.includes(id);
+            detail.innerHTML = `
+                <div class="pm-dialog-body">
+                    <div class="pm-dialog-head">
+                        <div>
+                            <p class="small-secondary">${opShort(r)}</p>
+                            <h3 class="h5">${r.name}</h3>
+                        </div>
+                        <button type="button" class="pm-x" data-close aria-label="Închide">✕</button>
+                    </div>
+                    <dl class="pm-dl">
+                        ${ATTRS.map(([l, g]) => `<div class="pm-dl-row"><dt>${l}</dt><dd>${g(r)}</dd></div>`).join("")}
+                    </dl>
+                    ${r.kind === "offer" ? `<p class="small-secondary">Prețul din ofertă se aplică la: ${r.offer.split("/").map((s) => s.trim()).join(", ")}.</p>` : ""}
+                    <p class="small-secondary">Prețul final îl confirmă operatorul.</p>
+                    <div class="pm-dialog-actions">
+                        <button type="button" class="pm-toggle${on ? " is-on" : ""}" data-cmp="${r.id}" aria-pressed="${on}"><span class="pm-cmp-text">${on ? "În comparație ✓" : "Adaugă la comparație"}</span></button>
+                        <a class="pm-link-btn" href="${OPS[r.key].url}" target="_blank" rel="noopener">Vezi oferta pe site-ul ${opShort(r)}</a>
+                    </div>
+                </div>`;
+            document.documentElement.classList.add("pm-lock");
+            detail.showModal();
+        };
+
+        if (detail) {
+            detail.addEventListener("close", () => document.documentElement.classList.remove("pm-lock"));
+            detail.addEventListener("click", (e) => {
+                if (e.target === detail || e.target.closest("[data-close]")) { detail.close(); return; }
+                const c = e.target.closest("[data-cmp]");
+                if (c) toggleCompare(c.dataset.cmp);
+            });
         }
 
-        render();
+        cardsEl.addEventListener("click", (e) => {
+            const c = e.target.closest("[data-cmp]");
+            if (c) { toggleCompare(c.dataset.cmp); return; }
+            const o = e.target.closest("[data-open]");
+            if (o) openDetail(o.dataset.open);
+        });
+        cardsEl.addEventListener("keydown", (e) => {
+            if ((e.key === "Enter" || e.key === " ") && e.target.matches(".pm-card")) {
+                e.preventDefault();
+                openDetail(e.target.dataset.open);
+            }
+        });
 
+        render();
+        refreshCompareUi();
+    }
+
+    /* ---------- 5. COMPARISON PAGE (compara-abonamente.html) ---------- */
+
+    const compareBody = $("pmCompareBody");
+
+    if (compareBody) {
+        // plans come from the link (?p=id,id,...) or, if there is none, from what was picked last
+        const fromUrl = (new URLSearchParams(location.search).get("p") || "").split(",").filter((id) => byId(id));
+        let picked = fromUrl.length ? fromUrl : loadCompared();
+        const emptyEl = $("pmCompareEmpty");
+        const clearAll = $("pmCompareClearAll");
+
+        const sync = () => {
+            saveCompared(picked);
+            try { history.replaceState(null, "", compareLink(picked)); } catch (e) { /* not important */ }
+        };
+
+        const draw = () => {
+            const plans = picked.map(byId);
+            if (emptyEl) emptyEl.hidden = plans.length > 0;
+            if (clearAll) clearAll.hidden = plans.length === 0;
+
+            if (!plans.length) { compareBody.innerHTML = ""; return; }
+
+            const head = plans.map((r) => `
+                <th scope="col">
+                    <button type="button" class="pm-x pm-x-small" data-remove="${r.id}" aria-label="Scoate ${r.name} din comparație">✕</button>
+                    <span class="small-secondary">${opShort(r)}</span>
+                    <strong class="pm-ct-name">${r.name}</strong>
+                </th>`).join("");
+            const rows = ATTRS.map(([label, get]) =>
+                `<tr><th scope="row">${label}</th>${plans.map((r) => `<td>${get(r)}</td>`).join("")}</tr>`).join("");
+            const links = `<tr><th scope="row">Oferta</th>${plans.map((r) =>
+                `<td><a class="pm-link" href="${OPS[r.key].url}" target="_blank" rel="noopener">Vezi pe site-ul ${opShort(r)}</a></td>`).join("")}</tr>`;
+
+            compareBody.innerHTML = `
+                <table class="pm-ctable">
+                    <thead><tr><th scope="col" class="pm-ct-corner"></th>${head}</tr></thead>
+                    <tbody>${rows}${links}</tbody>
+                </table>`;
+        };
+
+        compareBody.addEventListener("click", (e) => {
+            const x = e.target.closest("[data-remove]");
+            if (!x) return;
+            picked = picked.filter((id) => id !== x.dataset.remove);
+            sync();
+            draw();
+        });
+        clearAll?.addEventListener("click", () => { picked = []; sync(); draw(); });
+
+        if (fromUrl.length) saveCompared(picked);
+        draw();
     }
 
     /* ---------- cheapest plan per company (company comparison table) ---------- */
