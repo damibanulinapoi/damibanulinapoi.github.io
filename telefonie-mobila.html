@@ -195,53 +195,16 @@
                 </tbody>
             </table>
         </div>
+        <p class="small-secondary">* Moldtelecom: internetul este „nelimitat”, dar după un anumit volum viteza se poate reduce.</p>
     </section>
 
     <div class="section-break"></div>
 
-    <!-- ALL PLANS -->
+    <!-- ALL PLANS (own page) -->
     <section class="pm-section" id="comparatie">
-        <h2 class="h3">Toate abonamentele, într-un singur tabel</h2>
-        <p class="body1">Prețuri în lei pe lună, preluate de pe site-urile operatorilor în <span data-updated></span>. <strong>Apasă pe titlul unei coloane</strong> ca să sortezi abonamentele (de exemplu după preț sau internet). Apeși din nou ca să inversezi ordinea, a treia oară revine la ordinea inițială.</p>
-
-        <div class="plans-toolbar">
-            <button type="button" id="pmToggle" class="pm-toggle" aria-pressed="false">Ascunde ofertele</button>
-            <p class="small-secondary plans-count"><span id="plansMode"></span> <span id="plansCount"></span></p>
-        </div>
-
-        <div class="plans-wrap">
-            <table class="plans-table is-xwide" id="plansTable">
-                <thead>
-                    <tr>
-                        <th data-sort="name" aria-sort="none"><button type="button" class="sort-btn">Abonament</button></th>
-                        <th data-sort="op" aria-sort="none"><button type="button" class="sort-btn">Operator</button></th>
-                        <th class="num" data-sort="months" aria-sort="none"><button type="button" class="sort-btn">Contract</button></th>
-                        <th class="num" data-sort="cOffer" aria-sort="none"><button type="button" class="sort-btn">Preț în ofertă</button></th>
-                        <th class="num" data-sort="cAfter" aria-sort="none"><button type="button" class="sort-btn">Preț după ofertă</button></th>
-                        <th class="num" data-sort="gbOffer" aria-sort="none"><button type="button" class="sort-btn">Internet în ofertă</button></th>
-                        <th class="num" data-sort="gbAfter" aria-sort="none"><button type="button" class="sort-btn">Internet după ofertă</button></th>
-                        <th class="num" data-sort="roamUE" aria-sort="none"><button type="button" class="sort-btn">Roaming UE</button></th>
-                        <th class="num" data-sort="netMin" aria-sort="none"><button type="button" class="sort-btn">Min/SMS în rețea</button></th>
-                        <th class="num" data-sort="natMin" aria-sort="none"><button type="button" class="sort-btn">Min/SMS naționale</button></th>
-                        <th class="num" data-sort="intl" aria-sort="none"><button type="button" class="sort-btn">Min. internaționale</button></th>
-                        <!-- hidden for now (also see SHOW_HIDDEN_COLS in the js):
-                        <th class="num" data-sort="intlUE" aria-sort="none"><button type="button" class="sort-btn">Min. către UE</button></th>
-                        <th class="num" data-sort="nonUE" aria-sort="none"><button type="button" class="sort-btn">Min. non-UE</button></th>
-                        <th class="num" data-sort="roamNonUE" aria-sort="none"><button type="button" class="sort-btn">Roaming non-UE</button></th>
-                        -->
-                        <th data-sort="sig" aria-sort="none"><button type="button" class="sort-btn">Semnătură mobilă</button></th>
-                    </tr>
-                </thead>
-                <tbody id="plansBody"></tbody>
-            </table>
-        </div>
-        <p class="small-secondary plans-hint">Derulează tabelul lateral pentru toate coloanele →</p>
-
-        <div class="pm-note">
-            <p class="small-secondary">„Preț în ofertă” este prețul mediu pe lună pe toată perioada ofertei: la contractele de 24 de luni, media dintre primele 12 luni și următoarele 12 (de aceea apare cu ≈). „Preț după ofertă” și „Internet după ofertă” sunt ce rămâne după încheierea contractului. „Min/SMS naționale” sunt valabile în Moldova și în roaming UE. Ofertele se aplică la conectare nouă, portare sau trecere de la cartelă; butonul „Ascunde ofertele” arată prețurile standard, pentru cine își schimbă abonamentul la același operator. Unde o celulă arată „–”, operatorul nu include acel serviciu sau nu am găsit informația. Internet roaming UE și non-UE: din internetul inclus în abonament.</p>
-            <p class="small-secondary">* Orange: GB-ul de bonus este valabil 24 de luni, apoi rămâne doar internetul din a doua coloană. ** Moldtelecom 5G: internet „nelimitat” peste cel inclus, dar după consumul indicat viteza se poate reduce. La Moldtelecom, „300/100” înseamnă 300 de minute și 100 de SMS.</p>
-            <p class="small-secondary">Nu sunt incluse ofertele pentru firme. Informativ: operatorul poate schimba prețurile oricând.</p>
-        </div>
+        <h2 class="h3">Toate abonamentele</h2>
+        <p class="body1">Vezi toate abonamentele Orange, Moldcell și Moldtelecom într-un singur loc: le poți sorta după preț sau internet, filtra după câți GB vrei sau cât vrei să plătești și compara câteva abonamente unul lângă altul.</p>
+        <p><a class="pm-link-btn" href="abonamente-mobile.html">Vezi toate abonamentele</a></p>
     </section>
 
     <div class="section-break"></div>
@@ -270,7 +233,7 @@
             </div>
             <div class="item">
                 <div class="question">
-                    <p class="body1">De ce prețul din tabel diferă de cel de pe site-ul operatorului?</p>
+                    <p class="body1">De ce prețul din listă diferă de cel de pe site-ul operatorului?</p>
                     <div class="icon" aria-hidden="true"></div>
                 </div>
                 <div class="answer">

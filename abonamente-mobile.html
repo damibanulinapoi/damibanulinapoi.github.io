@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toate abonamentele de telefonie mobilă – Dă-mi Banul Înapoi</title>
+    <meta name="description" content="Toate abonamentele Orange, Moldcell și Moldtelecom într-un loc: sortează după preț sau internet, filtrează și compară abonamentele.">
+    <meta name="theme-color" content="#F1F1F3">
+    <link rel="canonical" href="https://damibanulinapoi.github.io/abonamente-mobile.html">
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Dă-mi Banul Înapoi">
+    <meta property="og:locale" content="ro_RO">
+    <meta property="og:title" content="Toate abonamentele de telefonie mobilă – Dă-mi Banul Înapoi">
+    <meta property="og:description" content="Toate abonamentele Orange, Moldcell și Moldtelecom într-un loc: sortează după preț sau internet, filtrează și compară abonamentele.">
+    <meta property="og:url" content="https://damibanulinapoi.github.io/abonamente-mobile.html">
+    <meta property="og:image" content="https://damibanulinapoi.github.io/images/calculatoare.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Fonts used on every page: start loading them right away -->
+    <link rel="preload" href="fonts/Archivo-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/RocaOne-Th.woff2" as="font" type="font/woff2" crossorigin>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/telefonie-mobila.css">
+    <link rel="icon" type="image/svg+xml" href="images/logo-small.svg">
+</head>
+
+<body>
+
+<!-- Header (built by js/script.js) -->
+<header class="header" id="site-header"></header>
+
+<main class="page-body phone-page is-wide">
+
+    <section class="calculator-hero">
+        <a href="telefonie-mobila.html" class="hero-back">← Economisește la telefon</a>
+        <h1 class="h3">Toate abonamentele de telefonie mobilă</h1>
+        <p class="body1">Prețuri în lei pe lună, preluate de pe site-urile operatorilor în <span data-updated></span>. <strong>Apasă pe un abonament</strong> ca să vezi toate detaliile și pe iconița de comparare ca să îl pui lângă alte abonamente.</p>
+    </section>
+
+    <section class="pm-section" id="abonamente">
+
+        <div class="plans-toolbar">
+            <div class="pm-toolbar-row">
+                <button type="button" id="pmFilterBtn" class="pm-toggle" aria-expanded="false" aria-controls="pmFilters">Filtre <span id="pmFilterCount" class="pm-count" hidden>0</span></button>
+                <label class="pm-toggle pm-select">
+                    <span class="sr-only">Sortează după</span>
+                    <select id="pmSort">
+                        <option value="" selected>Sortează</option>
+                        <option value="cOffer:1">Preț: de la mic la mare</option>
+                        <option value="cOffer:-1">Preț: de la mare la mic</option>
+                        <option value="gbOffer:-1">Internet: mai mult întâi</option>
+                        <option value="gbOffer:1">Internet: mai puțin întâi</option>
+                        <option value="op:1">Operator (A–Z)</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="pm-filters" id="pmFilters" hidden>
+                <div class="pm-filter">
+                    <label class="pm-check"><input type="checkbox" id="pmFHide"> Ascunde ofertele</label>
+                    <span class="small-secondary">Ofertele sunt prețurile pentru conectare nouă, portare sau transfer de la PrePay. Dacă le ascunzi, rămân prețurile standard.</span>
+                </div>
+                <div class="pm-filter">
+                    <label for="pmFGb">Internet</label>
+                    <select id="pmFGb" class="invest-select">
+                        <option value="0" selected>Oricât</option>
+                        <option value="20">Cel puțin 20 GB</option>
+                        <option value="50">Cel puțin 50 GB</option>
+                        <option value="100">Cel puțin 100 GB</option>
+                        <option value="200">Cel puțin 200 GB</option>
+                        <option value="9999">Nelimitat</option>
+                    </select>
+                </div>
+                <div class="pm-filter">
+                    <span class="pm-filter-label" id="pmFPriceLabel">Preț pe lună (lei)</span>
+                    <div class="pm-range" role="group" aria-labelledby="pmFPriceLabel">
+                        <input type="text" id="pmFMin" class="pm-input" inputmode="numeric" placeholder="de la" aria-label="Preț de la" autocomplete="off">
+                        <span aria-hidden="true">–</span>
+                        <input type="text" id="pmFMax" class="pm-input" inputmode="numeric" placeholder="până la" aria-label="Preț până la" autocomplete="off">
+                    </div>
+                </div>
+                <div class="pm-filter">
+                    <span class="pm-filter-label">Operator</span>
+                    <div class="pm-checks">
+                        <label class="pm-check"><input type="checkbox" data-fop="orange" checked> Orange</label>
+                        <label class="pm-check"><input type="checkbox" data-fop="moldcell" checked> Moldcell</label>
+                        <label class="pm-check"><input type="checkbox" data-fop="moldtelecom" checked> Moldtelecom</label>
+                    </div>
+                </div>
+                <div class="pm-filter">
+                    <label class="pm-check"><input type="checkbox" id="pmFSig"> Doar cu semnătură mobilă</label>
+                </div>
+                <button type="button" id="pmFReset" class="pm-toggle">Resetează filtrele</button>
+            </div>
+
+            <p class="small-secondary plans-count"><span id="plansCount"></span></p>
+            <p class="small-secondary"><span class="pm-badge pm-badge-offer">Ofertă</span> = preț pentru conectare nouă, portare sau transfer de la PrePay</p>
+        </div>
+
+        <div class="pm-cards" id="pmCards" aria-live="polite"></div>
+
+        <div class="pm-note">
+            <p class="small-secondary">„Preț în ofertă” este prețul mediu pe lună pe toată perioada ofertei: la contractele de 24 de luni, media dintre primele 12 luni și următoarele 12 (de aceea apare cu ≈). Cardurile cu „Ofertă” se aplică la conectare nouă, portare sau transfer de la PrePay; cele fără „Ofertă” sunt prețurile standard, pentru cine își schimbă abonamentul la același operator (din Filtre poți ascunde ofertele). Min/SMS naționale sunt valabile în Moldova și în roaming UE. Unde o valoare arată „–”, operatorul nu include acel serviciu sau nu am găsit informația.</p>
+            <p class="small-secondary">* Orange: GB-ul de bonus este valabil 24 de luni, apoi rămâne doar internetul de după ofertă. ** Moldtelecom 5G: internet „nelimitat” peste cel inclus, dar după consumul indicat viteza se poate reduce. La Moldtelecom, „300/100” înseamnă 300 de minute și 100 de SMS.</p>
+            <p class="small-secondary">Nu sunt incluse ofertele pentru firme. Informativ: operatorul poate schimba prețurile oricând.</p>
+        </div>
+    </section>
+
+</main>
+
+<!-- Bar with the plans picked for comparison -->
+<div class="pm-comparebar" id="pmCompareBar" hidden>
+    <span id="pmCompareCount" class="body2"></span>
+    <button type="button" id="pmCompareClear" class="pm-plain">Șterge</button>
+    <a id="pmCompareOpen" class="pm-link-btn" href="compara-abonamente.html" aria-disabled="true">Alege încă unul</a>
+</div>
+
+<!-- Details of one plan -->
+<dialog id="pmDetail" class="pm-dialog" aria-label="Detalii abonament"></dialog>
+
+<!-- Footer (built by js/script.js) -->
+<footer class="footer" id="site-footer"></footer>
+
+<script src="js/script.js"></script>
+<script src="js/telefonie-mobila.js"></script>
+
+</body>
+</html>

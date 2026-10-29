@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compară abonamentele de telefonie mobilă – Dă-mi Banul Înapoi</title>
+    <meta name="description" content="Pune abonamentele Orange, Moldcell și Moldtelecom unul lângă altul și compară prețul, internetul și minutele.">
+    <meta name="theme-color" content="#F1F1F3">
+    <meta name="robots" content="noindex, follow">
+    <link rel="canonical" href="https://damibanulinapoi.github.io/compara-abonamente.html">
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Dă-mi Banul Înapoi">
+    <meta property="og:locale" content="ro_RO">
+    <meta property="og:title" content="Compară abonamentele de telefonie mobilă – Dă-mi Banul Înapoi">
+    <meta property="og:description" content="Pune abonamentele Orange, Moldcell și Moldtelecom unul lângă altul și compară prețul, internetul și minutele.">
+    <meta property="og:url" content="https://damibanulinapoi.github.io/compara-abonamente.html">
+    <meta property="og:image" content="https://damibanulinapoi.github.io/images/calculatoare.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Fonts used on every page: start loading them right away -->
+    <link rel="preload" href="fonts/Archivo-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/RocaOne-Th.woff2" as="font" type="font/woff2" crossorigin>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/telefonie-mobila.css">
+    <link rel="icon" type="image/svg+xml" href="images/logo-small.svg">
+</head>
+
+<body>
+
+<!-- Header (built by js/script.js) -->
+<header class="header" id="site-header"></header>
+
+<main class="page-body phone-page is-wide">
+
+    <section class="calculator-hero">
+        <a href="abonamente-mobile.html" class="hero-back">← Toate abonamentele</a>
+        <h1 class="h3">Compară abonamentele</h1>
+        <p class="body1">Abonamentele alese sunt puse unul lângă altul, cu toate detaliile pe verticală. Dacă ai ales mai multe, derulează lateral ca să le vezi pe toate.</p>
+    </section>
+
+    <section class="pm-section" id="comparatie-pagina">
+        <div class="pm-compare-top">
+            <a class="pm-link-btn" href="abonamente-mobile.html">+ Adaugă alt abonament</a>
+            <button type="button" id="pmCompareClearAll" class="pm-plain" hidden>Șterge tot</button>
+        </div>
+
+        <div class="pm-empty" id="pmCompareEmpty" hidden>
+            <p class="body2">Nu ai ales încă niciun abonament. Mergi la lista cu toate abonamentele și apasă pe iconița de comparare de pe cardurile care te interesează.</p>
+        </div>
+
+        <div class="pm-compare-scroll" id="pmCompareBody"></div>
+
+        <p class="small-secondary">Prețuri în lei pe lună, preluate de pe site-urile operatorilor în <span data-updated></span>. „Preț în ofertă” este media pe toată perioada ofertei (≈ la contractele de 24 de luni). Prețul final îl confirmă operatorul.</p>
+    </section>
+
+</main>
+
+<!-- Footer (built by js/script.js) -->
+<footer class="footer" id="site-footer"></footer>
+
+<script src="js/script.js"></script>
+<script src="js/telefonie-mobila.js"></script>
+
+</body>
+</html>
